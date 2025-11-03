@@ -17,11 +17,13 @@ async function main() {
     const id = svc.slug || svc.id;
     const base = `homepage_service_${id}`;
 
+    const img = (svc as any).imageCover || (Array.isArray((svc as any).images) ? (svc as any).images[0] : '') || '';
     const items = [
       { key: `${base}_title`, title: `${svc.title} Title`, content: svc.title, page: 'homepage', section: 'services' },
       { key: `${base}_type`, title: `${svc.title} Type`, content: svc.serviceType || '', page: 'homepage', section: 'services' },
       { key: `${base}_summary`, title: `${svc.title} Summary`, content: svc.summary || (typeof svc.description === 'string' ? svc.description.slice(0, 220) : ''), page: 'homepage', section: 'services' },
       { key: `${base}_price`, title: `${svc.title} Price`, content: svc.price != null ? String(svc.price) : '', page: 'homepage', section: 'services' },
+      { key: `${base}_image`, title: `${svc.title} Image`, content: img, page: 'homepage', section: 'services' },
     ];
 
     for (const it of items) {

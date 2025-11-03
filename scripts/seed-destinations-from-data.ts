@@ -11,10 +11,12 @@ async function main() {
   for (const dest of destinations.slice(0, 8)) {
     const base = `homepage_destination_${dest.id}`;
 
+    const primaryImage = dest.image || dest.gallery?.[0] || '';
     const items = [
       { key: `${base}_title`, title: `${dest.name} Title`, content: dest.name, page: 'homepage', section: 'destinations' },
       { key: `${base}_region`, title: `${dest.name} Region`, content: dest.region, page: 'homepage', section: 'destinations' },
       { key: `${base}_summary`, title: `${dest.name} Summary`, content: dest.description, page: 'homepage', section: 'destinations' },
+      { key: `${base}_image`, title: `${dest.name} Image`, content: primaryImage, page: 'homepage', section: 'destinations' },
     ];
 
     // add top 3 highlights

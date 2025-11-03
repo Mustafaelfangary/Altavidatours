@@ -326,15 +326,20 @@ export default function TravelOKHomepage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {services.slice(0, 6).map((svc) => {
+            {services.slice(0, 6).map((svc, idx) => {
               const svcId = svc.slug || svc.id;
               const base = `homepage_service_${svcId}`;
               const title = getContent(`${base}_title`, svc.title);
               const type = getContent(`${base}_type`, svc.serviceType || '');
               const summary = getContent(`${base}_summary`, svc.summary || '');
               const price = getContent(`${base}_price`, svc.price != null ? String(svc.price) : '');
+              const image = getContent(`${base}_image`, ['/images/cultural&historical/DSC_8401.JPG','/images/Alexandria/IMG_6504.JPG','/images/desert&safary/DSC_9166.JPG'][idx % 3]);
               return (
-                <div key={svc.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-100">
+                <div key={svc.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden">
+                  <div className="relative h-40">
+                    <Image src={image} alt={title} fill className="object-cover" />
+                  </div>
+                  <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-xl font-bold text-travelok-blue">{title}</h3>
                     {type && (
@@ -351,6 +356,7 @@ export default function TravelOKHomepage() {
                     <Link href={`/services/${svc.slug || svc.id}`} className="bg-travelok-blue hover:bg-travelok-orange text-white px-4 py-2 rounded text-sm font-semibold">
                       View Details
                     </Link>
+                  </div>
                   </div>
                 </div>
               );
@@ -425,11 +431,13 @@ export default function TravelOKHomepage() {
               const destHighlight1 = getContent(`homepage_destination_${destination.id}_highlight_1`, destination.highlights[0] || '');
               const destSummary = getContent(`homepage_destination_${destination.id}_summary`, destination.description || '');
 
+              const destImage = getContent(`homepage_destination_${destination.id}_image`, destinationImages[index] || destination.image);
+
               return (
               <div key={destination.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="relative">
                   <Image
-                    src={destinationImages[index] || destination.image}
+                    src={destImage}
                     alt={destTitle}
                     width={300}
                     height={200}
