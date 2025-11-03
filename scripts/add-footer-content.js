@@ -1,5 +1,5 @@
 // Script to add missing footer content to the CMS
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -167,6 +167,7 @@ async function addFooterContent() {
         await prisma.websiteContent.create({
           data: {
             key: content.key,
+            title: content.key, // minimal title to satisfy schema
             content: content.value, // Use 'content' instead of 'value'
             section: content.section,
             page: content.page,

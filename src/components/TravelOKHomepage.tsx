@@ -10,9 +10,32 @@ import { useContent } from '@/hooks/useContent';
 export default function TravelOKHomepage() {
   const [heroReady, setHeroReady] = useState(false);
   const { getContent } = useContent({ page: 'homepage' });
+  // Services state
+  interface ServiceData { id: string; slug?: string; title: string; serviceType?: string; summary?: string; price?: number }
+  const [services, setServices] = useState<ServiceData[]>([]);
   useEffect(() => {
     const t = setTimeout(() => setHeroReady(true), 10);
     return () => clearTimeout(t);
+  }, []);
+
+  // Fetch featured services for homepage grid
+  useEffect(() => {
+    fetch('/api/travel-services?limit=8&featured=true')
+      .then(res => res.json())
+      .then(data => {
+        if (data && Array.isArray(data.services)) {
+          const items = data.services.map((s: any) => ({
+            id: s.id,
+            slug: s.slug,
+            title: s.title,
+            serviceType: s.serviceType,
+            summary: s.summary,
+            price: s.price,
+          }));
+          setServices(items);
+        }
+      })
+      .catch(() => setServices([]));
   }, []);
 
   return (
@@ -290,6 +313,57 @@ export default function TravelOKHomepage() {
         </div>
       </div>
 
+      {/* Services Section */}
+      <div className="bg-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-travelok-blue mb-2">
+              {getContent('services_section_title', 'Popular Services')}
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              {getContent('services_section_subtitle', 'Private guides, transfers, tickets, and curated experiences across Egypt.')}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {services.slice(0, 6).map((svc) => {
+              const svcId = svc.slug || svc.id;
+              const base = `homepage_service_${svcId}`;
+              const title = getContent(`${base}_title`, svc.title);
+              const type = getContent(`${base}_type`, svc.serviceType || '');
+              const summary = getContent(`${base}_summary`, svc.summary || '');
+              const price = getContent(`${base}_price`, svc.price != null ? String(svc.price) : '');
+              return (
+                <div key={svc.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-100">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-bold text-travelok-blue">{title}</h3>
+                    {type && (
+                      <span className="text-xs bg-blue-100 text-travelok-blue px-2 py-1 rounded-full font-semibold">{type}</span>
+                    )}
+                  </div>
+                  {summary && (
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">{summary}</p>
+                  )}
+                  <div className="flex items-center justify-between">
+                    <div className="text-travelok-orange font-bold">
+                      {price ? <>From ${price}</> : <span className="text-gray-400">Contact for price</span>}
+                    </div>
+                    <Link href={`/services/${svc.slug || svc.id}`} className="bg-travelok-blue hover:bg-travelok-orange text-white px-4 py-2 rounded text-sm font-semibold">
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+            {services.length === 0 && (
+              <div className="col-span-full text-center text-gray-500">
+                No services available yet.
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="md:flex">
@@ -345,12 +419,18 @@ export default function TravelOKHomepage() {
                 '/images/cultural&historical/DSCF1165.JPG',
                 '/images/desert&safary/DSC_9912.JPG'
               ];
+              // Pull granular content keys when available
+              const destTitle = getContent(`homepage_destination_${destination.id}_title`, destination.name);
+              const destRegion = getContent(`homepage_destination_${destination.id}_region`, destination.region);
+              const destHighlight1 = getContent(`homepage_destination_${destination.id}_highlight_1`, destination.highlights[0] || '');
+              const destSummary = getContent(`homepage_destination_${destination.id}_summary`, destination.description || '');
+
               return (
               <div key={destination.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="relative">
                   <Image
                     src={destinationImages[index] || destination.image}
-                    alt={destination.name}
+                    alt={destTitle}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover"
@@ -359,12 +439,12 @@ export default function TravelOKHomepage() {
                     }}
                   />
                   <div className="absolute top-4 left-4 bg-travelok-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    {destination.region}
+                    {destRegion}
                   </div>
                   <div className="absolute bottom-4 left-4 bg-black/80 text-white px-3 py-2 rounded">
-                    <div className="text-sm font-semibold">{destination.name}</div>
+                    <div className="text-sm font-semibold">{destTitle}</div>
                     <div className="text-xs opacity-90 flex items-center gap-1">
-                      📍 {destination.highlights[0]}
+                      📍 {destHighlight1}
                     </div>
                   </div>
                 </div>

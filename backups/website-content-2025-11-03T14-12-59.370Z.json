@@ -1,0 +1,1653 @@
+{
+  "exportedAt": "2025-11-03T14:12:59.435Z",
+  "data": {
+    "about": {
+      "hero": [
+        {
+          "key": "about_hero_background",
+          "title": "About Hero Background",
+          "content": "/images/about-hero.jpg",
+          "contentType": "IMAGE",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:51:42.279Z",
+          "updatedAt": "2025-11-03T13:51:42.279Z"
+        },
+        {
+          "key": "about_hero_subtitle",
+          "title": "About Hero Subtitle",
+          "content": "Locally owned. Decades of Egyptian travel expertise.",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:51:42.275Z",
+          "updatedAt": "2025-11-03T14:10:29.061Z"
+        },
+        {
+          "key": "about_hero_title",
+          "title": "About Hero Title",
+          "content": "About Treasure Egypt Tours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:51:42.254Z",
+          "updatedAt": "2025-11-03T14:10:29.060Z"
+        }
+      ],
+      "mission": [
+        {
+          "key": "about_mission_content",
+          "title": "Mission Content",
+          "content": "To provide unforgettable Nile cruise experiences that connect our guests with the rich history and culture of ancient Egypt.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 7,
+          "createdAt": "2025-11-03T13:51:42.287Z",
+          "updatedAt": "2025-11-03T13:51:42.287Z"
+        },
+        {
+          "key": "about_mission_title",
+          "title": "Mission Title",
+          "content": "Our Mission",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 6,
+          "createdAt": "2025-11-03T13:51:42.285Z",
+          "updatedAt": "2025-11-03T13:51:42.285Z"
+        }
+      ],
+      "story": [
+        {
+          "key": "about_story_content",
+          "title": "Story Content",
+          "content": "We craft authentic experiences across Egypt with safety, comfort, and cultural depth. Our team of local specialists personalizes every journey.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 5,
+          "createdAt": "2025-11-03T13:51:42.284Z",
+          "updatedAt": "2025-11-03T14:10:29.063Z"
+        },
+        {
+          "key": "about_story_title",
+          "title": "Story Title",
+          "content": "Our Story",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 4,
+          "createdAt": "2025-11-03T13:51:42.282Z",
+          "updatedAt": "2025-11-03T14:10:29.062Z"
+        }
+      ]
+    },
+    "blogs": {
+      "general": [
+        {
+          "key": "blogs_hero_description",
+          "title": "Blogs Hero Description",
+          "content": "Discover the secrets of the pharaohs, explore hidden treasures, and immerse yourself in the timeless stories of ancient Egypt through our curated collection of articles.",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.844Z",
+          "updatedAt": "2025-11-03T14:07:02.844Z"
+        },
+        {
+          "key": "blogs_hero_image",
+          "title": "Blogs Hero Image",
+          "content": "/images/blogs-hero-bg.jpg",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.841Z",
+          "updatedAt": "2025-11-03T14:07:02.841Z"
+        },
+        {
+          "key": "blogs_hero_title",
+          "title": "Blogs Hero Title",
+          "content": "Ancient Blogs",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.842Z",
+          "updatedAt": "2025-11-03T14:07:02.842Z"
+        },
+        {
+          "key": "blogs_hero_video",
+          "title": "Blogs Hero Video",
+          "content": "/videos/blogs-hero.mp4",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.835Z",
+          "updatedAt": "2025-11-03T14:07:02.835Z"
+        }
+      ]
+    },
+    "branding_settings": {
+      "branding": [
+        {
+          "key": "footer_logo",
+          "title": "Footer Logo URL",
+          "content": "/logos/treasureegypttours.svg",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.917Z",
+          "updatedAt": "2025-11-03T14:10:29.105Z"
+        }
+      ],
+      "general": [
+        {
+          "key": "navbar_logo",
+          "title": "Navbar Logo",
+          "content": "",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.922Z",
+          "updatedAt": "2025-11-03T14:07:02.939Z"
+        }
+      ]
+    },
+    "contact": {
+      "hero": [
+        {
+          "key": "contact_hero_subtitle",
+          "title": "Contact Hero Subtitle",
+          "content": "Ready to embark on your Nile adventure? Contact us today!",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:51:42.290Z",
+          "updatedAt": "2025-11-03T13:51:42.290Z"
+        },
+        {
+          "key": "contact_hero_title",
+          "title": "Contact Hero Title",
+          "content": "Contact Our Egypt Specialists",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:51:42.289Z",
+          "updatedAt": "2025-11-03T14:10:29.064Z"
+        }
+      ],
+      "info": [
+        {
+          "key": "contact_address",
+          "title": "Address",
+          "content": "Cairo, Egypt",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 5,
+          "createdAt": "2025-11-03T13:51:42.295Z",
+          "updatedAt": "2025-11-03T14:10:29.069Z"
+        },
+        {
+          "key": "contact_email",
+          "title": "Email",
+          "content": "info@treasureegypttours.com",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 4,
+          "createdAt": "2025-11-03T13:51:42.294Z",
+          "updatedAt": "2025-11-03T14:10:29.067Z"
+        },
+        {
+          "key": "contact_phone",
+          "title": "Phone",
+          "content": "+20 000 0000",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:51:42.292Z",
+          "updatedAt": "2025-11-03T14:10:29.066Z"
+        },
+        {
+          "key": "contact_whatsapp",
+          "title": "WhatsApp Number",
+          "content": "+20 123 456 7890",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 6,
+          "createdAt": "2025-11-03T13:51:42.297Z",
+          "updatedAt": "2025-11-03T13:51:42.297Z"
+        }
+      ],
+      "social_media": [
+        {
+          "key": "facebook_link",
+          "title": "Facebook Link",
+          "content": "https://facebook.com/TreasureEgyptTours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.848Z",
+          "updatedAt": "2025-11-03T14:10:29.100Z"
+        },
+        {
+          "key": "instagram_link",
+          "title": "Instagram Link",
+          "content": "https://instagram.com/treasureegypttours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.849Z",
+          "updatedAt": "2025-11-03T14:10:29.101Z"
+        },
+        {
+          "key": "telegram_link",
+          "title": "Telegram Link",
+          "content": "https://t.me/treasureegypt",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.846Z",
+          "updatedAt": "2025-11-03T14:10:29.103Z"
+        },
+        {
+          "key": "whatsapp_link",
+          "title": "WhatsApp Link",
+          "content": "https://wa.me/2000000000",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.845Z",
+          "updatedAt": "2025-11-03T14:10:29.102Z"
+        }
+      ]
+    },
+    "dahabiyas": {
+      "content": [
+        {
+          "key": "dahabiyas_description",
+          "title": "Dahabiyas Description",
+          "content": "Our fleet of traditional dahabiyas combines authentic Egyptian craftsmanship with modern comfort and luxury.",
+          "contentType": "TEXTAREA",
+          "isActive": false,
+          "order": 4,
+          "createdAt": "2025-11-03T13:51:42.311Z",
+          "updatedAt": "2025-11-03T14:10:29.030Z"
+        }
+      ],
+      "hero": [
+        {
+          "key": "dahabiyas_hero_background",
+          "title": "Dahabiyas Hero Background",
+          "content": "/images/dahabiyas-hero.jpg",
+          "contentType": "IMAGE",
+          "isActive": false,
+          "order": 3,
+          "createdAt": "2025-11-03T13:51:42.309Z",
+          "updatedAt": "2025-11-03T14:10:29.030Z"
+        },
+        {
+          "key": "dahabiyas_hero_subtitle",
+          "title": "Dahabiyas Hero Subtitle",
+          "content": "Sail the Nile in authentic traditional boats",
+          "contentType": "TEXT",
+          "isActive": false,
+          "order": 2,
+          "createdAt": "2025-11-03T13:51:42.308Z",
+          "updatedAt": "2025-11-03T14:10:29.030Z"
+        },
+        {
+          "key": "dahabiyas_hero_title",
+          "title": "Dahabiyas Hero Title",
+          "content": "Our Traditional Dahabiyas",
+          "contentType": "TEXT",
+          "isActive": false,
+          "order": 1,
+          "createdAt": "2025-11-03T13:51:42.307Z",
+          "updatedAt": "2025-11-03T14:10:29.030Z"
+        }
+      ]
+    },
+    "footer": {
+      "company": [
+        {
+          "key": "footer-company-name",
+          "title": "Company Name",
+          "content": "Treasure Egypt Tours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.156Z",
+          "updatedAt": "2025-11-03T14:10:29.070Z"
+        },
+        {
+          "key": "footer-description",
+          "title": "Footer Description",
+          "content": "Explore Egypt with tailored journeys and local expertise.",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.122Z",
+          "updatedAt": "2025-11-03T14:10:29.073Z"
+        },
+        {
+          "key": "footer-title",
+          "title": "Footer Title",
+          "content": "Treasure Egypt Tours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.105Z",
+          "updatedAt": "2025-11-03T14:10:29.072Z"
+        },
+        {
+          "key": "footer_company_description",
+          "title": "Footer Company Description",
+          "content": "Experience the magic of the Nile with Cleopatra Dahabiyat. Traditional boats, modern comfort, unforgettable memories.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:51:42.316Z",
+          "updatedAt": "2025-11-03T13:51:42.316Z"
+        }
+      ],
+      "contact": [
+        {
+          "key": "footer_contact_title",
+          "title": "Footer Contact Title",
+          "content": "Contact Info",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:51:42.319Z",
+          "updatedAt": "2025-11-03T13:51:42.319Z"
+        }
+      ],
+      "footer": [
+        {
+          "key": "footer-address",
+          "title": "footer-address",
+          "content": "Luxor, Egypt",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.135Z",
+          "updatedAt": "2025-11-03T13:54:03.135Z"
+        },
+        {
+          "key": "footer-email",
+          "title": "footer-email",
+          "content": "info@cleopatradahabiyat.com",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.139Z",
+          "updatedAt": "2025-11-03T13:54:03.139Z"
+        },
+        {
+          "key": "footer-link-dahabiyat",
+          "title": "footer-link-dahabiyat",
+          "content": "Dahabiyas",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.127Z",
+          "updatedAt": "2025-11-03T13:54:03.127Z"
+        },
+        {
+          "key": "footer-phone",
+          "title": "footer-phone",
+          "content": "+20 123 456 789",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.137Z",
+          "updatedAt": "2025-11-03T13:54:03.137Z"
+        },
+        {
+          "key": "footer_developer_contact_text",
+          "title": "footer_developer_contact_text",
+          "content": "Contact Developer",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.158Z",
+          "updatedAt": "2025-11-03T13:54:03.158Z"
+        },
+        {
+          "key": "footer_developer_logo",
+          "title": "footer_developer_logo",
+          "content": "/images/logo-white.png",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.154Z",
+          "updatedAt": "2025-11-03T13:54:03.154Z"
+        },
+        {
+          "key": "footer_loading_text",
+          "title": "footer_loading_text",
+          "content": "Loading Royal Footer...",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.159Z",
+          "updatedAt": "2025-11-03T13:54:03.159Z"
+        }
+      ],
+      "navigation": [
+        {
+          "key": "footer-link-about",
+          "title": "Footer Link About",
+          "content": "About",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.131Z",
+          "updatedAt": "2025-11-03T14:10:29.075Z"
+        },
+        {
+          "key": "footer-link-contact",
+          "title": "Footer Link Contact",
+          "content": "Contact",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.133Z",
+          "updatedAt": "2025-11-03T14:10:29.079Z"
+        },
+        {
+          "key": "footer-link-destinations",
+          "title": "Footer Link Destinations",
+          "content": "Destinations",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:10:29.080Z",
+          "updatedAt": "2025-11-03T14:10:29.080Z"
+        },
+        {
+          "key": "footer-link-home",
+          "title": "Footer Link Home",
+          "content": "Home",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.125Z",
+          "updatedAt": "2025-11-03T14:10:29.074Z"
+        },
+        {
+          "key": "footer-link-packages",
+          "title": "Footer Link Packages",
+          "content": "Packages",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.129Z",
+          "updatedAt": "2025-11-03T14:10:29.077Z"
+        },
+        {
+          "key": "footer-link-services",
+          "title": "Footer Link Services",
+          "content": "Services",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:10:29.082Z",
+          "updatedAt": "2025-11-03T14:10:29.082Z"
+        },
+        {
+          "key": "footer_quick_links_title",
+          "title": "Footer Quick Links Title",
+          "content": "Quick Links",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:51:42.317Z",
+          "updatedAt": "2025-11-03T14:10:29.083Z"
+        }
+      ],
+      "newsletter": [
+        {
+          "key": "footer-newsletter-text",
+          "title": "Footer Newsletter Text",
+          "content": "Subscribe to get updates on our latest offers and journeys.",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.149Z",
+          "updatedAt": "2025-11-03T14:10:29.087Z"
+        },
+        {
+          "key": "footer_newsletter_title",
+          "title": "Footer Newsletter Title",
+          "content": "Newsletter",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.147Z",
+          "updatedAt": "2025-11-03T14:10:29.086Z"
+        },
+        {
+          "key": "footer_subscribe_button_text",
+          "title": "Footer Subscribe Button",
+          "content": "Subscribe",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.152Z",
+          "updatedAt": "2025-11-03T14:10:29.088Z"
+        }
+      ],
+      "social": [
+        {
+          "key": "footer-facebook",
+          "title": "Footer Facebook URL",
+          "content": "https://facebook.com/TreasureEgyptTours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.142Z",
+          "updatedAt": "2025-11-03T14:10:29.090Z"
+        },
+        {
+          "key": "footer-instagram",
+          "title": "Footer Instagram URL",
+          "content": "https://instagram.com/treasureegypttours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.146Z",
+          "updatedAt": "2025-11-03T14:10:29.092Z"
+        },
+        {
+          "key": "footer-twitter",
+          "title": "Footer Twitter URL",
+          "content": "https://twitter.com/TreasureEgypt",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.144Z",
+          "updatedAt": "2025-11-03T14:10:29.091Z"
+        },
+        {
+          "key": "footer_follow_us_title",
+          "title": "Footer Follow Us Title",
+          "content": "Follow Us",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.141Z",
+          "updatedAt": "2025-11-03T14:10:29.085Z"
+        },
+        {
+          "key": "footer_social_title",
+          "title": "Footer Social Title",
+          "content": "Follow Us",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 4,
+          "createdAt": "2025-11-03T13:51:42.320Z",
+          "updatedAt": "2025-11-03T13:51:42.320Z"
+        }
+      ]
+    },
+    "global": {
+      "global": [
+        {
+          "key": "site_name",
+          "title": "Site Name",
+          "content": "Treasure Egypt Tours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:54:03.161Z",
+          "updatedAt": "2025-11-03T14:10:29.036Z"
+        }
+      ]
+    },
+    "global_media": {
+      "general": [
+        {
+          "key": "hero_fallback_image",
+          "title": "Hero Fallback Image",
+          "content": "/images/hero-bg.jpg",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.921Z",
+          "updatedAt": "2025-11-03T14:07:02.921Z"
+        }
+      ]
+    },
+    "homepage": {
+      "cta": [
+        {
+          "key": "cta_book_text",
+          "title": "CTA Book Text",
+          "content": "Book Your Journey",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.683Z",
+          "updatedAt": "2025-11-03T13:51:55.683Z"
+        },
+        {
+          "key": "cta_contact_text",
+          "title": "CTA Contact Text",
+          "content": "Contact Us",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.685Z",
+          "updatedAt": "2025-11-03T13:51:55.685Z"
+        },
+        {
+          "key": "cta_description",
+          "title": "CTA Description",
+          "content": "Contact us today to start planning your unforgettable Dahabiya adventure on the Nile",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.682Z",
+          "updatedAt": "2025-11-03T13:51:55.682Z"
+        },
+        {
+          "key": "cta_title",
+          "title": "CTA Title",
+          "content": "Ready to Begin Your Journey?",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.681Z",
+          "updatedAt": "2025-11-03T13:51:55.681Z"
+        }
+      ],
+      "dahabiyat": [
+        {
+          "key": "dahabiyat_section_subtitle",
+          "title": "Dahabiyat Section Subtitle",
+          "content": "Discover our collection of traditional sailing vessels, each offering a unique journey through Egypt's timeless landscapes",
+          "contentType": "TEXT",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.628Z",
+          "updatedAt": "2025-11-03T14:10:29.024Z"
+        },
+        {
+          "key": "dahabiyat_section_title",
+          "title": "Dahabiyat Section Title",
+          "content": "Our Luxury Dahabiyat Nile Cruise Fleet",
+          "contentType": "TEXT",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.626Z",
+          "updatedAt": "2025-11-03T14:10:29.024Z"
+        },
+        {
+          "key": "dahabiyat_view_all_text",
+          "title": "Dahabiyat View All Text",
+          "content": "View All Dahabiyat",
+          "contentType": "TEXT",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.632Z",
+          "updatedAt": "2025-11-03T14:10:29.024Z"
+        }
+      ],
+      "general": [
+        {
+          "key": "days_label",
+          "title": "Days Label",
+          "content": "Days",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.646Z",
+          "updatedAt": "2025-11-03T13:51:55.646Z"
+        },
+        {
+          "key": "guests_label",
+          "title": "Guests Label",
+          "content": "Guests",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.629Z",
+          "updatedAt": "2025-11-03T13:51:55.629Z"
+        },
+        {
+          "key": "homepage_destinations_title",
+          "title": "Destinations Title",
+          "content": "Top Destinations in Egypt",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:59:53.417Z",
+          "updatedAt": "2025-11-03T14:10:29.049Z"
+        },
+        {
+          "key": "homepage_featured_packages_subtitle",
+          "title": "Featured Packages Subtitle",
+          "content": "Our most popular Egypt trips curated for you",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:59:53.416Z",
+          "updatedAt": "2025-11-03T14:10:29.047Z"
+        },
+        {
+          "key": "homepage_featured_packages_title",
+          "title": "Featured Packages Title",
+          "content": "Featured Packages",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:59:53.414Z",
+          "updatedAt": "2025-11-03T14:10:29.046Z"
+        },
+        {
+          "key": "homepage_view_all_articles_text",
+          "title": "Homepage View All Articles",
+          "content": "View All Articles",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.959Z",
+          "updatedAt": "2025-11-03T14:10:29.098Z"
+        },
+        {
+          "key": "homepage_view_all_packages_text",
+          "title": "Homepage View All Packages",
+          "content": "View All Packages",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.956Z",
+          "updatedAt": "2025-11-03T14:10:29.097Z"
+        },
+        {
+          "key": "loading_text",
+          "title": "Loading Text",
+          "content": "Loading...",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.599Z",
+          "updatedAt": "2025-11-03T14:10:29.093Z"
+        },
+        {
+          "key": "read_less_text",
+          "title": "Read Less Text",
+          "content": "Read Less",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.643Z",
+          "updatedAt": "2025-11-03T14:10:29.096Z"
+        },
+        {
+          "key": "read_more_text",
+          "title": "Read More Text",
+          "content": "Read More",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.641Z",
+          "updatedAt": "2025-11-03T14:10:29.095Z"
+        },
+        {
+          "key": "view_details_text",
+          "title": "View Details Text",
+          "content": "View Details",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.631Z",
+          "updatedAt": "2025-11-03T13:51:55.631Z"
+        },
+        {
+          "key": "hero_scroll_text",
+          "title": "Hero Scroll Text",
+          "content": "",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.625Z",
+          "updatedAt": "2025-11-03T14:07:02.950Z"
+        },
+        {
+          "key": "hero_video_cta_link",
+          "title": "Hero Video Cta Link",
+          "content": "/tours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.946Z",
+          "updatedAt": "2025-11-03T14:07:02.946Z"
+        },
+        {
+          "key": "hero_video_secondary_cta_link",
+          "title": "Hero Video Secondary Cta Link",
+          "content": "/destinations",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.948Z",
+          "updatedAt": "2025-11-03T14:07:02.948Z"
+        },
+        {
+          "key": "homepage_discover_egypt_title",
+          "title": "Homepage Discover Egypt Title",
+          "content": "DISCOVER ANCIENT EGYPT",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.958Z",
+          "updatedAt": "2025-11-03T14:07:02.958Z"
+        },
+        {
+          "key": "homepage_featured_experience_title",
+          "title": "Homepage Featured Experience Title",
+          "content": "FEATURED EXPERIENCE",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.957Z",
+          "updatedAt": "2025-11-03T14:07:02.957Z"
+        },
+        {
+          "key": "homepage_hero_description",
+          "title": "Homepage Hero Description",
+          "content": "",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.945Z",
+          "updatedAt": "2025-11-03T14:07:02.945Z"
+        },
+        {
+          "key": "homepage_things_to_do_title",
+          "title": "Homepage Things To Do Title",
+          "content": "THINGS TO DO",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.952Z",
+          "updatedAt": "2025-11-03T14:07:02.952Z"
+        }
+      ],
+      "hero": [
+        {
+          "key": "hero_video_cta_text",
+          "title": "Primary CTA",
+          "content": "Explore Tours",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.623Z",
+          "updatedAt": "2025-11-03T14:10:29.042Z"
+        },
+        {
+          "key": "hero_video_poster",
+          "title": "Hero Video Poster",
+          "content": "/images/hero/travel-hero.jpg",
+          "contentType": "IMAGE",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.616Z",
+          "updatedAt": "2025-11-03T14:10:29.107Z"
+        },
+        {
+          "key": "hero_video_secondary_cta_text",
+          "title": "Secondary CTA",
+          "content": "View Packages",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:59:53.413Z",
+          "updatedAt": "2025-11-03T14:10:29.044Z"
+        },
+        {
+          "key": "hero_video_subtitle",
+          "title": "Hero Subtitle",
+          "content": "Tailored journeys, Nile cruises, and cultural adventures by local experts",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.622Z",
+          "updatedAt": "2025-11-03T14:10:29.040Z"
+        },
+        {
+          "key": "hero_video_title",
+          "title": "Hero Title",
+          "content": "Authentic Egypt Travel Experiences",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.620Z",
+          "updatedAt": "2025-11-03T14:10:29.039Z"
+        },
+        {
+          "key": "hero_video_url",
+          "title": "Hero Video URL",
+          "content": "/videos/home_hero_video.mp4",
+          "contentType": "VIDEO",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.618Z",
+          "updatedAt": "2025-11-03T14:10:29.106Z"
+        }
+      ],
+      "our_story": [
+        {
+          "key": "founder_image",
+          "title": "Founder Image",
+          "content": "/images/ashraf-elmasry.jpg",
+          "contentType": "IMAGE",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.672Z",
+          "updatedAt": "2025-11-03T13:51:55.672Z"
+        },
+        {
+          "key": "founder_name",
+          "title": "Founder Name",
+          "content": "Ashraf El-Masry",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.673Z",
+          "updatedAt": "2025-11-03T13:51:55.673Z"
+        },
+        {
+          "key": "founder_quote",
+          "title": "Founder Quote",
+          "content": "\"Preserving the ancient art of Nile navigation for future generations\"",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.676Z",
+          "updatedAt": "2025-11-03T13:51:55.676Z"
+        },
+        {
+          "key": "founder_title",
+          "title": "Founder Title",
+          "content": "Founder & CEO",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.675Z",
+          "updatedAt": "2025-11-03T13:51:55.675Z"
+        },
+        {
+          "key": "our_story_content",
+          "title": "Our Story Content",
+          "content": "Our journey began over 30 years ago when Captain Ahmed Hassan, a third-generation Nile navigator, had a vision to revive the authentic way of exploring Egypt's ancient wonders. Growing up along the banks of the Nile, he witnessed the transformation of river travel and felt called to preserve the traditional Dahabiya experience.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.666Z",
+          "updatedAt": "2025-11-03T13:51:55.666Z"
+        },
+        {
+          "key": "our_story_paragraph_2",
+          "title": "Our Story Paragraph 2",
+          "content": "What started as a single restored Dahabiya has grown into a fleet of carefully maintained vessels, each one a testament to traditional Egyptian craftsmanship combined with modern comfort and safety standards.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.667Z",
+          "updatedAt": "2025-11-03T13:51:55.667Z"
+        },
+        {
+          "key": "our_story_paragraph_3",
+          "title": "Our Story Paragraph 3",
+          "content": "Today, we continue Captain Hassan's legacy by offering intimate, authentic Nile experiences that connect our guests with the timeless beauty and rich history of Egypt, one journey at a time.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.669Z",
+          "updatedAt": "2025-11-03T13:51:55.669Z"
+        },
+        {
+          "key": "our_story_paragraph_4",
+          "title": "Our Story Paragraph 4",
+          "content": "Every member of our crew shares this passion for preserving Egyptian heritage while creating unforgettable memories for travelers from around the world.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.670Z",
+          "updatedAt": "2025-11-03T13:51:55.670Z"
+        },
+        {
+          "key": "our_story_title",
+          "title": "Our Story Title",
+          "content": "Our Story",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.664Z",
+          "updatedAt": "2025-11-03T13:51:55.664Z"
+        }
+      ],
+      "packages": [
+        {
+          "key": "packages_section_subtitle",
+          "title": "Packages Section Subtitle",
+          "content": "Choose from our carefully crafted packages, each designed to showcase the best of Egypt's ancient wonders and natural beauty",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.645Z",
+          "updatedAt": "2025-11-03T13:51:55.645Z"
+        },
+        {
+          "key": "packages_section_title",
+          "title": "Packages Section Title",
+          "content": "Our Journey Packages",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.644Z",
+          "updatedAt": "2025-11-03T13:51:55.644Z"
+        },
+        {
+          "key": "packages_view_all_text",
+          "title": "Packages View All Text",
+          "content": "View All Packages",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.648Z",
+          "updatedAt": "2025-11-03T13:51:55.648Z"
+        }
+      ],
+      "safety": [
+        {
+          "key": "safety_subtitle",
+          "title": "Safety Subtitle",
+          "content": "All our Dahabiyas are certified and regularly inspected to ensure the highest safety standards",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.679Z",
+          "updatedAt": "2025-11-03T13:51:55.679Z"
+        },
+        {
+          "key": "safety_title",
+          "title": "Safety Title",
+          "content": "Your Safety is Our Priority",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.678Z",
+          "updatedAt": "2025-11-03T13:51:55.678Z"
+        }
+      ],
+      "share_memories": [
+        {
+          "key": "share_memories_content",
+          "title": "Share Memories Content",
+          "content": "Your journey with us doesn't end when you disembark. We believe that the memories created during your Dahabiya experience are meant to be shared and cherished forever. Join our community of travelers who have fallen in love with the magic of the Nile.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.659Z",
+          "updatedAt": "2025-11-03T13:51:55.659Z"
+        },
+        {
+          "key": "share_memories_image_1",
+          "title": "Share Memories Image 1",
+          "content": "/images/guest-memories-1.jpg",
+          "contentType": "IMAGE",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.660Z",
+          "updatedAt": "2025-11-03T13:51:55.660Z"
+        },
+        {
+          "key": "share_memories_image_2",
+          "title": "Share Memories Image 2",
+          "content": "/images/guest-memories-2.jpg",
+          "contentType": "IMAGE",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.662Z",
+          "updatedAt": "2025-11-03T13:51:55.662Z"
+        },
+        {
+          "key": "share_memories_image_3",
+          "title": "Share Memories Image 3",
+          "content": "/images/guest-memories-3.jpg",
+          "contentType": "IMAGE",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.663Z",
+          "updatedAt": "2025-11-03T13:51:55.663Z"
+        },
+        {
+          "key": "share_memories_title",
+          "title": "Share Memories Title",
+          "content": "Share your memories with us",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.658Z",
+          "updatedAt": "2025-11-03T13:51:55.658Z"
+        }
+      ],
+      "what_is": [
+        {
+          "key": "what_is_dahabiya_content",
+          "title": "What is Dahabiya Content",
+          "content": "A Dahabiya is a traditional Egyptian sailing boat that has been navigating the Nile River for centuries. These elegant vessels, with their distinctive lateen sails and shallow draft, were once the preferred mode of transport for Egyptian nobility and wealthy travelers exploring the ancient wonders along the Nile.",
+          "contentType": "TEXTAREA",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.635Z",
+          "updatedAt": "2025-11-03T14:10:29.032Z"
+        },
+        {
+          "key": "what_is_dahabiya_image_1",
+          "title": "What is Dahabiya Image 1",
+          "content": "/images/dahabiya-sailing.jpg",
+          "contentType": "IMAGE",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.638Z",
+          "updatedAt": "2025-11-03T14:10:29.032Z"
+        },
+        {
+          "key": "what_is_dahabiya_image_2",
+          "title": "What is Dahabiya Image 2",
+          "content": "/images/dahabiya-deck.jpg",
+          "contentType": "IMAGE",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.639Z",
+          "updatedAt": "2025-11-03T14:10:29.032Z"
+        },
+        {
+          "key": "what_is_dahabiya_image_3",
+          "title": "What is Dahabiya Image 3",
+          "content": "/images/dahabiya-sunset.jpg",
+          "contentType": "IMAGE",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.640Z",
+          "updatedAt": "2025-11-03T14:10:29.032Z"
+        },
+        {
+          "key": "what_is_dahabiya_title",
+          "title": "What is Dahabiya Title",
+          "content": "What is Dahabiya?",
+          "contentType": "TEXT",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.633Z",
+          "updatedAt": "2025-11-03T14:10:29.032Z"
+        }
+      ],
+      "why_different": [
+        {
+          "key": "why_different_content",
+          "title": "Why Different Content",
+          "content": "While traditional Nile cruise ships can accommodate 200-400 passengers, Dahabiyas offer an intimate experience with only 8-12 guests. This fundamental difference creates a completely different travel experience that feels more like a private yacht charter than a commercial cruise.",
+          "contentType": "TEXTAREA",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.651Z",
+          "updatedAt": "2025-11-03T14:10:29.033Z"
+        },
+        {
+          "key": "why_different_image_1",
+          "title": "Why Different Image 1",
+          "content": "/images/cruise-comparison-1.jpg",
+          "contentType": "IMAGE",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.653Z",
+          "updatedAt": "2025-11-03T14:10:29.033Z"
+        },
+        {
+          "key": "why_different_image_2",
+          "title": "Why Different Image 2",
+          "content": "/images/cruise-comparison-2.jpg",
+          "contentType": "IMAGE",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.655Z",
+          "updatedAt": "2025-11-03T14:10:29.033Z"
+        },
+        {
+          "key": "why_different_image_3",
+          "title": "Why Different Image 3",
+          "content": "/images/cruise-comparison-3.jpg",
+          "contentType": "IMAGE",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.656Z",
+          "updatedAt": "2025-11-03T14:10:29.033Z"
+        },
+        {
+          "key": "why_different_title",
+          "title": "Why Different Title",
+          "content": "Why is Dahabiya different from regular Nile Cruises?",
+          "contentType": "TEXT",
+          "isActive": false,
+          "order": 0,
+          "createdAt": "2025-11-03T13:51:55.649Z",
+          "updatedAt": "2025-11-03T14:10:29.033Z"
+        }
+      ]
+    },
+    "itineraries": {
+      "cta": [
+        {
+          "key": "itineraries_cta_description",
+          "title": "CTA Section Description",
+          "content": "Contact our travel experts to customize your perfect Egyptian adventure or book one of our signature itineraries today.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:52:32.084Z",
+          "updatedAt": "2025-11-03T13:52:32.084Z"
+        },
+        {
+          "key": "itineraries_cta_primary_text",
+          "title": "Primary CTA Button Text",
+          "content": "Book Your Journey",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:52:32.085Z",
+          "updatedAt": "2025-11-03T13:52:32.085Z"
+        },
+        {
+          "key": "itineraries_cta_secondary_text",
+          "title": "Secondary CTA Button Text",
+          "content": "Contact Us",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 4,
+          "createdAt": "2025-11-03T13:52:32.087Z",
+          "updatedAt": "2025-11-03T13:52:32.087Z"
+        },
+        {
+          "key": "itineraries_cta_title",
+          "title": "CTA Section Title",
+          "content": "Ready to Begin Your Journey?",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:52:32.083Z",
+          "updatedAt": "2025-11-03T13:52:32.083Z"
+        }
+      ],
+      "empty_state": [
+        {
+          "key": "itineraries_no_itineraries_cta_text",
+          "title": "No Itineraries CTA Text",
+          "content": "Create Custom Journey",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:52:32.069Z",
+          "updatedAt": "2025-11-03T13:52:32.069Z"
+        },
+        {
+          "key": "itineraries_no_itineraries_description",
+          "title": "No Itineraries Description",
+          "content": "We couldn't find any itineraries matching your criteria. Please adjust your filters or contact us to create a custom journey just for you.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:52:32.065Z",
+          "updatedAt": "2025-11-03T13:52:32.065Z"
+        },
+        {
+          "key": "itineraries_no_itineraries_title",
+          "title": "No Itineraries Title",
+          "content": "No Journeys Found",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:52:32.064Z",
+          "updatedAt": "2025-11-03T13:52:32.064Z"
+        }
+      ],
+      "features": [
+        {
+          "key": "itineraries_feature_1_description",
+          "title": "Feature 1 Description",
+          "content": "Our guides are certified Egyptologists who bring ancient history to life with fascinating stories and deep knowledge.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:52:32.075Z",
+          "updatedAt": "2025-11-03T13:52:32.075Z"
+        },
+        {
+          "key": "itineraries_feature_1_title",
+          "title": "Feature 1 Title",
+          "content": "Expert Egyptologists",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:52:32.073Z",
+          "updatedAt": "2025-11-03T13:52:32.073Z"
+        },
+        {
+          "key": "itineraries_feature_2_description",
+          "title": "Feature 2 Description",
+          "content": "Visit hidden gems and experience local culture beyond the typical tourist sites.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 5,
+          "createdAt": "2025-11-03T13:52:32.078Z",
+          "updatedAt": "2025-11-03T13:52:32.078Z"
+        },
+        {
+          "key": "itineraries_feature_2_title",
+          "title": "Feature 2 Title",
+          "content": "Authentic Experiences",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 4,
+          "createdAt": "2025-11-03T13:52:32.076Z",
+          "updatedAt": "2025-11-03T13:52:32.076Z"
+        },
+        {
+          "key": "itineraries_feature_3_description",
+          "title": "Feature 3 Description",
+          "content": "Enjoy modern amenities and luxury accommodations while exploring ancient wonders.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 7,
+          "createdAt": "2025-11-03T13:52:32.081Z",
+          "updatedAt": "2025-11-03T13:52:32.081Z"
+        },
+        {
+          "key": "itineraries_feature_3_title",
+          "title": "Feature 3 Title",
+          "content": "Luxury Comfort",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 6,
+          "createdAt": "2025-11-03T13:52:32.080Z",
+          "updatedAt": "2025-11-03T13:52:32.080Z"
+        },
+        {
+          "key": "itineraries_features_title",
+          "title": "Features Section Title",
+          "content": "What Makes Our Itineraries Special",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:52:32.072Z",
+          "updatedAt": "2025-11-03T13:52:32.072Z"
+        }
+      ],
+      "filter": [
+        {
+          "key": "itineraries_filter_duration_label",
+          "title": "Duration Filter Label",
+          "content": "Duration",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:52:32.058Z",
+          "updatedAt": "2025-11-03T13:52:32.058Z"
+        },
+        {
+          "key": "itineraries_filter_guests_label",
+          "title": "Guests Filter Label",
+          "content": "Number of Guests",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 4,
+          "createdAt": "2025-11-03T13:52:32.062Z",
+          "updatedAt": "2025-11-03T13:52:32.062Z"
+        },
+        {
+          "key": "itineraries_filter_price_label",
+          "title": "Price Filter Label",
+          "content": "Price Range",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:52:32.060Z",
+          "updatedAt": "2025-11-03T13:52:32.060Z"
+        },
+        {
+          "key": "itineraries_filter_title",
+          "title": "Filter Section Title",
+          "content": "Find Your Perfect Journey",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:52:32.055Z",
+          "updatedAt": "2025-11-03T13:52:32.055Z"
+        }
+      ],
+      "hero": [
+        {
+          "key": "itineraries_hero_background_image",
+          "title": "Itineraries Hero Background Image",
+          "content": "/images/itineraries/hero-bg.jpg",
+          "contentType": "IMAGE",
+          "isActive": true,
+          "order": 5,
+          "createdAt": "2025-11-03T13:52:32.046Z",
+          "updatedAt": "2025-11-03T13:52:32.046Z"
+        },
+        {
+          "key": "itineraries_hero_cta_text",
+          "title": "Itineraries CTA Button Text",
+          "content": "Explore All Journeys",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 4,
+          "createdAt": "2025-11-03T13:52:32.043Z",
+          "updatedAt": "2025-11-03T13:52:32.043Z"
+        },
+        {
+          "key": "itineraries_hero_description",
+          "title": "Itineraries Hero Description",
+          "content": "Explore our carefully crafted itineraries that take you through 5000 years of Egyptian history. Each journey is designed to immerse you in the wonders of ancient civilization while enjoying modern luxury aboard our traditional dahabiyas.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:52:32.039Z",
+          "updatedAt": "2025-11-03T13:52:32.039Z"
+        },
+        {
+          "key": "itineraries_hero_subtitle",
+          "title": "Itineraries Hero Subtitle",
+          "content": "From Cairo highlights to Nile journeys and desert escapes",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:52:32.032Z",
+          "updatedAt": "2025-11-03T14:10:29.059Z"
+        },
+        {
+          "key": "itineraries_hero_title",
+          "title": "Itineraries Hero Title",
+          "content": "Discover Egypt, Your Way",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:52:32.014Z",
+          "updatedAt": "2025-11-03T14:10:29.057Z"
+        }
+      ],
+      "loading": [
+        {
+          "key": "itineraries_loading_text",
+          "title": "Loading Text",
+          "content": "Discovering your perfect journey...",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:52:32.070Z",
+          "updatedAt": "2025-11-03T13:52:32.070Z"
+        }
+      ],
+      "main": [
+        {
+          "key": "itineraries_main_description",
+          "title": "Main Section Description",
+          "content": "Each itinerary is a masterpiece of cultural immersion, combining historical exploration with luxurious comfort. Our expert guides bring ancient stories to life as you sail the same waters that carried pharaohs and queens.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:52:32.052Z",
+          "updatedAt": "2025-11-03T13:52:32.052Z"
+        },
+        {
+          "key": "itineraries_main_title",
+          "title": "Main Section Title",
+          "content": "Our Signature Journeys",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:52:32.049Z",
+          "updatedAt": "2025-11-03T13:52:32.049Z"
+        }
+      ]
+    },
+    "packages": {
+      "content": [
+        {
+          "key": "packages_description",
+          "title": "Packages Description",
+          "content": "Browse flexible packages designed by local experts. Customize any trip to match your dates and interests.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 4,
+          "createdAt": "2025-11-03T13:51:42.305Z",
+          "updatedAt": "2025-11-03T14:10:29.056Z"
+        }
+      ],
+      "hero": [
+        {
+          "key": "packages_hero_background",
+          "title": "Packages Hero Background",
+          "content": "/images/packages-hero.jpg",
+          "contentType": "IMAGE",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:51:42.303Z",
+          "updatedAt": "2025-11-03T13:51:42.303Z"
+        },
+        {
+          "key": "packages_hero_subtitle",
+          "title": "Packages Hero Subtitle",
+          "content": "Handcrafted itineraries across Cairo, Luxor, Aswan & the Red Sea",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:51:42.300Z",
+          "updatedAt": "2025-11-03T14:10:29.054Z"
+        },
+        {
+          "key": "packages_hero_title",
+          "title": "Packages Hero Title",
+          "content": "Egypt Travel Packages",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:51:42.298Z",
+          "updatedAt": "2025-11-03T14:10:29.051Z"
+        }
+      ]
+    },
+    "services": {
+      "general": [
+        {
+          "key": "services_description",
+          "title": "Services Description",
+          "content": "",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.916Z",
+          "updatedAt": "2025-11-03T14:07:02.916Z"
+        },
+        {
+          "key": "services_empty_description_active",
+          "title": "Services Empty Description Active",
+          "content": "",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.897Z",
+          "updatedAt": "2025-11-03T14:07:02.897Z"
+        },
+        {
+          "key": "services_empty_description_all",
+          "title": "Services Empty Description All",
+          "content": "",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.913Z",
+          "updatedAt": "2025-11-03T14:07:02.913Z"
+        },
+        {
+          "key": "services_empty_title",
+          "title": "Services Empty Title",
+          "content": "",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.850Z",
+          "updatedAt": "2025-11-03T14:07:02.850Z"
+        },
+        {
+          "key": "services_title",
+          "title": "Services Title",
+          "content": "",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 0,
+          "createdAt": "2025-11-03T14:07:02.914Z",
+          "updatedAt": "2025-11-03T14:07:02.914Z"
+        }
+      ]
+    },
+    "tailor-made": {
+      "content": [
+        {
+          "key": "tailor_made_description",
+          "title": "Tailor-Made Description",
+          "content": "Work with our experts to create a personalized Nile cruise that matches your interests, schedule, and preferences.",
+          "contentType": "TEXTAREA",
+          "isActive": true,
+          "order": 3,
+          "createdAt": "2025-11-03T13:51:42.314Z",
+          "updatedAt": "2025-11-03T13:51:42.314Z"
+        }
+      ],
+      "hero": [
+        {
+          "key": "tailor_made_hero_subtitle",
+          "title": "Tailor-Made Hero Subtitle",
+          "content": "Create your perfect Nile cruise experience",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 2,
+          "createdAt": "2025-11-03T13:51:42.313Z",
+          "updatedAt": "2025-11-03T13:51:42.313Z"
+        },
+        {
+          "key": "tailor_made_hero_title",
+          "title": "Tailor-Made Hero Title",
+          "content": "Tailor-Made Experiences",
+          "contentType": "TEXT",
+          "isActive": true,
+          "order": 1,
+          "createdAt": "2025-11-03T13:51:42.312Z",
+          "updatedAt": "2025-11-03T13:51:42.312Z"
+        }
+      ]
+    }
+  }
+}
