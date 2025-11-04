@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { generateSEO } from '@/lib/seo';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dahabiyatnilecruise.com';
@@ -22,20 +22,16 @@ export async function generateMetadata(
       });
     }
 
-    const image = dahabiya.mainImage || '/images/placeholder-dahabiya.jpg';
+    const image = dahabiya.imageCover || '/images/placeholder-dahabiya.jpg';
     const absImage = image.startsWith('http') ? image : `${baseUrl}${image}`;
     const url = `/dahabiyas/${dahabiya.slug || slug}`;
 
-    const tags: string[] = Array.isArray(dahabiya.tags) ? dahabiya.tags : [];
-    if (dahabiya.category) tags.push(dahabiya.category);
-
     return generateSEO({
       title: `${dahabiya.name} - Luxury Dahabiya`,
-      description: dahabiya.metaDescription || dahabiya.shortDescription || dahabiya.description || `${dahabiya.name} - luxury dahabiya on the Nile`,
+      description: dahabiya.description || `${dahabiya.name} - luxury dahabiya on the Nile`,
       image: absImage,
       url,
       type: 'website',
-      tags,
     });
   } catch (e) {
     return generateSEO({

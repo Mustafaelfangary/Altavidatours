@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import { prisma } from '@/lib/prisma';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.altavidatours.com';
@@ -67,48 +66,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.3,
     },
   ];
-
-  try {
-    // Test database connection first
-    await prisma.$connect();
-
-    // Dynamic travel service pages
-    const travelServices = await prisma.travelService.findMany({
-      where: { isActive: true },
-      select: {
-        slug: true,
-        updatedAt: true,
-        serviceType: true,
-      },
-    });
-
-    const servicePages: MetadataRoute.Sitemap = travelServices.map((service) => ({
-      url: `${baseUrl}/services/${service.slug}`,
-      lastModified: service.updatedAt,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    }));
-
-    // Dynamic destination pages
-    const destinations = await prisma.destination.findMany({
-      select: {
-        name: true,
-        updatedAt: true,
-      },
-    });
-
-    const destinationPages: MetadataRoute.Sitemap = destinations.map((destination) => ({
-      url: `${baseUrl}/destinations/${destination.name.toLowerCase().replace(/\s+/g, '-')}`,
-      lastModified: destination.updatedAt,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    }));
-
-    return [...staticPages, ...servicePages, ...destinationPages];
-  } catch (error) {
-    console.error('Error generating sitemap:', error);
-
-    // Return only static pages if database query fails
-    return staticPages;
-  }
+  // Return only static pages to avoid DB dependency in sitemap
+  return staticPages;
 }

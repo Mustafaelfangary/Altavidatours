@@ -25,10 +25,13 @@ export const revalidate = 3600; // Revalidate every hour
 
 export default async function PackageDetailPage({ params }: PageProps) {
   try {
-    // Fetch package data from the database
-    const pkg = await prisma.package.findUnique({
-      where: { slug: params.slug },
-    });
+    // Try by ID first, then fallback to name contains
+    let pkg = await prisma.package.findUnique({ where: { id: params.slug } });
+    if (!pkg) {
+      pkg = await prisma.package.findFirst({
+        where: { name: { contains: params.slug, mode: 'insensitive' } },
+      });
+    }
 
     if (!pkg) {
       return notFound();
@@ -91,21 +94,8 @@ export default async function PackageDetailPage({ params }: PageProps) {
 }
 
 export async function generateStaticParams() {
-  try {
-    const packages = await prisma.package.findMany({
-      select: {
-        slug: true
-      },
-      take: 100 // Limit to 100 packages to avoid timeout during build
-    });
-
-    return packages.map((pkg) => ({
-      slug: pkg.slug
-    }));
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
-  }
+  // DB may not have slug column; avoid querying and let on-demand rendering handle pages
+  return [];
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<{
@@ -123,14 +113,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }> {
   try {
-    const pkg = await prisma.package.findUnique({
-      where: { slug: params.slug },
-      select: {
-        name: true,
-        shortDescription: true,
-        mainImage: true
-      }
+    // Try by ID, then by name contains
+    let pkg = await prisma.package.findUnique({
+      where: { id: params.slug },
+      select: { name: true, shortDescription: true, mainImage: true }
     });
+    if (!pkg) {
+      pkg = await prisma.package.findFirst({
+        where: { name: { contains: params.slug, mode: 'insensitive' } },
+        select: { name: true, shortDescription: true, mainImage: true }
+      });
+    }
 
     if (!pkg) {
       return {

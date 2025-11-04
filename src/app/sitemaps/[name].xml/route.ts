@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 
 function xmlEscape(input: string): string {
   return input
@@ -52,7 +52,7 @@ export async function GET(_req: Request, { params }: { params: { name: string } 
       case 'blogs': {
         const posts = await prisma.blog.findMany({
           where: { isPublished: true },
-          select: { slug: true, updatedAt: true, publishedAt: true, mainImageUrl: true, heroImageUrl: true, seoTitle: true, title: true },
+          select: { slug: true, updatedAt: true, publishedAt: true, coverImage: true, title: true },
           orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
           take: 5000,
         });
@@ -62,14 +62,13 @@ export async function GET(_req: Request, { params }: { params: { name: string } 
             const loc = `${baseUrl}/blogs/${p.slug}`;
             const lastmod = (p.updatedAt || p.publishedAt || new Date()).toISOString().slice(0, 10);
             const images: string[] = [];
-            if (p.mainImageUrl) images.push(p.mainImageUrl);
-            if (p.heroImageUrl) images.push(p.heroImageUrl);
+            if (p.coverImage) images.push(p.coverImage);
 
             const imageXml = images
               .filter(Boolean)
               .map((img) => {
                 const abs = img.startsWith('http') ? img : `${baseUrl}${img}`;
-                const title = p.seoTitle || p.title || 'Blog image';
+                const title = p.title || 'Blog image';
                 return `    <image:image>\n      <image:loc>${xmlEscape(abs)}</image:loc>\n      <image:title>${xmlEscape(title)}</image:title>\n    </image:image>`;
               })
               .join('\n');
@@ -85,7 +84,7 @@ export async function GET(_req: Request, { params }: { params: { name: string } 
       case 'dahabiyas': {
         const items = await prisma.dahabiya.findMany({
           where: { isActive: true },
-          select: { slug: true, updatedAt: true, mainImage: true, gallery: true, name: true },
+          select: { slug: true, updatedAt: true, imageCover: true, images: true, name: true },
           orderBy: [{ updatedAt: 'desc' }],
           take: 5000,
         });
@@ -95,8 +94,8 @@ export async function GET(_req: Request, { params }: { params: { name: string } 
             const loc = `${baseUrl}/dahabiyas/${d.slug}`;
             const lastmod = (d.updatedAt || new Date()).toISOString().slice(0, 10);
             const images: string[] = [];
-            if (d.mainImage) images.push(d.mainImage);
-            if (Array.isArray(d.gallery)) images.push(...d.gallery);
+            if (d.imageCover) images.push(d.imageCover);
+            if (Array.isArray(d.images)) images.push(...d.images);
 
             const imageXml = images
               .filter(Boolean)
@@ -118,18 +117,18 @@ export async function GET(_req: Request, { params }: { params: { name: string } 
 
       case 'packages': {
         const items = await prisma.package.findMany({
-          select: { id: true, updatedAt: true, name: true, mainImageUrl: true },
+          select: { id: true, updatedAt: true, name: true, mainImage: true },
           orderBy: [{ updatedAt: 'desc' }],
           take: 5000,
         });
 
         const xmlItems = items
           .map((p) => {
-            const slug = p.id; // Package pages accept id as slug
+            const slug = p.id; // Package pages accept id as slug or name match
             const loc = `${baseUrl}/packages/${slug}`;
             const lastmod = (p.updatedAt || new Date()).toISOString().slice(0, 10);
             const images: string[] = [];
-            if (p.mainImageUrl) images.push(p.mainImageUrl);
+            if (p.mainImage) images.push(p.mainImage);
 
             const imageXml = images
               .filter(Boolean)
@@ -153,16 +152,16 @@ export async function GET(_req: Request, { params }: { params: { name: string } 
         const [blogs, dahabiyas, packages] = await Promise.all([
           prisma.blog.findMany({
             where: { isPublished: true },
-            select: { slug: true, mainImageUrl: true, heroImageUrl: true },
+            select: { slug: true, coverImage: true },
             take: 5000,
           }),
           prisma.dahabiya.findMany({
             where: { isActive: true },
-            select: { slug: true, mainImage: true, gallery: true },
+            select: { slug: true, imageCover: true, images: true },
             take: 5000,
           }),
           prisma.package.findMany({
-            select: { id: true, mainImageUrl: true },
+            select: { id: true, mainImage: true },
             take: 5000,
           }),
         ]);
@@ -170,7 +169,7 @@ export async function GET(_req: Request, { params }: { params: { name: string } 
         const blogEntries = blogs
           .map((b) => {
             const loc = `${baseUrl}/blogs/${b.slug}`;
-            const images = [b.mainImageUrl, b.heroImageUrl].filter(Boolean) as string[];
+            const images = [b.coverImage].filter(Boolean) as string[];
             const imageXml = images
               .map((img) => {
                 const abs = img.startsWith('http') ? img : `${baseUrl}${img}`;
@@ -184,7 +183,7 @@ export async function GET(_req: Request, { params }: { params: { name: string } 
         const dahabiyaEntries = dahabiyas
           .map((d) => {
             const loc = `${baseUrl}/dahabiyas/${d.slug}`;
-            const images = [d.mainImage, ...(Array.isArray(d.gallery) ? d.gallery : [])].filter(Boolean) as string[];
+            const images = [d.imageCover, ...(Array.isArray(d.images) ? d.images : [])].filter(Boolean) as string[];
             const imageXml = images
               .slice(0, 1000)
               .map((img) => {
@@ -199,7 +198,7 @@ export async function GET(_req: Request, { params }: { params: { name: string } 
         const packageEntries = packages
           .map((p) => {
             const loc = `${baseUrl}/packages/${p.id}`;
-            const images = [p.mainImageUrl].filter(Boolean) as string[];
+            const images = [p.mainImage].filter(Boolean) as string[];
             const imageXml = images
               .map((img) => {
                 const abs = img.startsWith('http') ? img : `${baseUrl}${img}`;

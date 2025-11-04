@@ -24,48 +24,33 @@ interface Review {
 }
 
 async function getDahabiyaData(slug: string) {
-  const tour = await prisma['tour'].findUnique({
-    where: { slug },
-    include: {
-      itineraries: {
-        include: {
-          days: {
-            orderBy: { dayNumber: 'asc' },
-            include: {
-              images: true
-            }
-          }
-        },
-        orderBy: {
-          name: 'asc'
-        }
-      },
-    }
+  const dahabiya = await prisma.dahabiya.findFirst({
+    where: { OR: [{ slug }, { id: slug }] },
   });
 
-  if (!tour) return null;
+  if (!dahabiya) return null;
 
   // Transform the data to match the expected format
   return {
-    id: tour.id,
-    name: tour.title,
-    slug: tour.slug,
-    description: tour.description || '',
-    shortDescription: tour.shortDescription || '',
-    pricePerDay: tour.price ? Number(tour.price) : 0,
-    capacity: tour.maxGroupSize || 0,
-    cabins: Math.ceil((tour.maxGroupSize || 2) / 2),
-    crew: 6,
-    length: 45,
-    width: 8,
-    yearBuilt: 2020,
-    mainImage: tour.mainImage || '/images/default-dahabiya.jpg',
-    gallery: tour.images?.map((image, index) => ({
-      id: image.id,
-      url: image.url,
-      alt: `${tour.title} - Image ${index + 1}`
-    })) || [],
-    features: tour.highlights || [
+    id: dahabiya.id,
+    name: dahabiya.name,
+    slug: dahabiya.slug || slug,
+    description: dahabiya.description || '',
+    shortDescription: dahabiya.summary || '',
+    pricePerDay: 0,
+    capacity: dahabiya.capacity || 0,
+    cabins: dahabiya.cabins || 0,
+    crew: dahabiya.crew || 0,
+    length: dahabiya.length || 0,
+    width: 0,
+    yearBuilt: 0,
+    mainImage: dahabiya.imageCover || '/images/default-dahabiya.jpg',
+    gallery: Array.isArray(dahabiya.images) ? dahabiya.images.map((url, index) => ({
+      id: `img-${dahabiya.id}-${index}`,
+      url,
+      alt: `${dahabiya.name} - Image ${index + 1}`
+    })) : [],
+    features: [
       'Private balconies in all cabins',
       'Air conditioning',
       'En-suite bathrooms',
@@ -73,7 +58,7 @@ async function getDahabiyaData(slug: string) {
       'Luxury linens',
       '24/7 room service'
     ],
-    amenities: tour.includes || [
+    amenities: [
       'Sun deck with loungers',
       'Jacuzzi',
       'Bar',
@@ -118,19 +103,7 @@ async function getDahabiyaData(slug: string) {
     category: 'LUXURY' as const,
     rating: 4.8,
     reviewCount: 42,
-    itineraries: tour.itineraries?.map(itinerary => ({
-      id: itinerary.id,
-      day: 1, // Default day
-      title: itinerary.name || 'Itinerary',
-      description: itinerary.description || '',
-      activities: itinerary.days.flatMap(day => 
-        day.activities?.map((activity, idx) => ({
-          id: `${day.id}-${idx}`,
-          description: activity,
-          time: '' // You might want to add time to your activities
-        })) || []
-      )
-    })) || [],
+    itineraries: [],
     reviews: [
       {
         id: '1',
@@ -151,10 +124,10 @@ async function getDahabiyaData(slug: string) {
     ],
     isFeatured: true,
     isActive: true,
-    videoUrl: tour.videoUrl || 'https://www.youtube.com/watch?v=example',
-    virtualTourUrl: tour.virtualTourUrl || 'https://example.com/virtual-tour',
-    createdAt: tour.createdAt?.toISOString() || new Date().toISOString(),
-    updatedAt: tour.updatedAt?.toISOString() || new Date().toISOString()
+    videoUrl: 'https://www.youtube.com/watch?v=example',
+    virtualTourUrl: 'https://example.com/virtual-tour',
+    createdAt: dahabiya.createdAt?.toISOString() || new Date().toISOString(),
+    updatedAt: dahabiya.updatedAt?.toISOString() || new Date().toISOString()
   };
 }
 
@@ -171,15 +144,9 @@ export default async function DahabiyaPage({ params }: { params: { slug: string 
 // Generate static params for all dahabiya slugs
 export async function generateStaticParams() {
   try {
-    const dahabiyas = await prisma['tour'].findMany({
-      where: {
-        // Filter for dahabiyas if needed
-        // type: 'Dahabiya'
-      },
-      select: {
-        slug: true
-      },
-      take: 100 // Limit to 100 dahabiyas to avoid timeout during build
+    const dahabiyas = await prisma.dahabiya.findMany({
+      select: { slug: true },
+      take: 100
     });
 
     return dahabiyas.map((dahabiya) => ({
