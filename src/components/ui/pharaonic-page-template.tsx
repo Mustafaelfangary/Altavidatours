@@ -333,7 +333,7 @@ export function PharaonicPageTemplate({
                     Book Now
                   </Button>
                 </Link>
-                <Link href={pageType === 'dahabiya' ? '/dahabiyat' : '/packages'}>
+                <Link href={pageType === 'dahabiya' ? '/dahabiyas' : '/packages'}>
                   <Button
                     variant="outlined"
                     size="large"

@@ -321,7 +321,7 @@ export default function BookingPage() {
             <Link href="/contact" className="bg-white hover:bg-white text-text-primary px-6 py-3 rounded-xl transition-colors">
               Contact Our Advisors
             </Link>
-            <Link href="/dahabiyat" className="bg-egyptian-gold/20 hover:bg-egyptian-gold/30 text-egyptian-gold px-6 py-3 rounded-xl transition-colors border border-egyptian-gold/50">
+            <Link href="/dahabiyas" className="bg-egyptian-gold/20 hover:bg-egyptian-gold/30 text-egyptian-gold px-6 py-3 rounded-xl transition-colors border border-egyptian-gold/50">
               Explore All Vessels
             </Link>
           </div>

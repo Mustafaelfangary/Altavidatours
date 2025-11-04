@@ -145,7 +145,9 @@ const WishlistGrid: React.FC<WishlistGridProps> = ({ userId, limit }) => {
         const isPackage = !!item.package;
         const content = item.package || item.dahabiya;
         const price = isPackage ? item.package!.price : item.dahabiya!.pricePerNight;
-        const linkHref = isPackage ? `/packages/${content!.id}` : `/dahabiyat/${content!.id}`;
+        const linkHref = isPackage
+          ? `/packages/${content!.slug || content!.id}`
+          : `/dahabiyas/${content!.slug || content!.id}`;
 
         return (
           <Card key={item.id} className="group overflow-hidden hover:shadow-lg transition-all duration-300">

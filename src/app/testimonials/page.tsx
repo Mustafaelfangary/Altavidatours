@@ -293,7 +293,7 @@ export default function TestimonialsPage() {
                     Write a Review
                   </Button>
                 </Link>
-                <Link href="/dahabiyat">
+                <Link href="/dahabiyas">
                   <Button variant="outline" className="border-egyptian-gold/30 text-hieroglyph-brown hover:bg-egyptian-gold/10">
                     <span className="mr-2">𓇳</span>
                     Explore Our Fleet
