@@ -5,14 +5,23 @@ export default async function ItineraryDetail({ params }: { params: { slug: stri
   const { slug } = params;
   if (!slug) return notFound();
 
-  // Resolve itinerary by id first, then by slug
-  let itinerary = await prisma.itinerary.findUnique({ where: { id: slug } });
+  // Resolve itinerary by id first, then by slug, including relational days
+  let itinerary = await prisma.itinerary.findUnique({ where: { id: slug } as any, include: { days: { orderBy: { dayNumber: 'asc' } } } as any } as any);
   if (!itinerary) {
-    itinerary = await prisma.itinerary.findUnique({ where: { slug } });
+    itinerary = await prisma.itinerary.findUnique({ where: { slug } as any, include: { days: { orderBy: { dayNumber: 'asc' } } } as any } as any);
   }
   if (!itinerary) return notFound();
 
-  const days = Array.isArray(itinerary.days) ? (itinerary.days as any[]) : [];
+  const daysFromJson = Array.isArray((itinerary as any).daysJson)
+    ? ((itinerary as any).daysJson as any[])
+    : Array.isArray((itinerary as any).days)
+      ? ((itinerary as any).days as any[]).map((d: any) => ({
+          dayNumber: d.dayNumber,
+          title: d.title,
+          description: d.description,
+          activities: d.activities || [],
+        }))
+      : [];
 
   return (
     <main style={{ paddingTop: '6rem' }}>
@@ -28,7 +37,7 @@ export default async function ItineraryDetail({ params }: { params: { slug: stri
 
       <section style={{ maxWidth: 1200, margin: '2rem auto', padding: '0 1rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
-          {days.map((d, idx) => (
+          {daysFromJson.map((d, idx) => (
             <div key={idx} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', padding: 16 }}>
               <h3 style={{ fontWeight: 700, marginBottom: 8 }}>Day {d?.dayNumber ?? idx + 1}: {d?.title || `Day ${idx + 1}`}</h3>
               <p style={{ color: '#334155' }}>{d?.description || ''}</p>
