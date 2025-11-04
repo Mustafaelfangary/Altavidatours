@@ -536,6 +536,7 @@ model Itinerary {
   name               String?
   slug               String         @unique
   description        String?        @db.Text
+  shortDescription   String?
   // Keep current duration; also add durationDays for admin compatibility
   duration           Int // in days
   durationDays       Int?

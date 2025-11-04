@@ -57,6 +57,13 @@ interface PDFDocument {
   size: number;
 }
 
+interface Amenity {
+  id: string;
+  name: string;
+  icon?: string;
+  isActive: boolean;
+}
+
 const DahabiyaManager: React.FC = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -78,6 +85,8 @@ const DahabiyaManager: React.FC = () => {
   const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [currentDahabiya, setCurrentDahabiya] = useState<Dahabiya | null>(null);
+  const [amenitiesOptions, setAmenitiesOptions] = useState<Amenity[]>([]);
+  const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   
   // Fetch dahabiyas from API
   useEffect(() => {
@@ -113,6 +122,20 @@ const DahabiyaManager: React.FC = () => {
     
     fetchDahabiyas();
   }, [searchQuery, filters, page, rowsPerPage]);
+
+  // Fetch amenities for selection
+  useEffect(() => {
+    const fetchAmenities = async () => {
+      try {
+        const res = await fetch('/api/admin/amenities');
+        if (res.ok) {
+          const data: Amenity[] = await res.json();
+          setAmenitiesOptions(data.filter(a => a.isActive));
+        }
+      } catch (_) {}
+    };
+    fetchAmenities();
+  }, []);
   
   // Handle filter changes
   const handleFilterChange = (filter: string, value: string) => {
@@ -170,6 +193,7 @@ const DahabiyaManager: React.FC = () => {
   // Handle edit dahabiya
   const handleEditDahabiya = (dahabiya: Dahabiya) => {
     setCurrentDahabiya(dahabiya);
+    setSelectedAmenities(Array.isArray(dahabiya.amenities) ? dahabiya.amenities : []);
     setIsEditDialogOpen(true);
   };
   
@@ -215,7 +239,10 @@ const DahabiyaManager: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(currentDahabiya || {}),
+        body: JSON.stringify({
+          ...(currentDahabiya || {}),
+          amenities: selectedAmenities,
+        }),
       });
       
       if (!response.ok) {
@@ -237,6 +264,7 @@ const DahabiyaManager: React.FC = () => {
       // Close dialog and reset form
       setIsEditDialogOpen(false);
       setCurrentDahabiya(null);
+      setSelectedAmenities([]);
       setError(null);
     } catch (err) {
       console.error('Error saving dahabiya:', err);
@@ -754,42 +782,7 @@ const DahabiyaManager: React.FC = () => {
                   }
                 />
               </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="shortDescription">Short Description</Label>
-              <Input
-                id="shortDescription"
-                placeholder="A brief description (max 200 characters)"
-                maxLength={200}
-                value={currentDahabiya?.shortDescription || ''}
-                onChange={(e) => 
-                  setCurrentDahabiya(prev => ({
-                    ...prev!,
-                    shortDescription: e.target.value
-                  }))
-                }
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="description">Full Description</Label>
-              <textarea
-                id="description"
-                className="flex min-h-[100px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Detailed description of the dahabiya..."
-                value={currentDahabiya?.description || ''}
-                onChange={(e) => 
-                  setCurrentDahabiya(prev => ({
-                    ...prev!,
-                    description: e.target.value
-                  }))
-                }
-                required
-              />
-            </div>
-            
-            <div className="flex items-center space-x-4">
+
               <div className="flex items-center space-x-2">
                 <input
                   id="isActive"

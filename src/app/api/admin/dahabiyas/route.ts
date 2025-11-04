@@ -14,8 +14,8 @@ export async function GET() {
 
     const dahabiyas = await prisma.dahabiya.findMany({
       include: {
-        amenities: true,
-        images: true,
+        amenityItems: true,
+        imageItems: true,
         itineraries: true,
       },
       orderBy: {
@@ -46,30 +46,44 @@ export async function POST(request: Request) {
         name: data.name,
         slug: data.slug || data.name.toLowerCase().replace(/\s+/g, '-'),
         description: data.description,
-        price: parseFloat(data.price),
-        capacity: parseInt(data.capacity),
-        length: data.length,
-        width: data.width,
-        cabins: parseInt(data.cabins),
-        decks: parseInt(data.decks),
-        isFeatured: data.isFeatured || false,
-        isActive: data.isActive !== undefined ? data.isActive : true,
-        amenities: {
-          connect: data.amenities?.map((id: string) => ({ id })) || [],
-        },
-        images: {
-          create: data.images?.map((url: string) => ({
-            url,
-            alt: data.name,
-          })) || [],
-        },
-        itineraries: {
-          create: data.itineraries?.map((itinerary: any) => ({
-            day: itinerary.day,
-            title: itinerary.title,
-            description: itinerary.description,
-          })) || [],
-        },
+        summary: data.summary || null,
+        capacity: data.capacity ? parseInt(data.capacity) : 0,
+        cabins: data.cabins ? parseInt(data.cabins) : 0,
+        crew: data.crew ? parseInt(data.crew) : null,
+        length: data.length ? parseFloat(data.length) : null,
+        imageCover: data.imageCover || null,
+        images: Array.isArray(data.images) ? data.images : [],
+        isFeatured: !!data.isFeatured,
+        isActive: data.isActive !== undefined ? !!data.isActive : true,
+        // optional amenity relation connect
+        amenityItems: data.amenities?.length
+          ? { connect: data.amenities.map((id: string) => ({ id })) }
+          : undefined,
+        // optional relational images creation
+        imageItems: Array.isArray(data.imageItems) && data.imageItems.length
+          ? {
+              create: data.imageItems.map((img: any, idx: number) => ({
+                url: typeof img === 'string' ? img : img.url,
+                alt: (typeof img === 'object' && img.alt) || data.name,
+                order: (typeof img === 'object' && img.order) ?? idx,
+              })),
+            }
+          : undefined,
+        // optional dahabiya itinerary steps
+        itineraries: Array.isArray(data.itineraries) && data.itineraries.length
+          ? {
+              create: data.itineraries.map((step: any, idx: number) => ({
+                day: step.day ?? idx + 1,
+                title: step.title,
+                description: step.description,
+              })),
+            }
+          : undefined,
+      },
+      include: {
+        amenityItems: true,
+        imageItems: true,
+        itineraries: true,
       },
     });
 

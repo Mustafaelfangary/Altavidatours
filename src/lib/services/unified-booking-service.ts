@@ -1,7 +1,6 @@
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { z } from 'zod';
 import { sendEmail } from '@/lib/email';
-import { Status } from '@prisma/client';
 
 // Unified booking validation schema
 export const bookingSchema = z.object({
@@ -61,248 +60,9 @@ export class UnifiedBookingService {
    * @param data - Booking data
    */
   static async createBooking(userId: string | null, data: BookingData): Promise<BookingResult> {
-    try {
-      // Validate input data
-      const validatedData = bookingSchema.parse(data);
-      
-      // Validate that either dahabiyaId or packageId is provided based on type
-      if (validatedData.type === 'DAHABIYA' && !validatedData.dahabiyaId) {
-        return { success: false, error: 'Dahabiya ID is required for dahabiya bookings' };
-      }
-      if (validatedData.type === 'PACKAGE' && !validatedData.packageId) {
-        return { success: false, error: 'Package ID is required for package bookings' };
-      }
-
-      // Create booking in transaction
-      const result = await prisma.$transaction(async (tx) => {
-        // Get item details and validate
-        let itemDetails: BookingItem | null = null;
-        
-        if (validatedData.type === 'DAHABIYA' && validatedData.dahabiyaId) {
-          const dahabiya = await tx.dahabiya.findUnique({
-            where: { id: validatedData.dahabiyaId },
-            select: {
-              id: true,
-              name: true,
-              pricePerDay: true,
-              capacity: true,
-              isActive: true,
-              mainImage: true,
-            },
-          });
-          
-          if (!dahabiya) {
-            throw new Error('Dahabiya not found');
-          }
-          if (!dahabiya.isActive) {
-            throw new Error('Dahabiya is not currently available for booking');
-          }
-          
-          itemDetails = {
-            ...dahabiya,
-            pricePerDay: Number(dahabiya.pricePerDay),
-          };
-        } else if (validatedData.type === 'PACKAGE' && validatedData.packageId) {
-          const pkg = await tx.package.findUnique({
-            where: { id: validatedData.packageId },
-            select: {
-              id: true,
-              name: true,
-              price: true,
-              mainImageUrl: true,
-              durationDays: true,
-            },
-          });
-          
-          if (!pkg) {
-            throw new Error('Package not found');
-          }
-          // Note: Package model doesn't have isActive field, assuming all packages are active
-          
-          itemDetails = {
-            ...pkg,
-            price: Number(pkg.price),
-            maxGuests: 50, // Default max guests for packages
-          };
-        }
-
-        if (!itemDetails) {
-          throw new Error('Invalid booking type or missing item ID');
-        }
-
-        // Validate guest capacity
-        const maxCapacity = validatedData.type === 'DAHABIYA' 
-          ? (itemDetails.capacity || 0) 
-          : (itemDetails.maxGuests || 0);
-          
-        if (maxCapacity > 0 && validatedData.guests > maxCapacity) {
-          throw new Error(`Maximum ${maxCapacity} guests allowed for this ${validatedData.type.toLowerCase()}`);
-        }
-
-        // Validate dates
-        const startDate = new Date(validatedData.startDate);
-        const endDate = new Date(validatedData.endDate);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        if (startDate < today) {
-          throw new Error('Start date cannot be in the past');
-        }
-        if (startDate >= endDate) {
-          throw new Error('End date must be after start date');
-        }
-
-        // Check for conflicting bookings
-        const whereClause: any = {
-          status: { in: ['PENDING', 'CONFIRMED'] },
-          OR: [
-            {
-              startDate: { lte: startDate },
-              endDate: { gt: startDate }
-            },
-            {
-              startDate: { lt: endDate },
-              endDate: { gte: endDate }
-            },
-            {
-              startDate: { gte: startDate },
-              endDate: { lte: endDate }
-            }
-          ]
-        };
-        
-        if (validatedData.type === 'DAHABIYA') {
-          whereClause.dahabiyaId = validatedData.dahabiyaId;
-        } else {
-          whereClause.packageId = validatedData.packageId;
-        }
-        
-        const conflictingBookings = await tx.booking.findMany({
-          where: whereClause
-        });
-
-        if (conflictingBookings.length > 0) {
-          throw new Error('Selected dates are not available. Please choose different dates.');
-        }
-
-        // Generate unique booking reference
-        const bookingReference = `${validatedData.type.charAt(0)}${Date.now().toString().slice(-6)}${Math.random().toString(36).substr(2, 3).toUpperCase()}`;
-
-        // For guest bookings, store guest info in special requests
-        let specialRequestsText = validatedData.specialRequests || '';
-        if (validatedData.isGuestBooking && validatedData.guestInfo) {
-          const guestInfoText = `\n\n[GUEST BOOKING]\nName: ${validatedData.guestInfo.name}\nEmail: ${validatedData.guestInfo.email}${validatedData.guestInfo.phone ? `\nPhone: ${validatedData.guestInfo.phone}` : ''}`;
-          specialRequestsText = specialRequestsText ? `${specialRequestsText}${guestInfoText}` : guestInfoText.trim();
-        }
-
-        // Create booking
-        const booking = await tx.booking.create({
-          data: {
-            userId: userId || undefined,
-            type: validatedData.type,
-            dahabiyaId: validatedData.dahabiyaId || null,
-            packageId: validatedData.packageId || null,
-            startDate,
-            endDate,
-            guests: validatedData.guests,
-            totalPrice: validatedData.totalPrice,
-            specialRequests: specialRequestsText || null,
-            status: 'PENDING',
-            bookingReference,
-          },
-          include: {
-            dahabiya: {
-              select: {
-                id: true,
-                name: true,
-                mainImage: true,
-                pricePerDay: true
-              }
-            },
-            package: {
-              select: {
-                id: true,
-                name: true,
-                mainImageUrl: true,
-                price: true
-              }
-            },
-            guestDetails: true,
-            user: {
-              select: {
-                id: true,
-                name: true,
-                email: true
-              }
-            }
-          }
-        });
-
-        // Create guest details if provided
-        if (validatedData.guestDetails && validatedData.guestDetails.length > 0) {
-          await tx.guestDetail.createMany({
-            data: validatedData.guestDetails.map((guest, index) => {
-              const guestData: any = {
-                bookingId: booking.id,
-                name: guest.name || `${guest.firstName || ''} ${guest.lastName || ''}`.trim() || 'Guest',
-                dietaryRequirements: guest.dietaryRequirements || [],
-                guestNumber: index + 1,
-              };
-
-              // Only add optional fields if they have values
-              if (guest.firstName) guestData.firstName = guest.firstName;
-              if (guest.lastName) guestData.lastName = guest.lastName;
-              if (guest.email) guestData.email = guest.email;
-              if (guest.phone) guestData.phone = guest.phone;
-              if (guest.age) guestData.age = guest.age;
-              if (guest.nationality) guestData.nationality = guest.nationality;
-              if (guest.dateOfBirth) guestData.dateOfBirth = new Date(guest.dateOfBirth);
-              if (guest.passport) guestData.passport = guest.passport;
-
-              return guestData;
-            }),
-          });
-        }
-
-        return { booking, itemDetails };
-      });
-
-      // Send confirmation emails outside transaction
-      try {
-        const guestInfo = validatedData.guestInfo ? {
-          name: validatedData.guestInfo.name,
-          email: validatedData.guestInfo.email,
-          phone: validatedData.guestInfo.phone
-        } : undefined;
-        await this.sendBookingEmails(result.booking, result.itemDetails, guestInfo);
-      } catch (emailError) {
-        console.error('Failed to send booking emails:', emailError);
-        // Don't fail the booking if email fails
-      }
-
-      // Create admin notification
-      try {
-        await this.createAdminNotification(result.booking, result.itemDetails);
-      } catch (notificationError) {
-        console.error('Failed to create admin notification:', notificationError);
-        // Don't fail the booking if notification fails
-      }
-
-      return { success: true, booking: result.booking };
-
-    } catch (error) {
-      console.error('Booking creation error:', error);
-      if (error instanceof z.ZodError) {
-        return {
-          success: false,
-          error: error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', ')
-        };
-      }
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Failed to create booking'
-      };
-    }
+    // Temporarily disabled until Booking schema is realigned.
+    // Prevents runtime errors due to mismatched relations/fields.
+    return { success: false, error: 'Online booking is temporarily unavailable while we upgrade the booking schema. Please contact support to book.' };
   }
 
   /**
@@ -312,30 +72,21 @@ export class UnifiedBookingService {
     try {
       const bookings = await prisma.booking.findMany({
         include: {
-          user: { 
-            select: { 
-              id: true, 
-              name: true, 
-              email: true 
-            } 
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
           },
-          dahabiya: { 
-            select: { 
-              id: true, 
-              name: true, 
-              mainImage: true, 
-              pricePerDay: true 
-            } 
+          tour: {
+            select: {
+              id: true,
+              title: true,
+              imageCover: true,
+              price: true,
+            },
           },
-          package: { 
-            select: { 
-              id: true, 
-              name: true, 
-              mainImageUrl: true, 
-              price: true 
-            } 
-          },
-          guestDetails: true,
         },
         orderBy: { createdAt: 'desc' }
       });
@@ -355,23 +106,14 @@ export class UnifiedBookingService {
       const booking = await prisma.booking.findUnique({
         where: { id: bookingId },
         include: {
-          dahabiya: {
+          tour: {
             select: {
               id: true,
-              name: true,
-              mainImage: true,
-              pricePerDay: true
-            }
+              title: true,
+              imageCover: true,
+              price: true,
+            },
           },
-          package: {
-            select: {
-              id: true,
-              name: true,
-              mainImageUrl: true,
-              price: true
-            }
-          },
-          guestDetails: true,
           user: {
             select: {
               id: true,
@@ -413,25 +155,23 @@ export class UnifiedBookingService {
       return await prisma.booking.findMany({
         where: { userId },
         include: {
-          dahabiya: {
+          user: {
             select: {
               id: true,
               name: true,
-              mainImage: true,
-              pricePerDay: true
-            }
+              email: true,
+            },
           },
-          package: {
+          tour: {
             select: {
               id: true,
-              name: true,
-              mainImageUrl: true,
-              price: true
-            }
+              title: true,
+              imageCover: true,
+              price: true,
+            },
           },
-          guestDetails: true,
         },
-        orderBy: { createdAt: 'desc' }
+        orderBy: { createdAt: 'desc' },
       });
     } catch (error) {
       console.error('Error fetching user bookings:', error);
@@ -448,26 +188,19 @@ export class UnifiedBookingService {
         where: { id: bookingId },
         data: { status },
         include: {
-          user: { 
-            select: { 
-              id: true, 
-              name: true, 
-              email: true 
-            } 
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
           },
-          dahabiya: { 
-            select: { 
-              id: true, 
-              name: true, 
-              mainImage: true 
-            } 
-          },
-          package: { 
-            select: { 
-              id: true, 
-              name: true, 
-              mainImageUrl: true 
-            } 
+          tour: {
+            select: {
+              id: true,
+              title: true,
+              imageCover: true,
+            },
           },
         }
       });
@@ -621,7 +354,7 @@ export class UnifiedBookingService {
    */
   private static async sendStatusUpdateEmail(booking: any) {
     try {
-      const itemName = booking.dahabiya?.name || booking.package?.name;
+      const itemName = booking.tour?.title;
 
       await sendEmail({
         to: booking.user.email,
@@ -645,7 +378,7 @@ export class UnifiedBookingService {
    */
   private static async sendCancellationEmail(booking: any) {
     try {
-      const itemName = booking.dahabiya?.name || booking.package?.name;
+      const itemName = booking.tour?.title;
 
       await sendEmail({
         to: booking.user.email,
