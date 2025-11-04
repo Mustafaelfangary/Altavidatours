@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 
 // Ensure dynamic behavior and disable caching
 export const dynamic = 'force-dynamic';
@@ -10,25 +10,8 @@ export const revalidate = 0;
 export async function GET() {
   try {
     const itineraries = await prisma.itinerary.findMany({
-      where: {
-        isActive: true
-      },
-      include: {
-        days: {
-          orderBy: {
-            dayNumber: 'asc'
-          }
-        },
-        pricingTiers: {
-          orderBy: {
-            category: 'asc'
-          }
-        }
-      },
-      orderBy: [
-        { featured: 'desc' },
-        { createdAt: 'desc' }
-      ]
+      where: { isActive: true },
+      orderBy: [{ createdAt: 'desc' }]
     });
 
     const res = NextResponse.json(itineraries);
@@ -61,28 +44,29 @@ export async function POST(request: NextRequest) {
 
     const itinerary = await prisma.itinerary.create({
       data: {
-        name: data.name,
+        title: data.name,
         slug: slug,
         description: data.description,
-        shortDescription: data.shortDescription,
-        durationDays: parseInt(data.durationDays),
-        mainImageUrl: data.mainImageUrl,
-        heroImageUrl: data.heroImageUrl,
-        videoUrl: data.videoUrl,
-        price: data.price ? parseFloat(data.price) : null,
-        maxGuests: data.maxGuests ? parseInt(data.maxGuests) : null,
-        highlights: data.highlights || [],
-        included: data.included || [],
-        notIncluded: data.notIncluded || [],
-        childrenPolicy: data.childrenPolicy,
-        cancellationPolicy: data.cancellationPolicy,
-        observations: data.observations,
+        duration: parseInt(data.durationDays),
+        days: Array.isArray(data.days) ? data.days : [],
+        tourType: data.tourType || null,
+        destination: data.destination || null,
         isActive: data.isActive ?? true,
-        featured: data.featured ?? false,
+        order: data.order ?? 0,
       },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        description: true,
+        duration: true,
         days: true,
-        pricingTiers: true
+        tourType: true,
+        destination: true,
+        isActive: true,
+        order: true,
+        createdAt: true,
+        updatedAt: true,
       }
     });
 

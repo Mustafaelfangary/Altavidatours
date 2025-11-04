@@ -1,10 +1,7 @@
 import { notFound } from 'next/navigation';
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 import type { PackageData } from '@/types/package.types';
 import dynamic from 'next/dynamic';
-
-// Create a new Prisma client instance
-const prisma = new PrismaClient();
 
 // Dynamically import the PackageDetail component to avoid SSR issues
 const PackageDetail = dynamic<{ pkg: PackageData }>(
@@ -29,94 +26,61 @@ export const revalidate = 3600; // Revalidate every hour
 export default async function PackageDetailPage({ params }: PageProps) {
   try {
     // Fetch package data from the database
-    const tour = await prisma['tour'].findUnique({
+    const pkg = await prisma.package.findUnique({
       where: { slug: params.slug },
-      include: {
-        itineraries: {
-          include: {
-            days: {
-              orderBy: { dayNumber: 'asc' },
-              include: {
-                images: true
-              }
-            }
-          },
-          orderBy: {
-            name: 'asc'
-          }
-        },
-        reviews: {
-          where: { 
-            status: 'APPROVED',
-            comment: { not: null },
-          },
-          orderBy: { createdAt: 'desc' },
-          include: {
-            user: {
-              select: {
-                name: true,
-              }
-            }
-          }
-        }
-      }
     });
 
-    if (!tour) {
+    if (!pkg) {
       return notFound();
     }
 
     // Transform the data to match the PackageData type
+    const rawItinerary = Array.isArray(pkg.itinerary) ? (pkg.itinerary as any[]) : [];
+    const itineraryDays = rawItinerary.map((day: any, index: number) => ({
+      id: `day-${pkg.id}-${index + 1}`,
+      day: Number(day?.dayNumber ?? index + 1),
+      title: day?.title || `Day ${Number(day?.dayNumber ?? index + 1)}`,
+      description: day?.description || '',
+      isActive: true,
+      activities: Array.isArray(day?.activities)
+        ? day.activities.map((a: any, i: number) => ({
+            id: `act-${pkg.id}-${index}-${i}`,
+            description: typeof a === 'string' ? a : (a?.description || 'Activity'),
+            time: typeof a === 'string' ? 'TBD' : (a?.time || 'TBD'),
+            order: i,
+          }))
+        : [],
+    }));
+
     const packageData: PackageData = {
-      id: tour.id,
-      name: tour.title,
-      description: tour.description || '',
-      shortDescription: tour.summary || null,
-      price: tour.price ? Number(tour.price) : 0,
-      duration: tour.duration || 0,
-      durationDays: tour.duration || 0,
-      maxPeople: tour.maxGroupSize || 0,
-      mainImageUrl: tour.imageCover || '/images/default-package.jpg',
+      id: pkg.id,
+      name: pkg.name,
+      description: pkg.description || '',
+      shortDescription: pkg.shortDescription || null,
+      price: pkg.price ? Number(pkg.price) : 0,
+      duration: pkg.duration || 0,
+      durationDays: pkg.duration || 0,
+      maxPeople: pkg.maxGroupSize || 0,
+      mainImageUrl: pkg.mainImage || '/images/default-package.jpg',
       isFeaturedOnHomepage: false,
       homepageOrder: 0,
-      images: Array.isArray(tour.images) ? tour.images.map((url, index) => ({
-        id: `img-${tour.id}-${index}`,
+      images: Array.isArray(pkg.images) ? pkg.images.map((url, index) => ({
+        id: `img-${pkg.id}-${index}`,
         url: url,
-        alt: `${tour.title} - Image ${index + 1}`,
+        alt: `${pkg.name} - Image ${index + 1}`,
         order: index,
         isActive: true
       })) : [],
-      itineraries: (tour.itineraries || []).flatMap(itinerary => 
-        (itinerary.days || []).map(day => ({
-          id: day.id,
-          day: day.dayNumber || 1,
-          title: day.title || `Day ${day.dayNumber || 1}`,
-          description: day.description || '',
-          isActive: true,
-          activities: (Array.isArray(day.activities) ? day.activities : []).map((activity, index) => ({
-            id: `act-${day.id}-${index}`,
-            description: typeof activity === 'string' ? activity : (activity?.description || 'Activity'),
-            time: typeof activity === 'string' ? 'TBD' : (activity?.time || 'TBD'),
-            order: index
-          }))
-        }))
-      ),
-      reviews: (tour.reviews || []).map(review => ({
-        id: review.id,
-        author: review.user?.name || 'Anonymous',
-        rating: review.rating || 5,
-        content: review.comment || '',
-        createdAt: review.createdAt || new Date(),
-        isApproved: true
-      })),
+      itineraries: itineraryDays,
+      reviews: [],
       highlights: [],
       inclusions: [],
       exclusions: [],
       category: 'STANDARD',
-      rating: tour.ratingsAverage || 0,
-      reviewCount: tour.ratingsQuantity || 0,
-      createdAt: tour.createdAt || new Date(),
-      updatedAt: tour.updatedAt || new Date()
+      rating: 0,
+      reviewCount: 0,
+      createdAt: pkg.createdAt || new Date(),
+      updatedAt: pkg.updatedAt || new Date()
     };
 
     return <PackageDetail pkg={packageData} />;
@@ -128,13 +92,9 @@ export default async function PackageDetailPage({ params }: PageProps) {
 
 export async function generateStaticParams() {
   try {
-    const packages = await prisma['tour'].findMany({
+    const packages = await prisma.package.findMany({
       select: {
         slug: true
-      },
-      where: {
-        // Only include published tours if status field exists
-        // status: 'PUBLISHED'
       },
       take: 100 // Limit to 100 packages to avoid timeout during build
     });
@@ -163,16 +123,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }> {
   try {
-    const tour = await prisma['tour'].findUnique({
+    const pkg = await prisma.package.findUnique({
       where: { slug: params.slug },
       select: {
-        title: true,
-        summary: true,
-        imageCover: true
+        name: true,
+        shortDescription: true,
+        mainImage: true
       }
     });
 
-    if (!tour) {
+    if (!pkg) {
       return {
         title: 'Package Not Found',
         description: 'The requested package could not be found.'
@@ -180,17 +140,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     }
 
     return {
-      title: tour.title,
-      description: tour.summary || '',
+      title: pkg.name,
+      description: pkg.shortDescription || '',
       openGraph: {
-        title: tour.title,
-        description: tour.summary || '',
+        title: pkg.name,
+        description: pkg.shortDescription || '',
         images: [
           {
-            url: tour.imageCover || '/images/default-package.jpg',
+            url: pkg.mainImage || '/images/default-package.jpg',
             width: 1200,
             height: 630,
-            alt: tour.title
+            alt: pkg.name
           }
         ]
       }

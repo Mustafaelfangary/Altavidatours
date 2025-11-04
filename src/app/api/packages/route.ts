@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 // REMOVED: enhanced-creation-utils imports - file deleted
 // import {
 //   generateSlug,
@@ -28,22 +28,14 @@ export async function GET(request: NextRequest) {
 
     const skip = (page - 1) * limit;
 
-    const where = featured ? { isFeaturedOnHomepage: true } : {};
+    const where = featured ? { isFeatured: true } : {};
 
     const [packages, total] = await Promise.all([
       prisma.package.findMany({
         where,
-        include: {
-          itineraryDays: {
-            include: {
-              images: true,
-            },
-            orderBy: { dayNumber: 'asc' },
-          },
-        },
         orderBy: featured
           ? [
-              { homepageOrder: "asc" },
+              { order: "asc" },
               { createdAt: "desc" }
             ]
           : { createdAt: "desc" },
@@ -57,7 +49,7 @@ export async function GET(request: NextRequest) {
     const packagesWithSlug = packages.map(pkg => ({
       ...pkg,
       price: Number(pkg.price),
-      slug: generateSlug(pkg.name)
+      slug: pkg.slug
     }));
 
     return NextResponse.json({
@@ -86,7 +78,8 @@ export async function POST(request: Request) {
       price,
       durationDays,
       mainImageUrl,
-      itineraryDays,
+      destination,
+      category,
     } = body;
 
     // Generate slug from name
@@ -96,28 +89,14 @@ export async function POST(request: Request) {
     const createdPackage = await prisma.package.create({
       data: {
         name,
+        slug,
         description,
         shortDescription,
         price,
-        durationDays,
-        mainImageUrl,
-        itineraryDays: {
-          create: (itineraryDays || []).map((day: { title: string; description: string; images?: { url: string; alt?: string }[] }, idx: number) => ({
-            dayNumber: idx + 1,
-            title: day.title,
-            description: day.description,
-            images: {
-              create: (day.images || []).map((img: { url: string; alt?: string }) => ({
-                url: img.url,
-                alt: img.alt || '',
-                category: 'INDOOR', // Default category for package images
-              })),
-            },
-          })),
-        },
-      },
-      include: {
-        itineraryDays: { include: { images: true } },
+        duration: durationDays,
+        mainImage: mainImageUrl,
+        destination,
+        category,
       },
     });
 
@@ -136,7 +115,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       ...createdPackage,
-      slug,
       enhanced: true,
       message: 'Enhanced package created successfully with individual page and content management'
     });

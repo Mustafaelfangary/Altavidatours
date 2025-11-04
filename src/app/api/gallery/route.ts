@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 
 // Public: GET /api/gallery
 import { NextRequest, NextResponse } from 'next/server';
@@ -25,31 +25,23 @@ export async function GET(request: NextRequest) {
     // 1. Get images from gallery table (uploaded via admin panel)
     try {
       const galleryImages = await prisma.galleryImage.findMany({
-        where: {
-          isActive: true
-        },
-        include: {
-          category: true
-        },
-        orderBy: {
-          order: 'asc'
-        }
+        orderBy: { order: 'asc' }
       });
 
       galleryImages.forEach(image => {
-        const category = image.category.name.toLowerCase();
+        const category = (image.category || 'gallery').toLowerCase();
         allImages.push({
           id: `gallery-${image.id}`,
           url: image.url,
-          alt: image.alt || image.title || 'Gallery Image',
+          alt: image.title || 'Gallery Image',
           caption: image.title || '',
           category: category,
           itemName: image.title,
-          itemSlug: image.category.slug,
-          location: image.location || 'Egypt',
-          photographer: image.photographer,
-          likes: image.likes,
-          views: image.views,
+          itemSlug: undefined,
+          location: 'Egypt',
+          photographer: undefined,
+          likes: 0,
+          views: 0,
         });
         categoryStats[category] = (categoryStats[category] || 0) + 1;
       });
@@ -64,24 +56,22 @@ export async function GET(request: NextRequest) {
     // 3. Get images from dahabiyas
     try {
       const dahabiyas = await prisma.dahabiya.findMany({
-        where: {
-          isActive: true
-        },
+        where: { isActive: true },
         select: {
           id: true,
           name: true,
           slug: true,
-          mainImage: true,
-          gallery: true
+          imageCover: true,
+          images: true
         }
       });
 
       dahabiyas.forEach(dahabiya => {
         // Add main image
-        if (dahabiya.mainImage) {
+        if (dahabiya.imageCover) {
           allImages.push({
             id: `dahabiya-main-${dahabiya.id}`,
-            url: dahabiya.mainImage,
+            url: dahabiya.imageCover,
             alt: `${dahabiya.name} - Main Image`,
             caption: `${dahabiya.name} Dahabiya`,
             category: 'dahabiya',
@@ -95,8 +85,8 @@ export async function GET(request: NextRequest) {
         }
 
         // Add gallery images
-        if (Array.isArray(dahabiya.gallery)) {
-          dahabiya.gallery.forEach((imgUrl, idx) => {
+        if (Array.isArray(dahabiya.images)) {
+          dahabiya.images.forEach((imgUrl, idx) => {
             if (imgUrl) {
               allImages.push({
                 id: `dahabiya-gallery-${dahabiya.id}-${idx}`,
@@ -125,26 +115,23 @@ export async function GET(request: NextRequest) {
         select: {
           id: true,
           name: true,
-          mainImageUrl: true,
-          itineraryDays: {
-            include: {
-              images: true
-            }
-          }
+          slug: true,
+          mainImage: true,
+          images: true,
         }
       });
 
       packages.forEach(pkg => {
         // Add main image
-        if (pkg.mainImageUrl) {
+        if (pkg.mainImage) {
           allImages.push({
             id: `package-main-${pkg.id}`,
-            url: pkg.mainImageUrl,
+            url: pkg.mainImage,
             alt: `${pkg.name} - Main Image`,
             caption: `${pkg.name} Package`,
             category: 'package',
             itemName: pkg.name,
-            itemSlug: pkg.id,
+            itemSlug: pkg.slug || pkg.id,
             location: 'Egypt',
             likes: 0,
             views: 0,
@@ -152,18 +139,18 @@ export async function GET(request: NextRequest) {
           categoryStats['package'] = (categoryStats['package'] || 0) + 1;
         }
 
-        // Add images from itinerary days
-        pkg.itineraryDays.forEach(day => {
-          day.images.forEach((img, idx) => {
-            if (img.url) {
+        // Add gallery images from package images array
+        if (Array.isArray(pkg.images)) {
+          pkg.images.forEach((imgUrl, idx) => {
+            if (imgUrl) {
               allImages.push({
-                id: `package-day-${day.id}-${img.id}`,
-                url: img.url,
-                alt: img.alt || `${pkg.name} - ${day.title}`,
-                caption: `${pkg.name} - ${day.title}`,
+                id: `package-gallery-${pkg.id}-${idx}`,
+                url: imgUrl,
+                alt: `${pkg.name} - Gallery Image ${idx + 1}`,
+                caption: `${pkg.name} - Image ${idx + 1}`,
                 category: 'package',
                 itemName: pkg.name,
-                itemSlug: pkg.id,
+                itemSlug: pkg.slug || pkg.id,
                 location: 'Egypt',
                 likes: 0,
                 views: 0,
@@ -171,65 +158,12 @@ export async function GET(request: NextRequest) {
               categoryStats['package'] = (categoryStats['package'] || 0) + 1;
             }
           });
-        });
+        }
       });
     } catch (err) {
       console.log('Packages not available:', err);
     }
-
-    // 5. Get images from itineraries
-    try {
-      const itineraries = await prisma.itinerary.findMany({
-        where: {
-          isActive: true
-        },
-        select: {
-          id: true,
-          name: true,
-          slug: true,
-          mainImageUrl: true,
-          image: true
-        }
-      });
-
-      itineraries.forEach(itinerary => {
-        // Add main image
-        if (itinerary.mainImageUrl) {
-          allImages.push({
-            id: `itinerary-main-${itinerary.id}`,
-            url: itinerary.mainImageUrl,
-            alt: `${itinerary.name} - Main Image`,
-            caption: `${itinerary.name} Itinerary`,
-            category: 'itinerary',
-            itemName: itinerary.name,
-            itemSlug: itinerary.slug || itinerary.id,
-            location: 'Egypt',
-            likes: 0,
-            views: 0,
-          });
-          categoryStats['itinerary'] = (categoryStats['itinerary'] || 0) + 1;
-        }
-
-        // Add itinerary image (single image relation)
-        if (itinerary.image && itinerary.image.url) {
-          allImages.push({
-            id: `itinerary-img-${itinerary.id}`,
-            url: itinerary.image.url,
-            alt: itinerary.image.alt || `${itinerary.name} Image`,
-            caption: `${itinerary.name}`,
-            category: 'itinerary',
-            itemName: itinerary.name,
-            itemSlug: itinerary.slug || itinerary.id,
-            location: 'Egypt',
-            likes: 0,
-            views: 0,
-          });
-          categoryStats['itinerary'] = (categoryStats['itinerary'] || 0) + 1;
-        }
-      });
-    } catch (err) {
-      console.log('Itineraries not available:', err);
-    }
+    // 5. Itineraries do not have image fields in current schema; skipping
 
     // Remove duplicates based on URL
     const uniqueImages = Array.from(

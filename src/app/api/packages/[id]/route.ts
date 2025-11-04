@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
@@ -10,48 +10,17 @@ export async function GET(
   try {
     const { id } = await params;
 
-    // Try to find by ID first, then by slug
-    let pkg = await prisma.package.findUnique({
-      where: { id },
-      include: {
-        itineraryDays: {
-          include: { images: true },
-          orderBy: { dayNumber: 'asc' },
-        },
-        bookings: {
-          include: {
-            user: {
-              select: {
-                name: true,
-                image: true,
-              },
-            },
-          },
-        },
-      },
-    });
+    // Try to find by ID first
+    let pkg = await prisma.package.findUnique({ where: { id } });
 
     // If not found by ID, try to find by slug or name
     if (!pkg) {
       pkg = await prisma.package.findFirst({
         where: {
-          name: { contains: id, mode: 'insensitive' }
-        },
-        include: {
-          itineraryDays: {
-            include: { images: true },
-            orderBy: { dayNumber: 'asc' },
-          },
-          bookings: {
-            include: {
-              user: {
-                select: {
-                  name: true,
-                  image: true,
-                },
-              },
-            },
-          },
+          OR: [
+            { slug: id },
+            { name: { contains: id, mode: 'insensitive' } },
+          ],
         },
       });
     }
@@ -63,27 +32,40 @@ export async function GET(
       );
     }
 
-    // Convert Decimal values to numbers and format for frontend
+    // Normalize itinerary JSON into the expected structure
+    const rawItinerary = Array.isArray(pkg.itinerary) ? pkg.itinerary as any[] : [];
+    const itineraryDays = rawItinerary.map((day: any, index: number) => ({
+      day: Number(day?.dayNumber ?? index + 1),
+      title: day?.title || `Day ${Number(day?.dayNumber ?? index + 1)}`,
+      description: day?.description || '',
+      activities: Array.isArray(day?.activities)
+        ? day.activities.map((a: any, i: number) => ({
+            id: `act-${pkg!.id}-${index}-${i}`,
+            description: typeof a === 'string' ? a : (a?.description || 'Activity'),
+            time: typeof a === 'string' ? 'TBD' : (a?.time || 'TBD'),
+            order: i,
+          }))
+        : [],
+      isActive: true,
+      id: `day-${pkg!.id}-${index + 1}`,
+    }));
+
+    // Convert values and map image URLs
     const formattedPackage = {
       ...pkg,
       price: Number(pkg.price),
-      mainImageUrl: pkg.mainImageUrl || '/images/default-package.jpg',
-      highlights: [], // Package model doesn't have highlights field
-      included: [], // Package model doesn't have included field
-      excluded: [], // Package model doesn't have excluded field
-      maxGuests: 20, // Package model doesn't have maxGuests field
-      slug: pkg.name.toLowerCase().replace(/\s+/g, '-'), // Generate slug from name
+      mainImageUrl: pkg.mainImage || '/images/default-package.jpg',
+      highlights: pkg.includes || [],
+      included: pkg.includes || [],
+      excluded: pkg.excludes || [],
+      maxGuests: pkg.maxGroupSize ?? 20,
+      slug: pkg.slug,
       longDescription: pkg.description,
-      itineraryDays: pkg.itineraryDays?.map(day => ({
-        day: day.dayNumber,
-        title: day.title || `Day ${day.dayNumber}`,
-        description: day.description || '',
-        activities: [], // PackageItineraryDay model doesn't have activities field
-        meals: [], // PackageItineraryDay model doesn't have meals field
-        accommodation: null, // PackageItineraryDay model doesn't have accommodation field
-        images: day.images || []
-      })) || [],
-      reviews: [] // Booking model doesn't have rating/comment fields
+      itineraryDays,
+      images: Array.isArray(pkg.images)
+        ? pkg.images.map((url, i) => ({ id: `img-${pkg!.id}-${i}`, url, alt: pkg!.name, order: i, isActive: true }))
+        : [],
+      reviews: [],
     };
 
     return NextResponse.json(formattedPackage);
@@ -120,11 +102,11 @@ export async function PUT(
         name: body.name,
         description: body.description,
         shortDescription: body.shortDescription,
-        durationDays: body.durationDays || body.duration,
+        duration: body.durationDays ?? body.duration,
         price: body.price,
-        mainImageUrl: body.mainImageUrl,
-        isFeaturedOnHomepage: body.isFeatured || body.isFeaturedOnHomepage,
-        homepageOrder: body.homepageOrder,
+        mainImage: body.mainImageUrl ?? body.mainImage,
+        isFeatured: body.isFeatured ?? body.isFeaturedOnHomepage,
+        order: body.homepageOrder ?? body.order,
       },
     });
 
