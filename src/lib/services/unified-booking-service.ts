@@ -182,7 +182,7 @@ export class UnifiedBookingService {
   /**
    * Update booking status
    */
-  static async updateBookingStatus(bookingId: string, status: Status) {
+  static async updateBookingStatus(bookingId: string, status: string) {
     try {
       const booking = await prisma.booking.update({
         where: { id: bookingId },
@@ -400,55 +400,9 @@ export class UnifiedBookingService {
   /**
    * Create admin notification in database
    */
-  private static async createAdminNotification(booking: any, itemDetails: BookingItem) {
-    try {
-      console.log('🔔 Creating admin notification for booking:', booking.bookingReference);
-
-      const itemName = itemDetails.name;
-
-      // Get all admin users
-      const adminUsers = await prisma.user.findMany({
-        where: { role: 'ADMIN' },
-        select: { id: true }
-      });
-
-      if (adminUsers.length === 0) {
-        console.log('⚠️ No admin users found, skipping notification creation');
-        return;
-      }
-
-      // Create notification for each admin user
-      const notificationPromises = adminUsers.map(admin =>
-        prisma.notification.create({
-          data: {
-            type: 'BOOKING_CREATED',
-            title: `New ${booking.type} Booking`,
-            message: `${booking.user?.name || 'Guest'} booked ${itemName} for ${booking.guests} guests`,
-            data: {
-              bookingId: booking.id,
-              bookingReference: booking.bookingReference,
-              customerName: booking.user.name || 'Guest',
-              customerEmail: booking.user.email,
-              bookingType: booking.type,
-              itemName: itemName,
-              startDate: booking.startDate,
-              endDate: booking.endDate,
-              guests: booking.guests,
-              totalPrice: booking.totalPrice,
-              status: booking.status
-            },
-            userId: admin.id,
-            read: false,
-          }
-        })
-      );
-
-      await Promise.all(notificationPromises);
-      console.log(`✅ Admin notifications created for ${adminUsers.length} admin users`);
-    } catch (error) {
-      console.error('❌ Failed to create admin notification:', error);
-      throw error;
-    }
+  private static async createAdminNotification(_booking: any, _itemDetails: BookingItem) {
+    // No-op: Notifications model not present in current schema.
+    return;
   }
 }
 
