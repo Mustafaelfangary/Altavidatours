@@ -24,16 +24,16 @@ async function main() {
   // Create minimal essential settings
   const essentialSettings = [
     // Contact
-    { key: 'contact_email', value: 'info@dahabiyatnilecruise.com', group: 'contact' },
-    { key: 'contact_phone', value: '+20 123 456 7890', group: 'contact' },
+    { key: 'contact_email', value: 'info@dahabiyatnilecruise.com', category: 'contact' },
+    { key: 'contact_phone', value: '+20 123 456 7890', category: 'contact' },
     
     // SEO
-    { key: 'meta_title', value: 'Dahabiyat Nile Cruise - Luxury Nile Experience', group: 'seo' },
-    { key: 'meta_description', value: 'Experience luxury Nile cruises with Dahabiyat Nile Cruise.', group: 'seo' },
+    { key: 'meta_title', value: 'Dahabiyat Nile Cruise - Luxury Nile Experience', category: 'seo' },
+    { key: 'meta_description', value: 'Experience luxury Nile cruises with Dahabiyat Nile Cruise.', category: 'seo' },
     
     // Basic settings
-    { key: 'currency', value: 'USD', group: 'payment' },
-    { key: 'booking_lead_time', value: '7', group: 'booking' },
+    { key: 'currency', value: 'USD', category: 'payment' },
+    { key: 'booking_lead_time', value: '7', category: 'booking' },
   ];
 
   for (const setting of essentialSettings) {
@@ -47,7 +47,15 @@ async function main() {
   console.log('✅ Essential settings created');
 
   // Create comprehensive homepage content
-  const homepageContent = [
+  const homepageContent: Array<{
+    key: string;
+    title: string;
+    content?: string;
+    page?: string;
+    section?: string;
+    contentType: string;
+    order: number;
+  }> = [
     // Hero Section
     {
       key: 'hero_video_title',
@@ -200,20 +208,28 @@ async function main() {
         content: content.content,
         page: content.page,
         section: content.section,
-        contentType: content.contentType as any,
+        contentType: content.contentType,
         order: content.order
       },
       create: {
         ...content,
         isActive: true
-      } as any,
+      },
     });
   }
 
   console.log('✅ Minimal homepage content created');
 
   // Create footer content
-  const footerContent = [
+  const footerContent: Array<{
+    key: string;
+    title: string;
+    content?: string;
+    page?: string;
+    section?: string;
+    contentType: string;
+    order: number;
+  }> = [
     {
       key: 'footer_company_name',
       title: 'Company Name',
@@ -278,20 +294,28 @@ async function main() {
         content: content.content,
         page: content.page,
         section: content.section,
-        contentType: content.contentType as any,
+        contentType: content.contentType,
         order: content.order
       },
       create: {
         ...content,
         isActive: true
-      } as any,
+      },
     });
   }
 
   console.log('✅ Footer content created');
 
   // Create global media content (for common elements)
-  const globalMediaContent = [
+  const globalMediaContent: Array<{
+    key: string;
+    title: string;
+    content?: string;
+    page?: string;
+    section?: string;
+    contentType: string;
+    order: number;
+  }> = [
     {
       key: 'site_logo',
       title: 'Site Logo',
@@ -320,33 +344,19 @@ async function main() {
         content: content.content,
         page: content.page,
         section: content.section,
-        contentType: content.contentType as any,
+        contentType: content.contentType,
         order: content.order
       },
       create: {
         ...content,
         isActive: true
-      } as any,
+      },
     });
   }
 
   console.log('✅ Global media content created');
 
-  // Create a sample FAQ
-  await prisma.faq.upsert({
-    where: { id: 'sample-faq' },
-    update: {},
-    create: {
-      id: 'sample-faq',
-      question: 'What is included in a Nile cruise?',
-      answer: 'Our Nile cruises include accommodation, meals, guided tours, and transportation.',
-      order: 1
-    }
-  });
-
-  console.log('✅ Sample FAQ created');
-
-  console.log('🎉 Minimal seed completed successfully!');
+  console.log(' Minimal seed completed successfully!');
 }
 
 main()

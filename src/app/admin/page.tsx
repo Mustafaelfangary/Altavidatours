@@ -20,19 +20,19 @@ export default function AdminDashboardPage() {
     queryKey: ["admin","tours","count"],
     queryFn: async () => {
       const data = await fetchJSON<any>("/api/tours");
-      const items = Array.isArray(data) ? data : data?.items || [];
-      const total = data?.total ?? items.length;
-      return { total, items: items.slice(0, 5) };
+      const items = data?.data ?? (Array.isArray(data) ? data : []);
+      const total = data?.pagination?.total ?? items.length;
+      return { total, items: (items || []).slice(0, 5) };
     },
   });
 
   const bookingsQ = useQuery({
     queryKey: ["admin","bookings","recent"],
     queryFn: async () => {
-      const data = await fetchJSON<any>("/api/bookings");
-      const items = Array.isArray(data) ? data : data?.items || [];
-      const total = data?.total ?? items.length;
-      return { total, items: items.slice(0, 5) };
+      const data = await fetchJSON<any>("/api/bookings?all=true");
+      const items = data?.bookings ?? [];
+      const total = items.length;
+      return { total, items: (items || []).slice(0, 5) };
     },
   });
 
@@ -40,8 +40,7 @@ export default function AdminDashboardPage() {
     queryKey: ["admin","users","count"],
     queryFn: async () => {
       const data = await fetchJSON<any>("/api/users");
-      const items = Array.isArray(data) ? data : data?.items || [];
-      const total = data?.total ?? items.length;
+      const total = data?.total ?? (data?.users?.length ?? 0);
       return { total };
     },
   });
@@ -52,7 +51,7 @@ export default function AdminDashboardPage() {
     // prefetch lists user will likely visit
     if (!loading) {
       qc.prefetchQuery({ queryKey: ["admin","tours","list"], queryFn: () => fetchJSON("/api/tours") });
-      qc.prefetchQuery({ queryKey: ["admin","bookings","list"], queryFn: () => fetchJSON("/api/bookings") });
+      qc.prefetchQuery({ queryKey: ["admin","bookings","list"], queryFn: () => fetchJSON("/api/bookings?all=true") });
       qc.prefetchQuery({ queryKey: ["admin","users","list"], queryFn: () => fetchJSON("/api/users") });
     }
   }, [loading, qc]);

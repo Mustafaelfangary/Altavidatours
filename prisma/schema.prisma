@@ -290,6 +290,12 @@ model PageContent {
   key       String   @unique
   title     String
   content   String   @db.Text
+  // Fields required by admin APIs and UI
+  page      String?
+  section   String?
+  order     Int      @default(0)
+  contentType String  @default("TEXT")
+  metadata  Json?
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
