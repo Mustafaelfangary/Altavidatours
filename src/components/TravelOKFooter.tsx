@@ -51,16 +51,16 @@ export default function TravelOKFooter() {
             
             {/* Social Media */}
             <div className="flex space-x-4">
-              <Link href="#" className="text-blue-200 hover:text-white transition-colors">
+              <Link href="https://www.facebook.com/treasureegypttours" className="text-blue-200 hover:text-white transition-colors">
                 <span className="text-2xl">📘</span>
               </Link>
-              <Link href="#" className="text-blue-200 hover:text-white transition-colors">
+              <Link href="https://www.instagram.com/treasureegypttours" className="text-blue-200 hover:text-white transition-colors">
                 <span className="text-2xl">📸</span>
               </Link>
-              <Link href="#" className="text-blue-200 hover:text-white transition-colors">
+              <Link href="https://twitter.com/treasureegypt" className="text-blue-200 hover:text-white transition-colors">
                 <span className="text-2xl">🐦</span>
               </Link>
-              <Link href="#" className="text-blue-200 hover:text-white transition-colors">
+              <Link href="https://www.youtube.com/@treasureegypttours" className="text-blue-200 hover:text-white transition-colors">
                 <span className="text-2xl">📺</span>
               </Link>
             </div>

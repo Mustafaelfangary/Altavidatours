@@ -24,7 +24,6 @@ import {
   Camera,
   BookOpen,
   Phone,
-  Star,
   Clock,
   Users,
   Heart,
@@ -41,6 +40,11 @@ const LANGUAGES = [
   { code: 'it', label: 'Italiano', flagSvg: '/images/flags/it.svg', name: 'Italiano' },
   { code: 'ru', label: 'Русский', flagSvg: '/images/flags/ru.svg', name: 'Русский' },
 ];
+
+// Minimal API types used in mapping
+interface ApiDahabiya { slug?: string; id?: string | number; name: string; description?: string }
+interface ApiItinerary { slug?: string; id?: string | number; name: string; description?: string }
+interface ApiPackage { slug?: string; id?: string | number; name: string; description?: string }
 
 export default function TravelOKNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -149,7 +153,7 @@ export default function TravelOKNavbar() {
       .then(res => res.json())
       .then(data => {
         if (data && Array.isArray(data.dahabiyas)) {
-          const items = data.dahabiyas.map((d: any, index: number) => ({
+          const items = data.dahabiyas.map((d: ApiDahabiya, index: number) => ({
             href: `/dahabiyas/${d.slug || d.id}`,
             label: d.name,
             description: d.description || `Experience luxury aboard ${d.name}`,
@@ -165,7 +169,7 @@ export default function TravelOKNavbar() {
       .then(res => res.json())
       .then(data => {
         if (data && Array.isArray(data)) {
-          const items = data.map((i: any, index: number) => ({
+          const items = data.map((i: ApiItinerary, index: number) => ({
             href: `/itineraries/${i.slug || i.id}`,
             label: i.name,
             description: i.description || `Discover ancient wonders on ${i.name}`,
@@ -181,7 +185,7 @@ export default function TravelOKNavbar() {
       .then(res => res.json())
       .then(data => {
         if (data && Array.isArray(data.packages)) {
-          const items = data.packages.map((p: any, index: number) => ({
+          const items = data.packages.map((p: ApiPackage, index: number) => ({
             href: `/packages/${p.slug || p.id}`,
             label: p.name,
             description: p.description || `Complete travel experience with ${p.name}`,
@@ -320,10 +324,11 @@ export default function TravelOKNavbar() {
       if (activeDropdown) updatePanelPosition(activeDropdown);
     };
     window.addEventListener('resize', onResize);
-    window.addEventListener('scroll', onResize, { passive: true } as any);
+    const scrollOpts: AddEventListenerOptions = { passive: true };
+    window.addEventListener('scroll', onResize, scrollOpts);
     return () => {
       window.removeEventListener('resize', onResize);
-      window.removeEventListener('scroll', onResize as any);
+      window.removeEventListener('scroll', onResize, scrollOpts);
     };
   }, [activeDropdown]);
 
@@ -368,7 +373,7 @@ export default function TravelOKNavbar() {
                   {LANGUAGES.map((lang) => (
                     <button
                       key={lang.code}
-                      onClick={() => setLocale(lang.code as any)}
+                      onClick={() => setLocale(lang.code as unknown as Parameters<typeof setLocale>[0])}
                       className="w-full px-4 py-2 text-left hover:bg-blue-50 flex items-center space-x-3 transition-colors duration-150 text-[13px]"
                     >
                       <Image src={lang.flagSvg} alt={lang.name} width={20} height={14} className="rounded-sm" />
@@ -414,7 +419,10 @@ export default function TravelOKNavbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-4 text-blue-600 hover:bg-blue-50 transition-colors duration-200"
+              className="lg:hidden p-4 text-blue-600 hover:bg-blue-50 transition-colors duration-200 mobile-menu-button"
+              data-testid="mobile-menu-button"
+              aria-label={mobileMenuOpen ? 'close menu' : 'open menu'}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -435,7 +443,7 @@ export default function TravelOKNavbar() {
                   className="relative dropdown-container"
                   style={{ overflow: 'visible' }}
                   onPointerEnter={() => openDropdown(item.id)}
-                  onPointerLeave={(e) => {
+                  onPointerLeave={() => {
                     if (openViaClick === item.id) return; // don't auto-close if opened via click
                     scheduleCloseDropdown(300);
                   }}
@@ -448,7 +456,7 @@ export default function TravelOKNavbar() {
                     aria-controls={`mega-${item.id}`}
                     onClick={() => toggleDropdownClick(item.id)}
                     onKeyDown={(e) => onKeyDownTopItem(e, item.id)}
-                    className={`px-3 py-3 text-[13px] font-bold transition-all duration-200 border-r border-gray-200 flex items-center space-x-2 hover:-translate-y-0.5 transition-transform ${
+                    className={`px-3 py-3 text-[13px] font-bold transition-all duration-200 border-r border-gray-200 flex items-center space-x-2 hover:-translate-y-0.5 ${
                     activeDropdown === item.id || isActive(item.mainHref)
                       ? 'bg-blue-600 text-white' 
                       : 'text-blue-600 hover:bg-blue-50'
@@ -494,7 +502,7 @@ export default function TravelOKNavbar() {
                               <div className="col-span-2">
                                 <h4 className="text-[12px] font-semibold text-gray-900 mb-3 uppercase tracking-wide">Popular Options</h4>
                                 <div className="space-y-2">
-                                  {item.items.slice(0, 6).map((subItem, index) => (
+                                  {item.items.slice(0, 6).map((subItem) => (
                             <Link
                               key={subItem.href}
                               href={subItem.href}
@@ -519,7 +527,7 @@ export default function TravelOKNavbar() {
                               <div className="col-span-1">
                                 <h4 className="text-[12px] font-semibold text-gray-900 mb-3 uppercase tracking-wide">Quick Access</h4>
                                 <div className="space-y-2">
-                                  {item.featured.map((featured, index) => (
+                                  {item.featured.map((featured) => (
                                     <Link
                                       key={featured.href}
                                       href={featured.href}
