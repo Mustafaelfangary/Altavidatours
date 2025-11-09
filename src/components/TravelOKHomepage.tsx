@@ -148,7 +148,7 @@ export default function TravelOKHomepage() {
             </Link>
             
             <Link 
-              href="/experiences/desert" 
+              href="/services/adventure-tours" 
               className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
             >
               <div className="text-3xl mb-2">🐪</div>
