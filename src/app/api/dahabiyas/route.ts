@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { z } from "zod";
 
 // Validation schema for dahabiya creation/update
@@ -58,13 +58,13 @@ export async function GET(request: NextRequest) {
     const where = activeOnly ? { isActive: true } : {};
 
     const [dahabiyas, total] = await Promise.all([
-      prisma.travelService.findMany({
+      prisma.dahabiya.findMany({
         where,
         orderBy: { createdAt: "desc" },
         skip,
         take: limit,
       }),
-      prisma.travelService.count({ where }),
+      prisma.dahabiya.count({ where }),
     ]);
 
     return NextResponse.json({
@@ -117,83 +117,44 @@ export async function POST(request: NextRequest) {
     let slug = baseSlug;
     let counter = 1;
 
-    while (await prisma.travelService.findUnique({ where: { slug } })) {
+    while (await prisma.dahabiya.findUnique({ where: { slug } })) {
       slug = `${baseSlug}-${counter}`;
       counter++;
     }
 
-    // Filter out undefined values and prepare data for creation
-    const createData = {
+    // Determine if provided amenity identifiers look like IDs (cuid)
+    const amenityIds = (validatedData.amenities || []).filter((a) => /^c[a-z0-9]{24,25}$/i.test(a));
+    const amenityNames = (validatedData.amenities || []).filter((a) => !/^c[a-z0-9]{24,25}$/i.test(a));
+
+    // Prepare creation data for Dahabiya model
+    const createData: any = {
       name: validatedData.name,
       description: validatedData.description,
-      pricePerDay: validatedData.pricePerDay,
+      summary: validatedData.shortDescription ?? null,
       capacity: validatedData.capacity,
-      slug,
-      gallery: validatedData.gallery || [],
-      features: validatedData.features || [],
-      amenities: validatedData.amenities || [],
-      activities: validatedData.activities || [],
-      diningOptions: validatedData.diningOptions || [],
-      services: validatedData.services || [],
-      routes: validatedData.routes || [],
-      highlights: validatedData.highlights || [],
-      tags: validatedData.tags || [],
+      cabins: validatedData.cabins ?? 0,
+      crew: validatedData.crew ?? null,
+      length: validatedData.length ?? null,
+      imageCover: validatedData.mainImage ?? null,
+      images: validatedData.gallery || [],
+      amenities: amenityNames, // keep non-ID amenities as free-form list
       isActive: validatedData.isActive ?? true,
       isFeatured: validatedData.isFeatured ?? false,
-      category: validatedData.category || 'PREMIUM',
-      rating: 0,
-      reviewCount: 0,
-      ...(validatedData.shortDescription !== undefined && { shortDescription: validatedData.shortDescription }),
-      ...(validatedData.cabins !== undefined && { cabins: validatedData.cabins }),
-      ...(validatedData.crew !== undefined && { crew: validatedData.crew }),
-      ...(validatedData.length !== undefined && { length: validatedData.length }),
-      ...(validatedData.width !== undefined && { width: validatedData.width }),
-      ...(validatedData.yearBuilt !== undefined && { yearBuilt: validatedData.yearBuilt }),
-      ...(validatedData.mainImage !== undefined && { mainImage: validatedData.mainImage }),
-      ...(validatedData.specificationsImage !== undefined && { specificationsImage: validatedData.specificationsImage }),
-      ...(validatedData.videoUrl !== undefined && { videoUrl: validatedData.videoUrl }),
-      ...(validatedData.virtualTourUrl !== undefined && { virtualTourUrl: validatedData.virtualTourUrl }),
-      ...(validatedData.metaTitle !== undefined && { metaTitle: validatedData.metaTitle }),
-      ...(validatedData.metaDescription !== undefined && { metaDescription: validatedData.metaDescription }),
+      slug,
     };
 
-    const dahabiya = await prisma.travelService.create({
+    // Optionally connect Amenity items if IDs are provided
+    if (amenityIds.length > 0) {
+      createData.amenityItems = {
+        connect: amenityIds.map((id: string) => ({ id }))
+      };
+    }
+
+    const created = await prisma.dahabiya.create({
       data: createData,
     });
 
-    // Handle itinerary associations if provided
-    if (validatedData.itineraryIds && validatedData.itineraryIds.length > 0) {
-      const itineraryAssociations = validatedData.itineraryIds.map((itineraryId, index) => ({
-        travelServiceId: dahabiya.id,
-        itineraryId,
-        isDefault: index === 0 // First itinerary is default
-      }));
-
-      await prisma.travelServiceItinerary.createMany({
-        data: itineraryAssociations,
-        skipDuplicates: true
-      });
-    }
-
-    // Fetch the created dahabiya with its itineraries
-    const dahabiyaWithItineraries = await prisma.travelService.findUnique({
-      where: { id: dahabiya.id },
-      include: {
-        serviceItineraries: {
-          include: {
-            itinerary: {
-              select: {
-                id: true,
-                name: true,
-                durationDays: true
-              }
-            }
-          }
-        }
-      }
-    });
-
-    return NextResponse.json(dahabiyaWithItineraries, { status: 201 });
+    return NextResponse.json(created, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(

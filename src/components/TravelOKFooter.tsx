@@ -84,7 +84,7 @@ export default function TravelOKFooter() {
             <h3 className="text-lg font-bold mb-6 text-orange-300">Services</h3>
             <ul className="space-y-3">
               <li><Link href="/tours/classic" className="text-blue-200 hover:text-white transition-colors text-sm">Classic Egypt Tours</Link></li>
-              <li><Link href="/experiences/desert" className="text-blue-200 hover:text-white transition-colors text-sm">Desert Safari</Link></li>
+              <li><Link href="/services/adventure-tours" className="text-blue-200 hover:text-white transition-colors text-sm">Desert Safari</Link></li>
               <li><Link href="/experiences/diving" className="text-blue-200 hover:text-white transition-colors text-sm">Red Sea Diving</Link></li>
               <li><Link href="/experiences/cultural" className="text-blue-200 hover:text-white transition-colors text-sm">Cultural Tours</Link></li>
               <li><Link href="/tours/private" className="text-blue-200 hover:text-white transition-colors text-sm">Private Tours</Link></li>
