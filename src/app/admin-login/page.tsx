@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
 
       // Use router.push instead of window.location.href
       setTimeout(() => {
-        router.push('/admin-bypass');
+        router.push('/admin');
       }, 500);
 
     } catch (error) {

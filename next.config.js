@@ -39,6 +39,13 @@ const nextConfig = {
     // Custom loader for better error handling
     loader: 'custom',
     loaderFile: './src/utils/imageLoader.js',
+    // Allow local images with query strings (e.g., cache-busting like ?t=...)
+    // Required starting in Next.js 16
+    localPatterns: [
+      { pathname: '/logos/**' },
+      { pathname: '/images/**' },
+      { pathname: '/public/**' }
+    ],
     remotePatterns: [
       {
         protocol: 'http',

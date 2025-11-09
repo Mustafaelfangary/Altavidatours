@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 import { Loader2 } from "lucide-react";
 
-const TourForm = dynamic(() => import("@/components/forms/TourForm"), { ssr: false });
+const TourForm = dynamic(
+  () => import("@/components/forms/TourForm").then((m) => m.TourForm),
+  { ssr: false }
+);
 
 async function fetchJSON<T>(url: string): Promise<T> {
   const res = await fetch(url, { credentials: "include" });
