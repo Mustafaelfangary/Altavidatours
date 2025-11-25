@@ -1,23 +1,29 @@
-# Create a temporary config for dahabiyatnilecruise.com
-sudo tee /etc/nginx/sites-available/dahabiyat_temp > /dev/null << 'EOL'
+# Update the dahabiyatnilecruise config with the correct certificate paths
+sudo tee /etc/nginx/sites-available/dahabiyatnilecruise > /dev/null << 'EOL'
 server {
     listen 80;
     server_name dahabiyatnilecruise.com www.dahabiyatnilecruise.com;
-    root /var/www/html;
-    
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name dahabiyatnilecruise.com www.dahabiyatnilecruise.com;
+
+    ssl_certificate /etc/letsencrypt/live/www.dahabiyatnilecruise.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/www.dahabiyatnilecruise.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
     location / {
-        return 404;
-    }
-    
-    location /.well-known/acme-challenge/ {
-        allow all;
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
 EOL
-
-# Enable the temporary config
-sudo ln -sf /etc/nginx/sites-available/dahabiyat_temp /etc/nginx/sites-enabled/
-sudo rm -f /etc/nginx/sites-enabled/dahabiyatnilecruise
-
-# Test and restart Nginx
-sudo nginx -t && sudo systemctl restart nginx
