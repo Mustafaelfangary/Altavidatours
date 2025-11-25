@@ -70,4 +70,3 @@ if [ $? -eq 0 ]; then
 else
     echo -e "${RED}Nginx configuration test failed. Please check the configuration.${NC}"
     exit 1
-fi
