@@ -12,7 +12,17 @@ PORT="3001"  # Using port 3001 for multiple sites
 REPO_URL="https://github.com/Mustafaelfangary/TreasureEgyptTours"
 BRANCH="main"
 
-ENV_CONTENT=$'NODE_ENV=production\nPORT=3001\nNEXT_PUBLIC_SITE_URL=https://www.treasureegypttours.com\nNEXTAUTH_URL=https://www.treasureegypttours.com\n# DATABASE_URL=<your-db-url-if-used>\n# NEXTAUTH_SECRET=<random-strong-secret-if-used>'
+# Create/overwrite .env automatically (1=yes, 0=no)
+WRITE_ENV=1
+
+read -r -d '' ENV_CONTENT << 'EOF'
+NODE_ENV=production
+PORT=3001
+NEXT_PUBLIC_SITE_URL=https://www.treasureegypttours.com
+NEXTAUTH_URL=https://www.treasureegypttours.com
+# DATABASE_URL=<your-db-url-if-used>
+# NEXTAUTH_SECRET=<random-strong-secret-if-used>
+# Add other required keys here...
 EOF
 # ========= END CONFIG =========
 
