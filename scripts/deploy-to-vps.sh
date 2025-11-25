@@ -133,7 +133,7 @@ main() {
     fi
     
     # Start deployment
-    deploy_to_vps
+to_vps
     
     print_success "🎉 Deployment completed!"
     echo ""
