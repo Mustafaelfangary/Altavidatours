@@ -1,17 +1,17 @@
-# Update the dahabiyatnilecruise config with the correct certificate paths
-sudo tee /etc/nginx/sites-available/dahabiyatnilecruise > /dev/null << 'EOL'
+# Create a new Nginx configuration with the updated domain
+sudo tee /etc/nginx/sites-available/dahabiyat > /dev/null << 'EOL'
 server {
     listen 80;
-    server_name dahabiyatnilecruise.com www.dahabiyatnilecruise.com;
+    server_name dahabiyat.com www.dahabiyat.com;
     return 301 https://$host$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name dahabiyatnilecruise.com www.dahabiyatnilecruise.com;
+    server_name dahabiyat.com www.dahabiyat.com;
 
-    ssl_certificate /etc/letsencrypt/live/www.dahabiyatnilecruise.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/www.dahabiyatnilecruise.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/dahabiyat.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/dahabiyat.com/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
