@@ -13,7 +13,6 @@ REPO_URL="https://github.com/Mustafaelfangary/TreasureEgyptTours"
 BRANCH="main"
 
 ENV_CONTENT=$'NODE_ENV=production\nPORT=3001\nNEXT_PUBLIC_SITE_URL=https://www.treasureegypttours.com\nNEXTAUTH_URL=https://www.treasureegypttours.com\n# DATABASE_URL=<your-db-url-if-used>\n# NEXTAUTH_SECRET=<random-strong-secret-if-used>'
-EOF
 # ========= END CONFIG =========
 
 # Colors for output
