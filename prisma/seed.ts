@@ -259,7 +259,7 @@ async function main() {
     // Contact/Support Section
     { key: 'home_contact_title', value: 'Need Help?', group: 'homepage', description: 'Contact section title', type: 'text' },
     { key: 'home_contact_text', value: 'Call & WhatsApp or Email us for any inquiries.', group: 'homepage', description: 'Contact section text', type: 'textarea' },
-    { key: 'home_contact_phone', value: '+201001538358', group: 'homepage', description: 'Contact phone', type: 'text' },
+    { key: 'home_contact_phone', value: '+201002588564', group: 'homepage', description: 'Contact phone', type: 'text' },
     { key: 'home_contact_email', value: 'info@dahabiyat.com', group: 'homepage', description: 'Contact email', type: 'email' },
     // Footer Section
     { key: 'home_footer_logo', value: '/images/footer-logo.png', group: 'homepage', description: 'Footer logo', type: 'image' },

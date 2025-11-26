@@ -35,7 +35,7 @@ export default function WhatsAppSettingsPage() {
   const { data: session, status } = useSession();
   const [settings, setSettings] = useState<WhatsAppSettings>({
     enabled: true,
-    phone: '+201001538358',
+    phone: '+201002588564',
     message: 'Hello! I\'m interested in your luxury Nile cruise packages. Could you please provide more information?',
     position: 'bottom-right',
     delay: 1,
@@ -178,7 +178,7 @@ export default function WhatsAppSettingsPage() {
                   id="phone"
                   value={settings.phone}
                   onChange={(e) => setSettings({...settings, phone: e.target.value})}
-                  placeholder="+201001538358"
+                  placeholder="+201002588564"
                 />
                 <p className="text-xs text-gray-500 mt-1">Include country code (e.g., +20 for Egypt)</p>
               </div>

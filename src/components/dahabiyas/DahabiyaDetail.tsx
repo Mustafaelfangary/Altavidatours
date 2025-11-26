@@ -564,7 +564,7 @@ export default function DahabiyaDetail({ dahabiya }: DahabiyaDetailProps) {
                 <Phone className="text-ocean-blue animate-pulse" size={24} />
                 <span className="text-ocean-blue text-xl">𓈎𓃭</span>
               </div>
-              <div className="text-3xl font-bold text-gray-800 mb-2">+201001538358</div>
+              <div className="text-3xl font-bold text-gray-800 mb-2">+201002588564</div>
               <div className="text-lg text-gray-600 mb-6">www.dahabiyatilecruise.com</div>
               
               <Button
