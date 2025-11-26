@@ -74,12 +74,7 @@ model DahabiyaItineraryStep {
   @@index([dahabiyaId, day])
 }
 
-// Run 'prisma generate' command to generate the Prisma client after schema changes
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+// Database configuration is now in prisma.config.ts
 
 enum Role {
   USER
