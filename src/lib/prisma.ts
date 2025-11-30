@@ -1,11 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { Pool } from 'pg';
-import { createPrismaPg } from '@prisma/adapter-pg';
+import { PrismaPg } from '@prisma/adapter-pg';
 
 // PrismaClient is attached to the `global` object in development to prevent
 // exhausting your database connection limit.
-//
-// Learn more: 
 // https://pris.ly/d/help/next-js-best-practices
 
 declare global {
@@ -13,8 +11,9 @@ declare global {
   var prisma: PrismaClient | undefined;
 }
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const adapter = createPrismaPg(pool);
+const connectionString = process.env.DATABASE_URL || '';
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
 
 const prisma: PrismaClient = global.prisma || new PrismaClient({
   adapter,

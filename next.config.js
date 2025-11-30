@@ -1,23 +1,25 @@
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: __dirname,
+
   // Server configuration
   env: {
-    // Use environment variable if set, otherwise default to 3001
     PORT: process.env.PORT || '3001',
     NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3001',
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'your-secret-key-here'
   },
   
-  // Temporarily ignore TypeScript errors during build
+  // TypeScript and ESLint configurations
   typescript: {
     ignoreBuildErrors: true,
   },
   
-  // Temporarily ignore ESLint errors during build
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -25,10 +27,16 @@ const nextConfig = {
   // Performance optimizations
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', '@mui/material', '@mui/icons-material']
+    optimizePackageImports: [
+      'lucide-react',
+      '@mui/material',
+      '@mui/icons-material',
+      '@prisma/client',
+      '@prisma/adapter-pg'
+    ]
   },
   
-  // Enhanced image optimization with error handling
+  // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -36,16 +44,8 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Custom loader for better error handling
     loader: 'custom',
     loaderFile: './src/utils/imageLoader.js',
-    // Allow local images with query strings (e.g., cache-busting like ?t=...)
-    // Required starting in Next.js 16
-    localPatterns: [
-      { pathname: '/logos/**' },
-      { pathname: '/images/**' },
-      { pathname: '/public/**' }
-    ],
     remotePatterns: [
       {
         protocol: 'http',
@@ -120,7 +120,6 @@ const nextConfig = {
         tls: false
       };
     }
-    
     return config;
   }
 };
