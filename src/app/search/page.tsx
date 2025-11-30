@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
+import { hardcodedItineraries } from '@/data/hardcodedItineraries';
 import { useSearchParams } from 'next/navigation';
 
 type Item = { id?: string; slug?: string; name: string; description?: string };
@@ -37,10 +38,11 @@ export default function SearchPage() {
               (x?.name || '').toLowerCase().includes(ql) || (x?.description || '').toLowerCase().includes(ql)
             )
           : [];
-        const iList: Item[] = Array.isArray(iRes)
-          ? iRes.filter((x: any) =>
-              (x?.name || '').toLowerCase().includes(ql) || (x?.description || '').toLowerCase().includes(ql)
-            )
+        const iRaw = Array.isArray(iRes) ? iRes : hardcodedItineraries;
+        const iList: Item[] = Array.isArray(iRaw)
+          ? iRaw
+              .map((x: any) => ({ id: x.id, slug: x.slug, name: x.name || x.title || '', description: x.description || x.shortDescription || '' }))
+              .filter((x: any) => (x?.name || '').toLowerCase().includes(ql) || (x?.description || '').toLowerCase().includes(ql))
           : [];
         const pList: Item[] = Array.isArray(pRes?.packages)
           ? pRes.packages.filter((x: any) =>

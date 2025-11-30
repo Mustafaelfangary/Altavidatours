@@ -163,7 +163,7 @@ export function TravelOKContactForm() {
           <button
             type="submit"
             disabled={loading}
-            className="btn-travelok-primary px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-2"
+            className="btn-primary px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-2"
           >
             {loading ? (
               <>

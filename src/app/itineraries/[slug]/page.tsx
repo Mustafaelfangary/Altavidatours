@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import prisma from '@/lib/prisma';
+import { hardcodedItineraries } from '@/data/hardcodedItineraries';
 
 export default async function ItineraryDetail({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -10,7 +11,24 @@ export default async function ItineraryDetail({ params }: { params: { slug: stri
   if (!itinerary) {
     itinerary = await prisma.itinerary.findUnique({ where: { slug } as any, include: { days: { orderBy: { dayNumber: 'asc' } } } as any } as any);
   }
-  if (!itinerary) return notFound();
+  if (!itinerary) {
+    // Attempt to locate a hardcoded itinerary from static data
+    const hc = hardcodedItineraries.find(h => {
+      const slugFromId = (h.id || '').toString().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const slugFromTitle = (h.title || '').toString().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      return slug === slugFromId || slug === slugFromTitle || slug === (h.file || '').toString().toLowerCase();
+    });
+
+    if (!hc) return notFound();
+
+    // Build a minimal itinerary object to render
+    itinerary = {
+      title: hc.title || 'Altavidatours Itinerary',
+      description: hc.shortDescription || '',
+      duration: hc.duration || 0,
+      daysJson: [] as any[],
+    } as any;
+  }
 
   const daysFromJson = Array.isArray((itinerary as any).daysJson)
     ? ((itinerary as any).daysJson as any[])

@@ -83,7 +83,8 @@ export function Hero({
                 <Link href={ctaLink}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-travelok-blue to-travelok-blue-light hover:from-travelok-blue-dark hover:to-travelok-blue text-white font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                    variant="primary"
+                    className="px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                   >
                     {ctaText}
                   </Button>

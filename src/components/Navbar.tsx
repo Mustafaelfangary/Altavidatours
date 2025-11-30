@@ -864,7 +864,6 @@ export default function Navbar() {
                       signOut({ callbackUrl: '/' });
                     }}
                     className={styles.signOutButton}
-                    }}
                   >
                     <LogOut size={16} />
                     Sign Out

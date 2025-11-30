@@ -77,7 +77,40 @@ export default function ItinerariesPage() {
   };
 
   useEffect(() => {
-    fetchItineraries();
+    // Prefer static hardcoded data (exported from /src/data/hardcodedItineraries.ts)
+    // falling back to the existing API when available.
+    import('@/data/hardcodedItineraries').then(mod => {
+      if (Array.isArray(mod.hardcodedItineraries) && mod.hardcodedItineraries.length > 0) {
+        // Convert minimal hardcoded items to the full Itinerary shape the UI expects
+        const items = mod.hardcodedItineraries.map((h: any, idx: number) => ({
+          id: h.id || `hc-${idx}`,
+          name: h.title || h.file || `Itinerary ${idx + 1}`,
+          slug: (h.id || h.file || `hc-${idx}`).toString().toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+          description: h.shortDescription || '',
+          shortDescription: h.shortDescription || '',
+          durationDays: typeof h.duration === 'number' ? h.duration : (h.duration ? Number(h.duration) || 0 : 0),
+          mainImageUrl: h.image || '/images/default-itinerary.jpg',
+          heroImageUrl: h.image || '/images/default-itinerary.jpg',
+          videoUrl: undefined,
+          price: undefined,
+          maxGuests: undefined,
+          highlights: [],
+          included: [],
+          notIncluded: [],
+          isActive: true,
+          featured: false,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }));
+
+        setItineraries(items as any);
+        setLoading(false);
+        return;
+      }
+
+      // Fallback to remote API
+      fetchItineraries();
+    }).catch(() => fetchItineraries());
   }, []);
 
   const fetchItineraries = async () => {

@@ -41,9 +41,9 @@ export default function TravelOKHomepage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <div className="relative h-screen sm:h-screen lg:h-screen bg-gradient-to-b from-blue-900 to-blue-700" style={{ minHeight: 'calc(100vh - 4rem)' }}>
+      <div className="hero-section relative h-screen" style={{ minHeight: 'calc(100vh - 4rem)' }}>
         {/* Background Image/Video */}
-        <div className="absolute inset-0">
+        <div className="hero-banner absolute inset-0">
           {getContent('hero_video_url') ? (
             <video
               autoPlay
@@ -68,11 +68,11 @@ export default function TravelOKHomepage() {
         </div>
 
         {/* Hero Content */}
-        <div className={`relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 transition-all duration-700 ${heroReady ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+        <div className={`hero-container relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 transition-all duration-700 ${heroReady ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+          <h1 className="hero-title mb-4 sm:mb-6 leading-tight">
             {getContent('hero_video_title', 'DISCOVER EGYPT')}
           </h1>
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl mb-6 sm:mb-8 font-light leading-relaxed">
+          <h2 className="hero-subtitle mb-6 sm:mb-8 font-light leading-relaxed">
             {getContent('hero_video_subtitle', 'Land of Pharaohs & Ancient Wonders')}
           </h2>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-12 max-w-3xl leading-relaxed px-4 sm:px-0">
@@ -83,13 +83,13 @@ export default function TravelOKHomepage() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 px-4 sm:px-0">
             <Link 
               href={getContent('hero_video_cta_link', '/tours')}
-              className="bg-travelok-orange hover:bg-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-colors text-center min-h-[48px] flex items-center justify-center"
+              className="btn-primary text-center min-h-[48px] flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold"
             >
               {getContent('hero_video_cta_text', 'EXPLORE TOURS')}
             </Link>
             <Link 
               href={getContent('hero_video_secondary_cta_link', '/destinations')}
-              className="border-2 border-white text-white hover:bg-white hover:text-travelok-blue px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-colors text-center min-h-[48px] flex items-center justify-center"
+              className="btn-ghost border-2 border-white text-white hover-bg-accent px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-colors text-center min-h-[48px] flex items-center justify-center"
             >
               {getContent('hero_video_secondary_cta_text', 'VIEW DESTINATIONS')}
             </Link>
@@ -108,7 +108,7 @@ export default function TravelOKHomepage() {
       </div>
 
       {/* Things To Do Section */}
-      <div className="bg-travelok-blue text-white">
+      <div className="bg-primary text-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center py-4">
             <h2 className="text-2xl font-bold tracking-wider">{getContent('homepage_things_to_do_title', 'THINGS TO DO')}</h2>
@@ -117,12 +117,12 @@ export default function TravelOKHomepage() {
       </div>
 
       {/* Category Navigation */}
-      <div className="bg-travelok-blue-dark">
+      <div className="bg-primary text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 py-6">
             <Link
               href={getContent('category_1_link', '/attractions/pyramids')}
-              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-4 sm:p-6 text-center rounded-lg min-h-[100px] flex flex-col items-center justify-center"
+              className="bg-primary hover-bg-accent transition-colors text-white p-4 sm:p-6 text-center rounded-lg min-h-[100px] flex flex-col items-center justify-center"
             >
               <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">{getContent('category_1_icon', '🔺')}</div>
               <div className="font-bold text-xs sm:text-sm">{getContent('category_1_title', 'PYRAMIDS')}</div>
@@ -131,7 +131,7 @@ export default function TravelOKHomepage() {
 
             <Link
               href={getContent('category_2_link', '/attractions/temples')}
-              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
             >
               <div className="text-3xl mb-2">{getContent('category_2_icon', '🏛️')}</div>
               <div className="font-bold text-sm">{getContent('category_2_title', 'ANCIENT')}</div>
@@ -140,7 +140,7 @@ export default function TravelOKHomepage() {
 
             <Link
               href={getContent('category_3_link', '/attractions/museums')}
-              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
             >
               <div className="text-3xl mb-2">{getContent('category_3_icon', '🏺')}</div>
               <div className="font-bold text-sm">{getContent('category_3_title', 'MUSEUMS')}</div>
@@ -149,7 +149,7 @@ export default function TravelOKHomepage() {
 
             <Link
               href={getContent('category_4_link', '/services/adventure-tours')}
-              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
             >
               <div className="text-3xl mb-2">{getContent('category_4_icon', '🐪')}</div>
               <div className="font-bold text-sm">{getContent('category_4_title', 'DESERT')}</div>
@@ -158,7 +158,7 @@ export default function TravelOKHomepage() {
 
             <Link
               href={getContent('category_5_link', '/experiences/diving')}
-              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
             >
               <div className="text-3xl mb-2">{getContent('category_5_icon', '🤿')}</div>
               <div className="font-bold text-sm">{getContent('category_5_title', 'RED SEA')}</div>
@@ -167,7 +167,7 @@ export default function TravelOKHomepage() {
 
             <Link
               href={getContent('category_6_link', '/hotels/nile-cruises')}
-              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
             >
               <div className="text-3xl mb-2">{getContent('category_6_icon', '⛵')}</div>
               <div className="font-bold text-sm">{getContent('category_6_title', 'NILE')}</div>
@@ -176,7 +176,7 @@ export default function TravelOKHomepage() {
 
             <Link
               href={getContent('category_7_link', '/experiences/cultural')}
-              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
             >
               <div className="text-3xl mb-2">{getContent('category_7_icon', '🎭')}</div>
               <div className="font-bold text-sm">{getContent('category_7_title', 'CULTURAL')}</div>
@@ -185,7 +185,7 @@ export default function TravelOKHomepage() {
 
             <Link
               href={getContent('category_8_link', '/experiences/food')}
-              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
             >
               <div className="text-3xl mb-2">{getContent('category_8_icon', '🍽️')}</div>
               <div className="font-bold text-sm">{getContent('category_8_title', 'EGYPTIAN')}</div>
@@ -241,7 +241,7 @@ export default function TravelOKHomepage() {
                 return cultural[index % cultural.length];
               };
               return (
-              <div key={pkg.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div key={pkg.id} className="card-travelok group cursor-pointer relative transition-shadow hover:shadow-xl">
                 <div className="relative h-48">
                   <Image
                     src={getImageForPackage() || pkg.image}
@@ -252,12 +252,12 @@ export default function TravelOKHomepage() {
                       e.currentTarget.src = pkg.image;
                     }}
                   />
-                  <div className="absolute top-4 right-4 bg-travelok-orange text-white px-3 py-1 rounded-full text-sm font-bold">
+                  <div className="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
                     {pkg.duration}
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-travelok-blue mb-2">{pkg.title}</h3>
+                  <h3 className="text-xl font-bold text-primary mb-2">{pkg.title}</h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">{pkg.description}</p>
                   
                   <div className="mb-4">

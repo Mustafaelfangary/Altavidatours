@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
-@import "../styles/theme-modern.css";
+@import "../styles/theme-altavida.css";
 /* Legacy theme imports disabled */
 /* @import "../styles/custom.css"; */
 /* @import "../styles/mobile-complete.css"; */
@@ -79,15 +79,15 @@ img {
     --primary-muted: 214 86% 95%;
 
     /* TravelOK Color Palette */
-    --travelok-blue: #1e64c7;
-    --travelok-blue-dark: #1854a0;
-    --travelok-blue-light: #2970d4;
-    --travelok-blue-lighter: #4d88dd;
-    --travelok-blue-lightest: #70a0e6;
-    --travelok-orange: #ff6600;
-    --travelok-orange-light: #ff8833;
-    --travelok-orange-dark: #e55a00;
-    --travelok-green: #228b22;
+    --travelok-blue: #0e6fbf; /* altavida ocean */
+    --travelok-blue-dark: #0b5aa0; /* deep ocean */
+    --travelok-blue-light: #1a7fda; /* lighter ocean */
+    --travelok-blue-lighter: #4d9ee6;
+    --travelok-blue-lightest: #70b5f2;
+    --travelok-orange: #ff7a2d; /* altavida sunset */
+    --travelok-orange-light: #ff9a5c;
+    --travelok-orange-dark: #e56522;
+    --travelok-green: #19a57a; /* altavida emerald */
     --travelok-white: #ffffff;
     --travelok-gray: #6b7280;
     --travelok-dark: #1f2937;
@@ -746,16 +746,17 @@ img {
     color: white;
     border: none;
     padding: 0.75rem 2rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
+    border-radius: 0.75rem;
+    font-weight: 700;
     font-family: "Montserrat", sans-serif;
-    transition: all 0.3s ease;
+    transition: transform .22s ease, box-shadow .22s ease, opacity .15s ease;
+    box-shadow: 0 10px 30px rgba(14,111,191,0.12), 0 4px 12px rgba(13,32,63,0.06);
   }
   
   .btn-travelok-primary:hover {
     background: linear-gradient(135deg, var(--travelok-blue-dark) 0%, var(--travelok-blue) 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(30, 100, 199, 0.3);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 18px 60px rgba(14,111,191,0.20), 0 6px 20px rgba(13,32,63,0.10);
   }
   
   .btn-travelok-secondary {
@@ -763,31 +764,33 @@ img {
     color: white;
     border: none;
     padding: 0.75rem 2rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
+    border-radius: 0.75rem;
+    font-weight: 700;
     font-family: "Montserrat", sans-serif;
-    transition: all 0.3s ease;
+    transition: transform .22s ease, box-shadow .22s ease, opacity .15s ease;
+    box-shadow: 0 10px 30px rgba(255,122,45,0.10), 0 4px 12px rgba(13,32,63,0.04);
   }
   
   .btn-travelok-secondary:hover {
     background: linear-gradient(135deg, var(--travelok-orange-dark) 0%, var(--travelok-orange) 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 102, 0, 0.3);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 18px 60px rgba(255,122,45,0.16), 0 6px 20px rgba(13,32,63,0.08);
   }
   
   /* TravelOK Card Styles */
   .card-travelok {
     background: white;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 1rem;
+    box-shadow: 0 8px 30px rgba(12,22,45,0.06);
     overflow: hidden;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .2s ease;
+    border: 1px solid rgba(0, 0, 0, 0.04);
   }
   
   .card-travelok:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(12,22,45,0.12);
+    border-color: rgba(13,32,63,0.06);
   }
 
   /* Force white text utility that beats pale background dark-text rule */

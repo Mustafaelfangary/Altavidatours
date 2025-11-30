@@ -92,12 +92,12 @@ const config: Config = {
         'brand-blue': '#0B70E1',
         'brand-orange': '#FFA500',
         
-        // TravelOK color scheme
-        'travelok-blue': '#1f3a8a', // Dark blue from TravelOK
-        'travelok-blue-dark': '#1e3a8a',
-        'travelok-blue-light': '#3b82f6',
-        'travelok-orange': '#f97316', // Orange accent from TravelOK
-        'travelok-orange-dark': '#ea580c',
+        // TravelOK color scheme (mapped to Altavidatours palette)
+        'travelok-blue': '#0e6fbf', // Altavida ocean
+        'travelok-blue-dark': '#0b5aa0',
+        'travelok-blue-light': '#1a7fda',
+        'travelok-orange': '#ff7a2d', // Altavida sunset
+        'travelok-orange-dark': '#e56522',
 
         // Clean text colors
         'text-primary': 'hsl(var(--text-primary))',

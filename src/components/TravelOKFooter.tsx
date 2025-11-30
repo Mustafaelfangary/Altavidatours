@@ -25,7 +25,7 @@ export default function TravelOKFooter() {
     fetchLogo();
   }, []);
   return (
-    <footer className="bg-travelok-blue text-white">
+    <footer className="footer text-white">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
@@ -41,7 +41,7 @@ export default function TravelOKFooter() {
                 />
                 <div>
                   <div className="text-white font-bold text-xl leading-tight">Altavida</div>
-                  <div className="text-orange-300 font-bold text-base -mt-0.5 tracking-wide">TOURS.COM</div>
+                  <div className="text-accent font-bold text-base -mt-0.5 tracking-wide">TOURS.COM</div>
                 </div>
               </div>
               <p className="text-sm text-blue-100 leading-relaxed">
@@ -68,7 +68,7 @@ export default function TravelOKFooter() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-orange-300">Quick Links</h3>
+            <h3 className="text-lg font-bold mb-6 text-accent">Quick Links</h3>
             <ul className="space-y-3">
               <li><Link href="/tours" className="text-blue-200 hover:text-white transition-colors text-sm">Tours & Packages</Link></li>
               <li><Link href="/attractions" className="text-blue-200 hover:text-white transition-colors text-sm">Attractions</Link></li>
@@ -81,7 +81,7 @@ export default function TravelOKFooter() {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-orange-300">Services</h3>
+            <h3 className="text-lg font-bold mb-6 text-accent">Services</h3>
             <ul className="space-y-3">
               <li><Link href="/tours/classic" className="text-blue-200 hover:text-white transition-colors text-sm">Classic Egypt Tours</Link></li>
               <li><Link href="/services/adventure-tours" className="text-blue-200 hover:text-white transition-colors text-sm">Desert Safari</Link></li>
@@ -94,7 +94,7 @@ export default function TravelOKFooter() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-orange-300">Contact Info</h3>
+            <h3 className="text-lg font-bold mb-6 text-accent">Contact Info</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <span className="text-orange-300 text-lg">📍</span>
@@ -127,9 +127,9 @@ export default function TravelOKFooter() {
                 <input 
                   type="email" 
                   placeholder="Your email"
-                  className="flex-1 px-3 py-2 text-sm bg-white text-gray-800 rounded-l focus:outline-none focus:ring-2 focus:ring-orange-300"
+                  className="flex-1 px-3 py-2 text-sm bg-white text-gray-800 rounded-l focus:outline-none focus:ring-2 focus:ring-accent"
                 />
-                <button className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-r transition-colors">
+                <button className="btn-primary px-4 py-2 rounded-r transition-colors">
                   <span className="text-sm font-semibold">Subscribe</span>
                 </button>
               </div>
