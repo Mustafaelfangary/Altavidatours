@@ -7,6 +7,12 @@ const __dirname = dirname(__filename);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   outputFileTracingRoot: __dirname,
+  
+  // Experimental features
+  experimental: {
+    // This is needed for Prisma to work with Next.js 13+
+    serverComponentsExternalPackages: ['@prisma/client'],
+  },
 
   // Server configuration
   env: {
