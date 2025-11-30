@@ -4,9 +4,10 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
-  // output   = "./node_modules/.prisma/client"
-  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
+  provider        = "prisma-client-js"
+  // output       = "./node_modules/.prisma/client"
+  binaryTargets  = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
+  previewFeatures = ["driverAdapters"]
 }
 
 // Relational itinerary day details for admin panel
