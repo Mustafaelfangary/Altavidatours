@@ -49,20 +49,11 @@ The "Our Partners" section was not showing anywhere on the website because it re
 Until you add real partners, these will display:
 
 ### **Partner 1: Alta Vida Tours**
-- Logo: Blue placeholder with text
-- Website: https://www.altavidatours.com
-- Description: "Premium Egypt Tours & Travel Experiences"
 
-### **Partner 2: Treasure Egypt Tours**
-- Logo: Green placeholder with text
-- Website: https://www.treasureegypttours.com
-- Description: "Discover the Treasures of Ancient Egypt"
+### **Partner 2: Altavida Tours**
 
----
 
 ## 🚀 Deploy to See Changes
-
-### **Step 1: Commit Changes**
 ```bash
 git add .
 git commit -m "Fix Partners section - add fallback demo partners"

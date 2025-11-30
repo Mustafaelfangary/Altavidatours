@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Fix port configuration script for Dahabiyat (3000) and TreasureEgyptTours (3001)
+# Fix port configuration script for Dahabiyat (3000) and AltavidaTours (3001)
 
 # Colors for output
 RED='\033[0;31m'
@@ -61,32 +61,32 @@ else
     echo -e "${RED}Error: Dahabiyat-Nile-Cruise directory not found at $DAHABIYAT_DIR${NC}"
 fi
 
-# Configure TreasureEgyptTours (Port 3001)
-echo -e "${YELLOW}Configuring TreasureEgyptTours on port 3001...${NC}"
-TREASURE_DIR="/var/www/treasureegypttours"
+# Configure AltavidaTours (Port 3001)
+echo -e "${YELLOW}Configuring AltavidaTours on port 3001...${NC}"
+TREASURE_DIR="/var/www/altavidatours"
 if [ -d "$TREASURE_DIR" ]; then
     # Update .env
     sed -i 's/PORT=.*/PORT=3001/' "$TREASURE_DIR/.env"
-    sed -i 's/NEXT_PUBLIC_SITE_URL=.*/NEXT_PUBLIC_SITE_URL=https:\/\/treasureegypttours.com/' "$TREASURE_DIR/.env"
+    sed -i 's/NEXT_PUBLIC_SITE_URL=.*/NEXT_PUBLIC_SITE_URL=https:\/\/altavidatours.com/' "$TREASURE_DIR/.env"
     
     # Update Nginx if config exists
-    if [ -f "/etc/nginx/sites-enabled/treasureegypttours" ]; then
-        sudo sed -i 's/proxy_pass http:\/\/127.0.0.1:[0-9]\+/proxy_pass http:\/\/127.0.0.1:3001/' /etc/nginx/sites-enabled/treasureegypttours
+    if [ -f "/etc/nginx/sites-enabled/altavidatours" ]; then
+        sudo sed -i 's/proxy_pass http:\/\/127.0.0.1:[0-9]\+/proxy_pass http:\/\/127.0.0.1:3001/' /etc/nginx/sites-enabled/altavidatours
     else
-        echo -e "${YELLOW}Nginx config for TreasureEgyptTours not found, creating it...${NC}"
-        sudo bash -c 'cat > /etc/nginx/sites-available/treasureegypttours << "EOL"
+        echo -e "${YELLOW}Nginx config for AltavidaTours not found, creating it...${NC}"
+        sudo bash -c 'cat > /etc/nginx/sites-available/altavidatours << "EOL"
 server {
     listen 80;
-    server_name treasureegypttours.com www.treasureegypttours.com;
+    server_name altavidatours.com www.altavidatours.com;
     return 301 https://$host$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name treasureegypttours.com www.treasureegypttours.com;
+    server_name altavidatours.com www.altavidatours.com;
 
-    ssl_certificate /etc/letsencrypt/live/treasureegypttours.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/treasureegypttours.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/altavidatours.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/altavidatours.com/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
@@ -102,10 +102,10 @@ server {
     }
 }
 EOL'
-        sudo ln -sf /etc/nginx/sites-available/treasureegypttours /etc/nginx/sites-enabled/
+        sudo ln -sf /etc/nginx/sites-available/altavidatours /etc/nginx/sites-enabled/
     fi
 else
-    echo -e "${RED}Error: TreasureEgyptTours directory not found at $TREASURE_DIR${NC}"
+    echo -e "${RED}Error: AltavidaTours directory not found at $TREASURE_DIR${NC}"
 fi
 
 # Test Nginx configuration
@@ -118,7 +118,7 @@ if sudo nginx -t; then
     # Restart applications
     echo -e "${YELLOW}Restarting applications...${NC}"
     cd "$DAHABIYAT_DIR" && pm2 start npm --name "Dahabiyat-Nile-Cruise" -- start
-    cd "$TREASURE_DIR" && pm2 start npm --name "treasureegypttours" -- start
+    cd "$TREASURE_DIR" && pm2 start npm --name "altavidatours" -- start
     pm2 save
     
     # Show status
@@ -131,11 +131,11 @@ if sudo nginx -t; then
     
     echo -e "\n${GREEN}Verification:${NC}"
     echo "Dahabiyat: http://localhost:3000"
-    echo "Treasure:  http://localhost:3001"
+    echo "Altavida:  http://localhost:3001"
 else
     echo -e "${RED}Nginx configuration test failed. Please check the configuration.${NC}"
     echo -e "${YELLOW}To fix SSL certificates, run:${NC}"
-    echo "sudo certbot --nginx -d treasureegypttours.com -d www.treasureegypttours.com"
+    echo "sudo certbot --nginx -d altavidatours.com -d www.altavidatours.com"
     echo "sudo certbot --nginx -d dahabiyatnilecruise.com -d www.dahabiyatnilecruise.com"
     exit 1
 fi

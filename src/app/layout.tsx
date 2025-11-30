@@ -57,19 +57,19 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         {/* Preload site logo to prevent flicker on initial paint */}
-        <link rel="preload" as="image" href="/logos/treasureegypttours.svg" />
+        <link rel="preload" as="image" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" />
 
         {/* PWA meta tags */}
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Treasure Egypt Tours" />
+        <meta name="apple-mobile-web-app-title" content="Altavida Tours.com" />
 
         {/* Favicon and app icons */}
-        <link rel="icon" href="/logos/treasureegypttours.ico" sizes="any" />
-        <link rel="icon" href="/logos/treasureegypttours.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" sizes="any" />
+        <link rel="icon" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" />
         <link rel="manifest" href="/manifest.json" />
 
         {/* Structured data */}
@@ -86,7 +86,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "name": "Treasure Egypt Tours",
+              "name": "Altavida Tours.com",
               "url": process.env.NEXT_PUBLIC_SITE_URL || "https://www.altavidatours.com",
               "potentialAction": {
                 "@type": "SearchAction",

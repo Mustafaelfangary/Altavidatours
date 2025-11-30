@@ -31,7 +31,7 @@ export const contentModels: ContentModel[] = [
         name: 'Main Heading',
         type: 'text',
         required: true,
-        defaultValue: 'Discover Egypt\'s Treasures'
+        defaultValue: "Discover Egypt's Wonders with Altavida Tours.com"
       },
       {
         id: 'subtitle',
@@ -146,7 +146,7 @@ export const contentModels: ContentModel[] = [
         name: 'Site Title',
         type: 'text',
         required: true,
-        defaultValue: 'Treasure Egypt Tours'
+        defaultValue: 'Altavida Tours.com'
       },
       {
         id: 'siteDescription',

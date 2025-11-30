@@ -73,11 +73,11 @@ export function createLogoCacheManager() {
  * Default logo paths for fallbacks
  */
 export const DEFAULT_LOGOS = {
-  navbar: '/logos/treasureegypttours.svg',
-  footer: '/logos/treasureegypttours.svg',
-  admin: '/logos/treasureegypttours.svg',
-  mobile: '/logos/treasureegypttours.svg',
-  site: '/logos/treasureegypttours.svg'
+  navbar: '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png',
+  footer: '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png',
+  admin: '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png',
+  mobile: '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png',
+  site: '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png'
 } as const;
 
 /**

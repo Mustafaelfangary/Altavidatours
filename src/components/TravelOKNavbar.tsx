@@ -51,7 +51,7 @@ export default function TravelOKNavbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [openViaClick, setOpenViaClick] = useState<string | null>(null);
   const [expandedMobileSections, setExpandedMobileSections] = useState<Record<string, boolean>>({});
-  const [logoUrl, setLogoUrl] = useState('/logos/treasureegypttours.svg');
+  const [logoUrl, setLogoUrl] = useState('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
   const [scrolled, setScrolled] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -596,7 +596,7 @@ export default function TravelOKNavbar() {
               <Link href="/" className="flex items-center">
                 <OptimizedImage 
                   src={logoUrl} 
-                  alt="Treasure Egypt Tours" 
+                  alt="Altavida Tours.com" 
                   width={120}
                   height={38}
                   className="h-9 lg:h-10 w-auto transition-all duration-300"

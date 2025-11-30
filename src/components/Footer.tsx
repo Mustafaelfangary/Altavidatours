@@ -165,7 +165,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
   // Get dynamic footer logo with cache busting
   const getFooterLogo = () => {
     // Prefer branding settings, fallback to global media
-    const logoUrl = getBrandingContent('footer_logo', '') || getGlobalContent('footer_logo', '/logos/treasureegypttours.svg');
+    const logoUrl = getBrandingContent('footer_logo', '') || getGlobalContent('footer_logo', '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
     // Add cache-busting timestamp
     if (logoUrl.includes('?')) {
       return `${logoUrl}&t=${footerLogoTimestamp}`;
@@ -259,12 +259,12 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
 
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
               <span className="text-egyptian-gold mr-2 sm:mr-3">𓇳</span>
-              {get('footer-title', 'Treasure Egypt Tours')}
+              {get('footer-title', 'Altavida Tours.com')}
               <span className="text-egyptian-gold ml-2 sm:ml-3">𓇳</span>
             </h2>
             <p className="text-gray-700 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-medium">
               <span className="text-egyptian-gold mr-1 sm:mr-2">𓊪</span>
-              {get('footer-description', 'Discover Egypt with Treasure Egypt Tours. Your trusted partner for unforgettable journeys across the land of the pharaohs.')}
+              {get('footer-description', 'Discover Egypt with Altavida Tours.com. Your trusted partner for unforgettable journeys across the land of the pharaohs.')}
               <span className="text-egyptian-gold ml-1 sm:ml-2">𓊪</span>
             </p>
           </div>
@@ -318,7 +318,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
                   },
                   {
                     icon: Mail,
-                    text: get('footer-email', 'info@treasureegypttours.com')
+                    text: get('footer-email', 'info@altavidatours.com')
                   }
                 ].map((contact, index) => {
                   const Icon = contact.icon;
@@ -440,7 +440,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
           <div className="border-t border-gray-200 pt-8">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
               <p className="text-gray-700 font-medium text-sm md:text-base text-center md:text-left">
-                © {new Date().getFullYear()} {get('footer-company-name', 'Treasure Egypt Tours')}. All Rights Reserved.
+                © {new Date().getFullYear()} {get('footer-company-name', 'Altavida Tours.com')}. All Rights Reserved.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 md:space-x-6">

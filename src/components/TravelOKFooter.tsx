@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function TravelOKFooter() {
-  const [logoUrl, setLogoUrl] = useState('/logos/treasureegypttours.svg');
+  const [logoUrl, setLogoUrl] = useState('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
 
   useEffect(() => {
     const fetchLogo = async () => {
@@ -34,33 +34,33 @@ export default function TravelOKFooter() {
               <div className="flex items-center mb-4">
                 <Image 
                   src={logoUrl} 
-                  alt="Treasure Egypt Tours" 
+                  alt="Altavida Tours.com" 
                   width={140}
                   height={40}
                   className="h-10 w-auto mr-3 invert"
                 />
                 <div>
-                  <div className="text-white font-bold text-xl leading-tight">Treasure Egypt</div>
-                  <div className="text-orange-300 font-bold text-base -mt-0.5 tracking-wide">TOURS</div>
+                  <div className="text-white font-bold text-xl leading-tight">Altavida</div>
+                  <div className="text-orange-300 font-bold text-base -mt-0.5 tracking-wide">TOURS.COM</div>
                 </div>
               </div>
               <p className="text-sm text-blue-100 leading-relaxed">
-                Your gateway to Egypt's incredible wonders. From ancient pyramids to Red Sea adventures, we create unforgettable travel experiences across the land of the pharaohs.
+                Your gateway to Egypt's incredible wonders. From ancient pyramids to Red Sea adventures, Altavida Tours.com creates unforgettable travel experiences across the land of the pharaohs.
               </p>
             </div>
             
             {/* Social Media */}
             <div className="flex space-x-4">
-              <Link href="https://www.facebook.com/treasureegypttours" className="text-blue-200 hover:text-white transition-colors">
+              <Link href="https://www.facebook.com/altavidatours" className="text-blue-200 hover:text-white transition-colors">
                 <span className="text-2xl">📘</span>
               </Link>
-              <Link href="https://www.instagram.com/treasureegypttours" className="text-blue-200 hover:text-white transition-colors">
+              <Link href="https://www.instagram.com/altavidatours" className="text-blue-200 hover:text-white transition-colors">
                 <span className="text-2xl">📸</span>
               </Link>
-              <Link href="https://twitter.com/treasureegypt" className="text-blue-200 hover:text-white transition-colors">
+              <Link href="https://twitter.com/altavidatours" className="text-blue-200 hover:text-white transition-colors">
                 <span className="text-2xl">🐦</span>
               </Link>
-              <Link href="https://www.youtube.com/@treasureegypttours" className="text-blue-200 hover:text-white transition-colors">
+              <Link href="https://www.youtube.com/@altavidatours" className="text-blue-200 hover:text-white transition-colors">
                 <span className="text-2xl">📺</span>
               </Link>
             </div>
@@ -111,7 +111,7 @@ export default function TravelOKFooter() {
               
               <div className="flex items-center space-x-3">
                 <span className="text-orange-300 text-lg">✉️</span>
-                <p className="text-sm text-blue-200">bookings@treasureegypttours.com</p>
+                <p className="text-sm text-blue-200">bookings@altavidatours.com</p>
               </div>
               
               <div className="flex items-center space-x-3">
@@ -141,7 +141,7 @@ export default function TravelOKFooter() {
         <div className="border-t border-blue-400 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-blue-200 mb-4 md:mb-0">
-              © 2024 Treasure Egypt Tours. All rights reserved.
+              © 2024 Altavida Tours.com. All rights reserved.
             </div>
             
             <div className="flex items-center space-x-6">

@@ -2,17 +2,17 @@
 set -euo pipefail
 
 # ========= CONFIG =========
-DOMAIN="treasureegypttours.com"
-WWW_DOMAIN="www.treasureegypttours.com"
-APP_NAME="treasureegypttours"
-APP_DIR="/var/www/treasureegypttours"
+DOMAIN="altavidatours.com"
+WWW_DOMAIN="www.altavidatours.com"
+APP_NAME="altavidatours"
+APP_DIR="/var/www/altavidatours"
 PORT="3001"  # Using port 3001 for multiple sites
 
 # Clone this repo automatically
-REPO_URL="https://github.com/Mustafaelfangary/TreasureEgyptTours"
+REPO_URL="https://github.com/Mustafaelfangary/Altavidatours"
 BRANCH="main"
 
-ENV_CONTENT=$'NODE_ENV=production\nPORT=3001\nNEXT_PUBLIC_SITE_URL=https://www.treasureegypttours.com\nNEXTAUTH_URL=https://www.treasureegypttours.com\n# DATABASE_URL=<your-db-url-if-used>\n# NEXTAUTH_SECRET=<random-strong-secret-if-used>'
+ENV_CONTENT=$'NODE_ENV=production\nPORT=3001\nNEXT_PUBLIC_SITE_URL=https://www.altavidatours.com\nNEXTAUTH_URL=https://www.altavidatours.com\n# DATABASE_URL=<your-db-url-if-used>\n# NEXTAUTH_SECRET=<random-strong-secret-if-used>'
 # ========= END CONFIG =========
 
 # Colors for output
@@ -291,7 +291,7 @@ verify_deployment() {
 
 # Main deployment function
 main() {
-    echo -e "\n${BLUE}🚀 Treasure Egypt Tours Deployment Script${NC}"
+    echo -e "\n${BLUE}🚀 Altavida Tours Deployment Script${NC}"
     echo -e "${BLUE}===================================${NC}\n"
     
     # Check for root privileges

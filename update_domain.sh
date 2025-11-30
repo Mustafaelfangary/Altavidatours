@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-OLD_DOMAIN="treasureegypttours.net"
+OLD_DOMAIN="altavidatours.com"
 NEW_DOMAIN="trasureegypttours.com"
 VPS_IP="195.200.4.110"  # Replace with your VPS IP
 WEB_SERVER="nginx"     # Change to "apache" if using Apache

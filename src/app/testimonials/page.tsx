@@ -12,11 +12,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import Container from '@/components/ui/container';
 import { PharaonicCard } from '@/components/ui/pharaonic-elements';
 import { ReviewCard } from '@/components/testimonials';
-import { 
-  Star, 
+import { useContent } from '@/hooks/useContent';
+import {
+  Star,
   User,
-  MapPin, 
-  Calendar, 
+  MapPin,
+  Calendar,
   MessageSquare,
   Search,
   Filter,
@@ -52,6 +53,7 @@ interface Dahabiya {
 }
 
 export default function TestimonialsPage() {
+  const { getContent } = useContent({ page: 'testimonials' });
   const [reviews, setReviews] = useState<Review[]>([]);
   const [dahabiyas, setDahabiyas] = useState<Dahabiya[]>([]);
   const [loading, setLoading] = useState(true);
@@ -147,11 +149,11 @@ export default function TestimonialsPage() {
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="text-egyptian-gold text-5xl animate-pulse">⭐</span>
               <h1 className="text-4xl md:text-6xl font-heading font-bold text-text-primary">
-                Guest Testimonials
+                {getContent('testimonials_hero_title', 'Guest Testimonials')}
               </h1>
               <span className="text-egyptian-gold text-5xl animate-pulse">⭐</span>
             </div>
-            
+
             <div className="flex items-center justify-center gap-3 mb-6">
               <span className="text-egyptian-gold text-xl">𓈖</span>
               <span className="text-egyptian-gold text-xl">𓂀</span>
@@ -159,17 +161,16 @@ export default function TestimonialsPage() {
               <span className="text-egyptian-gold text-xl">𓇯</span>
               <span className="text-egyptian-gold text-xl">𓊃</span>
             </div>
-            
+
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Discover authentic experiences from our guests who have sailed the Nile aboard our luxury dahabiyas. 
-              Each testimonial tells a story of wonder, comfort, and unforgettable memories.
+              {getContent('testimonials_hero_subtitle', 'Discover authentic experiences from our guests who have sailed the Nile aboard our luxury dahabiyas. Each testimonial tells a story of wonder, comfort, and unforgettable memories.')}
             </p>
 
             {/* Stats */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mb-8">
               <div className="text-center">
                 <div className="text-3xl font-bold text-hieroglyph-brown">{reviews.length}</div>
-                <div className="text-gray-600">Total Reviews</div>
+                <div className="text-gray-600">{getContent('testimonials_total_reviews_label', 'Total Reviews')}</div>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center gap-2">
@@ -178,14 +179,14 @@ export default function TestimonialsPage() {
                   </span>
                   <div className="flex">{renderStars(Math.round(averageRating))}</div>
                 </div>
-                <div className="text-gray-600">Average Rating</div>
+                <div className="text-gray-600">{getContent('testimonials_avg_rating_label', 'Average Rating')}</div>
               </div>
             </div>
 
             <Link href="/profile">
               <Button className="bg-egyptian-gold text-hieroglyph-brown hover:bg-egyptian-gold/90 text-lg px-8 py-3">
                 <MessageSquare className="w-5 h-5 mr-2" />
-                Share Your Review
+                {getContent('testimonials_share_review_btn', 'Share Your Review')}
               </Button>
             </Link>
           </div>
@@ -199,19 +200,19 @@ export default function TestimonialsPage() {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <Input
-                placeholder="Search testimonials..."
+                placeholder={getContent('testimonials_search_placeholder', 'Search testimonials...')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
               />
             </div>
-            
+
             <Select value={selectedDahabiya || 'ALL'} onValueChange={(value) => setSelectedDahabiya(value === 'ALL' ? '' : value)}>
               <SelectTrigger className="w-full md:w-48">
-                <SelectValue placeholder="All Dahabiyas" />
+                <SelectValue placeholder={getContent('testimonials_filter_all_dahabiyas', 'All Dahabiyas')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="ALL">All Dahabiyas</SelectItem>
+                <SelectItem value="ALL">{getContent('testimonials_filter_all_dahabiyas', 'All Dahabiyas')}</SelectItem>
                 {dahabiyas.map((dahabiya) => (
                   <SelectItem key={dahabiya.id} value={dahabiya.id}>
                     <span className="mr-2">𓇳</span>
@@ -223,13 +224,13 @@ export default function TestimonialsPage() {
 
             <Select value={selectedRating || 'ALL'} onValueChange={(value) => setSelectedRating(value === 'ALL' ? '' : value)}>
               <SelectTrigger className="w-full md:w-48">
-                <SelectValue placeholder="All Ratings" />
+                <SelectValue placeholder={getContent('testimonials_filter_all_ratings', 'All Ratings')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="ALL">All Ratings</SelectItem>
-                <SelectItem value="5">5 Stars Only</SelectItem>
-                <SelectItem value="4">4+ Stars</SelectItem>
-                <SelectItem value="3">3+ Stars</SelectItem>
+                <SelectItem value="ALL">{getContent('testimonials_filter_all_ratings', 'All Ratings')}</SelectItem>
+                <SelectItem value="5">{getContent('testimonials_filter_5_stars', '5 Stars Only')}</SelectItem>
+                <SelectItem value="4">{getContent('testimonials_filter_4_stars', '4+ Stars')}</SelectItem>
+                <SelectItem value="3">{getContent('testimonials_filter_3_stars', '3+ Stars')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -242,17 +243,17 @@ export default function TestimonialsPage() {
           {filteredReviews.length === 0 ? (
             <div className="text-center py-16">
               <div className="text-6xl text-egyptian-gold mb-4">⭐</div>
-              <h3 className="text-2xl font-bold text-hieroglyph-brown mb-2">No Reviews Found</h3>
+              <h3 className="text-2xl font-bold text-hieroglyph-brown mb-2">{getContent('testimonials_no_reviews_title', 'No Reviews Found')}</h3>
               <p className="text-gray-600 mb-6">
-                {searchTerm || selectedDahabiya || selectedRating 
-                  ? 'Try adjusting your filters to see more reviews.'
-                  : 'Be the first to share your experience with us!'
+                {searchTerm || selectedDahabiya || selectedRating
+                  ? getContent('testimonials_no_reviews_filter_text', 'Try adjusting your filters to see more reviews.')
+                  : getContent('testimonials_no_reviews_empty_text', 'Be the first to share your experience with us!')
                 }
               </p>
               <Link href="/profile">
                 <Button className="bg-egyptian-gold text-hieroglyph-brown hover:bg-egyptian-gold/90">
                   <MessageSquare className="w-4 h-4 mr-2" />
-                  Write the First Review
+                  {getContent('testimonials_write_first_review_btn', 'Write the First Review')}
                 </Button>
               </Link>
             </div>
@@ -280,23 +281,22 @@ export default function TestimonialsPage() {
             <div className="bg-white/80 backdrop-blur-sm border border-egyptian-gold/30 rounded-2xl p-8 max-w-2xl mx-auto">
               <div className="text-4xl text-egyptian-gold mb-4">𓊪</div>
               <h3 className="text-2xl font-bold text-hieroglyph-brown mb-3">
-                Share Your Nile Experience
+                {getContent('testimonials_cta_title', 'Share Your Nile Experience')}
               </h3>
               <p className="text-gray-600 mb-6">
-                Have you sailed with us? Your review helps future travelers discover 
-                the magic of a luxury Nile dahabiya journey.
+                {getContent('testimonials_cta_description', 'Have you sailed with us? Your review helps future travelers discover the magic of a luxury Nile dahabiya journey.')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/profile">
                   <Button className="bg-egyptian-gold text-hieroglyph-brown hover:bg-egyptian-gold/90">
                     <MessageSquare className="w-4 h-4 mr-2" />
-                    Write a Review
+                    {getContent('testimonials_cta_write_review_btn', 'Write a Review')}
                   </Button>
                 </Link>
                 <Link href="/dahabiyas">
                   <Button variant="outline" className="border-egyptian-gold/30 text-hieroglyph-brown hover:bg-egyptian-gold/10">
                     <span className="mr-2">𓇳</span>
-                    Explore Our Fleet
+                    {getContent('testimonials_cta_explore_fleet_btn', 'Explore Our Fleet')}
                   </Button>
                 </Link>
               </div>

@@ -1,7 +1,7 @@
 # Admin Panel & Database Schema Documentation
 
 ## Overview
-This document describes the complete admin panel structure, database schema, and API endpoints for the Treasure Egypt Tours website.
+This document describes the complete admin panel structure, database schema, and API endpoints for the Altavida Tours.com website.
 
 ## Database Schema
 

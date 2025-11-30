@@ -5,8 +5,8 @@
 ### Step 1: Save the Images
 
 Save the two images you have as:
-1. `altavida-logo.png` (Alta Vida Tours - red logo with bird)
-2. `treasure-egypt-logo.png` (Treasure Egypt Tours - blue/gold pyramid logo)
+1. `altavida-logo.png` (Altavida Tours - primary brand/logo)
+2. `altavida-partner-logo.png` (Altavida partner logo variant)
 
 ### Step 2: Add to Project
 
@@ -18,7 +18,7 @@ public/images/partners/
 So you'll have:
 ```
 public/images/partners/altavida-logo.png
-public/images/partners/treasure-egypt-logo.png
+public/images/partners/altavida-partner-logo.png
 ```
 
 ### Step 3: Commit via GitHub Desktop
@@ -51,4 +51,3 @@ The partner logos will now appear in:
 
 Both link to:
 - https://www.altavidatours.com
-- https://www.treasureegypttours.com

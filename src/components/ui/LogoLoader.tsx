@@ -29,7 +29,7 @@ export default function LogoLoader({
   fullScreen = true
 }: LogoLoaderProps) {
   const { width, height, containerClass } = sizeMap[size];
-  const [logoUrl, setLogoUrl] = useState<string>('/logos/treasureegypttours.svg');
+  const [logoUrl, setLogoUrl] = useState<string>('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
   const [loadedOnce, setLoadedOnce] = useState<boolean>(false);
 
   // Fetch the same logo used by the site/navbar so the loader always matches
@@ -72,8 +72,8 @@ export default function LogoLoader({
       >
         <div className="relative w-full h-full">
           <Image
-            src={logoUrl || '/logos/treasureegypttours.svg'}
-            alt="Treasure Egypt Tours Logo"
+            src={logoUrl || '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png'}
+            alt="Altavida Tours Logo"
             width={width}
             height={height}
             className={cn(
@@ -91,8 +91,8 @@ export default function LogoLoader({
             onLoad={() => setLoadedOnce(true)}
             onError={() => {
               // fallback to default if the provided URL fails
-              if (logoUrl !== '/logos/treasureegypttours.svg') {
-                setLogoUrl('/logos/treasureegypttours.svg');
+              if (logoUrl !== '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png') {
+                setLogoUrl('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
               }
             }}
           />

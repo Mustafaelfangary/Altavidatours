@@ -20,19 +20,19 @@ async function getDynamicSiteName(): Promise<string> {
     const response = await fetch('/api/website-content?page=homepage&key=site_name');
     if (response.ok) {
       const data = await response.json();
-      return data.content || 'Treasure Egypt Tours';
+      return data.content || 'Altavida Tours.com';
     }
   } catch (error) {
     console.warn('Failed to fetch dynamic site name:', error);
   }
-  return 'Treasure Egypt Tours';
+  return 'Altavida Tours.com';
 }
 
 const defaultSEO = {
-  siteName: 'Treasure Egypt Tours', // This will be overridden by dynamic content when available
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.treasureegypttours.com',
-  defaultTitle: 'Treasure Egypt Tours - Authentic Egypt Travel Experiences',
-  defaultDescription: 'Explore Egypt with Treasure Egypt Tours. Tailored Nile journeys, dahabiya cruises, cultural adventures, and luxury experiences crafted by local experts.',
+  siteName: 'Altavida Tours.com', // Updated site name
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.altavidatours.com',
+  defaultTitle: 'Altavida Tours.com - Authentic Egypt Travel Experiences',
+  defaultDescription: 'Explore Egypt with Altavida Tours.com. Tailored Nile journeys, dahabiya cruises, cultural adventures, and luxury experiences crafted by local experts.',
   defaultImage: '/images/hero/travel-hero.jpg',
   defaultKeywords: [
     'egypt tours',
@@ -44,11 +44,11 @@ const defaultSEO = {
     'cairo tours',
     'luxor and aswan',
     'cultural experiences in egypt',
-    'Treasure Egypt Tours'
+    'Altavida Tours.com'
   ],
-  twitterHandle: '@TreasureEgypt',
-  facebookPage: 'TreasureEgyptTours',
-  instagramHandle: '@treasureegypttours'
+  twitterHandle: '@AltavidaTours',
+  facebookPage: 'AltavidaTours',
+  instagramHandle: '@altavidatours'
 };
 
 export function generateSEO(config: SEOConfig = {}): Metadata {
@@ -161,16 +161,16 @@ export function generateSEO(config: SEOConfig = {}): Metadata {
 export const pageSEO = {
   home: (): Metadata => generateSEO({
     title: 'World-Class Travel Experiences',
-    description: 'Discover extraordinary destinations with Treasure Egypt Tours. Experience personalized luxury travel with our curated adventures, cultural immersions, and unforgettable journeys.',
+    description: 'Discover extraordinary destinations with Altavida Tours.com. Experience personalized luxury travel with our curated adventures, cultural immersions, and unforgettable journeys.',
     keywords: ['luxury travel', 'custom tours', 'travel agency', 'vacation packages', 'worldwide destinations'],
     url: '/',
     type: 'website'
   }),
 
   about: (): Metadata => generateSEO({
-    title: 'About Treasure Egypt Tours',
-    description: 'Learn about our passion for creating extraordinary Egypt travel experiences. Discover why Treasure Egypt Tours is your trusted partner for personalized adventures.',
-    keywords: ['about Treasure Egypt Tours', 'travel agency', 'luxury travel company', 'custom travel experiences'],
+    title: 'About Altavida Tours.com',
+    description: 'Learn about our passion for creating extraordinary Egypt travel experiences. Discover why Altavida Tours.com is your trusted partner for personalized adventures.',
+    keywords: ['about Altavida Tours.com', 'travel agency', 'luxury travel company', 'custom travel experiences'],
     url: '/about',
     type: 'website'
   }),
@@ -193,15 +193,15 @@ export const pageSEO = {
 
   contact: (): Metadata => generateSEO({
     title: 'Contact Us',
-    description: 'Get in touch with Treasure Egypt Tours for your travel planning. Our expert team is ready to create your perfect personalized adventure in Egypt.',
-    keywords: ['contact Treasure Egypt Tours', 'travel planning', 'luxury travel contact'],
+    description: 'Get in touch with Altavida Tours.com for your travel planning. Our expert team is ready to create your perfect personalized adventure in Egypt.',
+    keywords: ['contact Altavida Tours.com', 'travel planning', 'luxury travel contact'],
     url: '/contact',
     type: 'website'
   }),
 
   destination: (name: string, slug: string): Metadata => generateSEO({
     title: `${name} - Travel Destination`,
-    description: `Explore ${name} with Treasure Egypt Tours. Discover authentic cultural experiences, luxury accommodations, and unforgettable adventures in this extraordinary destination.`,
+    description: `Explore ${name} with Altavida Tours.com. Discover authentic cultural experiences, luxury accommodations, and unforgettable adventures in this extraordinary destination.`,
     keywords: [`${name} travel`, 'luxury destination', 'cultural experiences', 'adventure travel'],
     url: `/destinations/${slug}`,
     type: 'article'
@@ -227,7 +227,7 @@ export function generateOrganizationSchema() {
     logo: `${defaultSEO.siteUrl}/logo.png`,
     image: `${defaultSEO.siteUrl}${defaultSEO.defaultImage}`,
     telephone: '+20-000-0000',
-    email: 'info@treasureegypttours.com',
+    email: 'info@altavidatours.com',
     address: {
       '@type': 'PostalAddress',
       streetAddress: '123 Travel Plaza',

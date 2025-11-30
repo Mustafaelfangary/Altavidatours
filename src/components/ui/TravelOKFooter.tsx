@@ -40,15 +40,15 @@ export function TravelOKFooter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* About Column */}
           <div>
-            <h3 className="text-xl font-bold mb-4">About Treasure Egypt Tours</h3>
+            <h3 className="text-xl font-bold mb-4">About Altavida Tours.com</h3>
             <p className="text-white/90 text-sm leading-relaxed mb-4">
               Experience the wonders of Egypt with our expertly curated tours and luxury Nile cruises. 
               Creating unforgettable memories since 2010.
             </p>
             <div className="flex items-center gap-2 text-sm text-white/80">
               <Mail className="w-4 h-4" />
-              <a href="mailto:info@treasureegypttours.com" className="hover:text-white transition-colors">
-                info@treasureegypttours.com
+              <a href="mailto:info@altavidatours.com" className="hover:text-white transition-colors">
+                info@altavidatours.com
               </a>
             </div>
           </div>
@@ -118,7 +118,7 @@ export function TravelOKFooter() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/80">
-            <p>© {new Date().getFullYear()} Treasure Egypt Tours. All Rights Reserved.</p>
+            <p>© {new Date().getFullYear()} Altavida Tours.com. All Rights Reserved.</p>
             <div className="flex gap-6">
               <Link href="/privacy-policy" className="hover:text-white transition-colors">
                 Privacy Policy

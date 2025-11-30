@@ -8,56 +8,59 @@ import { Button } from '@/components/ui/button';
 import { MapPin, Star, Calendar, Users, ArrowRight, Compass, Sparkles, Heart, Mountain } from 'lucide-react';
 import UnifiedHero from '@/components/ui/UnifiedHero';
 import { AnimatedSection } from '@/components/ui/animated-section';
-
-const serviceCategories = [
-  {
-    id: 'adventure-tours',
-    name: 'Adventure Tours',
-    icon: '🏔️',
-    description: 'Experience heart-pumping adventures from mountain climbing to desert expeditions and extreme sports.',
-    image: '/images/Royal Cleopatra/DSC_8750.jpg',
-    services: ['Mountain Climbing', 'Desert Safari', 'Extreme Sports', 'Wildlife Expeditions'],
-    highlights: ['Adrenaline Rush', 'Expert Guides', 'Safety First', 'Unique Experiences'],
-    color: 'orange',
-    pricing: 'From $800'
-  },
-  {
-    id: 'cultural-experiences',
-    name: 'Cultural Experiences',
-    icon: '🏛️',
-    description: 'Immerse yourself in local cultures, traditions, and historic sites with expert cultural guides.',
-    image: '/images/destinations/karnak-temple.jpg',
-    services: ['Historical Tours', 'Local Immersion', 'Art & Museums', 'Traditional Workshops'],
-    highlights: ['Authentic Culture', 'Local Experts', 'Educational', 'Heritage Sites'],
-    color: 'blue',
-    pricing: 'From $600'
-  },
-  {
-    id: 'luxury-travel',
-    name: 'Luxury Travel',
-    icon: '✨',
-    description: 'Indulge in premium accommodations, fine dining, and exclusive experiences tailored for discerning travelers.',
-    image: '/images/Royal Cleopatra/DSC_8502.jpg',
-    services: ['5-Star Hotels', 'Private Jets', 'Exclusive Access', 'Personal Concierge'],
-    highlights: ['Ultimate Comfort', 'Premium Service', 'Exclusive Access', 'Personalized'],
-    color: 'amber',
-    pricing: 'From $2,500'
-  },
-  {
-    id: 'family-vacations',
-    name: 'Family Vacations',
-    icon: '👨‍👩‍👧‍👦',
-    description: 'Create lasting memories with family-friendly activities, accommodations, and experiences for all ages.',
-    image: '/images/Royal Cleopatra/DSC_8625.jpg',
-    services: ['Kids Activities', 'Family Hotels', 'Educational Tours', 'Safe Adventures'],
-    highlights: ['All Ages Fun', 'Safe Environment', 'Educational', 'Memory Making'],
-    color: 'pink',
-    pricing: 'From $400'
-  }
-];
+import { useContent } from '@/hooks/useContent';
 
 export default function ServicesPage() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const { getContent } = useContent({ page: 'services' });
+
+  // Build service categories from dynamic content with fallbacks
+  const serviceCategories = [
+    {
+      id: 'adventure-tours',
+      name: getContent('service_adventure_name', 'Adventure Tours'),
+      icon: getContent('service_adventure_icon', '🏔️'),
+      description: getContent('service_adventure_description', 'Experience heart-pumping adventures from mountain climbing to desert expeditions and extreme sports.'),
+      image: getContent('service_adventure_image', '/images/Royal Cleopatra/DSC_8750.jpg'),
+      services: getContent('service_adventure_services', 'Mountain Climbing,Desert Safari,Extreme Sports,Wildlife Expeditions').split(','),
+      highlights: getContent('service_adventure_highlights', 'Adrenaline Rush,Expert Guides,Safety First,Unique Experiences').split(','),
+      color: 'orange',
+      pricing: getContent('service_adventure_pricing', 'From $800')
+    },
+    {
+      id: 'cultural-experiences',
+      name: getContent('service_cultural_name', 'Cultural Experiences'),
+      icon: getContent('service_cultural_icon', '🏛️'),
+      description: getContent('service_cultural_description', 'Immerse yourself in local cultures, traditions, and historic sites with expert cultural guides.'),
+      image: getContent('service_cultural_image', '/images/destinations/karnak-temple.jpg'),
+      services: getContent('service_cultural_services', 'Historical Tours,Local Immersion,Art & Museums,Traditional Workshops').split(','),
+      highlights: getContent('service_cultural_highlights', 'Authentic Culture,Local Experts,Educational,Heritage Sites').split(','),
+      color: 'blue',
+      pricing: getContent('service_cultural_pricing', 'From $600')
+    },
+    {
+      id: 'luxury-travel',
+      name: getContent('service_luxury_name', 'Luxury Travel'),
+      icon: getContent('service_luxury_icon', '✨'),
+      description: getContent('service_luxury_description', 'Indulge in premium accommodations, fine dining, and exclusive experiences tailored for discerning travelers.'),
+      image: getContent('service_luxury_image', '/images/Royal Cleopatra/DSC_8502.jpg'),
+      services: getContent('service_luxury_services', '5-Star Hotels,Private Jets,Exclusive Access,Personal Concierge').split(','),
+      highlights: getContent('service_luxury_highlights', 'Ultimate Comfort,Premium Service,Exclusive Access,Personalized').split(','),
+      color: 'amber',
+      pricing: getContent('service_luxury_pricing', 'From $2,500')
+    },
+    {
+      id: 'family-vacations',
+      name: getContent('service_family_name', 'Family Vacations'),
+      icon: getContent('service_family_icon', '👨‍👩‍👧‍👦'),
+      description: getContent('service_family_description', 'Create lasting memories with family-friendly activities, accommodations, and experiences for all ages.'),
+      image: getContent('service_family_image', '/images/Royal Cleopatra/DSC_8625.jpg'),
+      services: getContent('service_family_services', 'Kids Activities,Family Hotels,Educational Tours,Safe Adventures').split(','),
+      highlights: getContent('service_family_highlights', 'All Ages Fun,Safe Environment,Educational,Memory Making').split(','),
+      color: 'pink',
+      pricing: getContent('service_family_pricing', 'From $400')
+    }
+  ];
 
   const getColorClasses = (color: string) => {
     const colors = {
@@ -72,9 +75,9 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-blue-50">
       <UnifiedHero
-        imageSrc="/images/Royal Cleopatra/DSC_8568.jpg"
-        title="Travel Services"
-        subtitle="Comprehensive Travel Solutions Tailored to Your Perfect Journey"
+        imageSrc={getContent('services_hero_image', '/images/Royal Cleopatra/DSC_8568.jpg')}
+        title={getContent('services_hero_title', 'Travel Services')}
+        subtitle={getContent('services_hero_subtitle', 'Comprehensive Travel Solutions Tailored to Your Perfect Journey')}
         hieroglyphicTitle={false}
         showEgyptianElements={true}
         overlayOpacity="medium"
@@ -86,17 +89,16 @@ export default function ServicesPage() {
             <Compass className="w-12 h-12 text-blue-600" />
           </div>
           <p className="text-lg sm:text-xl mb-8 leading-relaxed px-4 sm:px-0">
-            From adventure seekers to luxury travelers, families to cultural enthusiasts - discover our 
-            comprehensive range of travel services designed to create unforgettable experiences.
+            {getContent('services_hero_description', 'From adventure seekers to luxury travelers, families to cultural enthusiasts - discover our comprehensive range of travel services designed to create unforgettable experiences.')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
             <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
               <Sparkles className="w-5 h-5 mr-2" />
-              Explore Services
+              {getContent('services_hero_cta_primary', 'Explore Services')}
             </Button>
             <Button variant="outline" className="border-blue-600 text-blue-800 hover:bg-blue-50 px-6 py-3 rounded-lg">
               <Users className="w-5 h-5 mr-2" />
-              Custom Planning
+              {getContent('services_hero_cta_secondary', 'Custom Planning')}
             </Button>
           </div>
         </div>
@@ -107,10 +109,10 @@ export default function ServicesPage() {
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Travel <span className="text-blue-600">Services</span>
+                {getContent('services_section_title', 'Travel')} <span className="text-blue-600">Services</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                Choose from our specialized travel services, each designed to cater to different travel styles and preferences.
+                {getContent('services_section_subtitle', 'Choose from our specialized travel services, each designed to cater to different travel styles and preferences.')}
               </p>
             </div>
           </AnimatedSection>
@@ -192,19 +194,19 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4 text-center">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Ready to Plan Your Perfect Trip?
+              {getContent('services_cta_title', 'Ready to Plan Your Perfect Trip?')}
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-              Let our travel experts help you choose the perfect services for your dream vacation.
+              {getContent('services_cta_description', 'Let our travel experts help you choose the perfect services for your dream vacation.')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg">
                 <Calendar className="w-5 h-5 mr-2" />
-                Start Planning
+                {getContent('services_cta_primary_text', 'Start Planning')}
               </Button>
               <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg">
                 <Users className="w-5 h-5 mr-2" />
-                Contact Us
+                {getContent('services_cta_secondary_text', 'Contact Us')}
               </Button>
             </div>
           </AnimatedSection>

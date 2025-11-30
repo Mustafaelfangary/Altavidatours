@@ -20,8 +20,8 @@ Added "Our Partners" section to showcase partner companies with their logos and 
 - **Logo**: Red square with white bird design
 - **Description**: Premium Egypt Tours & Travel Experiences
 
-### 2. Treasure Egypt Tours
-- **Website**: https://www.treasureegypttours.com
+### 2. Altavida Tours
+- **Website**: https://www.altavidatours.com
 - **Logo**: Blue/gold pyramid design
 - **Description**: Discover the Treasures of Ancient Egypt
 
@@ -58,14 +58,14 @@ Added "Our Partners" section to showcase partner companies with their logos and 
 
 Save the partner logos you have:
 1. **Alta Vida Tours logo** → `altavida-logo.png`
-2. **Treasure Egypt Tours logo** → `treasure-egypt-logo.png`
+2. **Altavida Tours logo** → `altavida-logo.png`
 
 ### Step 2: Add to Project
 
 ```bash
 # Copy logos to the partners directory
 cp /path/to/altavida-logo.png public/images/partners/
-cp /path/to/treasure-egypt-logo.png public/images/partners/
+cp /path/to/altavida-logo.png public/images/partners/
 ```
 
 ### Step 3: Commit and Push
@@ -127,9 +127,9 @@ const partners: Partner[] = [
     description: 'Premium Egypt Tours & Travel Experiences'
   },
   {
-    name: 'Treasure Egypt Tours',
-    url: 'https://www.treasureegypttours.com',
-    logo: '/images/partners/treasure-egypt-logo.png',
+    name: 'Altavida Tours',
+    url: 'https://www.altavidatours.com',
+    logo: '/images/partners/altavida-logo.png',
     description: 'Discover the Treasures of Ancient Egypt'
   },
   // Add more partners here
@@ -223,7 +223,7 @@ Page variant:
 1. **Check file paths**:
    ```
    public/images/partners/altavida-logo.png
-   public/images/partners/treasure-egypt-logo.png
+  public/images/partners/altavida-logo.png
    ```
 
 2. **Verify file names** match exactly (case-sensitive)

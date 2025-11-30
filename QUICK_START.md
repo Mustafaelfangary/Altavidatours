@@ -1,4 +1,4 @@
-# Quick Start Guide - Treasure Egypt Tours Admin Panel
+# Quick Start Guide - Altavida Tours.com Admin Panel
 
 ## ✅ Completed Setup
 
@@ -131,7 +131,7 @@ Host: smtp.gmail.com
 Port: 587
 User: your-email@gmail.com
 Password: your-app-password
-From: info@treasureegypttours.com
+From: info@altavidatours.com
 ```
 
 #### WhatsApp Settings (`/admin/whatsapp-settings`)

@@ -1,8 +1,8 @@
-# Create treasureegypttours config
-sudo tee /etc/nginx/sites-available/treasureegypttours > /dev/null << 'EOL'
+# Create altavidatours config
+sudo tee /etc/nginx/sites-available/altavidatours > /dev/null << 'EOL'
 server {
     listen 80;
-    server_name treasureegypttours.com www.treasureegypttours.com;
+    server_name altavidatours.com www.altavidatours.com;
     root /var/www/html;
     
     location / {
@@ -16,10 +16,10 @@ server {
 
 server {
     listen 443 ssl http2;
-    server_name treasureegypttours.com www.treasureegypttours.com;
+    server_name altavidatours.com www.altavidatours.com;
 
-    ssl_certificate /etc/letsencrypt/live/treasureegypttours.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/treasureegypttours.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/altavidatours.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/altavidatours.com/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 

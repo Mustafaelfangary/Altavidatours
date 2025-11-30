@@ -61,7 +61,7 @@ If you have direct database access:
 INSERT INTO "Partner" (id, name, "logoUrl", "websiteUrl", description, "order", "isActive", "createdAt", "updatedAt")
 VALUES 
   (gen_random_uuid(), 'Alta Vida Tours', '/images/partners/altavida-logo.png', 'https://www.altavidatours.com', 'Premium Egypt Tours & Travel Experiences', 0, true, NOW(), NOW()),
-  (gen_random_uuid(), 'Treasure Egypt Tours', '/images/partners/treasure-egypt-logo.png', 'https://www.treasureegypttours.com', 'Discover the Treasures of Ancient Egypt', 1, true, NOW(), NOW());
+   (gen_random_uuid(), 'Altavida Tours', '/images/partners/altavida-logo.png', 'https://www.altavidatours.com', 'Discover Egypt with Altavida', 1, true, NOW(), NOW());
 ```
 
 ---
@@ -211,9 +211,9 @@ model Partner {
 ### **Partner 2:**
 ```json
 {
-  "name": "Treasure Egypt Tours",
-  "logoUrl": "/images/partners/treasure-egypt-logo.png",
-  "websiteUrl": "https://www.treasureegypttours.com",
+   "name": "Altavida Tours",
+   "logoUrl": "/images/partners/altavida-logo.png",
+   "websiteUrl": "https://www.altavidatours.com",
   "description": "Discover the Treasures of Ancient Egypt",
   "order": 1,
   "isActive": true

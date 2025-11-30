@@ -6,6 +6,7 @@ import { Container, Typography, Button, Chip } from '@mui/material';
 import { Camera, Eye, Heart, Ship, Package, MapPin, Filter } from 'lucide-react';
 import { AnimatedSection, StaggeredAnimation } from '@/components/ui/animated-section';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useContent } from '@/hooks/useContent';
 // Pharaonic elements removed for cleaner design
 import UnifiedHero from '@/components/ui/UnifiedHero';
 import LogoLoader from '@/components/ui/LogoLoader';
@@ -26,6 +27,7 @@ interface GalleryImage {
 
 export default function GalleryPage() {
   const { t } = useLanguage();
+  const { getContent } = useContent({ page: 'gallery' });
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [filteredImages, setFilteredImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
@@ -177,9 +179,9 @@ export default function GalleryPage() {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 relative overflow-hidden on-light">
       {/* Unified Hero Section */}
       <UnifiedHero
-        imageSrc="/images/Royal Cleopatra/DSC_8568.jpg"
-        title="Gallery"
-        subtitle="Captured Moments of Egyptian Splendor"
+        imageSrc={getContent('gallery_hero_image', '/images/Royal Cleopatra/DSC_8568.jpg')}
+        title={getContent('gallery_hero_title', 'Gallery')}
+        subtitle={getContent('gallery_hero_subtitle', 'Captured Moments of Egyptian Splendor')}
         hieroglyphicTitle={false}
         showEgyptianElements={false}
         showRoyalCrown={false}
@@ -192,18 +194,18 @@ export default function GalleryPage() {
       <Container maxWidth="lg" className="relative z-10">
         <AnimatedSection animation="fade-in">
           <div className="text-center text-deep-blue">
-            <h2 className="text-4xl font-bold mb-6 underline-accent">Gallery</h2>
+            <h2 className="text-4xl font-bold mb-6 underline-accent">{getContent('gallery_page_title', 'Gallery')}</h2>
 
               {/* Stats */}
               <div className="flex flex-wrap justify-center gap-6 mb-8">
                 <div className="flex items-center bg-white/70 backdrop-blur-sm rounded-full px-6 py-3 border border-blue-200">
                   <Camera className="w-5 h-5 text-ocean-blue mr-2" />
-                  <span className="text-deep-blue font-medium">{images.length} Photos</span>
+                  <span className="text-deep-blue font-medium">{images.length} {getContent('gallery_photos_label', 'Photos')}</span>
                 </div>
                 <div className="flex items-center bg-white/70 backdrop-blur-sm rounded-full px-6 py-3 border border-blue-200">
                   <Eye className="w-5 h-5 text-ocean-blue mr-2" />
                   <span className="text-deep-blue font-medium">
-                    {images.reduce((sum, img) => sum + img.views, 0).toLocaleString()} Views
+                    {images.reduce((sum, img) => sum + img.views, 0).toLocaleString()} {getContent('gallery_views_label', 'Views')}
                   </span>
                 </div>
 
@@ -213,7 +215,7 @@ export default function GalleryPage() {
               <div className="max-w-4xl mx-auto mb-12">
                 <div className="bg-white/70 backdrop-blur-sm border border-blue-200 rounded-2xl p-8 shadow">
                   <p className="text-xl md:text-2xl leading-relaxed text-deep-blue font-light">
-                    Explore our collection of stunning photographs showcasing the beauty of our dahabiyat, the majesty of ancient Egypt, and unforgettable travel experiences
+                    {getContent('gallery_description', 'Explore our collection of stunning photographs showcasing the beauty of our dahabiyat, the majesty of ancient Egypt, and unforgettable travel experiences')}
                   </p>
                 </div>
 
@@ -233,7 +235,7 @@ export default function GalleryPage() {
               className={filter === 'all' ? 'bg-amber-600 text-white' : 'border-amber-600 text-amber-600'}
               startIcon={<Filter className="w-4 h-4" />}
             >
-              All ({images.length})
+              {getContent('gallery_filter_all', 'All')} ({images.length})
             </Button>
             {categories.map((category) => (
               <Button
@@ -261,10 +263,10 @@ export default function GalleryPage() {
                   <div className="text-center py-20">
                     <div className="text-amber-800 text-4xl mb-4">𓇳 𓊪 𓈖</div>
                     <Typography variant="h5" className="text-amber-800 font-bold mb-4">
-                      No Images Found
+                      {getContent('gallery_no_images_title', 'No Images Found')}
                     </Typography>
                     <Typography variant="body1" className="text-amber-700">
-                      No images match your current filter. Try adjusting your selection.
+                      {getContent('gallery_no_images_text', 'No images match your current filter. Try adjusting your selection.')}
                     </Typography>
                   </div>
                 </div>

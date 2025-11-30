@@ -1,14 +1,11 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import { ArrowLeft, Map, Calendar, Clock, Users, Star, Camera, BookOpen } from 'lucide-react';
-
-export const metadata: Metadata = {
-  title: 'Route Map | Nile Cruise Routes | AltaVida Tours',
-  description: 'Explore our Nile cruise routes with interactive maps. Discover the ancient sites, temples, and landmarks along each cruise route.',
-  keywords: 'Nile cruise routes, route map, Egypt map, cruise itinerary map, ancient sites map',
-};
+import { useContent } from '@/hooks/useContent';
 
 export default function RouteMapPage() {
+  const { getContent } = useContent({ page: 'itinerary_map' });
   const routes = [
     {
       name: 'Luxor to Aswan',
@@ -70,15 +67,15 @@ export default function RouteMapPage() {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Route Map</h1>
-              <p className="text-gray-600 mt-2">Explore our Nile cruise routes and ancient sites</p>
+              <h1 className="text-3xl font-bold text-gray-900">{getContent('map_title', 'Route Map')}</h1>
+              <p className="text-gray-600 mt-2">{getContent('map_subtitle', 'Explore our Nile cruise routes and ancient sites')}</p>
             </div>
-            <Link 
-              href="/itineraries" 
+            <Link
+              href="/itineraries"
               className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors"
             >
               <ArrowLeft size={20} />
-              <span>Back to Itineraries</span>
+              <span>{getContent('map_back_btn', 'Back to Itineraries')}</span>
             </Link>
           </div>
         </div>
@@ -89,23 +86,22 @@ export default function RouteMapPage() {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 h-full flex items-center">
           <div className="text-white">
-            <h2 className="text-4xl font-bold mb-4">Nile Cruise Routes</h2>
+            <h2 className="text-4xl font-bold mb-4">{getContent('map_hero_title', 'Nile Cruise Routes')}</h2>
             <p className="text-xl mb-6 max-w-2xl">
-              Discover the ancient wonders along the Nile with our interactive route maps. 
-              Explore temples, tombs, and historic sites on your journey.
+              {getContent('map_hero_desc', 'Discover the ancient wonders along the Nile with our interactive route maps. Explore temples, tombs, and historic sites on your journey.')}
             </p>
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <Map size={20} />
-                <span>Interactive Maps</span>
+                <span>{getContent('map_feature_1', 'Interactive Maps')}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Camera size={20} />
-                <span>Site Photos</span>
+                <span>{getContent('map_feature_2', 'Site Photos')}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <BookOpen size={20} />
-                <span>Historical Info</span>
+                <span>{getContent('map_feature_3', 'Historical Info')}</span>
               </div>
             </div>
           </div>
@@ -116,7 +112,7 @@ export default function RouteMapPage() {
       <div className="max-w-7xl mx-auto px-4 py-16">
         {/* Route Overview */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Cruise Routes</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{getContent('map_routes_title', 'Cruise Routes')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {routes.map((route, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-6">
@@ -157,7 +153,7 @@ export default function RouteMapPage() {
                   route.color === 'green' ? 'bg-green-600 text-white hover:bg-green-700' :
                   'bg-purple-600 text-white hover:bg-purple-700'
                 }`}>
-                  View Route Map
+                  {getContent('map_view_route_btn', 'View Route Map')}
                 </button>
               </div>
             ))}
@@ -166,7 +162,7 @@ export default function RouteMapPage() {
 
         {/* Interactive Map Features */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Map Features</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{getContent('map_features_title', 'Map Features')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {mapFeatures.map((feature, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -183,47 +179,47 @@ export default function RouteMapPage() {
         {/* Map Legend */}
         <section className="mb-16">
           <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Map Legend</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">{getContent('map_legend_title', 'Map Legend')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Site Types</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{getContent('map_site_types_title', 'Site Types')}</h3>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
                     <div className="w-4 h-4 bg-red-500 rounded"></div>
-                    <span className="text-gray-700">Temples</span>
+                    <span className="text-gray-700">{getContent('map_site_temples', 'Temples')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-4 h-4 bg-blue-500 rounded"></div>
-                    <span className="text-gray-700">Tombs</span>
+                    <span className="text-gray-700">{getContent('map_site_tombs', 'Tombs')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-4 h-4 bg-green-500 rounded"></div>
-                    <span className="text-gray-700">Museums</span>
+                    <span className="text-gray-700">{getContent('map_site_museums', 'Museums')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-4 h-4 bg-purple-500 rounded"></div>
-                    <span className="text-gray-700">Cities</span>
+                    <span className="text-gray-700">{getContent('map_site_cities', 'Cities')}</span>
                   </div>
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Route Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{getContent('map_route_info_title', 'Route Information')}</h3>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
                     <div className="w-4 h-1 bg-blue-600"></div>
-                    <span className="text-gray-700">Downstream Route</span>
+                    <span className="text-gray-700">{getContent('map_route_downstream', 'Downstream Route')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-4 h-1 bg-teal-600"></div>
-                    <span className="text-gray-700">Upstream Route</span>
+                    <span className="text-gray-700">{getContent('map_route_upstream', 'Upstream Route')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-4 h-1 bg-green-600"></div>
-                    <span className="text-gray-700">Short Route</span>
+                    <span className="text-gray-700">{getContent('map_route_short', 'Short Route')}</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-4 h-1 bg-purple-600"></div>
-                    <span className="text-gray-700">Extended Route</span>
+                    <span className="text-gray-700">{getContent('map_route_extended', 'Extended Route')}</span>
                   </div>
                 </div>
               </div>
@@ -233,20 +229,20 @@ export default function RouteMapPage() {
 
         {/* CTA Section */}
         <div className="mt-16 bg-indigo-600 rounded-lg p-8 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">Ready to Plan Your Route?</h2>
-          <p className="text-xl mb-6">Use our route maps to plan your perfect Nile cruise itinerary</p>
+          <h2 className="text-3xl font-bold mb-4">{getContent('map_cta_title', 'Ready to Plan Your Route?')}</h2>
+          <p className="text-xl mb-6">{getContent('map_cta_desc', 'Use our route maps to plan your perfect Nile cruise itinerary')}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/contact" 
+            <Link
+              href="/contact"
               className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
-              Plan Your Cruise
+              {getContent('map_cta_plan_btn', 'Plan Your Cruise')}
             </Link>
-            <Link 
-              href="/itineraries" 
+            <Link
+              href="/itineraries"
               className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors"
             >
-              View All Itineraries
+              {getContent('map_cta_view_btn', 'View All Itineraries')}
             </Link>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Container, Typography, Box, Button, Card, CardMedia, CardContent, Grid, Chip, TextField, InputAdornment } from '@mui/material';
 import { Search, LocationOn, Star, People, CheckCircle, Security, Support } from '@mui/icons-material';
 import LogoLoader from '@/components/ui/LogoLoader';
+import { useContent } from '@/hooks/useContent';
 
 interface Dahabiya {
   id: string;
@@ -21,6 +22,7 @@ interface Dahabiya {
 }
 
 export default function DahabiyasPage() {
+  const { getContent } = useContent({ page: 'dahabiyas' });
   const [dahabiyas, setDahabiyas] = useState<Dahabiya[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -163,7 +165,7 @@ export default function DahabiyasPage() {
               lineHeight: { xs: '1.2', sm: '1.1' }
             }}
           >
-            Luxury Dahabiya Fleet
+            {getContent('dahabiyas_hero_title', 'Luxury Dahabiya Fleet')}
           </Typography>
           <Typography
             variant="h4"
@@ -177,7 +179,7 @@ export default function DahabiyasPage() {
               lineHeight: 1.4
             }}
           >
-            Premium Traditional Sailing Vessels on the Nile
+            {getContent('dahabiyas_hero_subtitle', 'Premium Traditional Sailing Vessels on the Nile')}
           </Typography>
           <Typography
             variant="h6"
@@ -189,7 +191,7 @@ export default function DahabiyasPage() {
               fontSize: { xs: '1rem', md: '1.25rem' }
             }}
           >
-            Handcrafted dahabiyas combining authentic Egyptian heritage with modern luxury amenities
+            {getContent('dahabiyas_hero_description', 'Handcrafted dahabiyas combining authentic Egyptian heritage with modern luxury amenities')}
           </Typography>
         </Container>
       </Box>
@@ -199,11 +201,11 @@ export default function DahabiyasPage() {
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
           <TextField
             variant="outlined"
-            placeholder="Search dahabiyas by name, category, or amenities..."
+            placeholder={getContent('dahabiyas_search_placeholder', 'Search dahabiyas by name, category, or amenities...')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            sx={{ 
-              maxWidth: 600, 
+            sx={{
+              maxWidth: 600,
               width: '100%',
               '& .MuiOutlinedInput-root': {
                 borderRadius: 3,
@@ -222,7 +224,7 @@ export default function DahabiyasPage() {
         </Box>
 
         <Typography variant="h6" sx={{ textAlign: 'center', mb: 6, color: 'text.secondary' }}>
-          {filteredDahabiyas.length} {filteredDahabiyas.length === 1 ? 'vessel' : 'vessels'} in our fleet
+          {filteredDahabiyas.length} {filteredDahabiyas.length === 1 ? getContent('dahabiyas_vessel_singular', 'vessel') : getContent('dahabiyas_vessel_plural', 'vessels')} {getContent('dahabiyas_in_fleet', 'in our fleet')}
         </Typography>
       </Container>
 
@@ -364,10 +366,10 @@ export default function DahabiyasPage() {
                 color: '#0A2FA6'
               }}
             >
-              Why Choose Our Dahabiya Fleet
+              {getContent('dahabiyas_advantages_title', 'Why Choose Our Dahabiya Fleet')}
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ maxWidth: '700px', mx: 'auto', lineHeight: 1.6 }}>
-              Traditional sailing vessels that offer authentic Nile experiences with modern luxury standards
+              {getContent('dahabiyas_advantages_subtitle', 'Traditional sailing vessels that offer authentic Nile experiences with modern luxury standards')}
             </Typography>
           </Box>
 
@@ -375,18 +377,18 @@ export default function DahabiyasPage() {
             {[
               {
                 icon: <CheckCircle sx={{ fontSize: '4rem', color: '#1BAE70' }} />,
-                title: "Authentic Traditional Design",
-                description: "Handcrafted dahabiyas built using traditional methods while incorporating modern safety and comfort features."
+                title: getContent('dahabiyas_advantage_1_title', 'Authentic Traditional Design'),
+                description: getContent('dahabiyas_advantage_1_description', 'Handcrafted dahabiyas built using traditional methods while incorporating modern safety and comfort features.')
               },
               {
                 icon: <Security sx={{ fontSize: '4rem', color: '#0B70E1' }} />,
-                title: "Premium Safety Standards",
-                description: "All vessels meet international maritime safety standards with modern navigation equipment and emergency protocols."
+                title: getContent('dahabiyas_advantage_2_title', 'Premium Safety Standards'),
+                description: getContent('dahabiyas_advantage_2_description', 'All vessels meet international maritime safety standards with modern navigation equipment and emergency protocols.')
               },
               {
                 icon: <Support sx={{ fontSize: '4rem', color: '#FFA500' }} />,
-                title: "Expert Crew & Guides",
-                description: "Experienced captains and certified Egyptologist guides providing personalized service and cultural insights."
+                title: getContent('dahabiyas_advantage_3_title', 'Expert Crew & Guides'),
+                description: getContent('dahabiyas_advantage_3_description', 'Experienced captains and certified Egyptologist guides providing personalized service and cultural insights.')
               }
             ].map((feature, index) => (
               <Grid item xs={12} md={4} key={index}>
@@ -431,10 +433,10 @@ export default function DahabiyasPage() {
           }}
         >
           <Typography variant="h2" component="h2" fontWeight="bold" gutterBottom sx={{ color: '#0A2FA6', fontSize: { xs: '2rem', md: '2.5rem' } }}>
-            Ready to Board Your Dahabiya?
+            {getContent('dahabiyas_cta_title', 'Ready to Board Your Dahabiya?')}
           </Typography>
           <Typography variant="h5" color="text.secondary" sx={{ mb: 6, maxWidth: '700px', mx: 'auto', lineHeight: 1.6 }}>
-            Experience the timeless elegance of traditional Nile sailing with modern luxury accommodations
+            {getContent('dahabiyas_cta_description', 'Experience the timeless elegance of traditional Nile sailing with modern luxury accommodations')}
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 3, justifyContent: 'center' }}>
             <Button
@@ -458,7 +460,7 @@ export default function DahabiyasPage() {
                 }
               }}
             >
-              Book Your Cruise
+              {getContent('dahabiyas_cta_book_btn', 'Book Your Cruise')}
             </Button>
             <Button
               component={Link}
@@ -483,7 +485,7 @@ export default function DahabiyasPage() {
                 }
               }}
             >
-              View Packages
+              {getContent('dahabiyas_cta_packages_btn', 'View Packages')}
             </Button>
           </Box>
         </Box>

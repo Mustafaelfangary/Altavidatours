@@ -9,6 +9,7 @@ import { Heart, Users, Calendar, Star, Baby, Shield, Gamepad2, Gift } from 'luci
 import { motion } from 'framer-motion';
 import UnifiedHero from '@/components/ui/UnifiedHero';
 import { AnimatedSection } from '@/components/ui/animated-section';
+import { useContent } from '@/hooks/useContent';
 
 interface FamilyPackage {
   id: string;
@@ -69,6 +70,7 @@ const familyGalleryImages = [
 ];
 
 export default function FamilyPackagesPage() {
+  const { getContent } = useContent({ page: 'packages_family' });
   const [packages, setPackages] = useState<FamilyPackage[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -136,7 +138,7 @@ export default function FamilyPackagesPage() {
       <div className="min-h-screen bg-gradient-to-b from-pink-50 to-purple-100 flex items-center justify-center">
         <div className="text-center">
           <Heart className="w-16 h-16 text-pink-600 mx-auto mb-4 animate-pulse" />
-          <div className="text-pink-800 text-xl font-bold">Loading Family Experiences...</div>
+          <div className="text-pink-800 text-xl font-bold">{getContent('family_loading', 'Loading Family Experiences...')}</div>
         </div>
       </div>
     );
@@ -146,9 +148,9 @@ export default function FamilyPackagesPage() {
     <div className="min-h-screen bg-gradient-to-b from-white via-pink-50 to-purple-50">
       {/* Hero Section */}
       <UnifiedHero
-        imageSrc="/images/Royal Cleopatra/DSC_8625.jpg"
-        title="Family Packages"
-        subtitle="Create Unforgettable Memories with Multi-Generational Egyptian Adventures"
+        imageSrc={getContent('family_hero_image', '/images/Royal Cleopatra/DSC_8625.jpg')}
+        title={getContent('family_hero_title', 'Family Packages')}
+        subtitle={getContent('family_hero_subtitle', 'Create Unforgettable Memories with Multi-Generational Egyptian Adventures')}
         hieroglyphicTitle={false}
         showEgyptianElements={true}
         showRoyalCrown={false}
@@ -163,17 +165,16 @@ export default function FamilyPackagesPage() {
             <Heart className="w-12 h-12 text-pink-600" />
           </div>
           <p className="text-lg sm:text-xl mb-8 leading-relaxed px-4 sm:px-0">
-            Discover Egypt together as a family with specially crafted experiences that delight both children and adults. 
-            Safe, educational, and fun adventures perfect for creating lifelong memories.
+            {getContent('family_hero_desc', 'Discover Egypt together as a family with specially crafted experiences that delight both children and adults. Safe, educational, and fun adventures perfect for creating lifelong memories.')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
             <Button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg min-h-[48px]">
               <Users className="w-5 h-5 mr-2" />
-              Family Adventures
+              {getContent('family_adventures_btn', 'Family Adventures')}
             </Button>
             <Button variant="outline" className="border-pink-600 text-pink-800 hover:bg-pink-50 px-6 py-3 rounded-lg min-h-[48px]">
               <Gift className="w-5 h-5 mr-2" />
-              Custom Family Trip
+              {getContent('family_custom_btn', 'Custom Family Trip')}
             </Button>
           </div>
         </div>
@@ -185,20 +186,20 @@ export default function FamilyPackagesPage() {
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Family <span className="text-pink-600">Experience</span>
+                {getContent('family_experience_title', 'Family')} <span className="text-pink-600">{getContent('family_experience_highlight', 'Experience')}</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                Every aspect of our family packages is designed with safety, education, and fun in mind for all family members.
+                {getContent('family_experience_desc', 'Every aspect of our family packages is designed with safety, education, and fun in mind for all family members.')}
               </p>
             </div>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-16">
             {[
-              { icon: Baby, title: 'All Ages Welcome', desc: 'Programs suitable for children, teens, and grandparents' },
-              { icon: Shield, title: 'Safety First', desc: 'Comprehensive safety measures and child-friendly environments' },
-              { icon: Gamepad2, title: 'Interactive Learning', desc: 'Educational games, treasure hunts, and hands-on activities' },
-              { icon: Gift, title: 'Family Bonding', desc: 'Shared experiences that bring families closer together' }
+              { icon: Baby, title: getContent('family_feature_1_title', 'All Ages Welcome'), desc: getContent('family_feature_1_desc', 'Programs suitable for children, teens, and grandparents') },
+              { icon: Shield, title: getContent('family_feature_2_title', 'Safety First'), desc: getContent('family_feature_2_desc', 'Comprehensive safety measures and child-friendly environments') },
+              { icon: Gamepad2, title: getContent('family_feature_3_title', 'Interactive Learning'), desc: getContent('family_feature_3_desc', 'Educational games, treasure hunts, and hands-on activities') },
+              { icon: Gift, title: getContent('family_feature_4_title', 'Family Bonding'), desc: getContent('family_feature_4_desc', 'Shared experiences that bring families closer together') }
             ].map((feature, index) => (
               <AnimatedSection key={index} delay={index * 100}>
                 <Card className="text-center p-6 hover:shadow-xl transition-all duration-300 border-pink-200">
@@ -220,10 +221,10 @@ export default function FamilyPackagesPage() {
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Family <span className="text-pink-600">Gallery</span>
+                {getContent('family_gallery_title', 'Family')} <span className="text-pink-600">{getContent('family_gallery_highlight', 'Gallery')}</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                See families enjoying Egypt together through safe, fun, and educational experiences designed for all ages.
+                {getContent('family_gallery_desc', 'See families enjoying Egypt together through safe, fun, and educational experiences designed for all ages.')}
               </p>
             </div>
           </AnimatedSection>
@@ -287,7 +288,7 @@ export default function FamilyPackagesPage() {
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Featured <span className="text-pink-600">Family Packages</span>
+                {getContent('family_packages_title', 'Featured')} <span className="text-pink-600">{getContent('family_packages_highlight', 'Family Packages')}</span>
               </h2>
             </div>
           </AnimatedSection>

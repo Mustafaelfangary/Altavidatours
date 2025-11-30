@@ -59,7 +59,7 @@ Get paginated list of content items for a specific model.
       "id": "uuid",
       "modelId": "home-hero",
       "data": {
-        "title": "Welcome to Treasure Egypt Tours",
+        "title": "Welcome to Altavida Tours.com",
         "subtitle": "Discover Ancient Wonders"
       },
       "status": "published",
@@ -88,7 +88,7 @@ Retrieve a specific content item by ID.
   "id": "uuid",
   "modelId": "home-hero",
   "data": {
-    "title": "Welcome to Treasure Egypt Tours",
+  "title": "Welcome to Altavida Tours.com",
     "subtitle": "Discover Ancient Wonders",
     "backgroundImage": "/uploads/hero-bg.jpg"
   },

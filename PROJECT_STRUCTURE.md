@@ -1,4 +1,4 @@
-# Treasure Egypt Tours - Complete Project Structure
+# Altavida Tours.com - Complete Project Structure
 
 ## 🏗️ Architecture Overview
 
@@ -24,7 +24,7 @@
 ## 📁 Project Structure
 
 ```
-E:\TreasureEgyptTours\
+E:\Altavidaweb\
 ├── 📱 src/
 │   ├── 🎯 app/                          # Next.js App Router
 │   │   ├── 🏠 (public pages)/
@@ -182,7 +182,7 @@ E:\TreasureEgyptTours\
 │   │   ├── Royal Cleopatra/
 │   │   └── ...
 │   └── logos/
-│       └── treasureegypttours.svg
+│       └── icons/AppIcons/android/mipmap-xxxhdpi/altavida.png
 │
 ├── ⚙️ Configuration Files
 │   ├── package.json                    # Dependencies & scripts
@@ -201,7 +201,7 @@ E:\TreasureEgyptTours\
 │   └── PROJECT_STRUCTURE.md            # This file
 │
 └── 🔧 VS Code Workspace
-    └── treasure-egypt-tours.code-workspace
+   └── altavidatours.code-workspace
 ```
 
 ## 🗄️ Database Models (Prisma Schema)
@@ -346,18 +346,18 @@ Required in `.env`:
 DATABASE_URL="postgresql://postgres:password@localhost:5432/altavida"
 
 # NextAuth
-NEXTAUTH_URL="http://www.treasureegypttours.net"
+NEXTAUTH_URL="http://www.altavidatours.com"
 NEXTAUTH_SECRET="your-secret-key"
 
 # Email
 EMAIL_SERVER_HOST="smtp.gmail.com"
 EMAIL_SERVER_PORT=587
-EMAIL_SERVER_USER="info@treasureegypttours.com"
+EMAIL_SERVER_USER="info@altavidatours.com"
 EMAIL_SERVER_PASSWORD="your-password"
-EMAIL_FROM="support@treasureegypttours.net"
+EMAIL_FROM="support@altavidatours.com"
 
 # Site
-NEXT_PUBLIC_SITE_URL="http://www.treasureegypttours.net"
+NEXT_PUBLIC_SITE_URL="http://www.altavidatours.com"
 ```
 
 ## 📊 Admin Panel Routes
@@ -496,7 +496,7 @@ See `ADMIN_PANEL_DOCUMENTATION.md` and `QUICK_START.md` for:
 
 ## 📜 License & Credits
 
-**Project**: Treasure Egypt Tours
+**Project**: Altavida Tours.com
 **Framework**: Next.js 15
 **Database**: PostgreSQL + Prisma
 **Authentication**: NextAuth.js

@@ -16,6 +16,7 @@ import LogoLoader from '@/components/ui/LogoLoader';
 import UnifiedHero from '@/components/ui/UnifiedHero';
 
 export default function PrivacyPage() {
+  const { getContent } = useContent({ page: 'privacy' });
   const [privacyContent, setPrivacyContent] = useState<{
     title: string;
     content: string;
@@ -70,9 +71,9 @@ export default function PrivacyPage() {
 
       {/* Unified Hero Section */}
       <UnifiedHero
-        imageSrc="/images/privacy-hero-bg.jpg"
-        title={privacyContent?.title || "Privacy Policy"}
-        subtitle="𓊪 Royal Decree of Privacy Protection 𓊪"
+        imageSrc={getContent('privacy_hero_image', '/images/privacy-hero-bg.jpg')}
+        title={privacyContent?.title || getContent('privacy_hero_title', 'Privacy Policy')}
+        subtitle={getContent('privacy_hero_subtitle', '𓊪 Royal Decree of Privacy Protection 𓊪')}
         hieroglyphicTitle={true}
         showEgyptianElements={true}
         showRoyalCrown={true}

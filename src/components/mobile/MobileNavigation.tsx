@@ -116,7 +116,7 @@ export default function MobileNavigation({ isOpen, onToggle }: MobileNavigationP
 
   // Get dynamic mobile logo with cache busting
   const getMobileLogo = () => {
-    const logoUrl = getGlobalContent('navbar_logo', '/logos/treasureegypttours.svg');
+    const logoUrl = getGlobalContent('navbar_logo', '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
     
     // During server-side rendering or before client hydration, return URL without timestamp
     if (!isClient || mobileLogoTimestamp === null) {
@@ -478,7 +478,7 @@ export default function MobileNavigation({ isOpen, onToggle }: MobileNavigationP
                   <div>
                     <h2 className="text-xl font-bold flex items-center gap-2 drop-shadow-sm">
                       <span className="text-2xl animate-pulse text-travelok-orange">🛥️</span>
-                      Treasure Egypt Tours
+                      Altavida Tours.com
                     </h2>
                     <p className="text-white/90 text-sm mt-1 drop-shadow-sm">Luxury Dahabiya Cruises</p>
                   </div>

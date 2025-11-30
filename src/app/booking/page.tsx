@@ -6,6 +6,7 @@ import { Ship, Star, Users, Crown, DollarSign } from 'lucide-react';
 import { Typography } from '@mui/material';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useContent } from '@/hooks/useContent';
 import BookingForm from '@/components/BookingForm';
 import PackageBookingForm from '@/components/PackageBookingForm';
 
@@ -28,6 +29,7 @@ interface TravelPackage {
 
 export default function BookingPage() {
   const { t } = useLanguage();
+  const { getContent } = useContent({ page: 'booking' });
   const params = useSearchParams();
   const itemId = params?.get('itemId') ?? null;
   const dahabiyaId = params?.get('dahabiyaId') ?? itemId;
@@ -94,7 +96,7 @@ export default function BookingPage() {
           <div className="w-16 h-16 bg-gradient-to-br from-egyptian-gold to-sunset-orange rounded-full flex items-center justify-center mb-4 mx-auto animate-pulse">
             <Crown className="w-8 h-8 text-white" />
           </div>
-          <p className="text-egyptian-gold text-xl">Loading vessels...</p>
+          <p className="text-egyptian-gold text-xl">{getContent('booking_loading', 'Loading vessels...')}</p>
         </div>
       </div>
     );
@@ -123,17 +125,17 @@ export default function BookingPage() {
             </div>
           </div>
           <h1 className="text-6xl font-bold text-egyptian-gold mb-4 font-heading bg-gradient-to-r from-egyptian-gold via-sunset-orange to-egyptian-gold bg-clip-text text-transparent">
-            𓊪𓈖𓇳 Booking Portal 𓇳𓈖𓊪
+            {getContent('booking_hero_title', '𓊪𓈖𓇳 Booking Portal 𓇳𓈖𓊪')}
           </h1>
 
           {/* Show selected dahabiya info if pre-selected */}
           {selectedDahabiya ? (
             <div className="bg-gradient-to-r from-egyptian-gold/20 to-deep-blue-400/20 rounded-xl p-6 mb-6 border-2 border-egyptian-gold/30">
               <Typography variant="h5" className="text-hieroglyph-brown font-bold mb-2">
-                Booking: {selectedDahabiya.name}
+                {getContent('booking_selected_label', 'Booking:')} {selectedDahabiya.name}
               </Typography>
               <Typography variant="body1" className="text-amber-700">
-                You&apos;ve selected this vessel for your Nile journey
+                {getContent('booking_selected_message', "You've selected this vessel for your Nile journey")}
               </Typography>
               <div className="flex items-center gap-4 mt-3">
                 <div className="flex items-center gap-1">
@@ -154,7 +156,9 @@ export default function BookingPage() {
             </div>
           ) : (
             <p className="text-2xl text-text-secondary font-medium">
-              Reserve Your {bookingType === 'package' ? 'Royal Egyptian Adventure' : 'Sacred Nile Journey'}
+              {bookingType === 'package'
+                ? getContent('booking_package_subtitle', 'Reserve Your Royal Egyptian Adventure')
+                : getContent('booking_dahabiya_subtitle', 'Reserve Your Sacred Nile Journey')}
             </p>
           )}
         </div>

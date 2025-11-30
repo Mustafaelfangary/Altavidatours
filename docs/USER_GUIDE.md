@@ -300,7 +300,7 @@ Every change creates a new version:
 ## Getting Help
 
 ### Support Resources
-- 📧 Email: support@treasureegypttours.com
+- 📧 Email: support@altavidatours.com
 - 📚 Documentation: [link to docs]
 - 🎥 Video Tutorials: [link to videos]
 - 💬 Live Chat: Available in admin panel

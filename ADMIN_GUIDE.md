@@ -1,4 +1,4 @@
-# Treasure Egypt Tours - Admin Panel Guide
+# Altavida Tours.com - Admin Panel Guide
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
@@ -14,7 +14,7 @@
 
 ## Project Overview
 
-This document outlines the architecture, features, and implementation details of the Treasure Egypt Tours admin panel. The admin panel allows administrators to manage tours, bookings, users, and other aspects of the travel booking system.
+This document outlines the architecture, features, and implementation details of the Altavida Tours.com admin panel. The admin panel allows administrators to manage tours, bookings, users, and other aspects of the travel booking system.
 
 ## Tech Stack
 
@@ -32,7 +32,7 @@ This document outlines the architecture, features, and implementation details of
 ## System Architecture
 
 ```
-treasure-egypt-tours/
+altavidatours/
 ├── .env                    # Environment variables
 ├── next.config.js          # Next.js configuration
 ├── package.json            # Dependencies
@@ -157,8 +157,8 @@ model User {
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/treasure-egypt-tours.git
-   cd treasure-egypt-tours
+   git clone https://github.com/yourusername/Altavidatours.git
+   cd Altavidatours
    ```
 
 2. Install dependencies:

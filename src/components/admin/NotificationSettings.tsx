@@ -45,9 +45,9 @@ export default function NotificationSettings() {
           type: 'email',
           enabled: true,
           settings: {
-            fromEmail: 'noreply@treasureegypttours.com',
-            fromName: 'Treasure Egypt Tours',
-            replyTo: 'info@treasureegypttours.com',
+            fromEmail: 'noreply@altavidatours.com',
+            fromName: 'Altavida Tours.com',
+            replyTo: 'info@altavidatours.com',
           },
         },
         {

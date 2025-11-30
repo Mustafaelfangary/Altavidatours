@@ -50,20 +50,11 @@ export default function Partners({ variant = 'footer', className = '' }: Partner
   const displayPartners = partners.length > 0 ? partners : [
     {
       id: 'mock-1',
-      name: 'Alta Vida Tours',
-      logoUrl: 'https://via.placeholder.com/240x120/0080ff/ffffff?text=Alta+Vida+Tours',
+      name: 'Altavida Tours.com',
+      logoUrl: '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png',
       websiteUrl: 'https://www.altavidatours.com',
       description: 'Premium Egypt Tours & Travel Experiences',
       order: 0,
-      isActive: true,
-    },
-    {
-      id: 'mock-2',
-      name: 'Treasure Egypt Tours',
-      logoUrl: 'https://via.placeholder.com/240x120/10b981/ffffff?text=Treasure+Egypt',
-      websiteUrl: 'https://www.treasureegypttours.com',
-      description: 'Discover the Treasures of Ancient Egypt',
-      order: 1,
       isActive: true,
     },
   ];

@@ -26,7 +26,7 @@
         {
           "key": "about_hero_title",
           "title": "About Hero Title",
-          "content": "About Treasure Egypt Tours",
+          "content": "About Altavida Tours.com",
           "contentType": "TEXT",
           "isActive": true,
           "order": 1,
@@ -128,7 +128,7 @@
         {
           "key": "footer_logo",
           "title": "Footer Logo URL",
-          "content": "/logos/treasureegypttours.svg",
+          "content": "/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png",
           "contentType": "TEXT",
           "isActive": true,
           "order": 0,
@@ -186,7 +186,7 @@
         {
           "key": "contact_email",
           "title": "Email",
-          "content": "info@treasureegypttours.com",
+          "content": "info@altavidatours.com",
           "contentType": "TEXT",
           "isActive": true,
           "order": 4,
@@ -218,7 +218,7 @@
         {
           "key": "facebook_link",
           "title": "Facebook Link",
-          "content": "https://facebook.com/TreasureEgyptTours",
+          "content": "https://facebook.com/AltavidaTours",
           "contentType": "TEXT",
           "isActive": true,
           "order": 0,
@@ -228,7 +228,7 @@
         {
           "key": "instagram_link",
           "title": "Instagram Link",
-          "content": "https://instagram.com/treasureegypttours",
+          "content": "https://instagram.com/altavidatours",
           "contentType": "TEXT",
           "isActive": true,
           "order": 0,
@@ -308,7 +308,7 @@
         {
           "key": "footer-company-name",
           "title": "Company Name",
-          "content": "Treasure Egypt Tours",
+          "content": "Altavida Tours.com",
           "contentType": "TEXT",
           "isActive": true,
           "order": 0,
@@ -328,7 +328,7 @@
         {
           "key": "footer-title",
           "title": "Footer Title",
-          "content": "Treasure Egypt Tours",
+          "content": "Altavida Tours.com",
           "contentType": "TEXT",
           "isActive": true,
           "order": 0,
@@ -538,7 +538,7 @@
         {
           "key": "footer-facebook",
           "title": "Footer Facebook URL",
-          "content": "https://facebook.com/TreasureEgyptTours",
+          "content": "https://facebook.com/AltavidaTours",
           "contentType": "TEXT",
           "isActive": true,
           "order": 0,
@@ -548,7 +548,7 @@
         {
           "key": "footer-instagram",
           "title": "Footer Instagram URL",
-          "content": "https://instagram.com/treasureegypttours",
+          "content": "https://instagram.com/altavidatours",
           "contentType": "TEXT",
           "isActive": true,
           "order": 0,
@@ -592,7 +592,7 @@
         {
           "key": "site_name",
           "title": "Site Name",
-          "content": "Treasure Egypt Tours",
+          "content": "Altavida Tours.com",
           "contentType": "TEXT",
           "isActive": true,
           "order": 0,

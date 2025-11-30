@@ -90,7 +90,7 @@ const translations: Record<string, any> = {
 export default function Navbar() {
   const { data: session } = useSession();
   const { getContent } = useContent({ page: 'branding_settings' });
-  const [logoUrl, setLogoUrl] = useState('/logos/treasureegypttours.svg');
+  const [logoUrl, setLogoUrl] = useState('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
   const [logoTimestamp, setLogoTimestamp] = useState<number | null>(null);
   const [isClient, setIsClient] = useState(false);
 
@@ -132,7 +132,7 @@ export default function Navbar() {
         
         if (response.ok) {
           const result = await response.json();
-          const logoToUse = result.logoUrl || '/logos/treasureegypttours.svg';
+          const logoToUse = result.logoUrl || '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png';
           setLogoUrl(logoToUse);
           // Use server-provided timestamp to create a stable cache-busting key
           setLogoTimestamp(result.timestamp || Date.now());
@@ -142,12 +142,12 @@ export default function Navbar() {
           }
         } else {
           console.warn('Logo API response not OK:', response.status);
-          setLogoUrl('/logos/treasureegypttours.svg');
+          setLogoUrl('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
         }
       } catch (error) {
         console.error('Failed to fetch logo:', error);
         // Always fallback to default logo on error
-        setLogoUrl('/logos/treasureegypttours.svg');
+        setLogoUrl('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
         if (process.env.NODE_ENV === 'development') {
           setLogoTimestamp(Date.now());
         }
@@ -211,7 +211,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [settings, setSettings] = useState({ siteName: 'Treasure Egypt Tours' });
+  const [settings, setSettings] = useState({ siteName: 'Altavida Tours.com' });
   const { locale, setLocale } = useLanguage();
   const t = useTranslation();
   const pathname = usePathname();
@@ -219,7 +219,7 @@ export default function Navbar() {
 
   // Get dynamic logo from database with fallback
   // const getNavbarLogo = () => {
-  //   return getContent('navbar_logo') || '/logos/treasureegypttours.svg';
+  //   return getContent('navbar_logo') || '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png';
   // };
 
   // Check if we're on the homepage
@@ -246,11 +246,11 @@ export default function Navbar() {
         fetch('/api/settings?group=general', { cache: 'no-store' })
           .then(res => res.json())
           .then(settingsData => {
-            const siteName = settingsData?.site_name || 'Treasure Egypt Tours';
+            const siteName = settingsData?.site_name || 'Altavida Tours.com';
             setSettings({ siteName });
           })
           .catch(() => {
-            setSettings({ siteName: 'Treasure Egypt Tours' });
+            setSettings({ siteName: 'Altavida Tours.com' });
           });
       }
     };
@@ -483,7 +483,7 @@ export default function Navbar() {
           }}>
             <Image
               src={getLogoCacheBustUrl(logoUrl)}
-              alt={getHomepageContent('site_name', 'Treasure Egypt Tours')}
+              alt={getHomepageContent('site_name', 'Altavida Tours.com')}
               width={180}
               height={60}
               className="h-16 w-auto"
@@ -493,7 +493,7 @@ export default function Navbar() {
               suppressHydrationWarning={true}
               onError={(e) => {
                 console.warn('Logo failed to load, falling back to default:', logoUrl);
-                setLogoUrl('/logos/treasureegypttours.svg');
+                setLogoUrl('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
                 if (isClient) {
                   if (process.env.NODE_ENV === 'development') {
                     setLogoTimestamp(Date.now());

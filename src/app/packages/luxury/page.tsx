@@ -9,6 +9,7 @@ import { Crown, Star, Users, Calendar, MapPin, Sparkles, Award, Ship } from 'luc
 import { motion } from 'framer-motion';
 import UnifiedHero from '@/components/ui/UnifiedHero';
 import { AnimatedSection } from '@/components/ui/animated-section';
+import { useContent } from '@/hooks/useContent';
 
 interface LuxuryPackage {
   id: string;
@@ -69,6 +70,7 @@ const luxuryGalleryImages = [
 ];
 
 export default function LuxuryPackagesPage() {
+  const { getContent } = useContent({ page: 'packages_luxury' });
   const [packages, setPackages] = useState<LuxuryPackage[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -136,7 +138,7 @@ export default function LuxuryPackagesPage() {
       <div className="min-h-screen bg-gradient-to-b from-amber-50 to-yellow-100 flex items-center justify-center">
         <div className="text-center">
           <Crown className="w-16 h-16 text-amber-600 mx-auto mb-4 animate-pulse" />
-          <div className="text-amber-800 text-xl font-bold">Loading Luxury Experiences...</div>
+          <div className="text-amber-800 text-xl font-bold">{getContent('luxury_loading', 'Loading Luxury Experiences...')}</div>
         </div>
       </div>
     );
@@ -146,9 +148,9 @@ export default function LuxuryPackagesPage() {
     <div className="min-h-screen bg-gradient-to-b from-white via-amber-50 to-yellow-50">
       {/* Hero Section */}
       <UnifiedHero
-        imageSrc="/Royal Cleopatra/DSC_8502.jpg"
-        title="Luxury Packages"
-        subtitle="Experience Egypt in Ultimate Elegance & Comfort"
+        imageSrc={getContent('luxury_hero_image', '/Royal Cleopatra/DSC_8502.jpg')}
+        title={getContent('luxury_hero_title', 'Luxury Packages')}
+        subtitle={getContent('luxury_hero_subtitle', 'Experience Egypt in Ultimate Elegance & Comfort')}
         hieroglyphicTitle={false}
         showEgyptianElements={true}
         showRoyalCrown={true}
@@ -163,17 +165,16 @@ export default function LuxuryPackagesPage() {
             <Crown className="w-12 h-12 text-amber-600" />
           </div>
           <p className="text-lg sm:text-xl mb-8 leading-relaxed px-4 sm:px-0">
-            Indulge in the finest Egyptian experiences with our luxury packages featuring presidential suites, 
-            private chefs, personal butlers, and exclusive access to Egypt&apos;s most treasured sites.
+            {getContent('luxury_hero_desc', "Indulge in the finest Egyptian experiences with our luxury packages featuring presidential suites, private chefs, personal butlers, and exclusive access to Egypt's most treasured sites.")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
             <Button className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg min-h-[48px]">
               <Star className="w-5 h-5 mr-2" />
-              View Luxury Packages
+              {getContent('luxury_view_btn', 'View Luxury Packages')}
             </Button>
             <Button variant="outline" className="border-amber-600 text-amber-800 hover:bg-amber-50 px-6 py-3 rounded-lg min-h-[48px]">
               <Award className="w-5 h-5 mr-2" />
-              Request Custom Quote
+              {getContent('luxury_quote_btn', 'Request Custom Quote')}
             </Button>
           </div>
         </div>
@@ -185,20 +186,20 @@ export default function LuxuryPackagesPage() {
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Luxury <span className="text-amber-600">Amenities</span>
+                {getContent('luxury_amenities_title', 'Luxury')} <span className="text-amber-600">{getContent('luxury_amenities_highlight', 'Amenities')}</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                Every detail crafted for the discerning traveler seeking the pinnacle of Egyptian hospitality.
+                {getContent('luxury_amenities_desc', 'Every detail crafted for the discerning traveler seeking the pinnacle of Egyptian hospitality.')}
               </p>
             </div>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-16">
             {[
-              { icon: Crown, title: 'Presidential Suites', desc: 'Spacious accommodations with premium furnishings' },
-              { icon: Star, title: 'Personal Butler', desc: '24/7 dedicated service for your every need' },
-              { icon: Award, title: 'Gourmet Dining', desc: 'World-class cuisine prepared by master chefs' },
-              { icon: Sparkles, title: 'Exclusive Access', desc: 'Private tours of temples and monuments' }
+              { icon: Crown, title: getContent('luxury_feature_1_title', 'Presidential Suites'), desc: getContent('luxury_feature_1_desc', 'Spacious accommodations with premium furnishings') },
+              { icon: Star, title: getContent('luxury_feature_2_title', 'Personal Butler'), desc: getContent('luxury_feature_2_desc', '24/7 dedicated service for your every need') },
+              { icon: Award, title: getContent('luxury_feature_3_title', 'Gourmet Dining'), desc: getContent('luxury_feature_3_desc', 'World-class cuisine prepared by master chefs') },
+              { icon: Sparkles, title: getContent('luxury_feature_4_title', 'Exclusive Access'), desc: getContent('luxury_feature_4_desc', 'Private tours of temples and monuments') }
             ].map((feature, index) => (
               <AnimatedSection key={index} delay={index * 100}>
                 <Card className="text-center p-6 hover:shadow-xl transition-all duration-300 border-amber-200">
@@ -220,10 +221,10 @@ export default function LuxuryPackagesPage() {
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Luxury <span className="text-amber-600">Gallery</span>
+                {getContent('luxury_gallery_title', 'Luxury')} <span className="text-amber-600">{getContent('luxury_gallery_highlight', 'Gallery')}</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                A glimpse into the opulent world of our luxury Egyptian experiences.
+                {getContent('luxury_gallery_desc', 'A glimpse into the opulent world of our luxury Egyptian experiences.')}
               </p>
             </div>
           </AnimatedSection>
@@ -287,7 +288,7 @@ export default function LuxuryPackagesPage() {
           <AnimatedSection>
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Featured <span className="text-amber-600">Luxury Packages</span>
+                {getContent('luxury_packages_title', 'Featured')} <span className="text-amber-600">{getContent('luxury_packages_highlight', 'Luxury Packages')}</span>
               </h2>
             </div>
           </AnimatedSection>

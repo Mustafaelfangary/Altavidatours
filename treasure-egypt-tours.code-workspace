@@ -1,7 +1,7 @@
 {
   "folders": [
     {
-      "name": "🏛️ ROOT - Treasure Egypt Tours",
+      "name": "🏛️ ROOT - Altavida Tours.com",
       "path": "."
     },
     {
@@ -96,7 +96,7 @@
       {
         "previewLimit": 50,
         "driver": "PostgreSQL",
-        "name": "Treasure Egypt Tours DB",
+        "name": "Altavida Tours DB",
         "server": "localhost",
         "port": 5432,
         "database": "altavida",

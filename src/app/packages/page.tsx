@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Container, Typography, Box, Button, Card, CardMedia, CardContent, Grid, Chip, TextField, InputAdornment } from '@mui/material';
 import { Search, LocationOn, Star, AccessTime, CheckCircle, Security, Support } from '@mui/icons-material';
 import LogoLoader from '@/components/ui/LogoLoader';
+import { useContent } from '@/hooks/useContent';
 
 interface Package {
   id: string;
@@ -22,6 +23,7 @@ interface Package {
 }
 
 export default function PackagesPage() {
+  const { getContent } = useContent({ page: 'packages' });
   const [packages, setPackages] = useState<Package[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -158,7 +160,7 @@ export default function PackagesPage() {
             lineHeight: { xs: '1.2', sm: '1.1' }
           }}
           >
-            Luxury Travel Packages
+            {getContent('packages_hero_title', 'Luxury Travel Packages')}
           </Typography>
           <Typography
             variant="h4"
@@ -173,7 +175,7 @@ export default function PackagesPage() {
             px: { xs: 2, sm: 0 }
           }}
           >
-            Curated Egyptian Adventures & Premium Nile Experiences
+            {getContent('packages_hero_subtitle', 'Curated Egyptian Adventures & Premium Nile Experiences')}
           </Typography>
           <Typography
             variant="h6"
@@ -185,7 +187,7 @@ export default function PackagesPage() {
               fontSize: { xs: '1rem', md: '1.25rem' }
             }}
           >
-            From intimate cruises to comprehensive cultural journeys, discover your perfect Egyptian adventure
+            {getContent('packages_hero_description', 'From intimate cruises to comprehensive cultural journeys, discover your perfect Egyptian adventure')}
           </Typography>
         </Container>
       </Box>
@@ -195,7 +197,7 @@ export default function PackagesPage() {
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
           <TextField
             variant="outlined"
-            placeholder="Search packages by name, destination, or description..."
+            placeholder={getContent('packages_search_placeholder', 'Search packages by name, destination, or description...')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             sx={{ 
@@ -219,7 +221,7 @@ export default function PackagesPage() {
         </Box>
 
         <Typography variant="h6" sx={{ textAlign: 'center', mb: 6, color: 'text.secondary' }}>
-          {filteredPackages.length} {filteredPackages.length === 1 ? 'package' : 'packages'} available
+          {filteredPackages.length} {filteredPackages.length === 1 ? getContent('packages_singular', 'package') : getContent('packages_plural', 'packages')} {getContent('packages_available', 'available')}
         </Typography>
       </Container>
 
@@ -349,10 +351,10 @@ export default function PackagesPage() {
                 color: '#0A2FA6'
               }}
             >
-              Why Choose Our Travel Packages
+              {getContent('packages_why_title', 'Why Choose Our Travel Packages')}
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ maxWidth: '700px', mx: 'auto', lineHeight: 1.6 }}>
-              Every package is carefully crafted to deliver exceptional value and unforgettable experiences
+              {getContent('packages_why_subtitle', 'Every package is carefully crafted to deliver exceptional value and unforgettable experiences')}
             </Typography>
           </Box>
 
@@ -360,18 +362,18 @@ export default function PackagesPage() {
             {[
               {
                 icon: <CheckCircle sx={{ fontSize: '4rem', color: '#1BAE70' }} />,
-                title: "All-Inclusive Excellence",
-                description: "Everything included from luxury accommodations to expert guides, meals, and entrance fees - no hidden costs."
+                title: getContent('packages_feature_1_title', 'All-Inclusive Excellence'),
+                description: getContent('packages_feature_1_description', 'Everything included from luxury accommodations to expert guides, meals, and entrance fees - no hidden costs.')
               },
               {
                 icon: <Security sx={{ fontSize: '4rem', color: '#0B70E1' }} />,
-                title: "Travel Protection",
-                description: "Comprehensive travel insurance, 24/7 support, and flexible booking policies for complete peace of mind."
+                title: getContent('packages_feature_2_title', 'Travel Protection'),
+                description: getContent('packages_feature_2_description', 'Comprehensive travel insurance, 24/7 support, and flexible booking policies for complete peace of mind.')
               },
               {
                 icon: <Support sx={{ fontSize: '4rem', color: '#FFA500' }} />,
-                title: "Expert Local Guides",
-                description: "Certified Egyptologists and local specialists bringing ancient history to life with insider knowledge and stories."
+                title: getContent('packages_feature_3_title', 'Expert Local Guides'),
+                description: getContent('packages_feature_3_description', 'Certified Egyptologists and local specialists bringing ancient history to life with insider knowledge and stories.')
               }
             ].map((feature, index) => (
               <Grid item xs={12} md={4} key={index}>
@@ -416,10 +418,10 @@ export default function PackagesPage() {
           }}
         >
           <Typography variant="h2" component="h2" fontWeight="bold" gutterBottom sx={{ color: '#0A2FA6', fontSize: { xs: '2rem', md: '2.5rem' } }}>
-            Ready to Book Your Adventure?
+            {getContent('packages_cta_title', 'Ready to Book Your Adventure?')}
           </Typography>
           <Typography variant="h5" color="text.secondary" sx={{ mb: 6, maxWidth: '700px', mx: 'auto', lineHeight: 1.6 }}>
-            Join thousands of satisfied travelers who've discovered Egypt with our expertly crafted travel packages
+            {getContent('packages_cta_subtitle', "Join thousands of satisfied travelers who've discovered Egypt with our expertly crafted travel packages")}
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 3, justifyContent: 'center' }}>
             <Button
@@ -443,7 +445,7 @@ export default function PackagesPage() {
                 }
               }}
             >
-              Book Now
+              {getContent('packages_cta_book_btn', 'Book Now')}
             </Button>
             <Button
               component={Link}
@@ -468,7 +470,7 @@ export default function PackagesPage() {
                 }
               }}
             >
-              Contact Us
+              {getContent('packages_cta_contact_btn', 'Contact Us')}
             </Button>
           </Box>
         </Box>

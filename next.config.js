@@ -55,12 +55,12 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'treasureegypttours.com',
+        hostname: 'altavidatours.com',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'www.treasureegypttours.com',
+        hostname: 'www.altavidatours.com',
         pathname: '/**',
       }
     ],

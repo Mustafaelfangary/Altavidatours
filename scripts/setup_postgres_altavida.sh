@@ -6,7 +6,7 @@ DB_NAME="altavida"
 DB_USER="altavida_user"
 DB_PASSWORD="1082034ASas"   # WARNING: do NOT commit this script with real password in public repos
 # App directory where .env resides (adjust if different)
-APP_DIR="/var/www/treasureegypttours"
+APP_DIR="/var/www/altavidatours"
 # Set to 1 to append DATABASE_URL into $APP_DIR/.env automatically
 WRITE_ENV=0
 # ========= END CONFIG =========

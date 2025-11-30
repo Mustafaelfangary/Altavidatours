@@ -15,6 +15,7 @@ import {
 import LogoLoader from '@/components/ui/LogoLoader';
 import UnifiedHero from '@/components/ui/UnifiedHero';
 import Image from 'next/image';
+import { useContent } from '@/hooks/useContent';
 
 // Component for image captions with random photographer names
 interface ImageWithCaptionProps {
@@ -46,6 +47,7 @@ const ImageWithCaption = ({ src, alt, photographer, className = "", width = 800,
 };
 
 export default function TermsPage() {
+  const { getContent } = useContent({ page: 'terms' });
   const [termsContent, setTermsContent] = useState<{
     title: string;
     content: string;
@@ -100,9 +102,9 @@ export default function TermsPage() {
     <div className="min-h-screen bg-slate-50 relative overflow-hidden">
       {/* Unified Hero Section */}
       <UnifiedHero
-        imageSrc="/images/dahabiya-sunset.jpg"
-        title={termsContent?.title || "Terms and Conditions"}
-        subtitle="𓊪 Royal Covenant of Service 𓊪"
+        imageSrc={getContent('terms_hero_image', '/images/dahabiya-sunset.jpg')}
+        title={termsContent?.title || getContent('terms_hero_title', 'Terms and Conditions')}
+        subtitle={getContent('terms_hero_subtitle', '𓊪 Royal Covenant of Service 𓊪')}
         hieroglyphicTitle={true}
         showEgyptianElements={true}
         showRoyalCrown={true}

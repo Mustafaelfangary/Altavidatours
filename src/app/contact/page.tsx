@@ -52,23 +52,23 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            🛥️ Contact AltaVida Tours
+            {getContent('contact_hero_title', '🛥️ Contact AltaVida Tours')}
           </h1>
           <p className="text-xl md:text-2xl text-travelok-orange mb-8 max-w-3xl mx-auto">
-            Ready to embark on your Egyptian dahabiya adventure? Get in touch with our travel experts.
+            {getContent('contact_hero_subtitle', 'Ready to embark on your Egyptian dahabiya adventure? Get in touch with our travel experts.')}
           </p>
           <div className="flex justify-center space-x-8 text-sm">
             <div className="flex items-center">
               <Clock className="w-5 h-5 mr-2" />
-              24/7 Support
+              {getContent('contact_feature_1', '24/7 Support')}
             </div>
             <div className="flex items-center">
               <CheckCircle className="w-5 h-5 mr-2" />
-              Expert Guidance
+              {getContent('contact_feature_2', 'Expert Guidance')}
             </div>
             <div className="flex items-center">
               <Heart className="w-5 h-5 mr-2" />
-              Personalized Service
+              {getContent('contact_feature_3', 'Personalized Service')}
             </div>
           </div>
         </div>
@@ -88,10 +88,10 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-travelok-blue-dark mb-4">
-              🚀 Prefer Instant Communication?
+              {getContent('contact_instant_title', '🚀 Prefer Instant Communication?')}
             </h2>
             <p className="text-lg text-travelok-gray max-w-2xl mx-auto">
-              Connect with us instantly through your favorite platform
+              {getContent('contact_instant_subtitle', 'Connect with us instantly through your favorite platform')}
             </p>
           </div>
 
@@ -100,13 +100,13 @@ export default function ContactPage() {
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MessageCircle className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="font-bold text-travelok-blue-dark mb-2">WhatsApp</h3>
-              <p className="text-sm text-travelok-gray mb-4">Instant messaging</p>
+              <h3 className="font-bold text-travelok-blue-dark mb-2">{getContent('contact_whatsapp_title', 'WhatsApp')}</h3>
+              <p className="text-sm text-travelok-gray mb-4">{getContent('contact_whatsapp_desc', 'Instant messaging')}</p>
               <button
                 onClick={() => window.open(getContent('whatsapp_link', 'https://wa.me/20952370574'), '_blank')}
                 className="btn-travelok-secondary w-full text-sm py-2"
               >
-                💬 Chat Now
+                {getContent('contact_whatsapp_btn', '💬 Chat Now')}
               </button>
             </div>
 
@@ -114,13 +114,13 @@ export default function ContactPage() {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Send className="w-8 h-8 text-blue-600" />
               </div>
-              <h3 className="font-bold text-travelok-blue-dark mb-2">Telegram</h3>
-              <p className="text-sm text-travelok-gray mb-4">Quick updates</p>
+              <h3 className="font-bold text-travelok-blue-dark mb-2">{getContent('contact_telegram_title', 'Telegram')}</h3>
+              <p className="text-sm text-travelok-gray mb-4">{getContent('contact_telegram_desc', 'Quick updates')}</p>
               <button
                 onClick={() => window.open(getContent('telegram_link', 'https://t.me/altavidatours'), '_blank')}
                 className="btn-travelok-secondary w-full text-sm py-2"
               >
-                🚀 Join Channel
+                {getContent('contact_telegram_btn', '🚀 Join Channel')}
               </button>
             </div>
 
@@ -128,13 +128,13 @@ export default function ContactPage() {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-blue-700" />
               </div>
-              <h3 className="font-bold text-travelok-blue-dark mb-2">Facebook</h3>
-              <p className="text-sm text-travelok-gray mb-4">Community & reviews</p>
+              <h3 className="font-bold text-travelok-blue-dark mb-2">{getContent('contact_facebook_title', 'Facebook')}</h3>
+              <p className="text-sm text-travelok-gray mb-4">{getContent('contact_facebook_desc', 'Community & reviews')}</p>
               <button
                 onClick={() => window.open(getContent('facebook_link', 'https://facebook.com/altavidatours'), '_blank')}
                 className="btn-travelok-secondary w-full text-sm py-2"
               >
-                👥 Follow Us
+                {getContent('contact_facebook_btn', '👥 Follow Us')}
               </button>
             </div>
 
@@ -142,13 +142,13 @@ export default function ContactPage() {
               <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Star className="w-8 h-8 text-pink-600" />
               </div>
-              <h3 className="font-bold text-travelok-blue-dark mb-2">Instagram</h3>
-              <p className="text-sm text-travelok-gray mb-4">Visual inspiration</p>
+              <h3 className="font-bold text-travelok-blue-dark mb-2">{getContent('contact_instagram_title', 'Instagram')}</h3>
+              <p className="text-sm text-travelok-gray mb-4">{getContent('contact_instagram_desc', 'Visual inspiration')}</p>
               <button
                 onClick={() => window.open(getContent('instagram_link', 'https://instagram.com/altavidatours'), '_blank')}
                 className="btn-travelok-secondary w-full text-sm py-2"
               >
-                📸 Follow
+                {getContent('contact_instagram_btn', '📸 Follow')}
               </button>
             </div>
           </div>

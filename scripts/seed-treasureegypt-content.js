@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function run() {
-  console.log('🚀 Seeding Treasure Egypt Tours brand content...');
+  console.log('🚀 Seeding Altavida Tours brand content...');
 
   // 1) Disable obviously Dahabiya-specific homepage keys so they don't surface
   const dahabiyaPatterns = [
@@ -24,7 +24,7 @@ async function run() {
   // 2) Brand name and global values
   const updates = [
     // Site identity
-    { key: 'site_name', title: 'Site Name', content: 'Treasure Egypt Tours', page: 'global', section: 'global' },
+    { key: 'site_name', title: 'Site Name', content: 'Altavida Tours.com', page: 'global', section: 'global' },
 
     // Homepage hero
     { key: 'hero_video_title', title: 'Hero Title', content: 'Authentic Egypt Travel Experiences', page: 'homepage', section: 'hero' },
@@ -35,7 +35,7 @@ async function run() {
     { key: 'hero_video_cta_link', title: 'Primary CTA Link', content: '/tours', page: 'homepage', section: 'hero' },
     { key: 'hero_video_secondary_cta_link', title: 'Secondary CTA Link', content: '/destinations', page: 'homepage', section: 'hero' },
 
-    // Homepage sections (generic for Treasure Egypt Tours)
+    // Homepage sections (generic for Altavida Tours.com)
     { key: 'homepage_featured_packages_title', title: 'Featured Packages Title', content: 'Featured Packages', page: 'homepage', section: 'general' },
     { key: 'homepage_featured_packages_subtitle', title: 'Featured Packages Subtitle', content: 'Our most popular Egypt trips curated for you', page: 'homepage', section: 'general' },
     { key: 'homepage_destinations_title', title: 'Destinations Title', content: 'Top Destinations in Egypt', page: 'homepage', section: 'general' },
@@ -63,7 +63,7 @@ async function run() {
     { key: 'services_section_title', title: 'Services Section Title', content: 'Popular Services', page: 'services', section: 'main' },
 
     // About page
-    { key: 'about_hero_title', title: 'About Hero Title', content: 'About Treasure Egypt Tours', page: 'about', section: 'hero' },
+    { key: 'about_hero_title', title: 'About Hero Title', content: 'About Altavida Tours.com', page: 'about', section: 'hero' },
     { key: 'about_hero_subtitle', title: 'About Hero Subtitle', content: 'Locally owned. Decades of Egyptian travel expertise.', page: 'about', section: 'hero' },
     { key: 'about_story_title', title: 'Story Title', content: 'Our Story', page: 'about', section: 'story' },
     { key: 'about_story_content', title: 'Story Content', content: 'We craft authentic experiences across Egypt with safety, comfort, and cultural depth. Our team of local specialists personalizes every journey.', page: 'about', section: 'story' },
@@ -71,13 +71,13 @@ async function run() {
     // Contact page
     { key: 'contact_hero_title', title: 'Contact Hero Title', content: 'Contact Our Egypt Specialists', page: 'contact', section: 'hero' },
     { key: 'contact_phone', title: 'Phone', content: '+20 000 0000', page: 'contact', section: 'info' },
-    { key: 'contact_email', title: 'Email', content: 'info@treasureegypttours.com', page: 'contact', section: 'info' },
+    { key: 'contact_email', title: 'Email', content: 'info@altavidatours.com', page: 'contact', section: 'info' },
     { key: 'contact_address', title: 'Address', content: 'Cairo, Egypt', page: 'contact', section: 'info' },
 
     // Footer
-    { key: 'footer-company-name', title: 'Company Name', content: 'Treasure Egypt Tours', page: 'footer', section: 'company' },
-    { key: 'footer-title', title: 'Footer Title', content: 'Treasure Egypt Tours', page: 'footer', section: 'company' },
-    { key: 'footer-description', title: 'Footer Description', content: 'Explore Egypt with tailored journeys and local expertise.', page: 'footer', section: 'company' },
+    { key: 'footer-company-name', title: 'Company Name', content: 'Altavida Tours.com', page: 'footer', section: 'company' },
+    { key: 'footer-title', title: 'Footer Title', content: 'Altavida Tours.com', page: 'footer', section: 'company' },
+    { key: 'footer-description', title: 'Footer Description', content: 'Explore Egypt with tailored journeys and local expertise by Altavida Tours.com.', page: 'footer', section: 'company' },
     { key: 'footer-link-home', title: 'Footer Link Home', content: 'Home', page: 'footer', section: 'navigation' },
     { key: 'footer-link-about', title: 'Footer Link About', content: 'About', page: 'footer', section: 'navigation' },
     { key: 'footer-link-packages', title: 'Footer Link Packages', content: 'Packages', page: 'footer', section: 'navigation' },
@@ -90,9 +90,9 @@ async function run() {
     { key: 'footer_newsletter_title', title: 'Footer Newsletter Title', content: 'Newsletter', page: 'footer', section: 'newsletter' },
     { key: 'footer-newsletter-text', title: 'Footer Newsletter Text', content: 'Subscribe to get updates on our latest offers and journeys.', page: 'footer', section: 'newsletter' },
     { key: 'footer_subscribe_button_text', title: 'Footer Subscribe Button', content: 'Subscribe', page: 'footer', section: 'newsletter' },
-    { key: 'footer-facebook', title: 'Footer Facebook URL', content: 'https://facebook.com/TreasureEgyptTours', page: 'footer', section: 'social' },
-    { key: 'footer-twitter', title: 'Footer Twitter URL', content: 'https://twitter.com/TreasureEgypt', page: 'footer', section: 'social' },
-    { key: 'footer-instagram', title: 'Footer Instagram URL', content: 'https://instagram.com/treasureegypttours', page: 'footer', section: 'social' },
+    { key: 'footer-facebook', title: 'Footer Facebook URL', content: 'https://facebook.com/AltavidaTours', page: 'footer', section: 'social' },
+    { key: 'footer-twitter', title: 'Footer Twitter URL', content: 'https://twitter.com/AltavidaTours', page: 'footer', section: 'social' },
+    { key: 'footer-instagram', title: 'Footer Instagram URL', content: 'https://instagram.com/altavidatours', page: 'footer', section: 'social' },
 
     // Homepage general helpers
     { key: 'loading_text', title: 'Loading Text', content: 'Loading...', page: 'homepage', section: 'general' },
@@ -102,13 +102,13 @@ async function run() {
     { key: 'homepage_view_all_articles_text', title: 'Homepage View All Articles', content: 'View All Articles', page: 'homepage', section: 'general' },
 
     // Contact page social links (used by CleanWebsiteContentManager contact page)
-    { key: 'facebook_link', title: 'Facebook Link', content: 'https://facebook.com/TreasureEgyptTours', page: 'contact', section: 'social_media' },
-    { key: 'instagram_link', title: 'Instagram Link', content: 'https://instagram.com/treasureegypttours', page: 'contact', section: 'social_media' },
+    { key: 'facebook_link', title: 'Facebook Link', content: 'https://facebook.com/AltavidaTours', page: 'contact', section: 'social_media' },
+    { key: 'instagram_link', title: 'Instagram Link', content: 'https://instagram.com/altavidatours', page: 'contact', section: 'social_media' },
     { key: 'whatsapp_link', title: 'WhatsApp Link', content: 'https://wa.me/2000000000', page: 'contact', section: 'social_media' },
     { key: 'telegram_link', title: 'Telegram Link', content: 'https://t.me/treasureegypt', page: 'contact', section: 'social_media' },
 
     // Branding/media (used by footer for logo path)
-    { key: 'footer_logo', title: 'Footer Logo URL', content: '/logos/treasureegypttours.svg', page: 'branding_settings', section: 'branding' },
+    { key: 'footer_logo', title: 'Footer Logo URL', content: '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png', page: 'branding_settings', section: 'branding' },
 
     // Homepage hero media placeholders (safe defaults; admin can update)
     { key: 'hero_video_url', title: 'Hero Video URL', content: '/videos/home_hero_video.mp4', page: 'homepage', section: 'hero' },
