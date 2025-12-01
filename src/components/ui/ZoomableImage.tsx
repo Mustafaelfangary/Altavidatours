@@ -133,17 +133,17 @@ export default function ZoomableImage({
           {/* Close Button */}
           <button
             onClick={handleCloseZoom}
-            className="absolute top-4 right-4 z-[10000] bg-egyptian-gold/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-egyptian-gold/40 transition-all duration-200 group"
+            className="absolute top-4 right-4 z-[10000] bg-[#1193b1]/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-[#1193b1]/40 transition-all duration-200 group"
             aria-label="Close zoom"
           >
             <X className="w-6 h-6 group-hover:scale-110 transition-transform" />
           </button>
 
           {/* Egyptian-themed decorative corners */}
-          <div className="absolute top-4 left-4 text-egyptian-gold text-2xl animate-pulse">𓇳</div>
-          <div className="absolute top-4 right-20 text-egyptian-gold text-2xl animate-pulse">𓊪</div>
-          <div className="absolute bottom-4 left-4 text-egyptian-gold text-2xl animate-pulse">𓈖</div>
-          <div className="absolute bottom-4 right-4 text-egyptian-gold text-2xl animate-pulse">𓂀</div>
+          <div className="absolute top-4 left-4 text-[#1193b1] text-2xl animate-pulse">𓇳</div>
+          <div className="absolute top-4 right-20 text-[#1193b1] text-2xl animate-pulse">𓊪</div>
+          <div className="absolute bottom-4 left-4 text-[#1193b1] text-2xl animate-pulse">𓈖</div>
+          <div className="absolute bottom-4 right-4 text-[#1193b1] text-2xl animate-pulse">𓂀</div>
 
           {/* Zoomed Image Container */}
           <div
@@ -162,7 +162,7 @@ export default function ZoomableImage({
           </div>
 
           {/* Egyptian-themed bottom info */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-hieroglyph-brown/80 backdrop-blur-sm text-egyptian-gold px-6 py-2 rounded-full text-sm font-medium">
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-[#073b5a]/80 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-medium">
             <span className="mr-2">𓏏</span>
             Click anywhere to close
             <span className="ml-2">𓇯</span>

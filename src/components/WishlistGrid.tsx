@@ -221,7 +221,7 @@ const WishlistGrid: React.FC<WishlistGridProps> = ({ userId, limit }) => {
                 {/* Price and Actions */}
                 <div className="flex items-center justify-between pt-2 border-t">
                   <div>
-                    <span className="text-2xl font-bold text-egyptian-gold">
+                    <span className="text-2xl font-bold text-[#073b5a]">
                       ${price.toLocaleString()}
                     </span>
                     {!isPackage && (
@@ -229,9 +229,9 @@ const WishlistGrid: React.FC<WishlistGridProps> = ({ userId, limit }) => {
                     )}
                   </div>
                   <Link href={linkHref}>
-                    <Button size="sm" className="bg-gradient-to-r from-egyptian-gold/80 to-deep-blue-500/80 text-hieroglyph-brown text-xs font-bold border border-egyptian-gold/30 hover:from-egyptian-gold hover:to-deep-blue-500">
+                    <Button size="sm" className="bg-gradient-to-r from-[#1193b1]/80 to-[#073b5a]/80 text-white text-xs font-bold border border-[#1193b1]/30 hover:from-[#1193b1] hover:to-[#073b5a]">
                       <span className="text-xs">View Details</span>
-                      <span className="text-xs text-egyptian-gold ml-1">𓎢𓃭𓅂𓅱𓊪𓄿𓏏𓂋𓄿</span>
+                      <span className="text-xs text-[#1193b1] ml-1">𓎢𓃭𓅂𓅱𓊪𓄿𓏏𓂋𓄿</span>
                     </Button>
                   </Link>
                 </div>

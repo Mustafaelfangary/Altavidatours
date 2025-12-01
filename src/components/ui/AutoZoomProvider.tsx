@@ -54,7 +54,7 @@ export default function AutoZoomProvider({ children, enabled = true }: AutoZoomP
         const handleMouseEnter = () => {
           img.style.transform = 'scale(1.05)';
           img.style.filter = 'brightness(1.1)';
-          img.style.boxShadow = '0 8px 32px rgba(0, 128, 255, 0.3)';
+          img.style.boxShadow = '0 8px 32px rgba(17,147,177,0.25)';
         };
 
         const handleMouseLeave = () => {
@@ -98,7 +98,7 @@ export default function AutoZoomProvider({ children, enabled = true }: AutoZoomP
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       `;
-      closeBtn.className = 'absolute top-4 right-4 z-[10000] bg-egyptian-gold/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-egyptian-gold/40 transition-all duration-200';
+      closeBtn.className = 'absolute top-4 right-4 z-[10000] bg-[#1193b1]/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-[#1193b1]/40 transition-all duration-200';
       closeBtn.setAttribute('aria-label', 'Close zoom');
 
       // Egyptian decorative elements
@@ -112,7 +112,7 @@ export default function AutoZoomProvider({ children, enabled = true }: AutoZoomP
       decorations.forEach(({ text, position }) => {
         const decoration = document.createElement('div');
         decoration.textContent = text;
-        decoration.className = `absolute ${position} text-egyptian-gold text-2xl animate-pulse`;
+        decoration.className = `absolute ${position} text-[#1193b1] text-2xl animate-pulse`;
         modal.appendChild(decoration);
       });
 
@@ -131,7 +131,7 @@ export default function AutoZoomProvider({ children, enabled = true }: AutoZoomP
       // Bottom info
       const info = document.createElement('div');
       info.innerHTML = '<span class="mr-2">𓏏</span>Click anywhere to close<span class="ml-2">𓇯</span>';
-      info.className = 'absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-hieroglyph-brown/80 backdrop-blur-sm text-egyptian-gold px-6 py-2 rounded-full text-sm font-medium';
+      info.className = 'absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-[#073b5a]/80 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-medium';
 
       // Assemble modal
       imgContainer.appendChild(zoomedImg);
@@ -222,6 +222,6 @@ export const autoZoomStyles = `
   .zoomable-image-hover:hover {
     transform: scale(1.05);
     filter: brightness(1.1);
-    box-shadow: 0 8px 32px rgba(0, 128, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(17,147,177,0.24);
   }
 `;

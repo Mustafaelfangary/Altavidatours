@@ -458,16 +458,16 @@ export const PharaonicCrown = ({ className = "" }: { className?: string }) => (
       </svg>
     </div>
     <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-ocean-blue to-blue-600 rounded-full flex items-center justify-center shadow-lg">
-      <span className="text-gold-text-dark text-sm font-bold">𓇳</span>
+    <span className="text-[#073b5a] text-sm font-bold">𓇳</span>
     </div>
     <div className="absolute -bottom-2 -left-2 w-8 h-8 bg-gradient-to-br from-white0 to-ocean-blue rounded-full flex items-center justify-center shadow-lg">
-      <span className="text-gold-text-dark text-sm font-bold">𓊪</span>
+      <span className="text-[#073b5a] text-sm font-bold">𓊪</span>
     </div>
     <div className="absolute top-1/2 -left-3 w-6 h-6 bg-gradient-to-br from-ocean-blue to-blue-500 rounded-full flex items-center justify-center shadow-md">
-      <span className="text-gold-text-dark text-xs font-bold">𓈖</span>
+      <span className="text-[#073b5a] text-xs font-bold">𓈖</span>
     </div>
     <div className="absolute top-1/2 -right-3 w-6 h-6 bg-gradient-to-br from-white0 to-ocean-blue rounded-full flex items-center justify-center shadow-md">
-      <span className="text-gold-text-dark text-xs font-bold">𓂀</span>
+      <span className="text-[#073b5a] text-xs font-bold">𓂀</span>
     </div>
   </div>
 );

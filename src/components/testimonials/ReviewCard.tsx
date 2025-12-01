@@ -31,7 +31,7 @@ const renderStars = (rating: number) => {
     <Star
       key={i}
       className={`w-4 h-4 ${
-        i < rating ? 'text-egyptian-gold fill-current' : 'text-gray-300'
+        i < rating ? 'text-[#1193b1] fill-current' : 'text-gray-300'
       }`}
     />
   ));

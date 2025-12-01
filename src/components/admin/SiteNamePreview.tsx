@@ -104,7 +104,7 @@ export function SiteNamePreview() {
       <Card>
         <CardContent className="p-6">
           <div className="flex items-center justify-center">
-            <RefreshCw className="w-6 h-6 animate-spin text-egyptian-gold" />
+            <RefreshCw className="w-6 h-6 animate-spin text-[#1193b1]" />
             <span className="ml-2">Loading site branding...</span>
           </div>
         </CardContent>
@@ -116,9 +116,9 @@ export function SiteNamePreview() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <span className="text-egyptian-gold">𓇳</span>
+          <span className="text-[#1193b1]">𓇳</span>
           Dynamic Site Branding
-          <span className="text-egyptian-gold">𓇳</span>
+          <span className="text-[#1193b1]">𓇳</span>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -187,7 +187,7 @@ export function SiteNamePreview() {
           <Button
             onClick={handlePreview}
             variant="outline"
-            className="border-egyptian-gold text-egyptian-gold hover:bg-egyptian-gold hover:text-black"
+            className="border-[#1193b1] text-[#1193b1] hover:bg-[#1193b1] hover:text-white"
           >
             <Eye className="w-4 h-4 mr-2" />
             Preview Site

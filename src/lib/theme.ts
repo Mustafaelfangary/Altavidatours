@@ -4,24 +4,24 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#0a2342', // Luxury deep blue
-      dark: '#07172b',
-      light: '#1e3a5c',
-      contrastText: '#ffe082', // Gold text
+      main: '#0b2b45', // refined navy
+      dark: '#061826',
+      light: '#1d3f56',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: '#d4af37', // Luxury gold
-      dark: '#bfa233',
-      light: '#ffe082',
-      contrastText: '#0a2342',
+      main: '#1193b1', // teal/cyan accent
+      dark: '#0b7f8e',
+      light: '#4cc7db',
+      contrastText: '#ffffff',
     },
     background: {
-      default: '#0a2342',
-      paper: 'rgba(255,255,255,0.15)',
+      default: '#ffffff',
+      paper: 'rgba(255,255,255,0.9)',
     },
     text: {
-      primary: '#ffe082',
-      secondary: '#ffffff',
+      primary: '#0a2833',
+      secondary: '#42515a',
     },
     error: {
       main: '#c62828',

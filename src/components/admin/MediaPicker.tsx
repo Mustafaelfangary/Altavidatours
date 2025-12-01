@@ -121,7 +121,7 @@ export default function MediaPicker({
                   <IconButton
                     size="small"
                     onClick={() => setShowMediaPicker(true)}
-                    className="text-egyptian-gold hover:bg-egyptian-gold/10"
+                    className="text-[#1193b1] hover:bg-[#1193b1]/10"
                   >
                     <CloudUpload size={16} />
                   </IconButton>

@@ -117,11 +117,11 @@ const BookingsList: React.FC<BookingsListProps> = ({
           <Card key={i} className="animate-pulse glass-card">
             <CardContent className="p-3 lg:p-6">
               <div className="flex space-x-3">
-                <div className="w-16 h-16 lg:w-24 lg:h-24 bg-gold/10 rounded-lg"></div>
+                <div className="w-16 h-16 lg:w-24 lg:h-24 bg-gray-100 rounded-lg"></div>
                 <div className="flex-1 space-y-2">
-                  <div className="h-3 lg:h-4 bg-gold/10 rounded w-3/4"></div>
-                  <div className="h-3 lg:h-4 bg-gold/10 rounded w-1/2"></div>
-                  <div className="h-3 lg:h-4 bg-gold/10 rounded w-1/4"></div>
+                  <div className="h-3 lg:h-4 bg-gray-100 rounded w-3/4"></div>
+                  <div className="h-3 lg:h-4 bg-gray-100 rounded w-1/2"></div>
+                  <div className="h-3 lg:h-4 bg-gray-100 rounded w-1/4"></div>
                 </div>
               </div>
             </CardContent>
@@ -134,13 +134,13 @@ const BookingsList: React.FC<BookingsListProps> = ({
   if (bookings.length === 0) {
     return (
       <div className="text-center py-12">
-        <div className="w-16 h-16 mx-auto mb-4 bg-gold/30 rounded-full flex items-center justify-center">
-          <Calendar className="w-8 h-8 text-gold" />
+        <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+          <Calendar className="w-8 h-8 text-[#1193b1]" />
         </div>
-        <h3 className="text-xl font-semibold text-white mb-2 luxury-font">No Journeys Yet</h3>
-        <p className="text-white/80 mb-6 luxury-font">Start your Egyptian adventure by booking your first Dahabiya cruise</p>
+        <h3 className="text-xl font-semibold text-[#073b5a] mb-2 luxury-font">No Journeys Yet</h3>
+        <p className="text-gray-700/80 mb-6 luxury-font">Start your Egyptian adventure by booking your first Dahabiya cruise</p>
         <Link href="/packages">
-          <Button className="btn-gold luxury-font text-lg">
+          <Button className="bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white luxury-font text-lg px-4 py-2 rounded-md">
             <Package className="w-4 h-4 mr-2" />
             Browse Packages
           </Button>
@@ -156,7 +156,7 @@ const BookingsList: React.FC<BookingsListProps> = ({
           <CardContent className="p-3 lg:p-6">
             <div className="flex flex-col md:flex-row gap-3 lg:gap-4">
               {/* Image */}
-              <div className="w-full md:w-24 lg:w-32 h-24 lg:h-32 relative rounded-lg overflow-hidden bg-gold/10">
+              <div className="w-full md:w-24 lg:w-32 h-24 lg:h-32 relative rounded-lg overflow-hidden bg-gray-100">
                 <Image
                   src={booking.package?.mainImageUrl || booking.dahabiya?.mainImageUrl || '/images/placeholder-booking.jpg'}
                   alt={booking.package?.name || booking.dahabiya?.name || 'Booking'}
@@ -169,24 +169,24 @@ const BookingsList: React.FC<BookingsListProps> = ({
               <div className="flex-1">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
                   <div>
-                    <h3 className="text-base lg:text-lg font-bold text-white mb-2 luxury-font">
+                    <h3 className="text-base lg:text-lg font-bold text-[#073b5a] mb-2 luxury-font">
                       {booking.package?.name || booking.dahabiya?.name || 'Custom Booking'}
                     </h3>
                     <div className="flex items-center gap-2 mb-2">
-                      <Badge className={`bg-gold/20 text-white border-gold/40 luxury-font`}>
+                      <Badge className={`bg-[#1193b1]/10 text-[#073b5a] border-[#1193b1]/30 luxury-font`}>
                         {getStatusIcon(booking.status)} {booking.status}
                       </Badge>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold text-white luxury-font">
+                    <p className="text-2xl font-bold text-[#073b5a] luxury-font">
                       ${booking.totalPrice.toLocaleString()}
                     </p>
                   </div>
                 </div>
 
                 {/* Details */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-white/80 luxury-font">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700/85 luxury-font">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
                     <span>
@@ -211,8 +211,8 @@ const BookingsList: React.FC<BookingsListProps> = ({
 
                 {/* Special Requests */}
                 {booking.specialRequests && (
-                  <div className="mt-4 p-3 bg-gold/10 rounded-lg">
-                    <p className="text-sm text-white luxury-font">
+                  <div className="mt-4 p-3 bg-gray-100 rounded-lg">
+                    <p className="text-sm text-gray-700 luxury-font">
                       <strong>Special Requests:</strong> {booking.specialRequests}
                     </p>
                   </div>
@@ -224,7 +224,7 @@ const BookingsList: React.FC<BookingsListProps> = ({
                     <Button variant="outline" size="sm" className="btn-gold luxury-font text-base">
                       <Eye className="w-3 h-3 mr-1" />
                       <span className="text-xs">View Details</span>
-                      <span className="text-xs text-gold ml-1">𓎢𓃭𓅂𓅱𓊪𓄿𓏏𓂋𓄿</span>
+                      <span className="text-xs text-[#073b5a] ml-1">𓎢𓃭𓅂𓅱𓊪𓄿𓏏𓂋𓄿</span>
                     </Button>
                   </Link>
                   {booking.status === 'COMPLETED' && (

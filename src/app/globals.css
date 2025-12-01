@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
 @import "../styles/theme-altavida.css";
 /* Legacy theme imports disabled */
 /* @import "../styles/custom.css"; */
@@ -63,7 +63,11 @@ img {
 
 @layer base {
   :root {
-    /* TravelOK Color Theme - Blue Primary, Orange Accent */
+     /* TravelOK Color Theme - refined palette (Jacada-like inspiration)
+       - Primary: deep navy/indigo
+       - Accent: teal / cyan for callouts
+       - Highlight: warm gold for CTAs
+     */
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
     --card: 0 0% 100%;
@@ -79,12 +83,13 @@ img {
     --primary-muted: 214 86% 95%;
 
     /* TravelOK Color Palette */
-    --travelok-blue: #0e6fbf; /* altavida ocean */
-    --travelok-blue-dark: #0b5aa0; /* deep ocean */
+    --travelok-blue: #073b5a; /* refined navy */
+    --travelok-blue-dark: #04293a; /* deep navy */
     --travelok-blue-light: #1a7fda; /* lighter ocean */
     --travelok-blue-lighter: #4d9ee6;
     --travelok-blue-lightest: #70b5f2;
-    --travelok-orange: #ff7a2d; /* altavida sunset */
+    --travelok-accent: #1193b1; /* teal-cyan accent */
+    --travelok-gold: #d4af37; /* elegant gold */
     --travelok-orange-light: #ff9a5c;
     --travelok-orange-dark: #e56522;
     --travelok-green: #19a57a; /* altavida emerald */
@@ -198,12 +203,12 @@ img {
       0 8px 10px -6px rgb(0 0 0 / 0.1);
 
     /* Luxury Tourism Theme Colors */
-    --luxury-blue: #0a2342;
-    --luxury-blue-dark: #07172b;
-    --luxury-blue-light: #1e3a5c;
-    --luxury-gold: #d4af37;
-    --luxury-gold-light: #ffe082;
-    --luxury-gold-gradient: linear-gradient(90deg, #d4af37 0%, #ffe082 100%);
+    --luxury-blue: #0b2b45;
+    --luxury-blue-dark: #061826;
+    --luxury-blue-light: #1d3f56;
+    --luxury-gold: #1193b1; /* repurposed name — teal primary for CTAs */
+    --luxury-gold-light: #63dbe7; /* lighter teal for highlights */
+    --luxury-gold-gradient: linear-gradient(90deg, #1193b1 0%, #0b79a0 100%);
     --luxury-white: #ffffff;
     --luxury-glass: rgba(255,255,255,0.15);
     --luxury-shadow: 0 8px 32px 0 rgba(10,35,66,0.25);
@@ -292,11 +297,14 @@ img {
   }
 
   body {
-    background: var(--luxury-blue);
-    color: var(--luxury-white);
+    /* Use a bright canvas similar to the reference site with soft gradients */
+    background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%);
+    color: rgba(10, 30, 45, 0.95);
     font-family: var(--luxury-font-body);
     letter-spacing: 0.01em;
-    font-size: 1.08rem;
+    font-size: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -307,7 +315,7 @@ img {
   }
 
   a {
-    color: var(--luxury-gold);
+    color: var(--travelok-accent);
     text-decoration: none;
     transition: color 0.2s;
   }
@@ -318,33 +326,34 @@ img {
 
   /* Glassmorphism Card */
   .glass-card {
-    background: var(--luxury-glass);
-    box-shadow: var(--luxury-shadow);
-    border-radius: var(--luxury-radius);
-    backdrop-filter: blur(16px) saturate(180%);
-    border: 1.5px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.72);
+    box-shadow: 0 12px 34px rgba(12,22,36,0.12);
+    border-radius: 1rem;
+    backdrop-filter: blur(6px) saturate(140%);
+    border: 1px solid rgba(10,30,45,0.06);
   }
 
   /* Gold Button */
   .btn-gold {
-    background: var(--luxury-gold-gradient);
-    color: var(--luxury-blue-dark);
+    background: linear-gradient(90deg, var(--travelok-accent) 0%, #0b79a0 100%);
+    color: #ffffff;
     border-radius: var(--luxury-radius);
     font-weight: 700;
-    box-shadow: var(--luxury-shadow-gold);
+    box-shadow: 0 8px 30px rgba(11,39,62,0.12);
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   }
 
   .btn-gold:hover {
-    background: var(--luxury-gold);
-    color: var(--luxury-blue);
-    box-shadow: 0 8px 32px 0 rgba(212,175,55,0.25);
+    /* Keep hover within the teal/navy system (no gold hover) */
+    background: linear-gradient(90deg, #0b79a0 0%, #073b5a 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 32px 0 rgba(7,59,90,0.16);
   }
 
   /* Animated underline for nav links */
   .nav-link {
     position: relative;
-    color: var(--luxury-gold);
+    color: var(--travelok-accent);
     font-weight: 600;
     transition: color 0.2s;
   }
@@ -367,7 +376,7 @@ img {
   /* Luxury Section Headings */
   .section-heading {
     font-family: var(--luxury-font-head);
-    color: var(--luxury-gold);
+    color: var(--travelok-accent);
     font-size: 2.5rem;
     font-weight: 800;
     letter-spacing: 0.04em;
@@ -393,9 +402,9 @@ img {
 
   /* Luxury Testimonial Card */
   .testimonial-card {
-    background: var(--luxury-glass);
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));
     border-radius: var(--luxury-radius-lg);
-    box-shadow: var(--luxury-shadow-gold);
+    box-shadow: 0 12px 40px rgba(12,22,36,0.08);
     padding: 2rem 2.5rem;
     color: var(--luxury-white);
     font-family: var(--luxury-font-body);

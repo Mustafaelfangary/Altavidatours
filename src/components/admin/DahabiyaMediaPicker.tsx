@@ -135,7 +135,7 @@ export default function DahabiyaMediaPicker({
               setShowMediaPicker(true);
             }}
             size="small"
-            className="bg-egyptian-gold/10 border-egyptian-gold text-hieroglyph-brown hover:bg-egyptian-gold/20"
+            className="bg-[#1193b1]/10 border-[#1193b1] text-[#073b5a] hover:bg-[#1193b1]/20"
           >
             {type === 'single' ? 'Select Image' : 'Add Image'}
           </Button>
@@ -305,7 +305,7 @@ export default function DahabiyaMediaPicker({
                 setReplacingIndex(null);
                 setShowMediaPicker(true);
               }}
-              className="border-egyptian-gold text-hieroglyph-brown hover:bg-egyptian-gold/10"
+              className="border-[#1193b1] text-[#073b5a] hover:bg-[#1193b1]/10"
             >
               {type === 'single' ? 'Select Image' : 'Add Images'}
             </Button>
@@ -328,7 +328,7 @@ export default function DahabiyaMediaPicker({
                 setShowMediaPicker(true);
               }}
               size="small"
-              className="text-egyptian-gold hover:bg-egyptian-gold/10"
+              className="text-[#1193b1] hover:bg-[#1193b1]/10"
             >
               Add More
             </Button>

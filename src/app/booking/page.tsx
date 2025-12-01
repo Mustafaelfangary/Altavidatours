@@ -93,10 +93,10 @@ export default function BookingPage() {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-egyptian-gold to-sunset-orange rounded-full flex items-center justify-center mb-4 mx-auto animate-pulse">
+          <div className="w-16 h-16 bg-gradient-to-br from-[#1193b1] to-[#073b5a] rounded-full flex items-center justify-center mb-4 mx-auto animate-pulse">
             <Crown className="w-8 h-8 text-white" />
           </div>
-          <p className="text-egyptian-gold text-xl">{getContent('booking_loading', 'Loading vessels...')}</p>
+          <p className="text-[#073b5a] text-xl">{getContent('booking_loading', 'Loading vessels...')}</p>
         </div>
       </div>
     );
@@ -124,13 +124,13 @@ export default function BookingPage() {
               <span className="text-blue-600">𓂋</span><span className="text-emerald-600">𓏤</span><span className="text-blue-600">𓈖</span><span className="text-emerald-600">𓇋</span><span className="text-blue-600">𓆎</span><span className="text-emerald-600">𓏏</span><span className="text-blue-600">𓂻</span>
             </div>
           </div>
-          <h1 className="text-6xl font-bold text-egyptian-gold mb-4 font-heading bg-gradient-to-r from-egyptian-gold via-sunset-orange to-egyptian-gold bg-clip-text text-transparent">
+          <h1 className="text-6xl font-bold text-[#073b5a] mb-4 font-heading bg-gradient-to-r from-[#1193b1] via-[#0b79a0] to-[#073b5a] bg-clip-text text-transparent">
             {getContent('booking_hero_title', '𓊪𓈖𓇳 Booking Portal 𓇳𓈖𓊪')}
           </h1>
 
           {/* Show selected dahabiya info if pre-selected */}
           {selectedDahabiya ? (
-            <div className="bg-gradient-to-r from-egyptian-gold/20 to-deep-blue-400/20 rounded-xl p-6 mb-6 border-2 border-egyptian-gold/30">
+            <div className="bg-gradient-to-r from-[#1193b1]/20 to-[#073b5a]/20 rounded-xl p-6 mb-6 border-2 border-[#1193b1]/30">
               <Typography variant="h5" className="text-hieroglyph-brown font-bold mb-2">
                 {getContent('booking_selected_label', 'Booking:')} {selectedDahabiya.name}
               </Typography>
