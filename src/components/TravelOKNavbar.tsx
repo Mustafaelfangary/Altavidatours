@@ -127,16 +127,29 @@ export default function TravelOKNavbar() {
         if (response.ok) {
           const result = await response.json();
           if (result.logoUrl) {
-            // Accept absolute URLs as-is; prefix relative filenames with /images/
-            const normalizedUrl = result.logoUrl.startsWith('/')
-              ? result.logoUrl
-              : `/images/${result.logoUrl}`;
+            // Normalize logo URL robustly:
+            // - If starts with 'http', use as-is
+            // - If starts with '/', use as-is
+            // - If just a filename, prefix with '/'
+            // - Fallback to '/altavida-logo-1.png'
+            let normalizedUrl = '/altavida-logo-1.png';
+            if (typeof result.logoUrl === 'string') {
+              if (result.logoUrl.startsWith('http')) {
+                normalizedUrl = result.logoUrl;
+              } else if (result.logoUrl.startsWith('/')) {
+                normalizedUrl = result.logoUrl;
+              } else if (result.logoUrl.match(/^[\w.-]+\.(png|jpg|jpeg|svg|webp|gif|ico)$/i)) {
+                normalizedUrl = '/' + result.logoUrl.replace(/^\//, '');
+              }
+            }
             setLogoUrl(normalizedUrl);
+          } else {
+            setLogoUrl('/altavida-logo-1.png');
           }
+        } else {
+          setLogoUrl('/altavida-logo-1.png');
         }
       } catch (error) {
-        console.error('Failed to fetch logo:', error);
-        // Use new default logo
         setLogoUrl('/altavida-logo-1.png');
       }
     };
@@ -144,8 +157,6 @@ export default function TravelOKNavbar() {
   }, []);
 
   // Fetch dahabiyas and itineraries for dropdowns
-  const [dahabiyasItems, setDahabiyasItems] = useState<Array<{href: string; label: string; description?: string; icon?: string}>>([]);
-  const [itinerariesItems, setItinerariesItems] = useState<Array<{href: string; label: string; description?: string; icon?: string}>>([]);
   const [packagesItems, setPackagesItems] = useState<Array<{href: string; label: string; description?: string; icon?: string}>>([]);
 
   useEffect(() => {
@@ -417,8 +428,18 @@ export default function TravelOKNavbar() {
       </div>
 
       {/* Luxury Main Navigation */}
-      <nav className={`navbar glass-card bg-[rgba(10,35,66,0.98)] text-gold shadow-xl relative z-40 transition-all duration-500 ${scrolled ? 'shadow-2xl' : 'shadow-lg'} ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`} ref={containerRef} style={{ overflow: 'visible', backdropFilter: 'blur(24px) saturate(180%)' }}>
-        <div className="max-w-7xl mx-auto" style={{ overflow: 'visible' }}>
+      <nav
+        className={`navbar glass-card bg-[rgba(10,35,66,0.98)] text-gold shadow-xl relative z-40 transition-all duration-500 ${scrolled ? 'shadow-2xl' : 'shadow-lg'} ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}
+        ref={containerRef}
+        style={{
+          overflow: 'visible',
+          backdropFilter: 'blur(24px) saturate(180%)',
+          maxWidth: '100vw',
+          paddingLeft: 0,
+          paddingRight: 0
+        }}
+      >
+        <div className="w-full mx-auto px-2" style={{ overflow: 'visible' }}>
           <div className="navbar-inner flex items-center justify-start" style={{ overflow: 'visible' }}>
             {/* Mobile Menu Button */}
             <button
@@ -460,7 +481,7 @@ export default function TravelOKNavbar() {
                     aria-controls={`mega-${item.id}`}
                     onClick={() => toggleDropdownClick(item.id)}
                     onKeyDown={(e) => onKeyDownTopItem(e, item.id)}
-                    className={`px-3 py-3 text-[13px] font-bold nav-link border-r border-gold flex items-center space-x-2 hover:-translate-y-0.5 ${activeDropdown === item.id || isActive(item.mainHref) ? 'bg-gold text-blue-900' : 'text-gold hover:bg-gold/20'}`}
+                    className={`px-2 py-2 text-[13px] font-bold nav-link border-r border-gold flex items-center space-x-2 hover:-translate-y-0.5 ${activeDropdown === item.id || isActive(item.mainHref) ? 'bg-gold text-blue-900' : 'text-gold hover:bg-gold/20'}`}
                   >
                     <item.icon size={16} />
                     <span>{item.label}</span>
@@ -592,17 +613,19 @@ export default function TravelOKNavbar() {
             </div>
 
             {/* Center Logo */}
-              <div className="flex-shrink-0 px-4 lg:px-6 py-2 lg:border-x border-gold brand">
+            <div className="flex-shrink-0 px-2 lg:px-3 py-1 lg:border-x border-gold brand">
               <Link href="/" className="flex items-center">
-                <OptimizedImage 
-                  src={logoUrl} 
-                  alt="Altavida Tours.com" 
-                  width={120}
-                  height={38}
-                  className="h-9 lg:h-10 w-auto transition-all duration-300 drop-shadow-lg"
-                  priority={true}
-                  quality={90}
-                />
+                <div className="rounded-full bg-white/80 border-2 border-gold shadow-lg flex items-center justify-center overflow-hidden w-12 h-12 lg:w-14 lg:h-14 transition-all duration-300">
+                  <OptimizedImage 
+                    src={logoUrl} 
+                    alt="Altavida Tours.com" 
+                    width={48}
+                    height={48}
+                    className="object-cover w-12 h-12 lg:w-14 lg:h-14 rounded-full"
+                    priority={true}
+                    quality={90}
+                  />
+                </div>
               </Link>
             </div>
 
