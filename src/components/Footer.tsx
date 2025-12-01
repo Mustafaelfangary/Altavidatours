@@ -238,15 +238,29 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
           {/* Modern Header - Mobile Optimized */}
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <div className="flex items-center justify-center mb-4 sm:mb-6">
-              <Image
-                src={getFooterLogo()}
-                alt="Site Logo"
-                width={120}
-                height={120}
-                className="h-20 sm:h-24 md:h-32 w-auto object-contain"
-                unoptimized={true}
-                key={`footer-logo-${footerLogoTimestamp}`}
-              />
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 'clamp(5rem, 12vw, 8rem)',
+                height: 'clamp(5rem, 12vw, 8rem)',
+                borderRadius: '50%',
+                backgroundColor: '#f3f4f6',
+                border: '3px solid #e5e7eb',
+                padding: '0.75rem',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.12)',
+                transition: 'all 0.3s ease-in-out'
+              }}>
+                <Image
+                  src={getFooterLogo()}
+                  alt="Site Logo"
+                  width={120}
+                  height={120}
+                  className="h-14 sm:h-20 md:h-24 w-auto object-contain"
+                  unoptimized={true}
+                  key={`footer-logo-${footerLogoTimestamp}`}
+                />
+              </div>
             </div>
 
             {/* Hieroglyphic Egypt Header */}

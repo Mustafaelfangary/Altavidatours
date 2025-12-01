@@ -481,33 +481,47 @@ export default function Navbar() {
             top: '50%',
             transform: 'translateY(-50%)'
           }}>
-            <Image
-              src={getLogoCacheBustUrl(logoUrl)}
-              alt={getHomepageContent('site_name', 'Altavida Tours.com')}
-              width={180}
-              height={60}
-              className="h-16 w-auto"
-              priority
-              fetchPriority="high"
-              unoptimized={true}
-              suppressHydrationWarning={true}
-              onError={(e) => {
-                console.warn('Logo failed to load, falling back to default:', logoUrl);
-                setLogoUrl('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
-                if (isClient) {
-                  if (process.env.NODE_ENV === 'development') {
-                    setLogoTimestamp(Date.now());
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '4rem',
+              height: '4rem',
+              borderRadius: '50%',
+              backgroundColor: '#f3f4f6',
+              border: '2px solid #e5e7eb',
+              padding: '0.5rem',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+              transition: 'all 0.3s ease-in-out'
+            }}>
+              <Image
+                src={getLogoCacheBustUrl(logoUrl)}
+                alt={getHomepageContent('site_name', 'Altavida Tours.com')}
+                width={100}
+                height={100}
+                className="h-14 w-14 object-contain"
+                priority
+                fetchPriority="high"
+                unoptimized={true}
+                suppressHydrationWarning={true}
+                onError={(e) => {
+                  console.warn('Logo failed to load, falling back to default:', logoUrl);
+                  setLogoUrl('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
+                  if (isClient) {
+                    if (process.env.NODE_ENV === 'development') {
+                      setLogoTimestamp(Date.now());
+                    }
                   }
-                }
-              }}
-              onLoad={(e) => {
-                // Debug log for development to confirm logo loaded
-                if (process.env.NODE_ENV === 'development') {
-                  console.log('Logo loaded successfully:', getLogoCacheBustUrl(logoUrl));
-                }
-              }}
-              key={isClient && logoTimestamp ? `logo-${logoTimestamp}` : 'logo-ssr'}
-            />
+                }}
+                onLoad={(e) => {
+                  // Debug log for development to confirm logo loaded
+                  if (process.env.NODE_ENV === 'development') {
+                    console.log('Logo loaded successfully:', getLogoCacheBustUrl(logoUrl));
+                  }
+                }}
+                key={isClient && logoTimestamp ? `logo-${logoTimestamp}` : 'logo-ssr'}
+              />
+            </div>
           </Link>
 
           {/* Navigation Links - Center, single line */}
