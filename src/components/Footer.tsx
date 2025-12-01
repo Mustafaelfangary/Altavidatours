@@ -60,8 +60,6 @@ function ContactDeveloperModal() {
     return contentValue || fallback;
   };
 
-
-
   // WhatsApp handler
   const handleWhatsApp = () => {
     const phone = get('footer_developer_phone', '+201234567890').replace(/\s+/g, '').replace('+', '');
@@ -165,7 +163,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
   // Get dynamic footer logo with cache busting
   const getFooterLogo = () => {
     // Prefer branding settings, fallback to global media
-    const logoUrl = getBrandingContent('footer_logo', '') || getGlobalContent('footer_logo', '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
+    const logoUrl = getBrandingContent('footer_logo', '') || getGlobalContent('footer_logo', '/altavida-logo-1.png');
     // Add cache-busting timestamp
     if (logoUrl.includes('?')) {
       return `${logoUrl}&t=${footerLogoTimestamp}`;
@@ -369,14 +367,12 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
               <p className="text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base font-medium px-2 sm:px-0">
                 {get('footer-newsletter-text', 'Subscribe to get updates on our latest offers and journeys.')}
               </p>
-
               <div className="space-y-2 sm:space-y-3 px-2 sm:px-0">
                 <input
                   type="email"
                   placeholder="Enter your email..."
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 text-gray-900 placeholder-gray-600 text-sm sm:text-base"
                 />
-
                 <button className="w-full bg-gradient-to-r from-egyptian-gold to-sunset-orange text-deep-blue font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg hover:from-egyptian-amber hover:to-egyptian-gold hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 text-sm sm:text-base shadow-lg focus-visible:outline-2 focus-visible:outline-emerald-400">
                   <Send className="w-4 h-4" />
                   <span className="mr-1">𓇳</span>
@@ -385,7 +381,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
                 </button>
               </div>
             </div>
-          </div>
+          </div> {/* End grid */}
 
           {/* Our Partners Section */}
           <div className="mt-8 pt-8 border-t border-white/20">
@@ -429,7 +425,6 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
                 className="w-full h-full object-cover"
               />
             </div>
-
             {/* Contact Developer Button */}
             <div className="mt-2 sm:mt-0">
               <ContactDeveloperModal />
@@ -442,7 +437,6 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
               <p className="text-gray-700 font-medium text-sm md:text-base text-center md:text-left">
                 © {new Date().getFullYear()} {get('footer-company-name', 'Altavida Tours.com')}. All Rights Reserved.
               </p>
-
               <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 md:space-x-6">
                 <Link
                   href="/privacy"
@@ -459,7 +453,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
               </div>
             </div>
           </div>
-        </div>
+        </div> {/* End inner content */}
       </Container>
     </footer>
   );

@@ -550,6 +550,15 @@ export default function TravelOKHomepage() {
           </div>
         </div>
       </div>
+
+      {/* Contact Section - Luxury, white text on dark blue */}
+      <div className="bg-[rgba(10,35,66,0.98)] py-12 px-4 mt-16 rounded-xl text-white max-w-3xl mx-auto">
+        <h2 className="text-2xl font-bold mb-4 section-heading">Contact Us</h2>
+        <div className="mb-2 flex items-center"><span className="font-bold mr-2">Address:</span> Egypt, Giza &lt;haram, Mashaal Station, pyramids view Tower 2, No 312</div>
+        <div className="mb-2 flex items-center"><span className="font-bold mr-2">Phone:</span> +20 10 02588564</div>
+        <div className="mb-2 flex items-center"><span className="font-bold mr-2">WhatsApp:</span> +20 10 02588564</div>
+        <div className="mb-2 flex items-center"><span className="font-bold mr-2">Email:</span> bookings@altavidatours.com</div>
+      </div>
     </div>
   );
 }

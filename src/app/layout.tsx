@@ -57,7 +57,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         {/* Preload site logo to prevent flicker on initial paint */}
-        <link rel="preload" as="image" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" />
+        <link rel="preload" as="image" href="/altavida-logo-1.png" />
 
         {/* PWA meta tags */}
         <meta name="format-detection" content="telephone=no" />
@@ -67,9 +67,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Altavida Tours.com" />
 
         {/* Favicon and app icons */}
-        <link rel="icon" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" sizes="any" />
-        <link rel="icon" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/altavida-logo-1.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/altavida-logo-1.png" />
         <link rel="manifest" href="/manifest.json" />
 
         {/* Structured data */}

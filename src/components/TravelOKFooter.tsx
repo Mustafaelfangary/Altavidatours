@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function TravelOKFooter() {
-  const [logoUrl, setLogoUrl] = useState('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
+  const [logoUrl, setLogoUrl] = useState('/altavida-logo-1.png');
 
   useEffect(() => {
     const fetchLogo = async () => {
@@ -19,7 +19,8 @@ export default function TravelOKFooter() {
           }
         }
       } catch (_) {
-        // keep default
+        // Use new default logo
+        setLogoUrl('/altavida-logo-1.png');
       }
     };
     fetchLogo();
@@ -93,24 +94,23 @@ export default function TravelOKFooter() {
               <div className="flex items-start space-x-3">
                 <span className="text-gold text-lg">📍</span>
                 <div>
-                  <p className="text-sm text-gold">Cairo, Egypt</p>
-                  <p className="text-sm text-gold">Nile Corniche, Zamalek</p>
+                  <p className="text-sm text-white">Egypt, Giza &lt;haram, Mashaal Station, pyramids view Tower 2, No 312</p>
                 </div>
               </div>
               
               <div className="flex items-center space-x-3">
                 <span className="text-gold text-lg">📞</span>
-                <p className="text-sm text-gold">+20 2 2736 8888</p>
+                <p className="text-sm text-white">+20 10 02588564</p>
               </div>
               
               <div className="flex items-center space-x-3">
                 <span className="text-gold text-lg">✉️</span>
-                <p className="text-sm text-gold">bookings@altavidatours.com</p>
+                <p className="text-sm text-white">bookings@altavidatours.com</p>
               </div>
               
               <div className="flex items-center space-x-3">
                 <span className="text-gold text-lg">📱</span>
-                <p className="text-sm text-gold">WhatsApp: +20 100 123 4567</p>
+                <p className="text-sm text-white">WhatsApp: +20 10 02588564</p>
               </div>
             </div>
 

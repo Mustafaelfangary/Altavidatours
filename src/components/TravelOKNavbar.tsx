@@ -51,7 +51,7 @@ export default function TravelOKNavbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [openViaClick, setOpenViaClick] = useState<string | null>(null);
   const [expandedMobileSections, setExpandedMobileSections] = useState<Record<string, boolean>>({});
-  const [logoUrl, setLogoUrl] = useState('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
+  const [logoUrl, setLogoUrl] = useState('/altavida-logo-1.png');
   const [scrolled, setScrolled] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -136,7 +136,8 @@ export default function TravelOKNavbar() {
         }
       } catch (error) {
         console.error('Failed to fetch logo:', error);
-        // Keep the default logo URL
+        // Use new default logo
+        setLogoUrl('/altavida-logo-1.png');
       }
     };
     fetchLogo();
@@ -399,11 +400,14 @@ export default function TravelOKNavbar() {
             
             {/* Right side info */}
             <div className="flex items-center space-x-5 text-[13px]">
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 text-white">
                 <Phone size={16} />
-                <span className="font-medium">+20 123 456 7890</span>
+                <span className="font-medium">+20 10 02588564</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 text-white">
+                <span className="font-medium">WhatsApp: +20 10 02588564</span>
+              </div>
+              <div className="flex items-center space-x-2 text-white">
                 <Clock size={16} />
                 <span className="font-medium">24/7 Support</span>
               </div>
