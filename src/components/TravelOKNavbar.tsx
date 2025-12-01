@@ -300,7 +300,7 @@ export default function TravelOKNavbar() {
       setActiveDropdown(null);
       setOpenViaClick(null);
     } else {
-      setActiveDropdown(itemId);
+      openDropdown(itemId);
       setOpenViaClick(itemId);
     }
   };
@@ -351,8 +351,8 @@ export default function TravelOKNavbar() {
 
   return (
     <>
-      {/* Modern Top Bar with Language Selector */}
-      <div className={`topbar hidden lg:block transition-all duration-300 ${scrolled ? 'py-1' : 'py-1.5'}`}>
+      {/* Luxury Top Bar with Language Selector */}
+      <div className={`topbar hidden lg:block glass-card transition-all duration-300 ${scrolled ? 'py-1' : 'py-1.5'} bg-[rgba(10,35,66,0.92)] text-gold shadow-lg backdrop-blur-xl`}> 
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-6">
@@ -412,14 +412,14 @@ export default function TravelOKNavbar() {
         </div>
       </div>
 
-      {/* Modern Main Navigation */}
-      <nav className={`navbar bg-white shadow-lg relative z-40 transition-all duration-500 ${scrolled ? 'shadow-xl' : 'shadow-md'} ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`} ref={containerRef} style={{ overflow: 'visible' }}>
+      {/* Luxury Main Navigation */}
+      <nav className={`navbar glass-card bg-[rgba(10,35,66,0.98)] text-gold shadow-xl relative z-40 transition-all duration-500 ${scrolled ? 'shadow-2xl' : 'shadow-lg'} ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`} ref={containerRef} style={{ overflow: 'visible', backdropFilter: 'blur(24px) saturate(180%)' }}>
         <div className="max-w-7xl mx-auto" style={{ overflow: 'visible' }}>
           <div className="navbar-inner flex items-center justify-start" style={{ overflow: 'visible' }}>
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-4 text-blue-600 hover:bg-blue-50 transition-colors duration-200 mobile-menu-button"
+              className="lg:hidden p-4 text-gold hover:bg-blue-700 transition-colors duration-200 mobile-menu-button"
               data-testid="mobile-menu-button"
               aria-label={mobileMenuOpen ? 'close menu' : 'open menu'}
               aria-expanded={mobileMenuOpen}
@@ -430,7 +430,7 @@ export default function TravelOKNavbar() {
             {/* Home Link */}
             <Link 
               href="/" 
-              className="hidden lg:block px-4 py-3.5 text-[13px] font-bold text-primary hover:bg-primary/5 transition-colors duration-200 border-r border-gray-200"
+              className="hidden lg:block px-4 py-3.5 text-[13px] font-bold nav-link border-r border-gold"
             >
               HOME
             </Link>
@@ -456,11 +456,7 @@ export default function TravelOKNavbar() {
                     aria-controls={`mega-${item.id}`}
                     onClick={() => toggleDropdownClick(item.id)}
                     onKeyDown={(e) => onKeyDownTopItem(e, item.id)}
-                    className={`px-3 py-3 text-[13px] font-bold transition-all duration-200 border-r border-gray-200 flex items-center space-x-2 hover:-translate-y-0.5 ${
-                    activeDropdown === item.id || isActive(item.mainHref)
-                      ? 'bg-primary text-white' 
-                      : 'text-primary hover:bg-blue-50'
-                  }`}
+                    className={`px-3 py-3 text-[13px] font-bold nav-link border-r border-gold flex items-center space-x-2 hover:-translate-y-0.5 ${activeDropdown === item.id || isActive(item.mainHref) ? 'bg-gold text-blue-900' : 'text-gold hover:bg-gold/20'}`}
                   >
                     <item.icon size={16} />
                     <span>{item.label}</span>
@@ -584,7 +580,7 @@ export default function TravelOKNavbar() {
               {/* Additional Links */}
               <Link
                 href="/gallery"
-                className="px-4 py-3.5 text-[13px] font-bold text-primary hover:bg-blue-50 transition-colors duration-200 border-r border-gray-200 flex items-center space-x-2"
+                className="px-4 py-3.5 text-[13px] font-bold text-gold hover:bg-blue-700 transition-colors duration-200 border-r border-gray-200 flex items-center space-x-2"
               >
                 <Camera size={16} />
                 <span>GALLERY</span>
@@ -592,14 +588,14 @@ export default function TravelOKNavbar() {
             </div>
 
             {/* Center Logo */}
-              <div className="flex-shrink-0 px-4 lg:px-6 py-2 lg:border-x border-gray-200 brand">
+              <div className="flex-shrink-0 px-4 lg:px-6 py-2 lg:border-x border-gold brand">
               <Link href="/" className="flex items-center">
                 <OptimizedImage 
                   src={logoUrl} 
                   alt="Altavida Tours.com" 
                   width={120}
                   height={38}
-                  className="h-9 lg:h-10 w-auto transition-all duration-300"
+                  className="h-9 lg:h-10 w-auto transition-all duration-300 drop-shadow-lg"
                   priority={true}
                   quality={90}
                 />
@@ -610,7 +606,7 @@ export default function TravelOKNavbar() {
             <div className="hidden lg:flex items-center flex-shrink-0 ml-auto">
               <Link
                 href="/blog"
-                className="px-4 py-3.5 text-[13px] font-bold text-primary hover:bg-blue-50 transition-colors duration-200 border-l border-gray-200 flex items-center space-x-2"
+                className="px-4 py-3.5 text-[13px] font-bold text-gold hover:bg-blue-700 transition-colors duration-200 border-l border-gray-200 flex items-center space-x-2"
               >
                 <BookOpen size={16} />
                 <span>BLOG</span>
@@ -632,7 +628,7 @@ export default function TravelOKNavbar() {
                       e.stopPropagation();
                       setProfileMenuOpen(!profileMenuOpen);
                     }}
-                    className="flex items-center space-x-2 text-[13px] font-medium text-primary hover:text-accent transition-colors duration-200 cursor-pointer"
+                    className="flex items-center space-x-2 text-[13px] font-medium text-gold hover:text-accent transition-colors duration-200 cursor-pointer"
                     type="button"
                   >
                     <UserCircle size={20} />
@@ -690,7 +686,7 @@ export default function TravelOKNavbar() {
               ) : (
                 <Link
                   href="/auth/signin"
-                  className="px-4 py-3.5 text-[13px] font-bold text-blue-600 hover:bg-blue-50 transition-colors duration-200 border-l border-gray-200 flex items-center space-x-2"
+                  className="px-4 py-3.5 text-[13px] font-bold text-gold hover:bg-blue-700 transition-colors duration-200 border-l border-gray-200 flex items-center space-x-2"
                 >
                   <User size={18} />
                   <span>SIGN IN</span>
@@ -705,7 +701,7 @@ export default function TravelOKNavbar() {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
                 <div className="fixed inset-0 bg-black opacity-50" onClick={() => setMobileMenuOpen(false)}></div>
-          <div className="fixed top-0 left-0 w-full max-w-sm bg-white shadow-2xl h-full overflow-y-auto">
+          <div className="fixed top-0 left-0 w-full max-w-sm bg-blue-900 text-gold shadow-2xl h-full overflow-y-auto glass-card">
             <div className="flex justify-between items-center p-4 border-b topbar text-white">
               <span className="font-bold text-lg">Menu</span>
               <button onClick={() => setMobileMenuOpen(false)}>
@@ -729,13 +725,13 @@ export default function TravelOKNavbar() {
                   />
                 </form>
               </div>
-              <Link href="/" className="block px-6 py-3 text-sm font-bold text-primary hover:bg-blue-50 transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/" className="block px-6 py-3 text-sm font-bold text-gold hover:bg-blue-700 transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
                 HOME
               </Link>
               {mainNavItems.map((item) => (
                 <div key={item.id} className="border-b">
                   <button
-                    className="w-full flex items-center justify-between px-6 py-3 font-bold text-primary bg-gray-50"
+                    className="w-full flex items-center justify-between px-6 py-3 font-bold text-gold bg-blue-800"
                     onClick={() => toggleMobileSection(item.id)}
                   >
                     <span className="flex items-center space-x-2">
@@ -750,7 +746,7 @@ export default function TravelOKNavbar() {
                         <Link
                           key={subItem.href}
                           href={subItem.href}
-                          className="flex items-center space-x-2 px-8 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150"
+                          className="flex items-center space-x-2 px-8 py-2 text-sm text-gray-300 hover:bg-blue-700 transition-colors duration-150"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <span>{subItem.icon}</span>
@@ -759,7 +755,7 @@ export default function TravelOKNavbar() {
                       ))}
                       <Link
                         href={item.mainHref}
-                        className="flex items-center space-x-2 px-8 py-2 text-sm text-blue-600 hover:bg-blue-50 transition-colors duration-150"
+                        className="flex items-center space-x-2 px-8 py-2 text-sm text-gold hover:bg-blue-700 transition-colors duration-150"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <ArrowRight size={16} />
@@ -774,7 +770,7 @@ export default function TravelOKNavbar() {
                 <>
                   <Link
                     href="/profile"
-                    className="flex items-center space-x-2 px-6 py-3 text-sm font-bold text-blue-600 hover:bg-blue-50 transition-colors duration-200"
+                    className="flex items-center space-x-2 px-6 py-3 text-sm font-bold text-gold hover:bg-blue-700 transition-colors duration-200"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <User size={18} />
@@ -783,7 +779,7 @@ export default function TravelOKNavbar() {
                   {session.user?.role === 'ADMIN' && (
                     <Link
                       href="/admin"
-                      className="flex items-center space-x-2 px-6 py-3 text-sm font-bold text-blue-600 hover:bg-blue-50 transition-colors duration-200"
+                      className="flex items-center space-x-2 px-6 py-3 text-sm font-bold text-gold hover:bg-blue-700 transition-colors duration-200"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <LayoutDashboard size={18} />
@@ -804,17 +800,17 @@ export default function TravelOKNavbar() {
               ) : (
                 <Link
                   href="/auth/signin"
-                  className="block px-6 py-3 text-sm font-bold text-blue-600 hover:bg-blue-50 transition-colors duration-200"
+                  className="block px-6 py-3 text-sm font-bold text-gold hover:bg-blue-700 transition-colors duration-200"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   SIGN IN
                 </Link>
               )}
               
-              <Link href="/gallery" className="block px-6 py-3 text-sm font-bold text-primary hover:bg-blue-50 transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/gallery" className="block px-6 py-3 text-sm font-bold text-gold hover:bg-blue-700 transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
                 GALLERY
               </Link>
-              <Link href="/blog" className="block px-6 py-3 text-sm font-bold text-primary hover:bg-blue-50 transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/blog" className="block px-6 py-3 text-sm font-bold text-gold hover:bg-blue-700 transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
                 BLOG
               </Link>
               <Link href="/contact" className="block px-6 py-3 text-sm font-bold btn-primary-gradient" onClick={() => setMobileMenuOpen(false)}>

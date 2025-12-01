@@ -4,24 +4,33 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#1BAE70', // TDS Green
-      dark: '#16925b',
-      light: '#20c97e',
-      contrastText: '#ffffff',
+      main: '#0a2342', // Luxury deep blue
+      dark: '#07172b',
+      light: '#1e3a5c',
+      contrastText: '#ffe082', // Gold text
     },
     secondary: {
-      main: '#0B70E1', // TDS Blue
-      dark: '#0A2FA6',
-      light: '#106EEA',
-      contrastText: '#ffffff',
+      main: '#d4af37', // Luxury gold
+      dark: '#bfa233',
+      light: '#ffe082',
+      contrastText: '#0a2342',
     },
     background: {
-      default: 'hsl(0, 0%, 100%)', // White
-      paper: 'hsl(0, 0%, 100%)',
+      default: '#0a2342',
+      paper: 'rgba(255,255,255,0.15)',
     },
     text: {
-      primary: 'hsl(0, 0%, 0%)', // Black
-      secondary: 'hsl(0, 0%, 0%)', // Changed to black for better contrast
+      primary: '#ffe082',
+      secondary: '#ffffff',
+    },
+    error: {
+      main: '#c62828',
+    },
+    success: {
+      main: '#1bae70',
+    },
+    info: {
+      main: '#1baee1',
     },
   },
   components: {
@@ -140,99 +149,18 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          fontWeight: 600,
-        },
-      },
-    },
-    // Fix Material-UI Chip text
-    MuiChip: {
-      styleOverrides: {
-        label: {
-          color: '#000000 !important',
-          fontWeight: 600,
-        },
-      },
-    },
-    // Fix Material-UI Dialog components
-    MuiDialogTitle: {
-      styleOverrides: {
-        root: {
-          color: '#ffffff !important',
-          fontWeight: 700,
-          backgroundColor: '#1BAE70 !important',
-        },
-      },
-    },
-    MuiDialogContent: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#ffffff !important',
-          color: '#000000 !important',
-        },
-      },
-    },
-    // Fix Material-UI Tab components
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          color: '#000000 !important',
-          fontWeight: 600,
-          '&.Mui-selected': {
-            color: '#1BAE70 !important',
-            fontWeight: 700,
-          },
-        },
-      },
-    },
-  },
-  typography: {
-    fontFamily: [
-      'Inter',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-    ].join(','),
-    h1: {
-      fontFamily: '"Playfair Display", "Times New Roman", serif',
-      fontWeight: 700,
-      letterSpacing: '0.02em',
-    },
-    h2: {
-      fontFamily: '"Playfair Display", "Times New Roman", serif',
-      fontWeight: 600,
-      letterSpacing: '0.01em',
-    },
-    h3: {
-      fontFamily: '"Playfair Display", "Times New Roman", serif',
-      fontWeight: 600,
-    },
-    h4: {
-      fontWeight: 600,
-    },
-    h5: {
-      fontWeight: 600,
-    },
-    h6: {
-      fontWeight: 600,
-    },
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
           textTransform: 'none',
-          borderRadius: '0.75rem',
-          fontWeight: 600,
-          padding: '12px 24px',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+          borderRadius: '1.25rem',
+          fontWeight: 700,
+          padding: '14px 32px',
+          background: 'linear-gradient(90deg, #d4af37 0%, #ffe082 100%)',
+          color: '#0a2342',
+          boxShadow: '0 4px 24px 0 rgba(212,175,55,0.15)',
+          transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
           '&:hover': {
-            transform: 'translateY(-2px)',
-            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
+            background: '#d4af37',
+            color: '#0a2342',
+            boxShadow: '0 8px 32px 0 rgba(212,175,55,0.25)',
           },
         },
         contained: {
@@ -250,49 +178,16 @@ export const theme = createTheme({
         },
       },
     },
-    MuiPaper: {
+    // Fix Material-UI Chip text
+    MuiChip: {
       styleOverrides: {
-        root: {
-          borderRadius: '1rem',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          '&:hover': {
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
-            transform: 'translateY(-2px)',
-          },
+        label: {
+          color: '#000000 !important',
+          fontWeight: 600,
         },
       },
     },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          '& .MuiOutlinedInput-root': {
-            borderRadius: '0.75rem',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            '&:hover': {
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-            },
-            '&.Mui-focused': {
-              boxShadow: '0 4px 16px rgba(210, 85%, 25%, 0.2)',
-            },
-          },
-        },
-      },
-    },
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          borderRadius: '1rem',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          overflow: 'hidden',
-          '&:hover': {
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
-            transform: 'translateY(-4px)',
-          },
-        },
-      },
-    },
+    // Fix Material-UI Dialog components
     MuiDialog: {
       styleOverrides: {
         paper: {
@@ -324,6 +219,39 @@ export const theme = createTheme({
         },
       },
     },
+    // Fix Material-UI Tab components
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: '#000000 !important',
+          fontWeight: 600,
+          '&.Mui-selected': {
+            color: '#1BAE70 !important',
+            fontWeight: 700,
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: '2rem',
+          background: 'rgba(255,255,255,0.15)',
+          boxShadow: '0 8px 32px 0 rgba(10,35,66,0.25)',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '2rem',
+          background: 'rgba(255,255,255,0.15)',
+          boxShadow: '0 8px 32px 0 rgba(10,35,66,0.25)',
+          border: '1.5px solid rgba(255,255,255,0.18)',
+          overflow: 'hidden',
+        },
+      },
+    },
     MuiBackdrop: {
       styleOverrides: {
         root: {
@@ -333,4 +261,52 @@ export const theme = createTheme({
       },
     },
   },
-}); 
+  typography: {
+    fontFamily: [
+      'Montserrat',
+      'Inter',
+      'Playfair Display',
+      'serif',
+      'sans-serif',
+    ].join(','),
+    h1: {
+      fontFamily: 'Playfair Display, serif',
+      fontWeight: 800,
+      color: '#d4af37',
+      letterSpacing: '0.04em',
+    },
+    h2: {
+      fontFamily: 'Playfair Display, serif',
+      fontWeight: 700,
+      color: '#ffe082',
+      letterSpacing: '0.03em',
+    },
+    h3: {
+      fontFamily: 'Playfair Display, serif',
+      fontWeight: 600,
+      color: '#ffe082',
+    },
+    h4: {
+      fontWeight: 600,
+      color: '#ffe082',
+    },
+    h5: {
+      fontWeight: 600,
+      color: '#ffe082',
+    },
+    h6: {
+      fontWeight: 600,
+      color: '#ffe082',
+    },
+    body1: {
+      color: '#ffffff',
+    },
+    body2: {
+      color: '#ffe082',
+    },
+    button: {
+      fontWeight: 700,
+      color: '#0a2342',
+    },
+  },
+});
