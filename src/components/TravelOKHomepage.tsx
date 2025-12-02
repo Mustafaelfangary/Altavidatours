@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { packages } from '@/data/packages';
 import { destinations } from '@/data/destinations';
 import { useContent } from '@/hooks/useContent';
@@ -10,6 +11,8 @@ import { useContent } from '@/hooks/useContent';
 export default function TravelOKHomepage() {
   const [heroReady, setHeroReady] = useState(false);
   const { getContent } = useContent({ page: 'homepage' });
+  const router = useRouter();
+  const [query, setQuery] = useState("");
   // Services state
   interface ServiceData { id: string; slug?: string; title: string; serviceType?: string; summary?: string; price?: number }
   const [services, setServices] = useState<ServiceData[]>([]);
@@ -39,35 +42,44 @@ export default function TravelOKHomepage() {
   }, []);
 
   return (
-    <div className="min-h-screen luxury-homepage">
-      {/* Luxury Hero Section */}
-      <div className="hero-section parallax-bg relative flex items-center justify-center" style={{ backgroundImage: 'url(/images/Royal Cleopatra/DSC_8627.jpg)' }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(10,35,66,0.85)] via-[rgba(10,35,66,0.7)] to-[rgba(212,175,55,0.25)] z-0" />
-        <div className="hero-container relative z-10 flex flex-col items-center justify-center text-center px-4 fade-in">
-          <h1 className="section-heading luxury-hero-title mb-4 animate-pulse drop-shadow-lg">
-            {getContent('hero_video_title', 'EXPERIENCE EGYPT IN LUXURY')}
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-light text-white/90 mb-6 max-w-2xl mx-auto">
-            {getContent('hero_video_subtitle', 'Bespoke journeys, timeless wonders, and golden memories await.')}
-          </h2>
-          <p className="text-lg md:text-xl text-white/80 mb-8 max-w-3xl mx-auto">
-            {getContent('homepage_hero_description', 'Sail the Nile, explore ancient temples, and indulge in world-class hospitality with Altavida Tours.')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <a href="/tours" className="bg-gradient-to-r from-[#0B2E4F] to-[#D4AF37] text-white rounded-lg text-lg px-6 py-3 shadow-xl">Book Your Journey</a>
-            <a href="/destinations" className="bg-gradient-to-r from-[#0B2E4F] to-[#D4AF37] text-white rounded-lg text-lg px-6 py-3 shadow-xl opacity-90 hover:opacity-100">View Destinations</a>
-          </div>
-          <div className="mt-8 flex flex-col items-center">
-            <span className="text-[#D4AF37] text-lg font-bold mb-2">{getContent('hero_scroll_text', 'Scroll to Discover')}</span>
-            <span className="w-8 h-8 border-2 border-[#D4AF37] rounded-full flex items-center justify-center animate-bounce">
-              <span className="w-2 h-2 bg-[#D4AF37] rounded-full" />
-            </span>
+    <div className="min-h-screen">
+      <section className="relative bg-white">
+        <div className="container mx-auto px-4 py-12 sm:py-16">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#0b2e4f]">
+              {getContent('homepage_hero_title', 'Discover Egypt This Season')}
+            </h1>
+            <p className="mt-4 text-base sm:text-lg text-gray-600">
+              {getContent('homepage_hero_subtitle', 'From ancient wonders to Nile cruises, plan unforgettable experiences with Altavida.')}
+            </p>
+            <form
+              onSubmit={(e) => { e.preventDefault(); const q = query.trim(); if (q) router.push(`/search?q=${encodeURIComponent(q)}`); }}
+              className="mt-8 flex items-center bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden max-w-2xl mx-auto"
+            >
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                type="search"
+                placeholder={getContent('homepage_search_placeholder', 'Search experiences, destinations, cruises...')}
+                className="flex-1 px-4 py-3 outline-none text-gray-800"
+              />
+              <button type="submit" className="px-5 py-3 bg-[#0b2e4f] text-white font-semibold">
+                {getContent('homepage_search_cta', 'Search')}
+              </button>
+            </form>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <Link href="/packages" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Things To Do</Link>
+              <Link href="/destinations" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Cities & Regions</Link>
+              <Link href="/dahabiyas" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Places To Stay</Link>
+              <Link href="/blog" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Festivals & Events</Link>
+              <Link href="/destinations" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">State Parks</Link>
+              <Link href="/blog" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Dining</Link>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Things To Do Section */}
-      <div className="bg-gray-50 text-[#0B2E4F] py-8">
+      <div className="bg-gray-50 text-[#0b2e4f] py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center py-4">
             <h2 className="text-2xl font-bold tracking-wider">{getContent('homepage_things_to_do_title', 'THINGS TO DO')}</h2>
@@ -75,8 +87,7 @@ export default function TravelOKHomepage() {
         </div>
       </div>
 
-      {/* Category Navigation */}
-      <div className="bg-white text-[#0B2E4F] py-8">
+      <div className="bg-white text-[#0b2e4f] py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 py-6">
             <Link
@@ -154,14 +165,13 @@ export default function TravelOKHomepage() {
         </div>
       </div>
 
-      {/* Featured Packages Section */}
-      <div className="bg-[#0B2E4F] py-12">
+      <div className="bg-white py-12">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#D4AF37] mb-4">
-              {getContent('homepage_featured_packages_title', 'FEATURED ')}
+            <h2 className="text-3xl font-bold text-[#0b2e4f] mb-4">
+              {getContent('homepage_featured_packages_title', 'Featured Experiences')}
             </h2>
-            <p className="text-white/90 max-w-2xl mx-auto">
+            <p className="text-gray-600 max-w-2xl mx-auto">
               {getContent('homepage_featured_packages_subtitle', 'Discover our most popular Egypt tour packages, carefully crafted to give you the best experience of this magnificent country.')}
             </p>
           </div>
@@ -200,7 +210,7 @@ export default function TravelOKHomepage() {
                 return cultural[index % cultural.length];
               };
               return (
-              <div key={pkg.id} className="card-travelok group cursor-pointer relative transition-shadow hover:shadow-xl">
+              <div key={pkg.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden">
                 <div className="relative h-48">
                   <Image
                     src={getImageForPackage() || pkg.image}
@@ -211,24 +221,24 @@ export default function TravelOKHomepage() {
                       e.currentTarget.src = pkg.image;
                     }}
                   />
-                  <div className="absolute top-4 right-4 bg-[#D4AF37]/10 text-[#0B2E4F] px-3 py-1 rounded-full text-sm font-bold">
+                  <div className="absolute top-4 right-4 bg-white text-[#0b2e4f] px-3 py-1 rounded-full text-sm font-bold shadow">
                     {pkg.duration}
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#0B2E4F] mb-2">{pkg.title}</h3>
-                  <p className="text-white/90 text-sm mb-4 line-clamp-3">{pkg.description}</p>
+                  <h3 className="text-xl font-bold text-[#0b2e4f] mb-2">{pkg.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{pkg.description}</p>
                   
                   <div className="mb-4">
-                    <div className="text-sm text-white mb-2">Highlights:</div>
+                    <div className="text-sm text-gray-700 mb-2">Highlights:</div>
                     <div className="flex flex-wrap gap-1">
-                      {pkg.highlights.slice(0, 3).map((highlight, index) => (
-                        <span key={index} className="bg-[#D4AF37]/10 text-[#0B2E4F] px-2 py-1 rounded text-xs">
+                      {pkg.highlights.slice(0, 3).map((highlight, i) => (
+                        <span key={i} className="bg-gray-100 text-[#0b2e4f] px-2 py-1 rounded text-xs">
                           {highlight}
                         </span>
                       ))}
                       {pkg.highlights.length > 3 && (
-                        <span className="bg-white text-[#0B2E4F] px-2 py-1 rounded text-xs">
+                        <span className="bg-white text-[#0b2e4f] px-2 py-1 rounded text-xs">
                           +{pkg.highlights.length - 3} more
                         </span>
                       )}
@@ -236,12 +246,12 @@ export default function TravelOKHomepage() {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="text-2xl font-bold text-[#D4AF37]">
+                    <div className="text-2xl font-bold text-[#0b2e4f]">
                       From ${pkg.price.from}
                     </div>
                     <Link 
                       href={`/packages/${pkg.id}`}
-                      className="bg-gradient-to-r from-[#0B2E4F] to-[#D4AF37] text-white px-4 py-2 rounded transition-colors text-sm font-semibold"
+                      className="bg-[#0b2e4f] text-white px-4 py-2 rounded transition-colors text-sm font-semibold hover:bg-[#09304e]"
                     >
                       View Details
                     </Link>
@@ -255,7 +265,7 @@ export default function TravelOKHomepage() {
           <div className="text-center mt-12">
             <Link 
               href="/packages"
-              className="bg-gradient-to-r from-[#0B2E4F] to-[#D4AF37] text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors inline-block"
+              className="bg-[#0b2e4f] text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors inline-block hover:bg-[#09304e]"
             >
               {getContent('homepage_view_all_packages_text', 'View All Packages')}
             </Link>

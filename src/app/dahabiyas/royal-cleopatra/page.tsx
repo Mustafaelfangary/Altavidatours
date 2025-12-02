@@ -13,15 +13,15 @@ export default function RoyalCleopatraPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative h-[70vh] bg-gradient-to-r from-blue-900 to-blue-700">
-        <div className="absolute inset-0 bg-black/40"></div>
+      <div className="relative h-[70vh] bg-gradient-to-r from-white to-gray-100">
+        <div className="absolute inset-0 bg-white/40"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 h-full flex items-center">
-          <div className="text-white">
+          <div className="text-[#0b2e4f]">
             <h1 className="text-5xl font-bold mb-4">Royal Cleopatra</h1>
             <p className="text-xl mb-6 max-w-2xl">Ultimate luxury experience on the Nile with world-class amenities and personalized service</p>
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
-                <Star className="text-yellow-400" size={20} />
+                <Star className="text-[#ff9900]" size={20} />
                 <span className="text-lg font-semibold">5.0 Rating</span>
               </div>
               <div className="flex items-center space-x-2">

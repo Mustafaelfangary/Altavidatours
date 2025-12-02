@@ -215,62 +215,77 @@ export default function TravelOKNavbar() {
   // Enhanced navigation structure with mega dropdown data
   const mainNavItems = [
     {
-      id: "dahabiyas",
-      label: "DAHABIYAS",
+      id: "things",
+      label: "THINGS TO DO",
+      mainHref: "/packages",
+      icon: MapPin,
+      description: "Experiences and activities",
+      items:
+        (packagesItems.slice(0, 4)).concat(itinerariesItems.slice(0, 2)),
+      featured: [
+        { label: "All Packages", href: "/packages", icon: Package },
+        { label: "All Itineraries", href: "/itineraries", icon: MapPin }
+      ]
+    },
+    {
+      id: "destinations",
+      label: "CITIES & REGIONS",
+      mainHref: "/destinations",
+      icon: Globe,
+      description: "Explore destinations",
+      items: [],
+      featured: [
+        { label: "View All Destinations", href: "/destinations", icon: MapPin }
+      ]
+    },
+    {
+      id: "stays",
+      label: "PLACES TO STAY",
       mainHref: "/dahabiyas",
       icon: Ship,
-      description: "Luxury Nile Cruises",
+      description: "Luxury Nile cruises",
       items: dahabiyasItems.length > 0 ? dahabiyasItems : [
         { label: "Royal Cleopatra", href: "/dahabiyas/royal-cleopatra", description: "Ultimate luxury experience", icon: "👑" },
         { label: "Princess Cleopatra", href: "/dahabiyas/princess-cleopatra", description: "Elegant comfort on the Nile", icon: "💎" },
         { label: "Queen Cleopatra", href: "/dahabiyas/queen-cleopatra", description: "Regal sailing experience", icon: "⭐" },
         { label: "AZHAR I", href: "/dahabiyas/azhar-i", description: "Traditional charm meets modern luxury", icon: "🌟" },
-        { label: "AZHAR II", href: "/dahabiyas/azhar-ii", description: "Contemporary elegance on water", icon: "🛥️" },
+        { label: "AZHAR II", href: "/dahabiyas/azhar-ii", description: "Contemporary elegance on water", icon: "🛥️" }
       ],
       featured: [
-        { label: "All Dahabiyas", href: "/dahabiyas", icon: Ship },
-        { label: "Compare Vessels", href: "/dahabiyas/compare", icon: Users },
-        { label: "Virtual Tours", href: "/dahabiyas/virtual-tours", icon: Camera }
+        { label: "All Dahabiyas", href: "/dahabiyas", icon: Ship }
       ]
     },
     {
-      id: "itineraries",
-      label: "ITINERARIES",
-      mainHref: "/itineraries",
-      icon: MapPin,
-      description: "Nile Cruise Routes",
-      items: itinerariesItems.length > 0 ? itinerariesItems : [
-        { label: "Luxor to Aswan", href: "/itineraries/luxor-aswan", description: "Classic downstream journey", icon: "🏛️" },
-        { label: "Aswan to Luxor", href: "/itineraries/aswan-luxor", description: "Upstream adventure", icon: "🌅" },
-        { label: "3-Day Short Cruise", href: "/itineraries/short-cruise", description: "Perfect weekend getaway", icon: "⛵" },
-        { label: "7-Day Extended Cruise", href: "/itineraries/extended-cruise", description: "Complete Nile experience", icon: "🏺" },
-        { label: "Temples & Tombs Tour", href: "/itineraries/temples-tour", description: "Archaeological exploration", icon: "🕌" },
-        { label: "Cultural Immersion", href: "/itineraries/cultural-immersion", description: "Authentic local experiences", icon: "🎭" },
-      ],
+      id: "events",
+      label: "FESTIVALS & EVENTS",
+      mainHref: "/blog",
+      icon: Calendar,
+      description: "What’s happening",
+      items: [],
       featured: [
-        { label: "All Itineraries", href: "/itineraries", icon: MapPin },
-        { label: "Route Map", href: "/itineraries/map", icon: Globe },
-        { label: "Best Time to Travel", href: "/itineraries/best-time", icon: Calendar }
+        { label: "View Blog", href: "/blog", icon: BookOpen }
       ]
     },
     {
-      id: "packages",
-      label: "PACKAGES",
-      mainHref: "/packages",
-      icon: Package,
-      description: "Complete Travel Solutions",
-      items: packagesItems.length > 0 ? packagesItems : [
-        { label: "Luxury Escapes", href: "/packages/luxury", description: "Premium all-inclusive experiences", icon: "✨" },
-        { label: "Family Vacations", href: "/packages/family", description: "Fun-filled family adventures", icon: "👨‍👩‍👧‍👦" },
-        { label: "Cultural Journeys", href: "/packages/cultural", description: "Deep dive into Egyptian culture", icon: "🏛️" },
-        { label: "Adventure Tours", href: "/packages/adventure", description: "Thrilling exploration experiences", icon: "🏔️" },
-        { label: "Romantic Getaways", href: "/packages/romantic", description: "Perfect couples retreat", icon: "💕" },
-        { label: "Beach Extensions", href: "/packages/beach", description: "Red Sea relaxation", icon: "🏖️" },
-      ],
+      id: "dining",
+      label: "DINING",
+      mainHref: "/blog",
+      icon: BookOpen,
+      description: "Food and dining",
+      items: [],
       featured: [
-        { label: "All Packages", href: "/packages", icon: Package },
-        { label: "Custom Tours", href: "/custom-tours", icon: Heart },
-        { label: "Group Bookings", href: "/packages/groups", icon: Users }
+        { label: "View Blog", href: "/blog", icon: BookOpen }
+      ]
+    },
+    {
+      id: "shop",
+      label: "SHOP ALTAVIDA",
+      mainHref: "/custom-tours",
+      icon: Heart,
+      description: "Tailor-made tours",
+      items: [],
+      featured: [
+        { label: "Custom Tours", href: "/custom-tours", icon: Heart }
       ]
     }
   ];
@@ -576,24 +591,33 @@ export default function TravelOKNavbar() {
             </div>
 
             {/* Center Logo */}
-            <div className="flex-shrink-0 px-2 lg:px-4 py-1 lg:border-x border-transparent bg-transparent">
-              <Link href="/" className="flex items-center">
-                <div className="rounded-full bg-white shadow-sm border border-slate-200 flex items-center justify-center overflow-hidden w-10 h-10 lg:w-12 lg:h-12 transition-all">
-                  <OptimizedImage
-                    src={logoUrl}
-                    alt="Altavida Tours.com"
-                    width={48}
-                    height={48}
-                    className="object-cover w-8 h-8 lg:w-10 lg:h-10 rounded-full"
-                    priority={true}
-                    quality={90}
-                  />
+            <div className="flex-shrink-0 px-2 lg:px-4 py-1">
+              <Link href="/" className="relative block">
+                <div className="relative mx-auto flex items-center justify-center">
+                  <div className="bg-white rounded-xl border-2 border-yellow-500 shadow-md px-3 py-2 lg:px-4 lg:py-2">
+                    <div className="flex items-center gap-2">
+                      <OptimizedImage
+                        src={logoUrl}
+                        alt="Altavida Tours.com"
+                        width={40}
+                        height={40}
+                        className="w-8 h-8 lg:w-10 lg:h-10 object-cover rounded"
+                        priority={true}
+                        quality={90}
+                      />
+                      <div className="hidden sm:block">
+                        <div className="text-[#0b2e4f] font-extrabold leading-tight">Altavida</div>
+                        <div className="text-[#0b2e4f]/80 font-bold text-xs tracking-widest">TOURS.COM</div>
+                      </div>
+                    </div>
+                  </div>
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-yellow-500" />
                 </div>
               </Link>
             </div>
 
             {/* Right Side Links - Desktop */}
-            <div className="hidden lg:flex items-center flex-shrink-0 ml-auto">
+            <div className="hidden lg:flex items-center flex-1 justify-end">
               <Link
                 href="/blog"
                 className="px-3 py-3 text-[12px] tracking-[0.12em] font-semibold text-slate-800 hover:text-[#0e2437] transition-colors border-l border-transparent flex items-center gap-2"
@@ -689,7 +713,7 @@ export default function TravelOKNavbar() {
       {/* Enhanced Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="fixed inset-0 bg-black opacity-50" onClick={() => setMobileMenuOpen(false)}></div>
+          <div className="fixed inset-0 bg-white opacity-80" onClick={() => setMobileMenuOpen(false)}></div>
           <div className="fixed top-0 left-0 w-full max-w-sm bg-white text-neutral-800 shadow-2xl h-full overflow-y-auto">
             <div className="flex justify-between items-center p-4 border-b topbar text-slate-800">
               <span className="font-bold text-lg">Menu</span>
