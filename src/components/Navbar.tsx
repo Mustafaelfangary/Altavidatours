@@ -90,7 +90,7 @@ const translations: Record<string, any> = {
 export default function Navbar() {
   const { data: session } = useSession();
   const { getContent } = useContent({ page: 'branding_settings' });
-  const [logoUrl, setLogoUrl] = useState('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
+  const [logoUrl, setLogoUrl] = useState('/AppIcons/android/mipmap-xxxhdpi/altavida.png');
   const [logoTimestamp, setLogoTimestamp] = useState<number | null>(null);
   const [isClient, setIsClient] = useState(false);
 
@@ -132,7 +132,7 @@ export default function Navbar() {
         
         if (response.ok) {
           const result = await response.json();
-          const logoToUse = result.logoUrl || '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png';
+          const logoToUse = result.logoUrl || '/AppIcons/android/mipmap-xxxhdpi/altavida.png';
           setLogoUrl(logoToUse);
           // Use server-provided timestamp to create a stable cache-busting key
           setLogoTimestamp(result.timestamp || Date.now());
@@ -142,7 +142,7 @@ export default function Navbar() {
           }
         } else {
           console.warn('Logo API response not OK:', response.status);
-          setLogoUrl('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
+          setLogoUrl('/AppIcons/android/mipmap-xxxhdpi/altavida.png');
         }
       } catch (error) {
         console.error('Failed to fetch logo:', error);
@@ -374,7 +374,17 @@ export default function Navbar() {
     { href: "/packages/family-vacations", label: "👨‍👩‍👧‍👦 Family Vacations", hieroglyph: "👨‍👩‍👧‍👦" },
   ]);
 
-  const navLinks = [
+  interface NavLink {
+    href: string;
+    label: string;
+    hieroglyph: string;
+    hasDropdown?: boolean;
+    dropdownItems?: any[];
+    special?: boolean;
+    singleLine?: boolean;
+  }
+
+  const navLinks: NavLink[] = [
     { href: "/destinations", label: "Destinations", hieroglyph: "🌍", hasDropdown: true, dropdownItems: destinationItems },
     { href: "/services", label: "Services", hieroglyph: "🏛️", hasDropdown: true, dropdownItems: serviceItems },
     { href: "/packages", label: `${t('packages')}`, hieroglyph: "📦", hasDropdown: true, dropdownItems: packagesItems },
@@ -497,16 +507,16 @@ export default function Navbar() {
               <Image
                 src={getLogoCacheBustUrl(logoUrl)}
                 alt={getHomepageContent('site_name', 'Altavida Tours.com')}
-                width={100}
-                height={100}
-                className="h-14 w-14 object-contain"
+                width={120}
+                height={56}
+                className="h-14 w-auto object-contain"
                 priority
                 fetchPriority="high"
                 unoptimized={true}
                 suppressHydrationWarning={true}
                 onError={(e) => {
                   console.warn('Logo failed to load, falling back to default:', logoUrl);
-                  setLogoUrl('/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
+                  setLogoUrl('/AppIcons/android/mipmap-xxxhdpi/altavida.png');
                   if (isClient) {
                     if (process.env.NODE_ENV === 'development') {
                       setLogoTimestamp(Date.now());
@@ -795,9 +805,10 @@ export default function Navbar() {
                       background: isHomepage && !scrolled
                         ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%)'
                         : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%)',
-                      ':hover': {
-                        background: isHomepage && !scrolled ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.05)'
-                      }
+                      transition: 'background 0.3s ease',
+                      ...(isHomepage && !scrolled 
+                        ? { '&:hover': { background: 'rgba(255, 255, 255, 0.3)' } }
+                        : { '&:hover': { background: 'rgba(0, 0, 0, 0.05)' } })
                     }}
                   >
                     <UserCircle size={18} />

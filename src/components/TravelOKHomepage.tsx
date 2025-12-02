@@ -180,14 +180,14 @@ export default function TravelOKHomepage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
             {[
-              { name: 'Jordan', image: '/destinations/jordan.jpg', href: '/destinations/jordan' },
-              { name: 'Dubai', image: '/destinations/dubai.jpg', href: '/destinations/dubai' },
-              { name: 'Turkey', image: '/destinations/turkey.jpg', href: '/destinations/turkey' },
-              { name: 'Morocco', image: '/destinations/morocco.jpg', href: '/destinations/morocco' },
+              { name: 'Jordan', image: 'https://images.pexels.com/photos/11195793/pexels-photo-11195793.jpeg', href: '/destinations/jordan', photographer: 'Yasir Gürbüz on Pexels' },
+              { name: 'Dubai', image: 'https://images.pexels.com/photos/3611545/pexels-photo-3611545.jpeg', href: '/destinations/dubai', photographer: 'Abbas Mohammed on Pexels' },
+              { name: 'Turkey', image: 'https://images.pexels.com/photos/28966539/pexels-photo-28966539.jpeg', href: '/destinations/turkey', photographer: 'Julien Goettelmann on Pexels' },
+              { name: 'Morocco', image: 'https://images.pexels.com/photos/22711558/pexels-photo-22711558.jpeg', href: '/destinations/morocco', photographer: 'Uiliam Nörnberg on Pexels' },
             ].map((d, i) => (
               <Link key={d.name} href={d.href} className="card-3d block overflow-hidden">
                 <div className="card-media relative h-44 md:h-56">
-                  <Image src={d.image} alt={d.name} fill className="object-cover" onError={(e) => { e.currentTarget.src = ['/Alexandria/IMG_6504.JPG','/cultural&historical/DSC_8401.JPG','/desert&safary/DSC_9166.JPG','/Royal Cleopatra/DSC_8628.jpg'][i%4]; }} />
+                  <Image src={d.image} alt={`${d.name} - Photo by ${d.photographer}`} fill className="object-cover" unoptimized />
                 </div>
                 <div className="p-4">
                   <h3 className="text-xl font-extrabold text-[#0b2e4f] tracking-tight heading-animated">{d.name}</h3>

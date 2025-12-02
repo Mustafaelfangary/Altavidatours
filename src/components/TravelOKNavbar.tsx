@@ -51,7 +51,7 @@ export default function TravelOKNavbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [openViaClick, setOpenViaClick] = useState<string | null>(null);
   const [expandedMobileSections, setExpandedMobileSections] = useState<Record<string, boolean>>({});
-  const [logoUrl, setLogoUrl] = useState('/altavida-logo-1.png');
+  const [logoUrl, setLogoUrl] = useState('/altavida-logo-1.svg');
   const [scrolled, setScrolled] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -137,39 +137,12 @@ export default function TravelOKNavbar() {
     }
   }, [profileMenuOpen]);
 
-  // Fetch logo
+  // Logo is hardcoded to use the SVG file directly
   useEffect(() => {
-    const fetchLogo = async () => {
-      try {
-        const response = await fetch('/api/logo', { 
-          cache: 'no-store',
-          headers: {
-            'Cache-Control': 'no-cache'
-          }
-        });
-        if (response.ok) {
-          const result = await response.json();
-          if (result.logoUrl) {
-          let normalizedUrl = '/altavida-logo-1.png';
-          if (typeof result.logoUrl === 'string') {
-          const val = result.logoUrl.trim();
-          if (val.startsWith('http')) normalizedUrl = val;
-          else if (val.startsWith('/')) normalizedUrl = val;
-          else if (/^[\w.-]+\.(png|jpg|jpeg|svg|webp|gif|ico)$/i.test(val)) normalizedUrl = '/' + val.replace(/^\/+/, '');
-          else normalizedUrl = '/altavida-logo-1.png';
-          }
-          setLogoUrl(normalizedUrl);
-          } else {
-          setLogoUrl('/altavida-logo-1.png');
-          }
-        } else {
-          setLogoUrl('/altavida-logo-1.png');
-        }
-      } catch (error) {
-        setLogoUrl('/altavida-logo-1.png');
-      }
-    };
-    fetchLogo();
+    // Verify logo exists, fallback to PNG if SVG fails
+    const img = new window.Image();
+    img.src = '/altavida-logo-1.svg';
+    img.onerror = () => setLogoUrl('/altavida-logo-1.png');
   }, []);
 
   // Fetch dahabiyas and itineraries for dropdowns
@@ -672,13 +645,14 @@ export default function TravelOKNavbar() {
                 <div className="relative mx-auto flex items-center justify-center">
                   <div className="bg-white rounded-full border border-yellow-500 shadow p-0.5">
                     <Image
-                      src={logoUrl || '/altavida-logo-1.png'}
+                      src={logoUrl}
                       alt="Altavida Tours.com"
                       width={36}
                       height={36}
                       className="w-8 h-8 lg:w-9 lg:h-9 object-contain rounded-full"
                       onError={() => setLogoUrl('/altavida-logo-1.png')}
                       priority
+                      unoptimized
                     />
                   </div>
                 </div>
@@ -786,7 +760,7 @@ export default function TravelOKNavbar() {
           <div className="fixed top-0 left-0 w-full max-w-sm bg-white text-neutral-800 shadow-2xl h-full overflow-y-auto">
             <div className="flex justify-between items-center p-4 border-b topbar text-slate-800">
               <div className="flex items-center gap-3">
-                <Image src={logoUrl || '/altavida-logo-1.png'} alt="Altavida" width={28} height={28} className="rounded-full" onError={() => setLogoUrl('/altavida-logo-1.png')} />
+                <Image src={logoUrl} alt="Altavida" width={28} height={28} className="rounded-full" onError={() => setLogoUrl('/altavida-logo-1.png')} unoptimized />
                 <span className="font-extrabold tracking-wider">Altavida Tours</span>
               </div>
               <button onClick={() => setMobileMenuOpen(false)} aria-label="close menu">

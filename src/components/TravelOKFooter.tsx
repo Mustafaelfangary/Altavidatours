@@ -7,30 +7,13 @@ import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone as PhoneIcon, MapPi
 import Partners from '@/components/Partners';
 
 export default function TravelOKFooter() {
-  const [logoUrl, setLogoUrl] = useState('/altavida-logo-1.png');
+  const [logoUrl, setLogoUrl] = useState('/altavida-logo-1.svg');
 
   useEffect(() => {
-    const fetchLogo = async () => {
-      try {
-        const res = await fetch('/api/logo', { cache: 'no-store' });
-        if (res.ok) {
-          const data = await res.json();
-          if (data?.logoUrl) {
-            let normalized = '/altavida-logo-1.png';
-            if (typeof data.logoUrl === 'string') {
-              const val = data.logoUrl.trim();
-              if (val.startsWith('http')) normalized = val;
-              else if (val.startsWith('/')) normalized = val;
-              else if (val.match(/^[\w.-]+\.(png|jpg|jpeg|svg|webp|gif|ico)$/i)) normalized = '/' + val.replace(/^\/+/, '');
-            }
-            setLogoUrl(normalized);
-          }
-        }
-      } catch (_) {
-        setLogoUrl('/altavida-logo-1.png');
-      }
-    };
-    fetchLogo();
+    // Verify logo exists, fallback to PNG if SVG fails
+    const img = new window.Image();
+    img.src = '/altavida-logo-1.svg';
+    img.onerror = () => setLogoUrl('/altavida-logo-1.png');
   }, []);
 
   return (
@@ -47,6 +30,8 @@ export default function TravelOKFooter() {
                 width={120}
                 height={40}
                 className="h-8 w-auto mr-3"
+                onError={() => setLogoUrl('/altavida-logo-1.png')}
+                unoptimized
               />
               <div>
                 <div className="text-[#0b2e4f] font-extrabold text-2xl leading-tight">Altavida</div>

@@ -162,13 +162,11 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
 
   // Get dynamic footer logo with cache busting
   const getFooterLogo = () => {
-    // Prefer branding settings, fallback to global media
-    const logoUrl = getBrandingContent('footer_logo', '') || getGlobalContent('footer_logo', '/altavida-logo-1.png');
+    // Use direct path to logo with fallback
+    const logoUrl = getBrandingContent('footer_logo', '') || 
+                   getGlobalContent('footer_logo', '/AppIcons/android/mipmap-xxxhdpi/altavida.png');
     // Add cache-busting timestamp
-    if (logoUrl.includes('?')) {
-      return `${logoUrl}&t=${footerLogoTimestamp}`;
-    }
-    return `${logoUrl}?t=${footerLogoTimestamp}`;
+    return `${logoUrl}${logoUrl.includes('?') ? '&' : '?'}t=${footerLogoTimestamp}`;
   };
 
   // Helper to get a setting value with priority: footerSettings > content > settings > fallback
@@ -242,23 +240,24 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: 'clamp(5rem, 12vw, 8rem)',
-                height: 'clamp(5rem, 12vw, 8rem)',
-                borderRadius: '50%',
-                backgroundColor: '#f3f4f6',
-                border: '3px solid #e5e7eb',
-                padding: '0.75rem',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.12)',
-                transition: 'all 0.3s ease-in-out'
+                width: '100%',
+                maxWidth: '200px',
+                margin: '0 auto',
+                padding: '1rem 0'
               }}>
                 <Image
                   src={getFooterLogo()}
                   alt="Site Logo"
                   width={120}
-                  height={120}
-                  className="h-14 sm:h-20 md:h-24 w-auto object-contain"
+                  height={56}
+                  className="h-auto w-full max-w-[180px] object-contain"
                   unoptimized={true}
                   key={`footer-logo-${footerLogoTimestamp}`}
+                  onError={(e) => {
+                    console.warn('Footer logo failed to load, falling back to default');
+                    e.currentTarget.src = '/AppIcons/android/mipmap-xxxhdpi/altavida.png';
+                    setFooterLogoTimestamp(Date.now());
+                  }}
                 />
               </div>
             </div>
