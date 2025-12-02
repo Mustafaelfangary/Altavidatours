@@ -663,6 +663,7 @@ export default function TravelOKNavbar() {
                 <Camera size={14} />
                 <span>GALLERY</span>
               </Link>
+              </div>
             </div>
 
             {/* Compact Brand at Left (reduce width) */}
