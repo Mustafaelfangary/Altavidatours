@@ -47,7 +47,7 @@ export default function MobileHeroSection({
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
+    }, 3000); // Changed from 5000ms to 3000ms for faster slideshow
     return () => clearInterval(timer);
   }, [heroSlides.length]);
 

@@ -1,4 +1,7 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
 
 /* Smooth scrolling for the entire site */
@@ -1057,7 +1060,9 @@ color: #ffffff !important;
 
 /* Light/Pale theme helpers to avoid dark blocks across the site */
 .bg-deep-blue { background-color: #eaf3fb !important; } /* pale blue section background */
-.text-deep-blue, .text-[#0b2e4f] { color: #0b2e4f !important; }
+.text-deep-blue, .text-#0b2e4f {
+  color: #0b2e4f !important;
+}
 .pale-card { background: #ffffff; border: 1px solid rgba(10,30,45,0.08); box-shadow: 0 6px 20px rgba(10,30,45,0.06); }
 .pale-chip { background: #f1f5f9; color: #0b2e4f; border: 1px solid rgba(10,30,45,0.08); }
 

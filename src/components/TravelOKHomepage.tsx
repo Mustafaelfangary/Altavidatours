@@ -306,10 +306,30 @@ export default function TravelOKHomepage() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
               {[
-                { name: 'Luxury Dahabiya', image: '/dahabiyas/royal-cleopatra.jpg', href: '/dahabiyas/royal-cleopatra' },
-                { name: 'Nile Cruise', image: '/nile-cruises/luxury-cruise.jpg', href: '/nile-cruises' },
-                { name: 'Desert Safari', image: '/desert-safari/sunset-ride.jpg', href: '/experiences/desert-safari' },
-                { name: 'Pyramids Tour', image: '/pyramids/great-pyramid.jpg', href: '/tours/pyramids' },
+                { 
+                  name: 'Alexandria', 
+                  image: '/Alexandria/IMG_6198.JPG', 
+                  href: '/destinations/alexandria',
+                  description: 'Mediterranean Pearl of Egypt'
+                },
+                { 
+                  name: 'Luxor', 
+                  image: '/Alexandria/IMG_6201.JPG', 
+                  href: '/destinations/luxor',
+                  description: 'World\'s Greatest Open-Air Museum'
+                },
+                { 
+                  name: 'Aswan', 
+                  image: '/Alexandria/IMG_6274.JPG', 
+                  href: '/destinations/aswan',
+                  description: 'Nile Valley Beauty'
+                },
+                { 
+                  name: 'Cairo', 
+                  image: '/Alexandria/IMG_6282.JPG', 
+                  href: '/destinations/cairo',
+                  description: 'City of a Thousand Minarets'
+                },
               ].map((item, index) => (
                 <Link 
                   key={index} 
@@ -325,7 +345,8 @@ export default function TravelOKHomepage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center">
-                      <h3 className="font-bold text-lg md:text-xl">{item.name}</h3>
+                      <h3 className="font-bold text-lg md:text-xl mb-1">{item.name}</h3>
+                      <p className="text-sm opacity-90">{item.description}</p>
                     </div>
                   </div>
                 </Link>

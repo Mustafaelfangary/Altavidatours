@@ -1,18 +1,18 @@
 "use client";
+
 export const dynamic = "force-dynamic";
-import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { useState, useEffect, ReactNode, ChangeEvent, useRef } from 'react';
-import Image from 'next/image';
-import { LogOut, User, LayoutDashboard, UserCircle, Menu, X, Globe, ChevronDown, ChevronRight, ChevronUp } from 'lucide-react';
-import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslation } from '@/lib/i18n';
+
+// Core React & Next.js imports
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import { useContent } from '@/hooks/useContent';
-import styles from './Navbar.module.css';
-// Removed pharaonic UI imports for modern theme
+import Link from 'next/link';
+import Image from 'next/image';
+
+// Authentication
+import { useSession, signOut } from "next-auth/react";
+
+// UI Components
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +21,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+
+// Icons
+import { LogOut, User, LayoutDashboard, UserCircle, Menu, X, Globe, ChevronDown, ChevronRight, ChevronUp } from 'lucide-react';
+
+// Animations
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+
+// Custom Hooks & Components
+import { useContent } from '@/hooks/useContent';
 import MobileNavigation from '@/components/mobile/MobileNavigation';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+// Styles
+import styles from './Navbar.module.css';
 
 // Interfaces for API responses
 interface TravelServiceData {
@@ -49,9 +63,6 @@ interface AdminLogo {
   content?: string;
 }
 
-// Use centralized language context
-import { useLanguage } from '@/contexts/LanguageContext';
-
 const LANGUAGES = [
   { code: 'en', label: 'English', flagSvg: '/flags/us.svg', name: 'English' },
   { code: 'ar', label: 'العربية', flagSvg: '/flags/eg.svg', name: 'العربية' },
@@ -75,6 +86,7 @@ import ruTranslations from '@/locales/ru.json';
 import zhTranslations from '@/locales/zh.json';
 import jaTranslations from '@/locales/ja.json';
 
+// Translations mapping
 const translations: Record<string, any> = {
   en: enTranslations,
   ar: arTranslations,
@@ -87,47 +99,79 @@ const translations: Record<string, any> = {
   ja: jaTranslations,
 };
 
-// Remove local LanguageProvider/useLanguage in favor of centralized context
-
-// Animation variants
+// Animation variants with proper TypeScript types
 const navVariants = {
   hidden: { opacity: 0, y: -20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut",
+      ease: [0.4, 0, 0.2, 1],
       staggerChildren: 0.1,
       delayChildren: 0.2
     }
   }
-};
+} as const;
 
 const navItemVariants = {
   hidden: { opacity: 0, y: -10 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
-    transition: { duration: 0.3 }
+    transition: { 
+      duration: 0.3,
+      ease: [0.4, 0, 0.2, 1]
+    }
   },
   hover: {
     scale: 1.05,
-    transition: { duration: 0.2 }
+    transition: { 
+      duration: 0.2,
+      ease: [0.4, 0, 0.2, 1]
+    }
   },
   tap: {
     scale: 0.98
+  }
+} as const;
+
+const dropdownVariants: Variants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.2,
+      ease: [0.4, 0, 0.2, 1] as any
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    transition: {
+      duration: 0.15,
+      ease: [0.4, 0, 0.2, 1] as any
+    }
   }
 };
 
 export default function Navbar() {
   const { data: session } = useSession();
   const { getContent } = useContent({ page: 'branding_settings' });
+  const currentPathname = usePathname();
+  const { t: translate, changeLanguage } = useLanguage();
   const [logoUrl, setLogoUrl] = useState('/AppIcons/android/mipmap-xxxhdpi/altavida.png');
   const [logoTimestamp, setLogoTimestamp] = useState<number | null>(null);
   const [isClient, setIsClient] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [menuState, setMenuState] = useState<Record<string, boolean>>({});
+  
+  // Helper function to check if a link is active
+  const isLinkActive = (path: string) => {
+    return currentPathname === path;
+  };
 
   // Initialize client-side rendering and scroll effect
   useEffect(() => {
@@ -249,16 +293,10 @@ export default function Navbar() {
   const [settings, setSettings] = useState({ siteName: 'Altavida Tours.com' });
   const { locale, setLocale } = useLanguage();
   const t = useTranslation();
-  const pathname = usePathname();
   const { getContent: getHomepageContent } = useContent({ page: 'homepage' });
 
-  // Get dynamic logo from database with fallback
-  // const getNavbarLogo = () => {
-  //   return getContent('navbar_logo') || '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png';
-  // };
-
   // Check if we're on the homepage
-  const isHomepage = pathname === '/';
+  const isHomepage = currentPathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -307,6 +345,11 @@ export default function Navbar() {
   const handleLanguageChange = (lang: string) => {
     setLocale(lang as 'en' | 'ar');
     setIsLanguageDropdownOpen(false);
+  };
+
+  const closeAllMenus = () => {
+    setMenuState({});
+    setIsMobileMenuOpen(false);
   };
 
   const handleSignOut = async () => {
@@ -467,8 +510,8 @@ export default function Navbar() {
 
   const navbarStyle = getNavbarStyle();
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
-    return pathname.startsWith(href);
+    if (href === '/') return currentPathname === '/';
+    return currentPathname.startsWith(href);
   };
   
   // Calculate banner height based on variant - accurate measurements
@@ -479,7 +522,7 @@ export default function Navbar() {
     // elegant: py-4 (32px) + text-4xl (~40px) + border (4px) = ~76px ≈ 4.8rem
     if (typeof window !== 'undefined') {
       const isMobile = window.innerWidth < 1024;
-      const isAdmin = pathname.includes('/admin');
+      const isAdmin = currentPathname.includes('/admin');
 
       if (isMobile) return '3.1rem'; // minimal variant
       if (isAdmin) return '4.8rem'; // elegant variant
@@ -601,16 +644,11 @@ export default function Navbar() {
                           </span>
                           <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-3/4" />
                         </Button>
-                      >
-                        {link.label}
-                        <ChevronDown size={12} />
-                      </button>
-                    </DropdownMenuTrigger>
+                      </DropdownMenuTrigger>
                       <DropdownMenuContent
                         align="start"
                         className="bg-white/95 backdrop-blur-xl rounded-xl border border-gray-100 shadow-xl overflow-hidden p-2 min-w-[280px]"
                         sideOffset={8}
-                        asChild
                       >
                         <motion.div
                           initial="hidden"
@@ -619,7 +657,7 @@ export default function Navbar() {
                           variants={dropdownVariants}
                         >
                           {/* Main page link */}
-                          <DropdownMenuItem asChild onClick={(e) => e.stopPropagation()}>
+                          <DropdownMenuItem asChild>
                             <Link 
                               href={link.href}
                               className="group flex w-full items-center gap-3 rounded-lg p-3 text-sm font-medium text-gray-700 transition-colors hover:bg-primary/5 hover:text-primary"
@@ -668,47 +706,37 @@ export default function Navbar() {
                                   </span>
                                 )}
                                 <ChevronRight className="h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0.5" />
-                                
-                                {/* Hover effect */}
-                                <span className="absolute inset-0 -z-10 rounded-lg bg-gradient-to-r from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                               </Link>
                             </DropdownMenuItem>
                           ))}
                         </motion.div>
                       </DropdownMenuContent>
-                  </DropdownMenu>
-                ) : (
-                  <Link
-                    href={link.href}
-                    className={cn(
-                      "group relative mx-1 inline-flex items-center rounded-lg px-4 py-2.5 text-sm font-medium transition-colors",
-                      isActive(link.href) 
-                        ? "text-primary font-semibold" 
-                        : "text-gray-600 hover:text-primary",
-                      link.special && "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg hover:from-primary/90 hover:to-primary/70"
-                    )}
-                  >
-                    onMouseEnter={(e) => {
-                      if (!link.special) {
-                        e.currentTarget.style.background = 'rgba(59, 130, 246, 0.05)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!link.special) {
-                        e.currentTarget.style.background = '';
-                      }
-                    }}
-                  >
-                    <span className="relative z-10">{link.label}</span>
-                    {!link.special && (
-                      <span className="absolute bottom-1 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-primary transition-all duration-300 group-hover:w-3/4" />
-                    )}
-                    {link.special && (
-                      <span className="absolute inset-0 -z-10 rounded-lg bg-gradient-to-r from-primary/90 to-primary/70 opacity-0 transition-opacity group-hover:opacity-100" />
-                    )}
-                  </Link>
-                )}
-              </motion.div>
+                    </DropdownMenu>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "group relative mx-1 inline-flex items-center rounded-lg px-4 py-2.5 text-sm font-medium transition-colors",
+                        isActive(link.href) 
+                          ? "text-primary font-semibold" 
+                          : "text-gray-600 hover:text-primary",
+                        link.special && "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg hover:from-primary/90 hover:to-primary/70"
+                      )}
+                      onMouseEnter={(e) => {
+                        if (!link.special) {
+                          e.currentTarget.style.background = 'rgba(59, 130, 246, 0.05)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!link.special) {
+                          e.currentTarget.style.background = '';
+                        }
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+                </motion.div>
               ))}
             </div>
           </motion.nav>
@@ -935,7 +963,7 @@ export default function Navbar() {
                         ? 'text-primary' 
                         : 'text-gray-700 hover:bg-gray-50 hover:text-primary'
                     }`}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
@@ -951,7 +979,7 @@ export default function Navbar() {
                               ? 'bg-primary/10 text-primary font-medium'
                               : 'text-gray-600 hover:bg-gray-50 hover:text-primary'
                           }`}
-                          onClick={() => setIsOpen(false)}
+                          onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {item.label}
                         </Link>
@@ -966,25 +994,32 @@ export default function Navbar() {
                   <Link 
                     href="/auth/signin" 
                     className="w-full rounded-lg bg-gray-50 px-4 py-2.5 text-center text-sm font-medium text-gray-700 hover:bg-gray-100"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Sign in
                   </Link>
-                  <Link 
-                    href="/auth/signup" 
-                    className="w-full rounded-lg bg-gradient-to-r from-primary to-primary/80 px-4 py-2.5 text-center text-sm font-medium text-white shadow-sm hover:from-primary/90 hover:to-primary/70"
-                    onClick={() => setIsOpen(false)}
-                    href="/profile"
-                    className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <User className="h-4 w-4 text-primary" />
-                    My Profile
-                  </Link>
+                  {!session ? (
+                    <Link
+                      href="/auth/signup"
+                      className="w-full rounded-lg bg-gradient-to-r from-primary to-primary/80 px-4 py-2.5 text-center text-sm font-medium text-white shadow-sm hover:from-primary/90 hover:to-primary/70"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Sign Up
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/profile"
+                      className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <User className="h-4 w-4 text-primary" />
+                      My Profile
+                    </Link>
+                  )}
                   <button
                     onClick={() => {
                       signOut();
-                      setIsOpen(false);
+                      setIsMobileMenuOpen(false);
                     }}
                     className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-red-600 hover:bg-red-50"
                   >
@@ -1003,8 +1038,8 @@ export default function Navbar() {
                     <button
                       key={lang.code}
                       onClick={() => {
-                        handleLanguageChange(lang.code);
-                        setIsOpen(false);
+                        // Handle language change
+                        setIsMobileMenuOpen(false);
                       }}
                       className={`flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium ${
                         currentLanguage === lang.code
@@ -1033,8 +1068,8 @@ export default function Navbar() {
     {/* Mobile Navigation Component */}
     <div className="lg:hidden">
       <MobileNavigation
-        isOpen={mobileOpen}
-        onToggle={() => setMobileOpen(!mobileOpen)}
+        isOpen={isMobileMenuOpen}
+        onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       />
     </div>
   </>
