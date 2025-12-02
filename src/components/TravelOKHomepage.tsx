@@ -298,6 +298,40 @@ export default function TravelOKHomepage() {
               </div>
             </Link>
           </div>
+
+          {/* Our Top Picks Section */}
+          <div className="mt-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2e4f] mb-4">Our Top Picks</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-8">Handpicked experiences for an unforgettable journey through Egypt</p>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
+              {[
+                { name: 'Luxury Dahabiya', image: '/dahabiyas/royal-cleopatra.jpg', href: '/dahabiyas/royal-cleopatra' },
+                { name: 'Nile Cruise', image: '/nile-cruises/luxury-cruise.jpg', href: '/nile-cruises' },
+                { name: 'Desert Safari', image: '/desert-safari/sunset-ride.jpg', href: '/experiences/desert-safari' },
+                { name: 'Pyramids Tour', image: '/pyramids/great-pyramid.jpg', href: '/tours/pyramids' },
+              ].map((item, index) => (
+                <Link 
+                  key={index} 
+                  href={item.href}
+                  className="group relative overflow-hidden rounded-xl aspect-square md:aspect-[3/4]"
+                >
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center">
+                      <h3 className="font-bold text-lg md:text-xl">{item.name}</h3>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
