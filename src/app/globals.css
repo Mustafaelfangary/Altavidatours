@@ -76,20 +76,20 @@ img {
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
 
-    /* Primary Colors - TravelOK Blue */
-    --primary: 214 86% 49%; /* #1e64c7 - TravelOK Blue */
+    /* Egyptian Theme Primary — Nile Blue */
+    --primary: 210 76% 17%; /* #0B2E4F */
     --primary-foreground: 0 0% 100%;
-    --primary-dark: 214 86% 39%; /* Darker blue */
-    --primary-light: 214 86% 59%; /* Lighter blue */
-    --primary-muted: 214 86% 95%;
+    --primary-dark: 210 76% 12%;
+    --primary-light: 210 76% 26%;
+    --primary-muted: 210 40% 96%;
 
-    /* TravelOK Color Palette */
-    --travelok-blue: #073b5a; /* refined navy */
-    --travelok-blue-dark: #04293a; /* deep navy */
-    --travelok-blue-light: #1a7fda; /* lighter ocean */
-    --travelok-blue-lighter: #4d9ee6;
-    --travelok-blue-lightest: #70b5f2;
-    --travelok-accent: #1193b1; /* teal-cyan accent */
+    /* Egyptian Color Palette */
+    --travelok-blue: #0b2e4f; /* Nile blue */
+    --travelok-blue-dark: #061a2a; /* deep Nile */
+    --travelok-blue-light: #0b79a0; /* Nile teal */
+    --travelok-blue-lighter: #3fa7c1;
+    --travelok-blue-lightest: #bfe3ee;
+    --travelok-accent: #d4af37; /* pharaonic gold accent */
     --travelok-gold: #d4af37; /* elegant gold */
     --travelok-orange-light: #ff9a5c;
     --travelok-orange-dark: #e56522;
@@ -103,17 +103,17 @@ img {
     --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     --card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
 
-    /* TravelOK Blue variations */
-    --travelok-blue-50: #eff6ff;
-    --travelok-blue-100: #dbeafe;
-    --travelok-blue-200: #bfdbfe;
-    --travelok-blue-300: #93c5fd;
-    --travelok-blue-400: #60a5fa;
-    --travelok-blue-500: #3b82f6;
-    --travelok-blue-600: #1e64c7;
-    --travelok-blue-700: #1d4ed8;
-    --travelok-blue-800: #1e40af;
-    --travelok-blue-900: #1e3a8a;
+    /* Nile Blue variations */
+    --travelok-blue-50: #f1f6fb;
+    --travelok-blue-100: #e3eef7;
+    --travelok-blue-200: #c7ddee;
+    --travelok-blue-300: #9fc3dd;
+    --travelok-blue-400: #6fa6c9;
+    --travelok-blue-500: #3a85ac;
+    --travelok-blue-600: #0b79a0;
+    --travelok-blue-700: #0b4871;
+    --travelok-blue-800: #0b375b;
+    --travelok-blue-900: #0b2e4f;
 
     /* TravelOK Orange variations */
     --travelok-orange-50: #fff7ed;
@@ -127,16 +127,16 @@ img {
     --travelok-orange-800: #9a3412;
     --travelok-orange-900: #7c2d12;
 
-    /* Secondary Colors - TravelOK Orange */
-    --secondary: 24 100% 50%; /* #ff6600 */
-    --secondary-foreground: 0 0% 100%;
-    --secondary-dark: 24 100% 40%; 
-    --secondary-light: 24 100% 60%;
-    --secondary-muted: 24 100% 95%;
+    /* Secondary Colors — Papyrus Sand */
+    --secondary: 46 94% 90%; /* papyrus sand */
+    --secondary-foreground: 220 12% 18%;
+    --secondary-dark: 46 30% 76%;
+    --secondary-light: 46 96% 94%;
+    --secondary-muted: 46 96% 98%;
 
-    /* Accent Colors - TravelOK Green */
-    --accent: 120 60% 34%; /* #228b22 */
-    --accent-foreground: 0 0% 100%;
+    /* Accent Colors — Pharaonic Gold */
+    --accent: 45 61% 52%; /* #d4af37 */
+    --accent-foreground: 210 12% 12%;
 
     /* Tertiary Colors - TDS Green */
     --tertiary: 158 85% 42%; /* #1BAE70 */
@@ -203,14 +203,14 @@ img {
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
       0 8px 10px -6px rgb(0 0 0 / 0.1);
 
-    /* Luxury Tourism Theme Colors */
-    --luxury-blue: #0b2b45;
-    --luxury-blue-dark: #061826;
-    --luxury-blue-light: #1d3f56;
-    --luxury-gold: #1193b1; /* repurposed name — teal primary for CTAs */
-    --luxury-gold-light: #63dbe7; /* lighter teal for highlights */
-    --luxury-gold-gradient: linear-gradient(90deg, #1193b1 0%, #0b79a0 100%);
-    --luxury-white: #ffffff;
+    /* Luxury Tourism Theme Colors — Egyptian */
+    --luxury-blue: #0b2e4f; /* Nile blue */
+    --luxury-blue-dark: #061a2a;
+    --luxury-blue-light: #0b4871;
+    --luxury-gold: #d4af37; /* true gold */
+    --luxury-gold-light: #f3d472; /* lighter gold */
+    --luxury-gold-gradient: linear-gradient(90deg, #d4af37 0%, #f3d472 100%);
+    --luxury-white: #f9f6ee; /* papyrus */
     --luxury-glass: rgba(255,255,255,0.15);
     --luxury-shadow: 0 8px 32px 0 rgba(10,35,66,0.25);
     --luxury-shadow-gold: 0 4px 24px 0 rgba(212,175,55,0.15);
@@ -298,8 +298,8 @@ img {
   }
 
   body {
-    /* Use a bright canvas similar to the reference site with soft gradients */
-    background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%);
+    /* Egyptian papyrus canvas with soft warmth */
+    background: linear-gradient(180deg, #f9f6ee 0%, #fffdf5 100%);
     color: rgba(10, 30, 45, 0.95);
     font-family: var(--luxury-font-body);
     letter-spacing: 0.01em;
@@ -316,13 +316,13 @@ img {
   }
 
   a {
-    color: var(--travelok-accent);
+    color: var(--luxury-gold);
     text-decoration: none;
     transition: color 0.2s;
   }
 
   a:hover {
-    color: var(--luxury-gold-light);
+    color: var(--luxury-blue-light);
   }
 
   /* Glassmorphism Card */
@@ -336,7 +336,7 @@ img {
 
   /* Gold Button */
   .btn-gold {
-    background: linear-gradient(90deg, var(--travelok-accent) 0%, #0b79a0 100%);
+    background: linear-gradient(90deg, var(--luxury-blue) 0%, var(--luxury-gold) 100%);
     color: #ffffff;
     border-radius: var(--luxury-radius);
     font-weight: 700;
@@ -345,8 +345,7 @@ img {
   }
 
   .btn-gold:hover {
-    /* Keep hover within the teal/navy system (no gold hover) */
-    background: linear-gradient(90deg, #0b79a0 0%, #073b5a 100%);
+    background: linear-gradient(90deg, var(--luxury-gold) 0%, var(--luxury-blue) 100%);
     color: #ffffff;
     box-shadow: 0 8px 32px 0 rgba(7,59,90,0.16);
   }
@@ -354,7 +353,7 @@ img {
   /* Animated underline for nav links */
   .nav-link {
     position: relative;
-    color: var(--travelok-accent);
+    color: var(--luxury-gold);
     font-weight: 600;
     transition: color 0.2s;
   }

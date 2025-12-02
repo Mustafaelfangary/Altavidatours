@@ -4,16 +4,15 @@
 */
 
 :root {
-  /* Layout / background */
-  --background: 38 96% 98%; /* very light sand */
+  /* Egyptian brand palette */
+  --background: 46 96% 96%; /* papyrus sand */
   --foreground: 218 12% 12%;  /* deep charcoal for text */
 
-  /* ALTAVIDA brand palette */
-  --altavida-ocean: 204 77% 33%; /* #0e6fbf - ocean blue */
-  --altavida-deep: 216 30% 12%; /* #0f1720 - near-black navy */
-  --altavida-sand: 38 96% 96%; /* #f7f3ef - sand */
-  --altavida-sunset: 22 100% 53%; /* #ff7a2d - warm sunset orange */
-  --altavida-emerald: 162 73% 35%; /* #19a57a - accent */
+  --altavida-ocean: 210 76% 17%; /* #0B2E4F - Nile blue */
+  --altavida-deep: 210 76% 12%; /* deep Nile */
+  --altavida-sand: 46 96% 94%; /* #F9F6EE - papyrus */
+  --altavida-sunset: 45 61% 52%; /* #D4AF37 - pharaonic gold */
+  --altavida-emerald: 162 73% 35%; /* emerald accent */
 
   --primary: var(--altavida-ocean);
   --primary-foreground: 0 0% 100%;
@@ -22,11 +21,11 @@
   --muted: 216 16% 94%;
   --muted-foreground: 215 16% 46%;
   --accent: var(--altavida-sunset);
-  --accent-foreground: 0 0% 100%;
+  --accent-foreground: 0 0% 12%;
 
   --border: 216 20% 94%;
   --input: 216 20% 96%;
-  --ring: 204 77% 33%; /* ocean blue ring */
+  --ring: 210 76% 28%; /* Nile ring */
 
   --radius: 12px;
   --radius-lg: 18px;
@@ -34,7 +33,7 @@
   --card-elevation: 0 12px 40px rgba(21, 39, 71, 0.12);
   --glass: rgba(255,255,255,0.66);
   --glass-dark: rgba(10,12,20,0.48);
-  --hero-gradient: linear-gradient(120deg, rgba(14,111,191,0.08), rgba(255,122,45,0.04));
+  --hero-gradient: linear-gradient(120deg, rgba(11,46,79,0.10), rgba(212,175,55,0.06));
 }
 
 .dark {
@@ -42,11 +41,11 @@
   --foreground: 210 12% 96%;
   --card: 224 18% 8%;
   --card-foreground: 210 20% 98%;
-  --primary: 204 77% 45%;
+  --primary: 210 76% 26%;
   --secondary: 216 20% 10%;
-  --accent: 22 100% 54%;
+  --accent: 45 61% 52%;
   --border: 218 20% 16%;
-  --ring: 204 77% 45%;
+  --ring: 210 76% 28%;
 }
 
 /* Typography */
@@ -63,8 +62,8 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-a { color: hsl(var(--primary)); text-decoration: none; }
-a:hover { color: hsl(var(--accent)); text-decoration: underline; }
+a { color: hsl(var(--accent)); text-decoration: none; }
+a:hover { color: hsl(var(--primary)); text-decoration: underline; }
 
 /* Cards */
 .card, [class*="card"], .shadow-card {
@@ -82,24 +81,24 @@ a:hover { color: hsl(var(--accent)); text-decoration: underline; }
   font-weight: 600;
   transition: transform 160ms ease, box-shadow 160ms ease, opacity 120ms ease;
 }
-.btn-primary { background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent))); color: #fff; box-shadow: 0 8px 30px rgba(14,111,191,0.14); }
+.btn-primary { background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent))); color: #fff; box-shadow: 0 8px 30px rgba(11,46,79,0.18); }
 .btn-ghost { background: transparent; border: 1px solid rgba(15,23,42,0.06); color: hsl(var(--foreground)); }
 .btn:active { transform: translateY(1px); }
 .btn:hover { transform: translateY(-3px); }
 
 /* Navigation & header */
-.navbar, nav { backdrop-filter: saturate(160%) blur(8px); background: linear-gradient(90deg, rgba(255,255,255,0.56), rgba(247,243,238,0.52)); border-bottom: 1px solid rgba(20,30,45,0.06); padding: 0.8rem 1rem; }
+.navbar, nav { backdrop-filter: saturate(160%) blur(8px); background: linear-gradient(90deg, rgba(249,246,238,0.72), rgba(255,255,255,0.85)); border-bottom: 1px solid rgba(20,30,45,0.06); padding: 0.8rem 1rem; }
 .navbar-inner { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
-.navbar .brand { display:flex; gap:.75rem; align-items:center; font-weight:700; color: hsl(var(--primary)); font-size:1.05rem; }
+.navbar .brand { display:flex; gap:.75rem; align-items:center; font-weight:700; color: hsl(var(--accent)); font-size:1.05rem; }
 .navbar .brand img { height:44px; width:auto; filter: drop-shadow(0 12px 34px rgba(15,23,42,0.08)); }
 .navbar .nav-links { display:flex; gap:1.15rem; align-items:center; }
 .navbar .cta { display:inline-flex; align-items:center; gap:.6rem; }
 
 /* Hero */
-.hero-section { min-height: 72vh; background: var(--hero-gradient), linear-gradient(180deg, rgba(247,243,238,0.6), rgba(255,255,255,0.98)); position:relative; overflow:visible; }
-.hero-banner { position:absolute; inset:0; z-index:1; background-image: url('/images/hero/travel-hero.jpg'); background-position:center; background-size:cover; opacity:0.86; filter: saturate(110%) contrast(105%); }
+.hero-section { min-height: 72vh; background: var(--hero-gradient), linear-gradient(180deg, rgba(249,246,238,0.6), rgba(255,255,255,0.98)); position:relative; overflow:visible; }
+.hero-banner { position:absolute; inset:0; z-index:1; background-image: url('/images/hero/travel-hero.jpg'); background-position:center; background-size:cover; opacity:0.86; filter: saturate(115%) contrast(108%); }
 .hero-container { position: relative; z-index:10; display:flex; align-items:center; justify-content:center; gap:2rem; }
-.hero-title { font-size: clamp(2rem, 4.5vw, 3.9rem); letter-spacing: -0.02em; color: #fff; text-shadow: 0 12px 30px rgba(1,34,78,0.45); font-weight:800; }
+.hero-title { font-size: clamp(2rem, 4.5vw, 3.9rem); letter-spacing: -0.02em; color: #fff; text-shadow: 0 12px 30px rgba(11,46,79,0.45); font-weight:800; }
 .hero-subtitle { color: rgba(255,255,255,0.92); font-size: clamp(1.05rem, 2vw, 1.4rem); max-width:900px; }
 .hero-ctas { display:flex; gap:1rem; margin-top:1.25rem; }
 .hero-ctas .btn-primary { padding: .9rem 1.4rem; border-radius: 14px; }
@@ -118,7 +117,7 @@ section { padding: 3.5rem 0; }
 input, select, textarea { border-radius: 10px; border: 1px solid hsl(var(--input)); }
 
 /* Footer — modern clean */
-footer { background: linear-gradient(180deg, rgba(7,20,36,0.95), rgba(10,18,34,0.98)); color: #e6f0ff; }
+.footer { background: linear-gradient(180deg, rgba(11,46,79,0.96), rgba(6,26,42,0.98)); color: #e6f0ff; }
 
 /* Utilities */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
@@ -138,4 +137,3 @@ img { border-radius: 10px; }
 .hover-text-accent:hover { color: hsl(var(--accent)); }
 .btn-primary-gradient { background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent))); color: #fff; }
 .hover-bg-accent:hover { background-color: hsl(var(--accent)); color: #fff; }
-

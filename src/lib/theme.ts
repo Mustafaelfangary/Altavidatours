@@ -4,15 +4,15 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#0b2b45', // refined navy
-      dark: '#061826',
-      light: '#1d3f56',
+      main: '#0B2E4F', // Nile blue
+      dark: '#061A2A',
+      light: '#0B4871',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#1193b1', // teal/cyan accent
-      dark: '#0b7f8e',
-      light: '#4cc7db',
+      main: '#D4AF37', // pharaonic gold accent
+      dark: '#B8922E',
+      light: '#F3D472',
       contrastText: '#ffffff',
     },
     background: {
@@ -153,27 +153,27 @@ export const theme = createTheme({
           borderRadius: '1.25rem',
           fontWeight: 700,
           padding: '14px 32px',
-          background: 'linear-gradient(90deg, #d4af37 0%, #ffe082 100%)',
-          color: '#0a2342',
-          boxShadow: '0 4px 24px 0 rgba(212,175,55,0.15)',
+          background: 'linear-gradient(90deg, #0B2E4F 0%, #D4AF37 100%)',
+          color: '#ffffff',
+          boxShadow: '0 4px 24px 0 rgba(11,46,79,0.15)',
           transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
           '&:hover': {
-            background: '#d4af37',
-            color: '#0a2342',
-            boxShadow: '0 8px 32px 0 rgba(212,175,55,0.25)',
+            background: 'linear-gradient(90deg, #D4AF37 0%, #0B2E4F 100%)',
+            color: '#ffffff',
+            boxShadow: '0 8px 32px 0 rgba(11,46,79,0.25)',
           },
         },
         contained: {
-          background: 'linear-gradient(135deg, #1BAE70 0%, #0B70E1 100%)',
+          background: 'linear-gradient(135deg, #0B2E4F 0%, #D4AF37 100%)',
           '&:hover': {
-            background: 'linear-gradient(135deg, #16925b 0%, #0A2FA6 100%)',
+            background: 'linear-gradient(135deg, #D4AF37 0%, #0B2E4F 100%)',
           },
         },
         outlined: {
           borderWidth: '2px',
           '&:hover': {
             borderWidth: '2px',
-            backgroundColor: 'rgba(27, 174, 112, 0.05)',
+            backgroundColor: 'rgba(212, 175, 55, 0.08)',
           },
         },
       },

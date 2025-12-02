@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone as PhoneIcon, MapPin as MapPinIcon } from "lucide-react";
+import Partners from '@/components/Partners';
 
 export default function TravelOKFooter() {
   const [logoUrl, setLogoUrl] = useState('/altavida-logo-1.png');
@@ -25,17 +27,18 @@ export default function TravelOKFooter() {
           }
         }
       } catch (_) {
-        // Use new default logo
         setLogoUrl('/altavida-logo-1.png');
       }
     };
     fetchLogo();
   }, []);
+
   return (
-    <footer className="footer pt-16 pb-8 px-4 md:px-0 border-t border-white/10">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          {/* Logo and Description */}
+    <footer className="footer border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        {/* Top */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16">
+          {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center mb-6">
               <Image 
@@ -46,108 +49,95 @@ export default function TravelOKFooter() {
                 className="h-8 w-auto mr-3"
               />
               <div>
-                <div className="text-white font-bold text-2xl leading-tight luxury-font">Altavida</div>
-                <div className="text-white/70 font-bold text-sm -mt-0.5 tracking-wide luxury-font">TOURS.COM</div>
+                <div className="text-white font-bold text-2xl leading-tight">Altavida</div>
+                <div className="text-white/70 font-bold text-sm -mt-0.5 tracking-[0.18em]">TOURS.COM</div>
               </div>
             </div>
-            <p className="text-base text-white/80 leading-relaxed mb-4">
+            <p className="text-white/80 leading-relaxed text-[15px] md:text-base">
               Your gateway to Egypt's wonders. From ancient pyramids to Red Sea adventures, Altavida Tours.com creates unforgettable luxury travel experiences.
             </p>
-            {/* Trust Badges */}
-            <div className="flex space-x-3 mt-4">
-              <span className="bg-white/10 text-white/90 px-3 py-1 rounded-full text-xs font-bold">✓ Trusted by 10,000+ guests</span>
-              <span className="bg-white/10 text-white/90 px-3 py-1 rounded-full text-xs font-bold">✓ 5-Star Reviews</span>
-            </div>
-            {/* Social Media */}
-            <div className="flex space-x-4 mt-6">
-              <Link href="https://www.facebook.com/altavidatours" className="text-white/80 hover:text-[#b88a44] transition-colors text-xl">📘</Link>
-              <Link href="https://www.instagram.com/altavidatours" className="text-white/80 hover:text-[#b88a44] transition-colors text-xl">📸</Link>
-              <Link href="https://twitter.com/altavidatours" className="text-white/80 hover:text-[#b88a44] transition-colors text-xl">🐦</Link>
-              <Link href="https://www.youtube.com/@altavidatours" className="text-white/80 hover:text-[#b88a44] transition-colors text-xl">▶️</Link>
+
+            {/* Social */}
+            <div className="mt-6 flex items-center gap-3">
+              {[{Icon: Facebook, href: 'https://www.facebook.com/altavidatours', label: 'Facebook'},
+                {Icon: Instagram, href: 'https://www.instagram.com/altavidatours', label: 'Instagram'},
+                {Icon: Twitter, href: 'https://twitter.com/altavidatours', label: 'Twitter'},
+                {Icon: Linkedin, href: 'https://www.linkedin.com/company/altavidatours', label: 'LinkedIn'}].map(({Icon, href, label}) => (
+                <Link key={label} href={href} aria-label={label} className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/20 text-white/80 hover:text-[#c7a15a] hover:border-[#c7a15a] transition-colors">
+                  <Icon size={18} />
+                </Link>
+              ))}
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="section-heading">Quick Links</h3>
+            <h3 className="section-heading mb-5">Quick Links</h3>
             <ul className="space-y-3">
-              <li><Link href="/tours" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Tours & Packages</Link></li>
-              <li><Link href="/attractions" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Attractions</Link></li>
-              <li><Link href="/destinations" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Destinations</Link></li>
-              <li><Link href="/accommodation" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Hotels & Resorts</Link></li>
-              <li><Link href="/gallery" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Gallery</Link></li>
-              <li><Link href="/about" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">About Us</Link></li>
+              <li><Link href="/tours" className="text-white/85 hover:text-[#c7a15a] transition-colors text-[15px]">Tours & Packages</Link></li>
+              <li><Link href="/destinations" className="text-white/85 hover:text-[#c7a15a] transition-colors text-[15px]">Destinations</Link></li>
+              <li><Link href="/itineraries" className="text-white/85 hover:text-[#c7a15a] transition-colors text-[15px]">Itineraries</Link></li>
+              <li><Link href="/gallery" className="text-white/85 hover:text-[#c7a15a] transition-colors text-[15px]">Gallery</Link></li>
+              <li><Link href="/about" className="text-white/85 hover:text-[#c7a15a] transition-colors text-[15px]">About Us</Link></li>
+              <li><Link href="/contact" className="text-white/85 hover:text-[#c7a15a] transition-colors text-[15px]">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Contact */}
           <div>
-            <h3 className="section-heading">Services</h3>
-            <ul className="space-y-3">
-              <li><Link href="/tours/classic" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Classic Egypt Tours</Link></li>
-              <li><Link href="/services/adventure-tours" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Desert Safari</Link></li>
-              <li><Link href="/experiences/diving" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Red Sea Diving</Link></li>
-              <li><Link href="/experiences/cultural" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Cultural Tours</Link></li>
-              <li><Link href="/tours/private" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Private Tours</Link></li>
-              <li><Link href="/tours/group" className="text-white/80 hover:text-[#b88a44] transition-colors text-sm">Group Travel</Link></li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="section-heading">Contact Info</h3>
+            <h3 className="section-heading mb-5">Contact</h3>
             <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <span className="text-[#b88a44] text-lg">📍</span>
-                <div>
-                  <p className="text-sm text-white/80">Egypt, Giza &lt;haram, Mashaal Station, pyramids view Tower 2, No 312</p>
-                </div>
+              <div className="flex items-start gap-3 text-white/85">
+                <MapPinIcon size={18} className="text-[#c7a15a] mt-0.5" />
+                <p className="text-[15px]">Egypt, Giza &lt;haram, Mashaal Station, pyramids view Tower 2, No 312</p>
               </div>
-              
-              <div className="flex items-center space-x-3">
-                <span className="text-[#b88a44] text-lg">📞</span>
-                <p className="text-sm text-white/80">+20 10 02588564</p>
+              <div className="flex items-center gap-3 text-white/85">
+                <PhoneIcon size={18} className="text-[#c7a15a]" />
+                <p className="text-[15px]">+20 10 02588564</p>
               </div>
-              
-              <div className="flex items-center space-x-3">
-                <span className="text-[#b88a44] text-lg">✉️</span>
-                <p className="text-sm text-white/80">bookings@altavidatours.com</p>
+              <div className="flex items-center gap-3 text-white/85">
+                <Mail size={18} className="text-[#c7a15a]" />
+                <p className="text-[15px]">bookings@altavidatours.com</p>
               </div>
-              
-              <div className="flex items-center space-x-3">
-                <span className="text-[#b88a44] text-lg">📱</span>
-                <p className="text-sm text-white/80">WhatsApp: +20 10 02588564</p>
+              <div className="flex items-center gap-3 text-white/85">
+                <PhoneIcon size={18} className="text-[#c7a15a]" />
+                <p className="text-[15px]">WhatsApp: +20 10 02588564</p>
               </div>
             </div>
+          </div>
 
-            {/* Newsletter Signup */}
-            <div className="mt-8 md:mt-0">
-              <h4 className="text-lg font-semibold mb-3 text-white">Stay Updated</h4>
-              <div className="flex">
-                <input 
-                  type="email" 
-                  placeholder="Your email"
-                  className="flex-1 px-3 py-2 text-base bg-white text-gray-700 rounded-l border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#b88a44]"
-                />
-                <button className="px-4 py-2 rounded-r transition-colors btn-primary-gradient text-white font-semibold">
-                  <span className="text-base">Subscribe</span>
-                </button>
-              </div>
-            </div>
+          {/* Newsletter */}
+          <div>
+            <h3 className="section-heading mb-5">Newsletter</h3>
+            <p className="text-white/80 text-[15px] leading-relaxed mb-4">
+              Subscribe for exclusive offers and timeless Egypt travel inspiration.
+            </p>
+            <form onSubmit={(e) => e.preventDefault()} className="flex items-stretch">
+              <input 
+                type="email" 
+                placeholder="Your email"
+                className="flex-1 px-4 py-2.5 text-base bg-white text-gray-700 rounded-l-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c7a15a]"
+              />
+              <button className="px-5 py-2.5 rounded-r-full btn-primary-gradient text-white font-semibold">
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-base text-white/60 mb-4 md:mb-0">
-              © 2025 Altavida Tours.com. All rights reserved.
-            </div>
-            
-            <div className="flex items-center space-x-6">
-              <Link href="/privacy" className="text-base text-white/60 hover:text-[#b88a44] transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="text-base text-white/60 hover:text-[#b88a44] transition-colors">Terms of Service</Link>
-              <Link href="/cookies" className="text-base text-white/60 hover:text-[#b88a44] transition-colors">Cookie Policy</Link>
+        {/* Partners strip */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <Partners variant="footer" />
+        </div>
+
+        {/* Legal bar */}
+        <div className="mt-10 pt-6 border-t border-white/10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-white/70">
+            <div className="text-[15px]">© {new Date().getFullYear()} Altavida Tours.com. All rights reserved.</div>
+            <div className="flex items-center gap-6 text-[15px]">
+              <Link href="/privacy" className="hover:text-[#c7a15a] transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-[#c7a15a] transition-colors">Terms of Service</Link>
+              <Link href="/cookies" className="hover:text-[#c7a15a] transition-colors">Cookie Policy</Link>
             </div>
           </div>
         </div>
@@ -155,4 +145,3 @@ export default function TravelOKFooter() {
     </footer>
   );
 }
-
