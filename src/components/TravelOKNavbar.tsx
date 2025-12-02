@@ -367,7 +367,7 @@ export default function TravelOKNavbar() {
   return (
     <>
       {/* Luxury Top Bar with Language Selector */}
-      <div className={`topbar hidden lg:block transition-all duration-300 ${scrolled ? 'py-0.5' : 'py-1'} bg-white/60 text-neutral-700 shadow-sm backdrop-blur-md border-b border-gray-100`}> 
+      <div className={`topbar hidden lg:block transition-all duration-300 ${scrolled ? 'py-0.5' : 'py-1'} text-slate-700 border-b`}> 
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-6">
@@ -400,13 +400,13 @@ export default function TravelOKNavbar() {
               
               {/* Quick Links */}
                 <div className="flex items-center space-x-5 text-[13px]">
-                <Link href="/contact" className="transition-colors duration-200 font-medium hover:text-[#1193b1]">
+                <Link href="/contact" className="transition-colors duration-200 font-medium hover:text-[#b88a44]">
                   Contact Us
                 </Link>
-                <Link href="/about" className="transition-colors duration-200 font-medium hover:text-[#1193b1]">
+                <Link href="/about" className="transition-colors duration-200 font-medium hover:text-[#b88a44]">
                   About Us
                 </Link>
-                <Link href="/blog" className="transition-colors duration-200 font-medium hover:text-[#1193b1]">
+                <Link href="/blog" className="transition-colors duration-200 font-medium hover:text-[#b88a44]">
                   Travel Blog
                 </Link>
               </div>
@@ -431,8 +431,8 @@ export default function TravelOKNavbar() {
       </div>
 
       {/* Luxury Main Navigation */}
-      <nav className={`navbar relative z-40 transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'shadow-md' : 'shadow-sm'}`} ref={containerRef} style={{ overflow: 'visible', backdropFilter: 'none' }}>
-        <div className="w-full mx-auto px-3 lg:px-6" style={{ overflow: 'visible' }}>
+      <nav className={`navbar sticky top-0 z-40 transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'shadow-md' : 'shadow-sm'}`} ref={containerRef} style={{ overflow: 'visible' }}>
+        <div className="w-full container-narrow" style={{ overflow: 'visible' }}>
           <div className="navbar-inner flex items-center justify-start" style={{ overflow: 'visible' }}>
             {/* Mobile Menu Button */}
             <button
@@ -503,7 +503,7 @@ export default function TravelOKNavbar() {
                             {/* Header */}
                             <div className="flex items-center space-x-3 mb-6 pb-4 border-b border-gray-100">
                               <div className="p-2 bg-blue-100 rounded-lg">
-                                <item.icon size={24} className="text-blue-600" />
+                                <item.icon size={24} className="text-[#b88a44]" />
                               </div>
                               <div>
                                 <h3 className="text-[15px] font-bold text-gray-900 leading-tight">{item.label}</h3>
@@ -520,7 +520,7 @@ export default function TravelOKNavbar() {
                             <Link
                               key={subItem.href}
                               href={subItem.href}
-                                      className="group flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-all duration-200"
+                                      className="group flex items-start space-x-3 p-3 rounded-lg hover:bg-slate-50 transition-all duration-200"
                             >
                                       <span className="text-lg mt-0.5">{subItem.icon}</span>
                                       <div className="flex-1">
@@ -545,10 +545,10 @@ export default function TravelOKNavbar() {
                                     <Link
                                       key={featured.href}
                                       href={featured.href}
-                                      className="group flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-50 transition-all duration-200"
+                                      className="group flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-50 transition-all duration-200"
                                     >
-                                      <featured.icon size={18} className="text-orange-500" />
-                                      <span className="font-medium text-[14px] text-gray-900 group-hover:text-orange-600 transition-colors duration-200">
+                                      <featured.icon size={18} className="text-[#b88a44]" />
+                                      <span className="font-medium text-[14px] text-gray-900 group-hover:text-[#b88a44] transition-colors duration-200">
                                         {featured.label}
                                       </span>
                             </Link>
@@ -598,7 +598,7 @@ export default function TravelOKNavbar() {
               {/* Additional Links */}
               <Link
                 href="/gallery"
-                className="px-2 py-2 text-[13px] font-semibold text-neutral-700 hover:text-primary transition-colors duration-200 border-r border-transparent flex items-center space-x-2"
+                className="px-2 py-2 text-[13px] font-semibold text-slate-800 hover:text-[#b88a44] transition-colors duration-200 border-r border-transparent flex items-center space-x-2"
                 style={{ marginLeft: 8 }}
               >
                 <Camera size={16} />
@@ -634,7 +634,7 @@ export default function TravelOKNavbar() {
               </Link>
               <Link
                 href="/contact"
-                className="px-3 py-2 text-[13px] font-semibold rounded-md bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white transition-all duration-200 flex items-center space-x-2 shadow-sm hover:shadow-md"
+                className="px-4 py-2 text-[13px] font-semibold rounded-full btn-primary-gradient transition-all duration-200 flex items-center space-x-2 shadow-sm hover:shadow-md"
               >
                 <Phone size={16} />
                 <span>CONTACT</span>
@@ -723,7 +723,7 @@ export default function TravelOKNavbar() {
         <div className="fixed inset-0 z-50 lg:hidden">
                 <div className="fixed inset-0 bg-black opacity-50" onClick={() => setMobileMenuOpen(false)}></div>
           <div className="fixed top-0 left-0 w-full max-w-sm bg-white text-neutral-800 shadow-2xl h-full overflow-y-auto">
-            <div className="flex justify-between items-center p-4 border-b topbar text-white">
+            <div className="flex justify-between items-center p-4 border-b topbar text-slate-800">
               <span className="font-bold text-lg">Menu</span>
               <button onClick={() => setMobileMenuOpen(false)}>
                 <X size={24} />
@@ -767,7 +767,7 @@ export default function TravelOKNavbar() {
                         <Link
                           key={subItem.href}
                           href={subItem.href}
-                          className="flex items-center space-x-2 px-8 py-2 text-sm text-gray-300 hover:bg-blue-700 transition-colors duration-150"
+                          className="flex items-center space-x-2 px-8 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors duration-150"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <span>{subItem.icon}</span>
