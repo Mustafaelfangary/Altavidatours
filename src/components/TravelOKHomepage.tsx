@@ -40,6 +40,63 @@ export default function TravelOKHomepage() {
       })
       .catch(() => setServices([]));
   }, []);
+ 
+  // Animated package card with slideshow and 3D hover
+  function AnimatedPackageCard({ pkg, images, index }: { pkg: any; images: string[]; index: number }) {
+    const [idx, setIdx] = useState(0);
+
+    useEffect(() => {
+      if (!images || images.length <= 1) return;
+      const timer = setInterval(() => setIdx((i) => (i + 1) % images.length), 3500);
+      return () => clearInterval(timer);
+    }, [images]);
+
+    const current = images && images[idx] ? images[idx] : (images?.[0] || pkg.image);
+
+    return (
+      <div className={`group relative bg-white rounded-2xl border border-gray-100 shadow-[0_12px_40px_rgba(11,46,79,0.08)] hover:shadow-[0_26px_70px_rgba(11,46,79,0.16)] transition-all duration-500 [transform-style:preserve-3d] hover:[transform:translateY(-10px)_rotateX(2deg)] ${index % 2 === 1 ? 'md:mt-10 lg:mt-16' : ''}`}>
+        <div className="absolute inset-0 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{boxShadow:'inset 0 1px 0 rgba(255,255,255,.6), 0 30px 80px rgba(11,46,79,.15)', filter:'saturate(110%)'}}></div>
+        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
+          <Image
+            key={current}
+            src={current || pkg.image}
+            alt={pkg.title}
+            fill
+            className="object-cover scale-[1.02] transition-all duration-700 group-hover:scale-[1.06]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/35"></div>
+          <div className="absolute top-4 right-4 bg-white/95 text-[#0b2e4f] px-3 py-1 rounded-full text-sm font-bold shadow">
+            {pkg.duration}
+          </div>
+        </div>
+        <div className="p-6 md:p-7">
+          <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#0b2e4f] mb-2 animate-[slideUp_0.6s_ease-out]">{pkg.title}</h3>
+          <p className="text-gray-600 text-sm md:text-base mb-4 line-clamp-3 animate-[fadeIn_0.8s_ease-out]">{pkg.description}</p>
+
+          <div className="mb-5">
+            <div className="text-sm text-gray-700 mb-2 font-semibold">Highlights:</div>
+            <div className="flex flex-wrap gap-2">
+              {pkg.highlights.slice(0, 3).map((highlight: string, i: number) => (
+                <span key={i} className="pale-chip px-2.5 py-1 rounded text-xs">{highlight}</span>
+              ))}
+              {pkg.highlights.length > 3 && (
+                <span className="pale-chip px-2 py-1 rounded text-xs">+{pkg.highlights.length - 3} more</span>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-end">
+            <Link
+              href={`/packages/${pkg.id}`}
+              className="px-4 md:px-5 py-2 md:py-2.5 rounded-full bg-[#0b2e4f] text-white font-semibold hover:bg-[#09304e] transition-colors"
+            >
+              View Details
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -79,6 +136,69 @@ export default function TravelOKHomepage() {
         </div>
       </section>
 
+      {/* Top Destinations Section */}
+      <section className="bg-papyrus section-separator">
+        <div className="container mx-auto px-4 py-10 sm:py-14">
+          <div className="text-center mb-8">
+            <h2 className="heading-animated text-3xl md:text-4xl font-extrabold text-[#0b2e4f]">Top Destinations</h2>
+            <p className="subheading-animated text-gray-600 max-w-2xl mx-auto">Explore Egypt's most iconic regions handpicked for this season.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+            {destinations.slice(0,4).map((d, i) => {
+              const fallbackImages = [
+                '/cultural&historical/Saqqara pyramid.jpg',
+                '/Alexandria/IMG_6334.JPG',
+                '/desert&safary/DSC_9166.JPG',
+                '/Royal Cleopatra/DSC_8628.jpg'
+              ];
+              const img = d.image || fallbackImages[i % fallbackImages.length];
+              const title = d.name || `Destination ${i+1}`;
+              const region = d.region || 'Egypt';
+              const slug = (d as any).slug ? `/destinations/${(d as any).slug}` : '/destinations';
+              return (
+                <Link key={d.id || i} href={slug} className="card-3d block overflow-hidden">
+                  <div className="card-media relative h-44 md:h-56">
+                    <Image src={img} alt={title} fill className="object-cover" />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xl font-extrabold text-[#0b2e4f] tracking-tight heading-animated">{title}</h3>
+                    <div className="text-[13px] text-slate-600 mt-1 subheading-animated">{region}</div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* International/Nearby Destinations Section */}
+      <section className="bg-pale-blue">
+        <div className="container mx-auto px-4 py-10 sm:py-14">
+          <div className="text-center mb-8">
+            <h2 className="heading-animated text-3xl md:text-4xl font-extrabold text-[#0b2e4f]">Explore The Region</h2>
+            <p className="subheading-animated text-gray-600 max-w-2xl mx-auto">Add a regional touch to your itinerary with these remarkable nearby destinations.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+            {[
+              { name: 'Jordan', image: '/destinations/jordan.jpg', href: '/destinations/jordan' },
+              { name: 'Dubai', image: '/destinations/dubai.jpg', href: '/destinations/dubai' },
+              { name: 'Turkey', image: '/destinations/turkey.jpg', href: '/destinations/turkey' },
+              { name: 'Morocco', image: '/destinations/morocco.jpg', href: '/destinations/morocco' },
+            ].map((d, i) => (
+              <Link key={d.name} href={d.href} className="card-3d block overflow-hidden">
+                <div className="card-media relative h-44 md:h-56">
+                  <Image src={d.image} alt={d.name} fill className="object-cover" onError={(e) => { e.currentTarget.src = ['/Alexandria/IMG_6504.JPG','/cultural&historical/DSC_8401.JPG','/desert&safary/DSC_9166.JPG','/Royal Cleopatra/DSC_8628.jpg'][i%4]; }} />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-xl font-extrabold text-[#0b2e4f] tracking-tight heading-animated">{d.name}</h3>
+                  <div className="text-[13px] text-slate-600 mt-1 subheading-animated">Regional Destination</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <div className="bg-gray-50 text-[#0b2e4f] py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center py-4">
@@ -90,76 +210,92 @@ export default function TravelOKHomepage() {
       <div className="bg-white text-[#0b2e4f] py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 py-6">
-            <Link
-              href={getContent('category_1_link', '/attractions/pyramids')}
-              className="bg-white border border-gray-200 hover:bg-[#fff7ea] transition-colors text-[#0B2E4F] hover:text-[#0B2E4F] p-4 sm:p-6 text-center rounded-lg min-h-[100px] flex flex-col items-center justify-center"
-            >
-              <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">{getContent('category_1_icon', '🔺')}</div>
-              <div className="font-bold text-xs sm:text-sm">{getContent('category_1_title', 'PYRAMIDS')}</div>
-              <div className="font-bold text-xs sm:text-sm">{getContent('category_1_subtitle', '& SPHINX')}</div>
+            {/* Pyramids & Sphinx */}
+            <Link href={getContent('category_1_link', '/attractions/pyramids')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <div className="relative h-32 sm:h-36">
+                <Image src={getContent('category_1_image','/cultural&historical/Saqqara pyramid.jpg')} alt="Pyramids & Sphinx" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              </div>
+              <div className="p-3 text-center">
+                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">PYRAMIDS & SPHINX</div>
+              </div>
             </Link>
 
-            <Link
-              href={getContent('category_2_link', '/attractions/temples')}
-              className="bg-white border border-gray-200 hover:bg-[#fff7ea] transition-colors text-[#0B2E4F] hover:text-[#0B2E4F] p-6 text-center rounded-lg"
-            >
-              <div className="text-3xl mb-2">{getContent('category_2_icon', '🏛️')}</div>
-              <div className="font-bold text-sm">{getContent('category_2_title', 'ANCIENT')}</div>
-              <div className="font-bold text-sm">{getContent('category_2_subtitle', 'TEMPLES')}</div>
+            {/* Ancient Temples */}
+            <Link href={getContent('category_2_link', '/attractions/temples')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <div className="relative h-32 sm:h-36">
+                <Image src={getContent('category_2_image','/cultural&historical/DSCF1165.JPG')} alt="Ancient Temples" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              </div>
+              <div className="p-3 text-center">
+                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">ANCIENT TEMPLES</div>
+              </div>
             </Link>
 
-            <Link
-              href={getContent('category_3_link', '/attractions/museums')}
-              className="bg-white border border-gray-200 hover:bg-[#fff7ea] transition-colors text-[#0B2E4F] hover:text-[#0B2E4F] p-6 text-center rounded-lg"
-            >
-              <div className="text-3xl mb-2">{getContent('category_3_icon', '🏺')}</div>
-              <div className="font-bold text-sm">{getContent('category_3_title', 'MUSEUMS')}</div>
-              <div className="font-bold text-sm">{getContent('category_3_subtitle', '& ARTIFACTS')}</div>
+            {/* Museums & Artifacts */}
+            <Link href={getContent('category_3_link', '/attractions/museums')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <div className="relative h-32 sm:h-36">
+                <Image src={getContent('category_3_image','/cultural&historical/DSC_8401.JPG')} alt="Museums & Artifacts" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              </div>
+              <div className="p-3 text-center">
+                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">MUSEUMS & ARTIFACTS</div>
+              </div>
             </Link>
 
-            <Link
-              href={getContent('category_4_link', '/services/adventure-tours')}
-              className="bg-white border border-gray-200 hover:bg-[#fff7ea] transition-colors text-[#0B2E4F] hover:text-[#0B2E4F] p-6 text-center rounded-lg"
-            >
-              <div className="text-3xl mb-2">{getContent('category_4_icon', '🐪')}</div>
-              <div className="font-bold text-sm">{getContent('category_4_title', 'DESERT')}</div>
-              <div className="font-bold text-sm">{getContent('category_4_subtitle', 'SAFARI')}</div>
+            {/* Desert Safari */}
+            <Link href={getContent('category_4_link', '/services/adventure-tours')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <div className="relative h-32 sm:h-36">
+                <Image src={getContent('category_4_image','/desert&safary/DSC_9895.JPG')} alt="Desert Safari" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              </div>
+              <div className="p-3 text-center">
+                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">DESERT SAFARI</div>
+              </div>
             </Link>
 
-            <Link
-              href={getContent('category_5_link', '/experiences/diving')}
-              className="bg-white border border-gray-200 hover:bg-[#fff7ea] transition-colors text-[#0B2E4F] hover:text-[#0B2E4F] p-6 text-center rounded-lg"
-            >
-              <div className="text-3xl mb-2">{getContent('category_5_icon', '🤿')}</div>
-              <div className="font-bold text-sm">{getContent('category_5_title', 'RED SEA')}</div>
-              <div className="font-bold text-sm">{getContent('category_5_subtitle', 'DIVING')}</div>
+            {/* Red Sea Diving */}
+            <Link href={getContent('category_5_link', '/experiences/diving')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <div className="relative h-32 sm:h-36">
+                <Image src={getContent('category_5_image','/RedSea/DSCF1998.JPG')} alt="Red Sea Diving" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              </div>
+              <div className="p-3 text-center">
+                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">RED SEA DIVING</div>
+              </div>
             </Link>
 
-            <Link
-              href={getContent('category_6_link', '/hotels/nile-cruises')}
-              className="bg-white border border-gray-200 hover:bg-[#fff7ea] transition-colors text-[#0B2E4F] hover:text-[#0B2E4F] p-6 text-center rounded-lg"
-            >
-              <div className="text-3xl mb-2">{getContent('category_6_icon', '⛵')}</div>
-              <div className="font-bold text-sm">{getContent('category_6_title', 'NILE')}</div>
-              <div className="font-bold text-sm">{getContent('category_6_subtitle', 'CRUISES')}</div>
+            {/* Nile Cruises */}
+            <Link href={getContent('category_6_link', '/hotels/nile-cruises')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <div className="relative h-32 sm:h-36">
+                <Image src={getContent('category_6_image','/Royal Cleopatra/DSC_8628.jpg')} alt="Nile Cruises" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              </div>
+              <div className="p-3 text-center">
+                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">NILE CRUISES</div>
+              </div>
             </Link>
 
-            <Link
-              href={getContent('category_7_link', '/experiences/cultural')}
-              className="bg-white border border-gray-200 hover:bg-[#f1fcfe] transition-colors text-[#073b5a] hover:text-[#073b5a] p-6 text-center rounded-lg"
-            >
-              <div className="text-3xl mb-2">{getContent('category_7_icon', '🎭')}</div>
-              <div className="font-bold text-sm">{getContent('category_7_title', 'CULTURAL')}</div>
-              <div className="font-bold text-sm">{getContent('category_7_subtitle', 'TOURS')}</div>
+            {/* Cultural Tours */}
+            <Link href={getContent('category_7_link', '/experiences/cultural')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <div className="relative h-32 sm:h-36">
+                <Image src={getContent('category_7_image','/cultural&historical/IMG_3143.JPG')} alt="Cultural Tours" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              </div>
+              <div className="p-3 text-center">
+                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">CULTURAL TOURS</div>
+              </div>
             </Link>
 
-            <Link
-              href={getContent('category_8_link', '/experiences/food')}
-              className="bg-white border border-gray-200 hover:bg-[#f1fcfe] transition-colors text-[#073b5a] hover:text-[#073b5a] p-6 text-center rounded-lg"
-            >
-              <div className="text-3xl mb-2">{getContent('category_8_icon', '🍽️')}</div>
-              <div className="font-bold text-sm">{getContent('category_8_title', 'EGYPTIAN')}</div>
-              <div className="font-bold text-sm">{getContent('category_8_subtitle', 'CUISINE')}</div>
+            {/* Egyptian Cuisine */}
+            <Link href={getContent('category_8_link', '/experiences/food')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <div className="relative h-32 sm:h-36">
+                <Image src={getContent('category_8_image','/Alexandria/IMG_6504.JPG')} alt="Egyptian Cuisine" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              </div>
+              <div className="p-3 text-center">
+                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">EGYPTIAN CUISINE</div>
+              </div>
             </Link>
           </div>
         </div>
@@ -176,88 +312,31 @@ export default function TravelOKHomepage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-10">
             {packages.slice(0, 6).map((pkg, index) => {
-              // Choose image based on package type to reflect categories
-              const getImageForPackage = () => {
-                if (pkg.type === 'luxury' || pkg.type === 'cruise') {
-                  const royal = [
-                    '/images/Royal Cleopatra/DSC_8627.jpg',
-                    '/images/Royal Cleopatra/DSC_8733.jpg',
-                    '/images/Royal Cleopatra/DSC_8848.jpg',
-                    '/images/Royal Cleopatra/DSC_8653.jpg',
-                    '/images/Royal Cleopatra/DSC_8666.jpg',
-                    '/images/Royal Cleopatra/DSC_8675.jpg'
-                  ];
-                  return royal[index % royal.length];
-                }
-                if (pkg.type === 'adventure') {
-                  const desert = [
-                    '/images/desert&safary/DSC_9908.JPG',
-                    '/images/desert&safary/DSC_9912.JPG',
-                    '/images/desert&safary/DSC_9895.JPG',
-                    '/images/desert&safary/DSC_9826.JPG'
-                  ];
-                  return desert[index % desert.length];
-                }
-                // classic, cultural, or others
-                const cultural = [
-                  '/images/cultural&historical/Saqqara pyramid.jpg',
-                  '/images/cultural&historical/DSC_8401.JPG',
-                  '/images/cultural&historical/DSCF1165.JPG',
-                  '/images/cultural&historical/IMG_3143.JPG'
-                ];
-                return cultural[index % cultural.length];
-              };
+              const royal = [
+                '/images/Royal Cleopatra/DSC_8627.jpg',
+                '/images/Royal Cleopatra/DSC_8733.jpg',
+                '/images/Royal Cleopatra/DSC_8848.jpg',
+                '/images/Royal Cleopatra/DSC_8653.jpg',
+                '/images/Royal Cleopatra/DSC_8666.jpg',
+                '/images/Royal Cleopatra/DSC_8675.jpg'
+              ];
+              const desert = [
+                '/images/desert&safary/DSC_9908.JPG',
+                '/images/desert&safary/DSC_9912.JPG',
+                '/images/desert&safary/DSC_9895.JPG',
+                '/images/desert&safary/DSC_9826.JPG'
+              ];
+              const cultural = [
+                '/images/cultural&historical/Saqqara pyramid.jpg',
+                '/images/cultural&historical/DSC_8401.JPG',
+                '/images/cultural&historical/DSCF1165.JPG',
+                '/images/cultural&historical/IMG_3143.JPG'
+              ];
+              const images = (pkg.type === 'luxury' || pkg.type === 'cruise') ? royal : (pkg.type === 'adventure') ? desert : cultural;
               return (
-              <div key={pkg.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden">
-                <div className="relative h-48">
-                  <Image
-                    src={getImageForPackage() || pkg.image}
-                    alt={pkg.title}
-                    fill
-                    className="object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = pkg.image;
-                    }}
-                  />
-                  <div className="absolute top-4 right-4 bg-white text-[#0b2e4f] px-3 py-1 rounded-full text-sm font-bold shadow">
-                    {pkg.duration}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#0b2e4f] mb-2">{pkg.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{pkg.description}</p>
-                  
-                  <div className="mb-4">
-                    <div className="text-sm text-gray-700 mb-2">Highlights:</div>
-                    <div className="flex flex-wrap gap-1">
-                      {pkg.highlights.slice(0, 3).map((highlight, i) => (
-                        <span key={i} className="bg-gray-100 text-[#0b2e4f] px-2 py-1 rounded text-xs">
-                          {highlight}
-                        </span>
-                      ))}
-                      {pkg.highlights.length > 3 && (
-                        <span className="bg-white text-[#0b2e4f] px-2 py-1 rounded text-xs">
-                          +{pkg.highlights.length - 3} more
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="text-2xl font-bold text-[#0b2e4f]">
-                      From ${pkg.price.from}
-                    </div>
-                    <Link 
-                      href={`/packages/${pkg.id}`}
-                      className="bg-[#0b2e4f] text-white px-4 py-2 rounded transition-colors text-sm font-semibold hover:bg-[#09304e]"
-                    >
-                      View Details
-                    </Link>
-                  </div>
-                </div>
-              </div>
+                <AnimatedPackageCard key={pkg.id} pkg={pkg} images={images} index={index} />
               );
             })}
           </div>
@@ -318,10 +397,7 @@ export default function TravelOKHomepage() {
                   {summary && (
                     <p className="text-gray-600 text-sm mb-4 line-clamp-3">{summary}</p>
                   )}
-                  <div className="flex items-center justify-between">
-                    <div className="text-[#073b5a] font-bold">
-                      {price ? <>From ${price}</> : <span className="text-gray-400">Contact for price</span>}
-                    </div>
+                  <div className="flex items-center justify-end">
                     <Link href={`/services/${svc.slug || svc.id}`} className="bg-white border border-gray-200 hover:bg-[#f1fcfe] text-[#073b5a] hover:text-[#073b5a] px-4 py-2 rounded text-sm font-semibold">
                       View Details
                     </Link>

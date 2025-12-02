@@ -76,11 +76,11 @@ img {
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
 
-    /* Egyptian Theme Primary — Nile Blue */
-    --primary: 210 76% 17%; /* #0B2E4F */
+    /* Egyptian Theme Primary — switched to pale Nile blue for a light theme */
+    --primary: 210 60% 45%; /* lighter blue for light theme */
     --primary-foreground: 0 0% 100%;
-    --primary-dark: 210 76% 12%;
-    --primary-light: 210 76% 26%;
+    --primary-dark: 210 60% 35%;
+    --primary-light: 210 90% 92%; /* very pale background usage */
     --primary-muted: 210 40% 96%;
 
     /* Egyptian Color Palette */
@@ -677,7 +677,73 @@ img {
 }
 
 @layer components {
-  /* existing component styles ... */
+  /* Pale theme component utilities */
+
+  /* 3D Card System */
+  .card-3d {
+    background: #fff;
+    border: 1px solid rgba(10,30,45,0.08);
+    border-radius: 1rem;
+    box-shadow: 0 12px 34px rgba(12,22,36,0.08);
+    transition: transform .35s ease, box-shadow .35s ease, filter .35s ease;
+    transform-style: preserve-3d;
+  }
+  .card-3d:hover {
+    transform: translateY(-8px) rotateX(2deg);
+    box-shadow: 0 26px 70px rgba(11,46,79,0.16);
+    filter: saturate(1.05);
+  }
+  .card-3d .card-media {
+    position: relative;
+    overflow: hidden;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+  .card-3d .card-media img { transition: transform .6s ease; }
+  .card-3d:hover .card-media img { transform: scale(1.06); }
+  .card-3d .card-media::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.35) 100%);
+    pointer-events: none;
+  }
+
+  /* Luxury caption for tiles */
+  .lux-caption { 
+    font-weight: 800; text-transform: uppercase; letter-spacing: .14em; 
+    color: #0b2e4f; font-size: 11px; 
+  }
+
+  /* Buttons */
+  .btn-primary { 
+    background: #0b2e4f; color:#fff; border-radius: 9999px; font-weight: 700; 
+    padding: .5rem 1rem; transition: background .2s, box-shadow .2s; 
+    box-shadow: 0 10px 24px rgba(11,46,79,.12);
+  }
+  .btn-primary:hover { background: #09304e; box-shadow: 0 14px 30px rgba(11,46,79,.16); }
+  .btn-outline { 
+    background: #fff; color:#0b2e4f; border-radius: 9999px; font-weight: 700; 
+    padding: .5rem 1rem; border:1px solid rgba(10,30,45,.12); 
+  }
+  .btn-outline:hover { background:#f7fafc; }
+
+  /* Link underline animation */
+  .link-underline { position:relative; }
+  .link-underline::after { content:''; position:absolute; left:0; right:0; bottom:-3px; height:2px; background:#c7a15a; transform:scaleX(0); transition:transform .25s ease; }
+  .link-underline:hover::after { transform:scaleX(1); }
+
+  /* Skeleton loaders */
+  .skeleton { position: relative; overflow:hidden; background: #eef2f7; }
+  .skeleton::after { content:''; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); transform: translateX(-100%); animation: shimmer 1.6s infinite; }
+  .skeleton-image { border-radius: .75rem; min-height: 8rem; }
+
+  /* Pale backgrounds */
+  .bg-papyrus { background: #fffdf7; }
+  .bg-pale-blue { background: #eaf3fb; }
+
+  /* Section heading animation helpers */
+  .heading-animated { opacity:0; transform: translateY(12px); animation: slideUp .6s ease-out forwards; }
+  .subheading-animated { opacity:0; animation: fadeIn .8s ease-out forwards .1s; }
 }
 
 /* existing keyframes and other styles ... */
@@ -828,14 +894,39 @@ img {
 
 /* Final override: ensure hero headline is white in theatre hero */
 @layer base {
-  .hero-section .hero-title,
-  .hero-section .hero-title * {
-    color: #ffffff !important;
-  }
+.hero-section .hero-title,
+.hero-section .hero-title * {
+color: #ffffff !important;
+}
 }
 
-/* Pale blue overrides for dark blue backgrounds across sections */
+/* Light/Pale theme helpers to avoid dark blocks across the site */
+.bg-deep-blue { background-color: #eaf3fb !important; } /* pale blue section background */
+.text-deep-blue, .text-[#0b2e4f] { color: #0b2e4f !important; }
+.pale-card { background: #ffffff; border: 1px solid rgba(10,30,45,0.08); box-shadow: 0 6px 20px rgba(10,30,45,0.06); }
+.pale-chip { background: #f1f5f9; color: #0b2e4f; border: 1px solid rgba(10,30,45,0.08); }
+
+/* Convert any remaining dark gradients to light variants */
+[class*="bg-gradient-to"][class*="from-blue-800"],
+[class*="bg-gradient-to"][class*="from-slate-800"],
+[class*="bg-gradient-to"][class*="from-gray-900"] { --tw-gradient-from: #eaf3fb !important; }
+[class*="bg-gradient-to"][class*="to-blue-900"],
+[class*="bg-gradient-to"][class*="to-slate-900"],
+[class*="bg-gradient-to"][class*="to-gray-900"] { --tw-gradient-to: #ffffff00 !important; }
+
+/* Gentle section separators */
+.section-separator { border-top: 1px solid rgba(10,30,45,0.08); }
+
+/* Global: hide all price labels across the site */
+/* This targets common price-related class names used throughout the project */
+.price, .pricing,
+[class*="price"], [class*="Price"],
+[class*="pricing"], [class*="Pricing"],
+.package-price, .package-card-price, .price-breakdown, .price-total, .price-display {
+  display: none !important;
+}
+
 /* DISABLED legacy remap block to allow new theme to take effect */
 /* @layer utilities {
-  ...
+...
 } */

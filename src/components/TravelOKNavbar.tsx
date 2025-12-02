@@ -75,6 +75,10 @@ export default function TravelOKNavbar() {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [navReady, setNavReady] = useState(false);
+  // Horizontal scroll indicators for nav row
+  const navScrollRef = useRef<HTMLDivElement | null>(null);
+  const [showLeft, setShowLeft] = useState(false);
+  const [showRight, setShowRight] = useState(false);
 
   // Handle scroll effect
   useEffect(() => {
@@ -90,6 +94,25 @@ export default function TravelOKNavbar() {
     const t = setTimeout(() => setNavReady(true), 10);
     return () => clearTimeout(t);
   }, []);
+
+  // Update nav scroll indicators on scroll/resize
+  useEffect(() => {
+    const el = navScrollRef.current;
+    if (!el) return;
+    const update = () => {
+      const canScroll = el.scrollWidth > el.clientWidth + 1;
+      setShowLeft(canScroll && el.scrollLeft > 0);
+      setShowRight(canScroll && el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+    };
+    update();
+    el.addEventListener('scroll', update, { passive: true } as any);
+    const onResize = () => update();
+    window.addEventListener('resize', onResize);
+    return () => {
+      el.removeEventListener('scroll', update as any);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [navReady]);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -127,25 +150,17 @@ export default function TravelOKNavbar() {
         if (response.ok) {
           const result = await response.json();
           if (result.logoUrl) {
-            // Normalize logo URL robustly:
-            // - If starts with 'http', use as-is
-            // - If starts with '/', use as-is
-            // - If just a filename (e.g. 'altavida-logo-1.png'), prefix with '/'
-            // - Fallback to '/altavida-logo-1.png'
-            let normalizedUrl = '/altavida-logo-1.png';
-            if (typeof result.logoUrl === 'string') {
-              const val = result.logoUrl.trim();
-              if (val.startsWith('http')) {
-                normalizedUrl = val;
-              } else if (val.startsWith('/')) {
-                normalizedUrl = val;
-              } else if (val.match(/^[\w.-]+\.(png|jpg|jpeg|svg|webp|gif|ico)$/i)) {
-                normalizedUrl = '/' + val.replace(/^\/+/, '');
-              }
-            }
-            setLogoUrl(normalizedUrl);
+          let normalizedUrl = '/altavida-logo-1.png';
+          if (typeof result.logoUrl === 'string') {
+          const val = result.logoUrl.trim();
+          if (val.startsWith('http')) normalizedUrl = val;
+          else if (val.startsWith('/')) normalizedUrl = val;
+          else if (/^[\w.-]+\.(png|jpg|jpeg|svg|webp|gif|ico)$/i.test(val)) normalizedUrl = '/' + val.replace(/^\/+/, '');
+          else normalizedUrl = '/altavida-logo-1.png';
+          }
+          setLogoUrl(normalizedUrl);
           } else {
-            setLogoUrl('/altavida-logo-1.png');
+          setLogoUrl('/altavida-logo-1.png');
           }
         } else {
           setLogoUrl('/altavida-logo-1.png');
@@ -212,80 +227,124 @@ export default function TravelOKNavbar() {
       .catch(() => {});
   }, []);
 
-  // Enhanced navigation structure with mega dropdown data
+   // Enhanced navigation structure with mega dropdown data (pale theme)
+  const thingsToDoItems = [
+    { href: '/attractions/pyramids', label: 'Pyramids & Sphinx', description: 'Giza plateau, Saqqara, Dahshur', icon: '🔺' },
+    { href: '/attractions/temples', label: 'Ancient Temples', description: 'Karnak, Luxor, Philae, Abu Simbel', icon: '🏛️' },
+    { href: '/attractions/museums', label: 'Museums & Artifacts', description: 'Egyptian Museum, GEM, NMEC', icon: '🏺' },
+    { href: '/services/adventure-tours', label: 'Desert Safari', description: 'White Desert, Siwa, ATV, Camels', icon: '🐪' },
+    { href: '/experiences/diving', label: 'Red Sea Diving', description: 'Hurghada, Sharm El Sheikh, Marsa Alam', icon: '🤿' },
+    { href: '/hotels/nile-cruises', label: 'Nile Cruises', description: 'Aswan ⇄ Luxor, 3–7 nights', icon: '⛵' },
+    { href: '/experiences/cultural', label: 'Cultural Tours', description: 'Markets, crafts, performances', icon: '🎭' },
+    { href: '/experiences/food', label: 'Egyptian Cuisine', description: 'Street food, tastings, classes', icon: '🍽️' }
+  ];
+
+  const destinationItems = [
+    { href: '/destinations/cairo', label: 'Cairo', description: 'Capital, pyramids, museums', icon: '🏙️' },
+    { href: '/destinations/luxor', label: 'Luxor', description: 'Valley of the Kings & Karnak', icon: '🏛️' },
+    { href: '/destinations/aswan', label: 'Aswan', description: 'Philae, Nubian culture', icon: '🌅' },
+    { href: '/destinations/alexandria', label: 'Alexandria', description: 'Mediterranean jewel', icon: '🌊' },
+    { href: '/destinations/siwa', label: 'Siwa Oasis', description: 'Desert paradise', icon: '🏜️' },
+    { href: '/destinations/hurghada', label: 'Hurghada', description: 'Red Sea resorts', icon: '🏖️' },
+    { href: '/destinations/sharm-el-sheikh', label: 'Sharm El Sheikh', description: 'Diving haven', icon: '🐠' },
+    { href: '/destinations/abu-simbel', label: 'Abu Simbel', description: 'Colossal temples', icon: '🗿' },
+  ];
+
+  const staysItems = (dahabiyasItems.length > 0 ? dahabiyasItems : [
+    { href: '/dahabiyas/royal-cleopatra', label: 'Royal Cleopatra', description: 'Ultimate luxury experience', icon: '👑' },
+    { href: '/dahabiyas/princess-cleopatra', label: 'Princess Cleopatra', description: 'Elegant comfort on the Nile', icon: '💎' },
+    { href: '/dahabiyas/queen-cleopatra', label: 'Queen Cleopatra', description: 'Regal sailing experience', icon: '⭐' },
+  ]).concat([
+    { href: '/hotels/nile-cruises', label: 'Nile Cruises', description: 'Modern cruise ships', icon: '🚢' },
+    { href: '/accommodation', label: 'Hotels & Lodges', description: 'Stay across Egypt', icon: '🏨' },
+  ]);
+
+  const eventsItems = [
+    { href: '/blog?tag=events', label: 'All Events', description: 'Festivals, culture, sports', icon: '🎉' },
+    { href: '/blog?tag=festival', label: 'Festivals', description: 'Seasonal highlights', icon: '🎪' },
+    { href: '/blog?tag=concert', label: 'Concerts', description: 'Music & nightlife', icon: '🎵' },
+  ];
+
+  const diningItems = [
+    { href: '/experiences/food', label: 'Egyptian Cuisine', description: 'Food tours & tastings', icon: '🍲' },
+    { href: '/blog?tag=dining', label: 'Dining Guides', description: 'Where to eat', icon: '🍽️' },
+    { href: '/blog?tag=restaurants', label: 'Top Restaurants', description: 'Curated lists', icon: '⭐' },
+  ];
+
+  const shopItems = [
+    { href: '/packages', label: 'All Packages', description: 'Popular & luxury trips', icon: '🧳' },
+    { href: '/custom-tours', label: 'Tailor-made Tours', description: 'Plan your dream trip', icon: '❤️' },
+    { href: '/book', label: 'Quick Booking', description: 'Reserve in minutes', icon: '⚡' },
+  ];
+
   const mainNavItems = [
     {
-      id: "things",
-      label: "THINGS TO DO",
-      mainHref: "/packages",
+      id: 'things',
+      label: 'THINGS TO DO',
+      mainHref: '/packages',
       icon: MapPin,
-      description: "Experiences and activities",
-      items:
-        (packagesItems.slice(0, 4)).concat(itinerariesItems.slice(0, 2)),
+      description: 'Experiences and activities',
+      items: thingsToDoItems,
       featured: [
-        { label: "All Packages", href: "/packages", icon: Package },
-        { label: "All Itineraries", href: "/itineraries", icon: MapPin }
+        { label: 'All Packages', href: '/packages', icon: Package },
+        { label: 'All Itineraries', href: '/itineraries', icon: MapPin }
       ]
     },
     {
-      id: "destinations",
-      label: "CITIES & REGIONS",
-      mainHref: "/destinations",
+      id: 'destinations',
+      label: 'CITIES & REGIONS',
+      mainHref: '/destinations',
       icon: Globe,
-      description: "Explore destinations",
-      items: [],
+      description: 'Explore destinations',
+      items: destinationItems,
       featured: [
-        { label: "View All Destinations", href: "/destinations", icon: MapPin }
+        { label: 'View All Destinations', href: '/destinations', icon: MapPin }
       ]
     },
     {
-      id: "stays",
-      label: "PLACES TO STAY",
-      mainHref: "/dahabiyas",
+      id: 'stays',
+      label: 'PLACES TO STAY',
+      mainHref: '/dahabiyas',
       icon: Ship,
-      description: "Luxury Nile cruises",
-      items: dahabiyasItems.length > 0 ? dahabiyasItems : [
-        { label: "Royal Cleopatra", href: "/dahabiyas/royal-cleopatra", description: "Ultimate luxury experience", icon: "👑" },
-        { label: "Princess Cleopatra", href: "/dahabiyas/princess-cleopatra", description: "Elegant comfort on the Nile", icon: "💎" },
-        { label: "Queen Cleopatra", href: "/dahabiyas/queen-cleopatra", description: "Regal sailing experience", icon: "⭐" },
-        { label: "AZHAR I", href: "/dahabiyas/azhar-i", description: "Traditional charm meets modern luxury", icon: "🌟" },
-        { label: "AZHAR II", href: "/dahabiyas/azhar-ii", description: "Contemporary elegance on water", icon: "🛥️" }
-      ],
+      description: 'Luxury Nile cruises & stays',
+      items: staysItems,
       featured: [
-        { label: "All Dahabiyas", href: "/dahabiyas", icon: Ship }
+        { label: 'All Dahabiyas', href: '/dahabiyas', icon: Ship },
+        { label: 'All Stays', href: '/accommodation', icon: Ship }
       ]
     },
     {
-      id: "events",
-      label: "FESTIVALS & EVENTS",
-      mainHref: "/blog",
+      id: 'events',
+      label: 'FESTIVALS & EVENTS',
+      mainHref: '/blog',
       icon: Calendar,
-      description: "What’s happening",
-      items: [],
+      description: 'What’s happening',
+      items: eventsItems,
       featured: [
-        { label: "View Blog", href: "/blog", icon: BookOpen }
+        { label: 'View Blog', href: '/blog', icon: BookOpen }
       ]
     },
     {
-      id: "dining",
-      label: "DINING",
-      mainHref: "/blog",
+      id: 'dining',
+      label: 'DINING',
+      mainHref: '/blog?tag=dining',
       icon: BookOpen,
-      description: "Food and dining",
-      items: [],
+      description: 'Food and dining',
+      items: diningItems,
       featured: [
-        { label: "View Blog", href: "/blog", icon: BookOpen }
+        { label: 'Dining Guides', href: '/blog?tag=dining', icon: BookOpen }
       ]
     },
     {
-      id: "shop",
-      label: "SHOP ALTAVIDA",
-      mainHref: "/custom-tours",
+      id: 'shop',
+      label: 'SHOP ALTAVIDA',
+      mainHref: '/custom-tours',
       icon: Heart,
-      description: "Tailor-made tours",
-      items: [],
+      description: 'Tailor-made tours',
+      items: shopItems,
       featured: [
-        { label: "Custom Tours", href: "/custom-tours", icon: Heart }
+        { label: 'Custom Tours', href: '/custom-tours', icon: Heart },
+        { label: 'Book Now', href: '/book', icon: Heart }
       ]
     }
   ];
@@ -381,14 +440,14 @@ export default function TravelOKNavbar() {
 
   return (
     <>
-      {/* Jacada-like slim utility bar */}
-      <div className={`hidden lg:block transition-all duration-300 ${scrolled ? 'py-0.5' : 'py-1.5'} text-slate-200 bg-[#0e2437] border-b border-white/10`}> 
+      {/* Pale utility bar */}
+      <div className={`hidden lg:block transition-all duration-300 ${scrolled ? 'py-0.5' : 'py-1.5'} text-slate-700 bg-[#f7f7f2] border-b border-slate-200`}> 
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-6">
               {/* Language Selector */}
               <div className="relative group">
-                <button className="flex items-center gap-2 text-[12px] tracking-wide font-semibold text-slate-200 hover:text-[#c7a15a] transition-colors">
+                <button className="flex items-center gap-2 text-[12px] tracking-wide font-semibold text-slate-700 hover:text-[#c7a15a] transition-colors">
                   <Image
                     src={LANGUAGES.find(l => l.code === locale)?.flagSvg || '/images/flags/us.svg'}
                     alt="Language"
@@ -414,18 +473,18 @@ export default function TravelOKNavbar() {
               </div>
               {/* Quick Links */}
               <div className="hidden xl:flex items-center gap-5 text-[12px] tracking-wide">
-                <Link href="/contact" className="font-semibold text-slate-200 hover:text-[#c7a15a] transition-colors">Contact</Link>
-                <Link href="/about" className="font-semibold text-slate-200 hover:text-[#c7a15a] transition-colors">About</Link>
-                <Link href="/blog" className="font-semibold text-slate-200 hover:text-[#c7a15a] transition-colors">Blog</Link>
+                <Link href="/contact" className="font-semibold text-slate-700 hover:text-[#c7a15a] transition-colors">Contact</Link>
+                <Link href="/about" className="font-semibold text-slate-700 hover:text-[#c7a15a] transition-colors">About</Link>
+                <Link href="/blog" className="font-semibold text-slate-700 hover:text-[#c7a15a] transition-colors">Blog</Link>
               </div>
             </div>
             {/* Right side info */}
             <div className="flex items-center gap-5 text-[12px] tracking-wide">
-              <div className="flex items-center gap-2 text-slate-200">
+              <div className="flex items-center gap-2 text-slate-700">
                 <Phone size={14} />
                 <span className="font-semibold">+20 10 02588564</span>
               </div>
-              <div className="hidden md:flex items-center gap-2 text-slate-200">
+              <div className="hidden md:flex items-center gap-2 text-slate-700">
                 <Clock size={14} />
                 <span className="font-semibold">24/7 Support</span>
               </div>
@@ -436,8 +495,8 @@ export default function TravelOKNavbar() {
 
       {/* Main Navigation - glass over white then solid on scroll */}
       <nav className={`sticky top-0 z-40 transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'backdrop-blur bg-white/95 shadow-sm' : 'backdrop-blur bg-white/70'} border-b border-slate-200`} ref={containerRef as any} style={{ overflow: 'visible' }}>
-        <div className="max-w-7xl mx-auto px-3 lg:px-6" style={{ overflow: 'visible' }}>
-          <div className="flex items-center justify-start gap-2" style={{ overflow: 'visible' }}>
+        <div className="max-w-[1400px] mx-auto px-2 lg:px-3" style={{ overflow: 'visible' }}>
+          <div className="flex items-center justify-start gap-1" style={{ overflow: 'visible' }}>
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -458,7 +517,20 @@ export default function TravelOKNavbar() {
             </Link>
 
             {/* Navigation Items - Desktop */}
-            <div className="hidden lg:flex items-center flex-1 justify-start overflow-x-auto whitespace-nowrap pr-1" style={{ overflow: 'visible' }}>
+            <div className="relative hidden lg:flex items-center flex-1" style={{ overflow: 'visible' }}>
+              {/* Left gradient + button indicator */}
+              <div className={`pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-white to-transparent transition-opacity ${showLeft ? 'opacity-100' : 'opacity-0'}`} />
+              <button
+                type="button"
+                aria-label="Scroll navigation left"
+                onClick={() => { navScrollRef.current?.scrollBy({ left: -160, behavior: 'smooth' }); }}
+                className={`absolute left-1 top-1/2 -translate-y-1/2 rounded-full bg-white/90 border border-slate-200 shadow p-1 text-slate-700 hover:bg-white transition-opacity ${showLeft ? 'opacity-100' : 'opacity-0'}`}
+              >
+                ‹
+              </button>
+
+              {/* Scrollable row */}
+              <div ref={navScrollRef} className="flex items-center flex-1 justify-start overflow-x-auto whitespace-nowrap pr-0 gap-0" style={{ overflowX: 'auto', overflowY: 'visible' }}>
               {mainNavItems.map((item) => (
                 <div 
                   key={item.id} 
@@ -478,7 +550,7 @@ export default function TravelOKNavbar() {
                     aria-controls={`mega-${item.id}`}
                     onClick={() => toggleDropdownClick(item.id)}
                     onKeyDown={(e) => onKeyDownTopItem(e, item.id)}
-                    className={`px-3 py-3 text-[12px] tracking-[0.12em] font-semibold nav-link border-r border-transparent flex items-center gap-2 ${activeDropdown === item.id || isActive(item.mainHref) ? 'text-[#0e2437]' : 'text-slate-800 hover:text[#c7a15a]'}`}
+                    className={`px-2 py-2.5 text-[11px] tracking-[0.12em] font-semibold nav-link border-r border-transparent flex items-center gap-1.5 ${activeDropdown === item.id || isActive(item.mainHref) ? 'text-[#0e2437]' : 'text-slate-800 hover:text[#c7a15a]'}`}
                   >
                     <span className="hidden xl:inline"><item.icon size={14} /></span>
                     <span>{item.label}</span>
@@ -488,7 +560,10 @@ export default function TravelOKNavbar() {
                   {/* Mega Dropdown */}
                   {activeDropdown === item.id && item.items.length > 0 && panelPos[item.id] && (
                     <Portal>
-                      <div ref={portalRef} className="pointer-events-auto" style={{ position: 'absolute', top: panelPos[item.id].top, left: panelPos[item.id].left, zIndex: 1000 }}
+                      <div
+                        ref={portalRef}
+                        className="pointer-events-auto"
+                        style={{ position: 'absolute', top: panelPos[item.id].top, left: panelPos[item.id].left, zIndex: 1000 }}
                         onPointerEnter={() => openDropdown(item.id)}
                         onPointerLeave={() => {
                           if (openViaClick === item.id) return;
@@ -496,7 +571,7 @@ export default function TravelOKNavbar() {
                         }}
                       >
                         <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: panelPos[item.id].width, height: 10 }} />
-                        <div 
+                        <div
                           id={`mega-${item.id}`}
                           role="menu"
                           className="bg-white/98 backdrop-blur border border-slate-200 shadow-xl min-w-[820px] rounded-xl overflow-hidden"
@@ -590,34 +665,27 @@ export default function TravelOKNavbar() {
               </Link>
             </div>
 
-            {/* Center Logo */}
-            <div className="flex-shrink-0 px-2 lg:px-4 py-1">
+            {/* Compact Brand at Left (reduce width) */}
+            <div className="flex-shrink-0 px-1 lg:px-2 py-0.5 order-first">
               <Link href="/" className="relative block">
                 <div className="relative mx-auto flex items-center justify-center">
-                  <div className="bg-white rounded-xl border-2 border-yellow-500 shadow-md px-3 py-2 lg:px-4 lg:py-2">
-                    <div className="flex items-center gap-2">
-                      <OptimizedImage
-                        src={logoUrl}
-                        alt="Altavida Tours.com"
-                        width={40}
-                        height={40}
-                        className="w-8 h-8 lg:w-10 lg:h-10 object-cover rounded"
-                        priority={true}
-                        quality={90}
-                      />
-                      <div className="hidden sm:block">
-                        <div className="text-[#0b2e4f] font-extrabold leading-tight">Altavida</div>
-                        <div className="text-[#0b2e4f]/80 font-bold text-xs tracking-widest">TOURS.COM</div>
-                      </div>
-                    </div>
+                  <div className="bg-white rounded-full border border-yellow-500 shadow p-0.5">
+                    <Image
+                      src={logoUrl || '/altavida-logo-1.png'}
+                      alt="Altavida Tours.com"
+                      width={36}
+                      height={36}
+                      className="w-8 h-8 lg:w-9 lg:h-9 object-contain rounded-full"
+                      onError={() => setLogoUrl('/altavida-logo-1.png')}
+                      priority
+                    />
                   </div>
-                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-yellow-500" />
                 </div>
               </Link>
             </div>
 
             {/* Right Side Links - Desktop */}
-            <div className="hidden lg:flex items-center flex-1 justify-end">
+            <div className="hidden lg:flex items-center flex-shrink-0 justify-end">
               <Link
                 href="/blog"
                 className="px-3 py-3 text-[12px] tracking-[0.12em] font-semibold text-slate-800 hover:text-[#0e2437] transition-colors border-l border-transparent flex items-center gap-2"
@@ -716,8 +784,11 @@ export default function TravelOKNavbar() {
           <div className="fixed inset-0 bg-white opacity-80" onClick={() => setMobileMenuOpen(false)}></div>
           <div className="fixed top-0 left-0 w-full max-w-sm bg-white text-neutral-800 shadow-2xl h-full overflow-y-auto">
             <div className="flex justify-between items-center p-4 border-b topbar text-slate-800">
-              <span className="font-bold text-lg">Menu</span>
-              <button onClick={() => setMobileMenuOpen(false)}>
+              <div className="flex items-center gap-3">
+                <Image src={logoUrl || '/altavida-logo-1.png'} alt="Altavida" width={28} height={28} className="rounded-full" onError={() => setLogoUrl('/altavida-logo-1.png')} />
+                <span className="font-extrabold tracking-wider">Altavida Tours</span>
+              </div>
+              <button onClick={() => setMobileMenuOpen(false)} aria-label="close menu">
                 <X size={24} />
               </button>
             </div>
