@@ -1,8 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
 
 /* Smooth scrolling for the entire site */
 html {
@@ -475,62 +475,141 @@ img {
 
 @layer base {
   * {
-    @apply border-border;
-    @apply transition-colors duration-200;
+    border: 1px solid hsl(var(--border));
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
   }
   
   body {
-    @apply bg-background text-foreground antialiased font-sans;
-    text-rendering: optimizeLegibility;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold tracking-tight text-foreground;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: hsl(var(--foreground));
   }
   
-  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
-  h2 { @apply text-3xl md:text-4xl lg:text-5xl; }
-  h3 { @apply text-2xl md:text-3xl lg:text-4xl; }
-  h4 { @apply text-xl md:text-2xl lg:text-3xl; }
-  h5 { @apply text-lg md:text-xl lg:text-2xl; }
-  h6 { @apply text-base md:text-lg lg:text-xl; }
+  h1 { font-size: 2.25rem; line-height: 2.5rem; }
+  @media (min-width: 768px) { h1 { font-size: 3rem; line-height: 1; } }
+  @media (min-width: 1024px) { h1 { font-size: 3.75rem; line-height: 1; } }
+  
+  h2 { font-size: 1.875rem; line-height: 2.25rem; }
+  @media (min-width: 768px) { h2 { font-size: 2.25rem; line-height: 2.5rem; } }
+  @media (min-width: 1024px) { h2 { font-size: 3rem; line-height: 1; } }
+  
+  h3 { font-size: 1.5rem; line-height: 2rem; }
+  @media (min-width: 768px) { h3 { font-size: 1.875rem; line-height: 2.25rem; } }
+  @media (min-width: 1024px) { h3 { font-size: 2.25rem; line-height: 2.5rem; } }
+  
+  h4 { font-size: 1.25rem; line-height: 1.75rem; }
+  @media (min-width: 768px) { h4 { font-size: 1.5rem; line-height: 2rem; } }
+  @media (min-width: 1024px) { h4 { font-size: 1.875rem; line-height: 2.25rem; } }
+  
+  h5 { font-size: 1.125rem; line-height: 1.75rem; }
+  @media (min-width: 768px) { h5 { font-size: 1.25rem; line-height: 1.75rem; } }
+  @media (min-width: 1024px) { h5 { font-size: 1.5rem; line-height: 2rem; } }
+  
+  h6 { font-size: 1rem; line-height: 1.5rem; }
+  @media (min-width: 768px) { h6 { font-size: 1.125rem; line-height: 1.75rem; } }
+  @media (min-width: 1024px) { h6 { font-size: 1.25rem; line-height: 1.75rem; } }
   
   p {
-    @apply text-foreground/90 leading-relaxed;
+    color: hsl(var(--foreground) / 0.9);
+    line-height: 1.625;
   }
   
   a {
-    @apply text-primary hover:text-primary-dark transition-colors duration-200;
+    color: hsl(var(--primary));
+    transition: color 0.2s;
+  }
+  
+  a:hover {
+    color: hsl(var(--primary-dark));
   }
   
   .prose {
-    @apply max-w-none;
+    max-width: none;
   }
   
   .prose p {
-    @apply my-4;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   
   .btn {
-    @apply inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    transition: color 0.2s, background-color 0.2s;
+  }
+  
+  .btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+  
+  .btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
   
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary-dark;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+  
+  .btn-primary:hover {
+    background-color: hsl(var(--primary-dark));
   }
   
   .btn-secondary {
-    @apply bg-secondary text-secondary-foreground hover:bg-secondary-dark;
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+  }
+  
+  .btn-secondary:hover {
+    background-color: hsl(var(--secondary-dark));
   }
   
   .btn-outline {
-    @apply border border-input hover:bg-accent hover:text-accent-foreground;
+    border: 1px solid hsl(var(--input));
+  }
+  
+  .btn-outline:hover {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
   
   .container {
-    @apply px-4 sm:px-6 lg:px-8 mx-auto w-full;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
   html {
@@ -813,16 +892,27 @@ img {
 
 /* Hover effects */
 .hover-scale {
-  @apply transition-transform duration-300 hover:scale-105;
+  transition: transform 0.3s;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
 }
 
 .hover-lift {
-  @apply transition-all duration-300 hover:-translate-y-1 shadow-lg;
+  transition: all 0.3s;
+}
+
+.hover-lift:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 /* Glassmorphism effect */
 .glass {
-  @apply bg-white/10 backdrop-blur-md border border-white/10;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Custom scroll snap */
@@ -1060,7 +1150,7 @@ color: #ffffff !important;
 
 /* Light/Pale theme helpers to avoid dark blocks across the site */
 .bg-deep-blue { background-color: #eaf3fb !important; } /* pale blue section background */
-.text-deep-blue, .text-#0b2e4f {
+.text-deep-blue {
   color: #0b2e4f !important;
 }
 .pale-card { background: #ffffff; border: 1px solid rgba(10,30,45,0.08); box-shadow: 0 6px 20px rgba(10,30,45,0.06); }

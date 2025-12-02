@@ -1,6 +1,6 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from 'tailwindcss'
 
-const config = {
+const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -16,7 +16,13 @@ const config = {
       '2xl': '1536px',
     },
     extend: {
+      borderColor: {
+        DEFAULT: 'hsl(var(--border))',
+      },
       colors: {
+        border: {
+          DEFAULT: 'hsl(var(--border))',
+        },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -62,6 +68,9 @@ const config = {
         info: {
           DEFAULT: 'hsl(var(--info))',
           foreground: 'hsl(var(--info-foreground))',
+        },
+        border: {
+          DEFAULT: 'hsl(var(--border))',
         },
         // Enhanced Egyptian-inspired color palette
         'egyptian-blue': {
@@ -145,7 +154,6 @@ const config = {
         'text-primary': 'hsl(var(--text-primary))',
         'text-secondary': 'hsl(var(--text-secondary))',
         'text-accent': 'hsl(var(--text-accent))',
-        border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
       },
@@ -283,13 +291,17 @@ const config = {
     require('tailwindcss-animate')({
       classes: [
         'fade-in', 'fade-in-up', 'fade-in-down', 'fade-in-left', 'fade-in-right',
-        'slide-up', 'slide-down', 'slide-in-left', 'slide-in-right',
-        'pulse-slow', 'float', 'bounce-slow', 'scale-in', 'shimmer', 'ripple', 'glow'
+        'fade-out', 'fade-out-up', 'fade-out-down', 'fade-out-left', 'fade-out-right',
+        'slide-in-up', 'slide-in-down', 'slide-in-left', 'slide-in-right',
+        'slide-out-up', 'slide-out-down', 'slide-out-left', 'slide-out-right',
+        'zoom-in', 'zoom-out', 'spin', 'pulse', 'bounce', 'ping', 'pulse-slow', 'float', 'bounce-slow', 'scale-in', 'shimmer', 'ripple', 'glow'
       ]
     }),
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
-  important: true, // This ensures Tailwind classes override Material-UI styles
+    
+  ],
+  important: true // This ensures Tailwind classes override Material-UI styles
 };
 
-export default config; 
+export default config;
