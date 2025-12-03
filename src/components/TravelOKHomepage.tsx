@@ -144,7 +144,7 @@ export default function TravelOKHomepage() {
           <div className="grid-luxury grid-luxury-4 stagger-animation">
             {destinations.slice(0,4).map((d, i) => {
               const fallbackImages = [
-                '/cultural&historical/Saqqara pyramid.jpg',
+                '/images/cultural-historical/saqqara-pyramid.jpg',
                 '/Alexandria/IMG_6334.JPG',
                 '/desert&safary/DSC_9166.JPG',
                 '/Royal Cleopatra/DSC_8628.jpg'
@@ -223,7 +223,7 @@ export default function TravelOKHomepage() {
             {/* Pyramids & Sphinx */}
             <Link href={getContent('category_1_link', '/attractions/pyramids')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
               <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_1_image','/cultural&historical/Saqqara pyramid.jpg')} alt="Pyramids & Sphinx" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <Image src={getContent('category_1_image','/images/cultural-historical/saqqara-pyramid.jpg')} alt="Pyramids & Sphinx" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
               </div>
               <div className="p-3 text-center">
@@ -394,7 +394,7 @@ export default function TravelOKHomepage() {
                 '/images/desert&safary/DSC_9826.JPG'
               ];
               const cultural = [
-                '/images/cultural&historical/Saqqara pyramid.jpg',
+                '/images/cultural-historical/saqqara-pyramid.jpg',
                 '/images/cultural&historical/DSC_8401.JPG',
                 '/images/cultural&historical/DSCF1165.JPG',
                 '/images/cultural&historical/IMG_3143.JPG'
@@ -523,7 +523,7 @@ export default function TravelOKHomepage() {
             {destinations.slice(0, 8).map((destination, index) => {
               // Use available destination images
               const destinationImages = [
-                '/images/cultural&historical/Saqqara pyramid.jpg',
+                '/images/cultural-historical/saqqara-pyramid.jpg',
                 '/images/Alexandria/IMG_6334.JPG',
                 '/images/desert&safary/DSC_9166.JPG',
                 '/images/desert&safary/DSC_9826.JPG',

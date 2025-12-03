@@ -1,12 +1,38 @@
-@import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
 
-@theme {
-  /* Font families */
-  --font-sans: 'Montserrat', 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-  --font-serif: 'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
+/* Theme and admin styles */
+@import "../styles/theme-altavida.css";
+@import "../styles/admin.css";
+@import "../styles/admin-contrast-fix.css";
+@import "../styles/theme-jacada.css";
+
+/* Custom base styles */
+@layer base {
+  :root {
+    /* Font families */
+    --font-sans: 'Montserrat', 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    --font-serif: 'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  /* Base image styles */
+  img {
+    @apply max-w-full h-auto object-cover;
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Responsive images */
+  .img-responsive {
+    @apply w-full h-auto;
+  }
 }
 
 /* Smooth scrolling for the entire site */
@@ -33,15 +59,6 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary));
 }
-@import "../styles/theme-altavida.css";
-/* Legacy theme imports disabled */
-/* @import "../styles/custom.css"; */
-/* @import "../styles/mobile-complete.css"; */
-/* @import "../styles/mobile-enhancements.css"; */
-@import "../styles/admin.css";
-@import "../styles/admin-contrast-fix.css";
-@import "../styles/theme-jacada.css";
-
 /* RTL Support for Arabic */
 [dir="rtl"] {
   direction: rtl;

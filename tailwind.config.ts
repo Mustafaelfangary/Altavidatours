@@ -1,10 +1,16 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+import animatePlugin from 'tailwindcss-animate';
+import lineClamp from '@tailwindcss/line-clamp';
 
 const config: Config = {
+  darkMode: ['class'],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/styles/**/*.css',
   ],
   theme: {
     screens: {
@@ -288,18 +294,10 @@ const config: Config = {
     },
   },
   plugins: [
-    require('tailwindcss-animate')({
-      classes: [
-        'fade-in', 'fade-in-up', 'fade-in-down', 'fade-in-left', 'fade-in-right',
-        'fade-out', 'fade-out-up', 'fade-out-down', 'fade-out-left', 'fade-out-right',
-        'slide-in-up', 'slide-in-down', 'slide-in-left', 'slide-in-right',
-        'slide-out-up', 'slide-out-down', 'slide-out-left', 'slide-out-right',
-        'zoom-in', 'zoom-out', 'spin', 'pulse', 'bounce', 'ping', 'pulse-slow', 'float', 'bounce-slow', 'scale-in', 'shimmer', 'ripple', 'glow'
-      ]
-    }),
-    require('@tailwindcss/line-clamp'),
-    require('@tailwindcss/typography'),
-    
+    animatePlugin,
+    lineClamp,
+    typography,
+    forms,
   ],
   important: true // This ensures Tailwind classes override Material-UI styles
 };
