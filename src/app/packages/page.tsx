@@ -50,7 +50,7 @@ export default function PackagesPage() {
             price: 2850,
             destination: 'Luxor to Aswan',
             description: 'Comprehensive luxury journey featuring premium dahabiya accommodation, expert Egyptologist guides, and exclusive temple access with gourmet dining throughout.',
-            mainImage: '/cultural&historical/Saqqara pyramid.jpg'
+            mainImage: '/images/cultural-historical/saqqara-pyramid.jpg'
           },
           {
             id: '2',
@@ -140,7 +140,7 @@ export default function PackagesPage() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: 'url(/cultural&historical/Saqqara pyramid.jpg)',
+            backgroundImage: 'url(/images/cultural-historical/saqqara-pyramid.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: { xs: 'center', sm: 'center' },
             opacity: 0.3,
@@ -229,7 +229,7 @@ export default function PackagesPage() {
       <Container maxWidth="xl" sx={{ pb: 8 }}>
         <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
           {filteredPackages.map((pkg) => (
-            <Grid item xs={12} md={6} lg={4} key={pkg.id}>
+            <Grid item={true} xs={12} md={6} lg={4} key={pkg.id} component="div">
               <Card
                 sx={{
                   height: '100%',
@@ -376,7 +376,7 @@ export default function PackagesPage() {
                 description: getContent('packages_feature_3_description', 'Certified Egyptologists and local specialists bringing ancient history to life with insider knowledge and stories.')
               }
             ].map((feature, index) => (
-              <Grid item xs={12} md={4} key={index}>
+              <Grid item={true} xs={12} md={4} key={index} component="div">
                 <Box
                   sx={{
                     textAlign: 'center',

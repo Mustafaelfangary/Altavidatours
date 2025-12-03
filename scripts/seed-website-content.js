@@ -80,7 +80,7 @@ async function main() {
     {
       key: 'homepage_destination_cairo_image',
       title: 'Homepage Cairo Image',
-      mediaUrl: '/images/cultural&historical/Saqqara pyramid.jpg',
+      mediaUrl: '/images/cultural-historical/saqqara-pyramid.jpg',
       contentType: 'IMAGE',
       page: 'homepage',
       section: 'destinations',

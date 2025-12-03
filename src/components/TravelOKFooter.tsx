@@ -17,7 +17,7 @@ export default function TravelOKFooter() {
   }, []);
 
   return (
-    <footer className="bg-[#f7f7f2] !bg-[#f7f7f2] border-t border-gray-200" style={{backgroundColor:'#f7f7f2'}}>
+    <footer className="bg-[#f7f7f2] border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         {/* Top */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16">

@@ -99,54 +99,52 @@ export default function TravelOKHomepage() {
   }
 
   return (
-    <div className="min-h-screen">
-      <section className="relative bg-white">
-        <div className="container mx-auto px-4 py-12 sm:py-16">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#0b2e4f]">
-              {getContent('homepage_hero_title', 'Discover Egypt This Season')}
-            </h1>
-            <p className="mt-4 text-base sm:text-lg text-gray-600">
-              {getContent('homepage_hero_subtitle', 'From ancient wonders to Nile cruises, plan unforgettable experiences with Altavida.')}
-            </p>
-            <form
-              onSubmit={(e) => { e.preventDefault(); const q = query.trim(); if (q) router.push(`/search?q=${encodeURIComponent(q)}`); }}
-              className="mt-8 flex items-center bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden max-w-2xl mx-auto"
-            >
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                type="search"
-                placeholder={getContent('homepage_search_placeholder', 'Search experiences, destinations, cruises...')}
-                className="flex-1 px-4 py-3 outline-none text-gray-800"
-              />
-              <button type="submit" className="px-5 py-3 bg-[#0b2e4f] text-white font-semibold">
-                {getContent('homepage_search_cta', 'Search')}
-              </button>
-            </form>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <Link href="/packages" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Things To Do</Link>
-              <Link href="/destinations" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Cities & Regions</Link>
-              <Link href="/dahabiyas" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Places To Stay</Link>
-              <Link href="/blog" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Festivals & Events</Link>
-              <Link href="/destinations" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">State Parks</Link>
-              <Link href="/blog" className="px-3 py-2 rounded-full border border-gray-200 text-sm text-[#0b2e4f]">Dining</Link>
-            </div>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section with Modern Design */}
+      <section className="hero-modern">
+        <div className="hero-content">
+          <h1 className="hero-title animate-fade-in-up">
+            {getContent('homepage_hero_title', 'Discover Egypt This Season')}
+          </h1>
+          <p className="hero-subtitle animate-fade-in">
+            {getContent('homepage_hero_subtitle', 'From ancient wonders to Nile cruises, plan unforgettable experiences with Altavida.')}
+          </p>
+          <form
+            onSubmit={(e) => { e.preventDefault(); const q = query.trim(); if (q) router.push(`/search?q=${encodeURIComponent(q)}`); }}
+            className="search-modern animate-slide-up"
+          >
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              type="search"
+              placeholder={getContent('homepage_search_placeholder', 'Search experiences, destinations, cruises...')}
+            />
+            <button type="submit">
+              {getContent('homepage_search_cta', 'Search')}
+            </button>
+          </form>
+          <div className="quick-links animate-fade-in">
+            <Link href="/packages" className="quick-link">Things To Do</Link>
+            <Link href="/destinations" className="quick-link">Cities & Regions</Link>
+            <Link href="/dahabiyas" className="quick-link">Places To Stay</Link>
+            <Link href="/blog" className="quick-link">Festivals & Events</Link>
+            <Link href="/destinations" className="quick-link">State Parks</Link>
+            <Link href="/blog" className="quick-link">Dining</Link>
           </div>
         </div>
       </section>
 
       {/* Top Destinations Section */}
-      <section className="bg-papyrus section-separator">
-        <div className="container mx-auto px-4 py-10 sm:py-14">
-          <div className="text-center mb-8">
-            <h2 className="heading-animated text-3xl md:text-4xl font-extrabold text-[#0b2e4f]">Top Destinations</h2>
-            <p className="subheading-animated text-gray-600 max-w-2xl mx-auto">Explore Egypt's most iconic regions handpicked for this season.</p>
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="section-header">
+            <h2 className="section-title animate-fade-in-up">Top Destinations</h2>
+            <p className="section-subtitle animate-fade-in">Explore Egypt's most iconic regions handpicked for this season.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          <div className="grid-luxury grid-luxury-4 stagger-animation">
             {destinations.slice(0,4).map((d, i) => {
               const fallbackImages = [
-                '/cultural&historical/Saqqara pyramid.jpg',
+                '/images/cultural-historical/saqqara-pyramid.jpg',
                 '/Alexandria/IMG_6334.JPG',
                 '/desert&safary/DSC_9166.JPG',
                 '/Royal Cleopatra/DSC_8628.jpg'
@@ -156,13 +154,19 @@ export default function TravelOKHomepage() {
               const region = d.region || 'Egypt';
               const slug = (d as any).slug ? `/destinations/${(d as any).slug}` : '/destinations';
               return (
-                <Link key={d.id || i} href={slug} className="card-3d block overflow-hidden">
-                  <div className="card-media relative h-44 md:h-56">
+                <Link key={d.id || i} href={slug} className="card-luxury block">
+                  <div className="card-luxury-image">
                     <Image src={img} alt={title} fill className="object-cover" />
+                    <div className="image-overlay">
+                      <div>
+                        <h3 className="text-xl font-bold mb-1">{title}</h3>
+                        <p className="text-sm opacity-90">{region}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-xl font-extrabold text-[#0b2e4f] tracking-tight heading-animated">{title}</h3>
-                    <div className="text-[13px] text-slate-600 mt-1 subheading-animated">{region}</div>
+                  <div className="card-luxury-content">
+                    <h3 className="card-luxury-title">{title}</h3>
+                    <p className="text-sm text-gray-500">{region}</p>
                   </div>
                 </Link>
               );
@@ -172,26 +176,32 @@ export default function TravelOKHomepage() {
       </section>
 
       {/* International/Nearby Destinations Section */}
-      <section className="bg-pale-blue">
-        <div className="container mx-auto px-4 py-10 sm:py-14">
-          <div className="text-center mb-8">
-            <h2 className="heading-animated text-3xl md:text-4xl font-extrabold text-[#0b2e4f]">Explore The Region</h2>
-            <p className="subheading-animated text-gray-600 max-w-2xl mx-auto">Add a regional touch to your itinerary with these remarkable nearby destinations.</p>
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="section-header">
+            <h2 className="section-title animate-fade-in-up">Explore The Region</h2>
+            <p className="section-subtitle animate-fade-in">Add a regional touch to your itinerary with these remarkable nearby destinations.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          <div className="grid-luxury grid-luxury-4 stagger-animation">
             {[
               { name: 'Jordan', image: 'https://images.pexels.com/photos/11195793/pexels-photo-11195793.jpeg', href: '/destinations/jordan', photographer: 'Yasir Gürbüz on Pexels' },
               { name: 'Dubai', image: 'https://images.pexels.com/photos/3611545/pexels-photo-3611545.jpeg', href: '/destinations/dubai', photographer: 'Abbas Mohammed on Pexels' },
               { name: 'Turkey', image: 'https://images.pexels.com/photos/28966539/pexels-photo-28966539.jpeg', href: '/destinations/turkey', photographer: 'Julien Goettelmann on Pexels' },
               { name: 'Morocco', image: 'https://images.pexels.com/photos/22711558/pexels-photo-22711558.jpeg', href: '/destinations/morocco', photographer: 'Uiliam Nörnberg on Pexels' },
             ].map((d, i) => (
-              <Link key={d.name} href={d.href} className="card-3d block overflow-hidden">
-                <div className="card-media relative h-44 md:h-56">
+              <Link key={d.name} href={d.href} className="card-luxury block">
+                <div className="card-luxury-image">
                   <Image src={d.image} alt={`${d.name} - Photo by ${d.photographer}`} fill className="object-cover" unoptimized />
+                  <div className="image-overlay">
+                    <div>
+                      <h3 className="text-xl font-bold mb-1">{d.name}</h3>
+                      <p className="text-sm opacity-90">Regional Destination</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="p-4">
-                  <h3 className="text-xl font-extrabold text-[#0b2e4f] tracking-tight heading-animated">{d.name}</h3>
-                  <div className="text-[13px] text-slate-600 mt-1 subheading-animated">Regional Destination</div>
+                <div className="card-luxury-content">
+                  <h3 className="card-luxury-title">{d.name}</h3>
+                  <p className="text-sm text-gray-500">Regional Destination</p>
                 </div>
               </Link>
             ))}
@@ -213,7 +223,7 @@ export default function TravelOKHomepage() {
             {/* Pyramids & Sphinx */}
             <Link href={getContent('category_1_link', '/attractions/pyramids')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
               <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_1_image','/cultural&historical/Saqqara pyramid.jpg')} alt="Pyramids & Sphinx" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <Image src={getContent('category_1_image','/images/cultural-historical/saqqara-pyramid.jpg')} alt="Pyramids & Sphinx" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
               </div>
               <div className="p-3 text-center">
@@ -384,7 +394,7 @@ export default function TravelOKHomepage() {
                 '/images/desert&safary/DSC_9826.JPG'
               ];
               const cultural = [
-                '/images/cultural&historical/Saqqara pyramid.jpg',
+                '/images/cultural-historical/saqqara-pyramid.jpg',
                 '/images/cultural&historical/DSC_8401.JPG',
                 '/images/cultural&historical/DSCF1165.JPG',
                 '/images/cultural&historical/IMG_3143.JPG'
@@ -513,7 +523,7 @@ export default function TravelOKHomepage() {
             {destinations.slice(0, 8).map((destination, index) => {
               // Use available destination images
               const destinationImages = [
-                '/images/cultural&historical/Saqqara pyramid.jpg',
+                '/images/cultural-historical/saqqara-pyramid.jpg',
                 '/images/Alexandria/IMG_6334.JPG',
                 '/images/desert&safary/DSC_9166.JPG',
                 '/images/desert&safary/DSC_9826.JPG',
