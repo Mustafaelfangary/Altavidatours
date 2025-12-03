@@ -1,18 +1,790 @@
 /* Luxury Travel Website Design System */
 
-/* Fix for 403 image errors */
+/* ============================================
+   LUXURY IMAGE HANDLING SYSTEM
+   - Premium image effects and transitions
+   - Elegant hover states and animations
+   - Responsive and accessible components
+   - Error handling with style
+============================================ */
+
+/* Base image styles with luxury enhancements */
+:root {
+  --gold-accent: #d4af37;
+  --platinum: #e5e4e2;
+  --dark-velvet: #0a0a0a;
+  --soft-gold: rgba(212, 175, 55, 0.1);
+  --transition-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 img {
+  --fallback-bg: #0a0a0a;
+  --fallback-color: #2a2a2a;
+  
   display: block;
   max-width: 100%;
   height: auto;
   object-fit: cover;
-  transition: transform 0.3s ease;
-  filter: brightness(0.9) contrast(1.05);
+  transition: all 0.6s var(--transition-ease);
+  filter: brightness(0.9) contrast(1.05) saturate(0.95);
+  position: relative;
+  background-color: var(--fallback-bg);
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Prevent 403 errors by ensuring proper image loading */
+/* Luxury fallback for broken images */
+img[src=""],
+img:not([src]),
+img[src^="data:,"],
+img[src*="base64"][src*=""],
+img.error {
+  content: '';
+  background: 
+    linear-gradient(135deg, var(--dark-velvet) 0%, #1a1a1a 100%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="%23d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>') center/80px 80px no-repeat;
+  background-blend-mode: overlay;
+  min-height: 200px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated shimmer effect for loading/error states */
+img.error::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+  z-index: 1;
+}
+
+/* Fallback text for broken images */
+img::after {
+  content: attr(alt);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5em;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 0.8em;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img:hover::after {
+  opacity: 1;
+}
+
+/* Prevent 403 errors for external images */
 img[src*="http"] {
   referrerpolicy: "no-referrer";
+}
+
+/* ============================================
+   IMAGE TYPES
+============================================ */
+
+/* ============================================
+   LUXURY IMAGE COMPONENTS
+============================================ */
+
+/* Hero Image with Parallax Effect */
+.hero-image {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.7) contrast(1.1);
+  transition: transform 1.2s var(--transition-ease), filter 0.8s var(--transition-ease);
+  will-change: transform;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.2) 0%,
+    rgba(10, 10, 10, 0.7) 70%,
+    rgba(10, 10, 10, 0.9) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-image:hover {
+  filter: brightness(0.9) contrast(1.2) saturate(1.1);
+  transform: scale(1.02);
+}
+
+/* Hero Image Container with Decorative Elements */
+.hero-container {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+}
+
+.hero-container::before,
+.hero-container::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, var(--dark-velvet), transparent);
+  z-index: 2;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.hero-container::after {
+  top: auto;
+  bottom: 0;
+  background: linear-gradient(to top, var(--dark-velvet), transparent);
+}
+
+/* Decorative Corner Accents */
+.hero-container .corner-accent {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: 3;
+  border-color: var(--gold-accent);
+  border-style: solid;
+  opacity: 0.7;
+  transition: all 0.6s var(--transition-ease);
+}
+
+.hero-container .corner-top-left {
+  top: 30px;
+  left: 30px;
+  border-width: 2px 0 0 2px;
+}
+
+.hero-container .corner-top-right {
+  top: 30px;
+  right: 30px;
+  border-width: 2px 2px 0 0;
+}
+
+.hero-container .corner-bottom-left {
+  bottom: 30px;
+  left: 30px;
+  border-width: 0 0 2px 2px;
+}
+
+.hero-container .corner-bottom-right {
+  bottom: 30px;
+  right: 30px;
+  border-width: 0 2px 2px 0;
+}
+
+.hero-container:hover .corner-accent {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+/* Luxury Thumbnail Gallery */
+.thumbnail-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.thumbnail {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  transition: all 0.6s var(--transition-ease);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--dark-velvet);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(212, 175, 55, 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.8s var(--transition-ease);
+}
+
+.thumbnail:hover {
+  transform: translateY(-5px) scale(1.03);
+  border-color: var(--gold-accent);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.thumbnail:hover::before {
+  transform: translateX(100%);
+}
+
+/* Active/Selected Thumbnail */
+.thumbnail.active {
+  border: 2px solid var(--gold-accent);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3);
+  transform: scale(1.05);
+}
+
+/* Luxury Card Images */
+.luxury-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--dark-velvet);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  transition: all 0.6s var(--transition-ease);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.luxury-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.card-image {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: all 0.8s var(--transition-ease);
+  position: relative;
+  background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+}
+
+.luxury-card:hover .card-image {
+  transform: scale(1.05);
+  filter: brightness(1.1) contrast(1.05);
+}
+
+/* Card Overlay Content */
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
+  color: white;
+  z-index: 2;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.6s var(--transition-ease);
+}
+
+.luxury-card:hover .card-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Decorative Elements */
+.card-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--gold-accent);
+  color: var(--dark-velvet);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 3;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: all 0.6s var(--transition-ease) 0.1s;
+}
+
+.luxury-card:hover .card-badge {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Luxury Avatar with Halo Effect */
+.avatar {
+  --avatar-size: 80px;
+  --border-width: 2px;
+  
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: 50%;
+  object-fit: cover;
+  border: var(--border-width) solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 0 0 1px rgba(212, 175, 55, 0.3),
+    0 5px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transition: all 0.6s var(--transition-ease);
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+}
+
+.avatar::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--border-width));
+  left: calc(-1 * var(--border-width));
+  right: calc(-1 * var(--border-width));
+  bottom: calc(-1 * var(--border-width));
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--gold-accent);
+  border-right-color: var(--gold-accent);
+  transition: all 0.8s var(--transition-ease);
+  animation: rotateHalo 8s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.avatar:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 0 0 1px rgba(212, 175, 55, 0.5),
+    0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.avatar:hover::before {
+  border-color: var(--gold-accent);
+  border-width: 1px;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+}
+
+/* Avatar Sizes */
+.avatar-sm {
+  --avatar-size: 40px;
+  --border-width: 1px;
+}
+
+.avatar-lg {
+  --avatar-size: 120px;
+  --border-width: 3px;
+}
+
+.avatar-xl {
+  --avatar-size: 180px;
+  --border-width: 4px;
+}
+
+@keyframes rotateHalo {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Luxury Logo with Glow Effect */
+.logo {
+  --logo-height: 50px;
+  
+  width: auto;
+  height: var(--logo-height);
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0));
+  transition: all 0.6s var(--transition-ease);
+  position: relative;
+  z-index: 1;
+}
+
+/* Gold Gradient Effect on Hover */
+.logo::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  right: -10%;
+  bottom: -10%;
+  background: radial-gradient(
+    circle at center,
+    rgba(212, 175, 55, 0.3) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.6s var(--transition-ease);
+  pointer-events: none;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
+  transform: scale(1.05);
+}
+
+.logo:hover::after {
+  opacity: 1;
+}
+
+/* Logo Sizes */
+.logo-sm {
+  --logo-height: 30px;
+}
+
+.logo-lg {
+  --logo-height: 70px;
+}
+
+.logo-xl {
+  --logo-height: 100px;
+}
+
+/* Animated Logo for Loading States */
+.logo-loading {
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3)); }
+  100% { opacity: 1; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.7)); }
+}
+
+/* Luxury Loading States */
+img.loading {
+  background: linear-gradient(
+    90deg, 
+    #1a1a1a 0%, 
+    #2a2a2a 25%, 
+    #1a1a1a 50%, 
+    #2a2a2a 75%, 
+    #1a1a1a 100%
+  );
+  background-size: 200% 100%;
+  animation: loading 2.5s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+img.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 55, 0.1),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Elegant Loading Spinner */
+.image-loading {
+  position: relative;
+  background: #1a1a1a;
+  overflow: hidden;
+}
+
+.image-loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid rgba(212, 175, 55, 0.2);
+  border-top-color: var(--gold-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 2;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Luxury Responsive Images */
+.responsive-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: all 0.6s var(--transition-ease);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Hover Zoom Effect */
+.hover-zoom {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.hover-zoom img {
+  transition: transform 1.2s var(--transition-ease);
+}
+
+.hover-zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* Parallax Effect Container */
+.parallax-container {
+  height: 80vh;
+  overflow: hidden;
+  position: relative;
+  perspective: 1000px;
+}
+
+.parallax-image {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+/* Glass Morphism Effect */
+.glass-image {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+  border-radius: 12px;
+  padding: 2px;
+  transition: all 0.6s var(--transition-ease);
+}
+
+.glass-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* Luxury Rounded Images with Border Effects */
+.rounded-image {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.6s var(--transition-ease);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rounded-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid var(--gold-accent);
+  border-radius: 12px;
+  opacity: 0;
+  transition: all 0.6s var(--transition-ease);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.rounded-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.rounded-image:hover::before {
+  opacity: 0.7;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+}
+
+/* Polaroid Style */
+.polaroid {
+  background: white;
+  padding: 15px 15px 40px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: rotate(-2deg);
+  transition: all 0.3s ease;
+}
+
+.polaroid:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.polaroid:hover {
+  transform: rotate(0) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Tilt Effect */
+.tilt-image {
+  transform-style: preserve-3d;
+  transition: transform 0.5s var(--transition-ease);
+  transform: perspective(1000px) rotateX(0) rotateY(0);
+  will-change: transform;
+}
+
+.tilt-image:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+}
+
+/* Luxury Image with Caption */
+.image-with-caption {
+  position: relative;
+  margin: 2rem 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  transition: all 0.6s var(--transition-ease);
+}
+
+.image-with-caption:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 10, 0.9) 0%,
+    rgba(10, 10, 10, 0.7) 70%,
+    transparent 100%
+  );
+  color: white;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s var(--transition-ease);
+  z-index: 2;
+}
+
+.image-caption h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gold-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.image-caption p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.image-with-caption:hover .image-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Decorative Overlay */
+.image-with-caption::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(10, 10, 10, 0.7) 0%,
+    rgba(10, 10, 10, 0.3) 50%,
+    rgba(10, 10, 10, 0.7) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.6s var(--transition-ease);
+  pointer-events: none;
+}
+
+.image-with-caption:hover::after {
+  opacity: 1;
+}
+
+/* Caption Position Variations */
+.caption-top .image-caption {
+  bottom: auto;
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.9) 0%,
+    rgba(10, 10, 10, 0.7) 70%,
+    transparent 100%
+  );
+  transform: translateY(-20px);
+}
+
+.caption-top:hover .image-caption {
+  transform: translateY(0);
+}
+
+.caption-center .image-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(10, 10, 10, 0.8);
+  transform: scale(0.9);
+  opacity: 0;
+}
+
+.caption-center:hover .image-caption {
+  transform: scale(1);
+  opacity: 1;
 }
 
 /* Global text color for captions and cards */
