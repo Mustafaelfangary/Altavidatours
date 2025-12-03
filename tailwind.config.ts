@@ -63,6 +63,11 @@ const config = {
           DEFAULT: 'hsl(var(--info))',
           foreground: 'hsl(var(--info-foreground))',
         },
+        border: {
+          DEFAULT: 'hsl(var(--border))',
+        },
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
         // Enhanced Egyptian-inspired color palette
         'egyptian-blue': {
           '50': '#f0f9ff',
