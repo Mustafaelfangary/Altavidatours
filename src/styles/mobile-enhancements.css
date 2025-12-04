@@ -292,6 +292,7 @@
     gap: 1rem;
     padding: 1rem;
   }
+}
 
   /* Grid layout for larger mobile screens */
   @media (min-width: 480px) and (max-width: 640px) {
