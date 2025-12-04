@@ -567,33 +567,36 @@ export default function Navbar() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       align="start"
+                      className={styles.megaMenuPanel}
                       style={{
                         background: 'rgba(255, 255, 255, 0.98)',
                         backdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(52, 211, 153, 0.25)',
-                        borderRadius: '12px',
-                        padding: '8px',
-                        minWidth: '250px',
-                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                        border: '1px solid rgba(212, 175, 55, 0.35)',
+                        borderRadius: '18px',
+                        padding: '10px',
+                        minWidth: '280px',
                         zIndex: 1000
                       }}
                     >
                       {/* Main page link */}
                       <DropdownMenuItem asChild onClick={(e) => e.stopPropagation()}>
-                        <Link href={link.href} style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '8px',
-                          padding: '8px 12px',
-                          borderRadius: '8px',
-                          transition: 'all 0.2s ease',
-                          color: '#333',
-                          textDecoration: 'none',
-                          fontSize: '14px',
-                          fontWeight: '600',
-                          backgroundColor: 'rgba(52, 211, 153, 0.08)',
-                          border: '1px solid rgba(52, 211, 153, 0.25)'
-                        }}>
+                        <Link
+                          href={link.href}
+                          className={styles.megaMenuItem}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            padding: '10px 14px',
+                            borderRadius: '999px',
+                            color: '#020617',
+                            textDecoration: 'none',
+                            fontSize: '14px',
+                            fontWeight: 600,
+                            background: 'linear-gradient(135deg, rgba(248, 231, 184, 0.3), rgba(248, 231, 184, 0.15))',
+                            border: '1px solid rgba(212, 175, 55, 0.45)'
+                          }}
+                        >
                           <span style={{ fontSize: '16px' }}>
                             {link.href === '/destinations' ? '🌍' :
                              link.href === '/packages' ? '📦' :
@@ -618,17 +621,18 @@ export default function Navbar() {
                         <Link 
                           key={index}
                           href={item.href}
-                          className={styles.navLink}
+                          className={`${styles.navLink} ${styles.megaMenuItem}`}
                           style={{
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center',
+                            justifyContent: 'space-between',
                             minWidth: 'fit-content',
                             maxWidth: 'none',
-                            textAlign: 'center',
+                            textAlign: 'left',
+                            padding: '8px 10px',
                             ...(item.special ? {
-                              background: 'linear-gradient(135deg, rgba(59,130,246,1) 0%, rgba(52,211,153,1) 100%)',
-                              boxShadow: '0 6px 18px rgba(59,130,246,0.35)'
+                              background: 'linear-gradient(135deg, rgba(248, 231, 184, 0.8) 0%, rgba(248, 231, 184, 0.6) 100%)',
+                              boxShadow: '0 6px 18px rgba(15,23,42,0.25)'
                             } : {})
                           }}
                           onMouseEnter={(e) => {

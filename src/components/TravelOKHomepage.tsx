@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { packages } from '@/data/packages';
 import { destinations } from '@/data/destinations';
 import { useContent } from '@/hooks/useContent';
+import SafeImage from '@/components/SafeImage';
 
 export default function TravelOKHomepage() {
   const [heroReady, setHeroReady] = useState(false);
@@ -57,7 +57,7 @@ export default function TravelOKHomepage() {
               Your browser does not support the video tag.
             </video>
           ) : (
-            <Image
+            <SafeImage
               src={getContent('hero_video_poster', '/images/cultural&historical/DSC_8401.JPG')}
               alt={getContent('hero_video_title', 'Discover Egypt')}
               fill
@@ -108,88 +108,234 @@ export default function TravelOKHomepage() {
       </div>
 
       {/* Things To Do Section */}
-      <div className="bg-primary text-white">
+      <div className="bg-slate-50 text-travelok-dark border-b border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center py-4">
-            <h2 className="text-2xl font-bold tracking-wider">{getContent('homepage_things_to_do_title', 'THINGS TO DO')}</h2>
+            <h2 className="text-2xl font-bold tracking-wider">
+              {getContent('homepage_things_to_do_title', 'THINGS TO DO')}
+            </h2>
           </div>
         </div>
       </div>
 
-      {/* Category Navigation */}
-      <div className="bg-primary text-white">
+      {/* Category Navigation - now using real destination images */}
+      <div className="bg-white text-travelok-dark">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 py-6">
+            {/* Pyramids & Sphinx */}
             <Link
               href={getContent('category_1_link', '/attractions/pyramids')}
-              className="bg-primary hover-bg-accent transition-colors text-white p-4 sm:p-6 text-center rounded-lg min-h-[100px] flex flex-col items-center justify-center"
+              className="group relative rounded-xl overflow-hidden shadow-lg bg-black/5"
             >
-              <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">{getContent('category_1_icon', '🔺')}</div>
-              <div className="font-bold text-xs sm:text-sm">{getContent('category_1_title', 'PYRAMIDS')}</div>
-              <div className="font-bold text-xs sm:text-sm">{getContent('category_1_subtitle', '& SPHINX')}</div>
+              <div className="relative w-full h-32 sm:h-40 md:h-48">
+                <SafeImage
+                  src={getContent('category_1_image', '/images/cultural&historical/Saqqara pyramid.jpg')}
+                  alt={getContent('category_1_title', 'PYRAMIDS & SPHINX')}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-4 text-center text-white">
+                <div className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] opacity-90 mb-1">
+                  {getContent('category_1_icon', 'PYRAMIDS')}
+                </div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">
+                  {getContent('category_1_title', 'PYRAMIDS')}
+                </div>
+                <div className="font-semibold text-[0.7rem] sm:text-xs opacity-90">
+                  {getContent('category_1_subtitle', '& SPHINX')}
+                </div>
+              </div>
             </Link>
 
+            {/* Ancient Temples */}
             <Link
               href={getContent('category_2_link', '/attractions/temples')}
-              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
+              className="group relative rounded-xl overflow-hidden shadow-lg bg-black/5"
             >
-              <div className="text-3xl mb-2">{getContent('category_2_icon', '🏛️')}</div>
-              <div className="font-bold text-sm">{getContent('category_2_title', 'ANCIENT')}</div>
-              <div className="font-bold text-sm">{getContent('category_2_subtitle', 'TEMPLES')}</div>
+              <div className="relative w-full h-32 sm:h-40 md:h-48">
+                <SafeImage
+                  src={getContent('category_2_image', '/images/cultural&historical/DSC_8401.JPG')}
+                  alt={getContent('category_2_title', 'ANCIENT TEMPLES')}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-4 text-center text-white">
+                <div className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] opacity-90 mb-1">
+                  {getContent('category_2_icon', 'TEMPLES')}
+                </div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">
+                  {getContent('category_2_title', 'ANCIENT')}
+                </div>
+                <div className="font-semibold text-[0.7rem] sm:text-xs opacity-90">
+                  {getContent('category_2_subtitle', 'TEMPLES')}
+                </div>
+              </div>
             </Link>
 
+            {/* Museums & Artifacts */}
             <Link
               href={getContent('category_3_link', '/attractions/museums')}
-              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
+              className="group relative rounded-xl overflow-hidden shadow-lg bg-black/5"
             >
-              <div className="text-3xl mb-2">{getContent('category_3_icon', '🏺')}</div>
-              <div className="font-bold text-sm">{getContent('category_3_title', 'MUSEUMS')}</div>
-              <div className="font-bold text-sm">{getContent('category_3_subtitle', '& ARTIFACTS')}</div>
+              <div className="relative w-full h-32 sm:h-40 md:h-48">
+                <SafeImage
+                  src={getContent('category_3_image', '/images/cultural&historical/DSCF1165.JPG')}
+                  alt={getContent('category_3_title', 'MUSEUMS & ARTIFACTS')}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-4 text-center text-white">
+                <div className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] opacity-90 mb-1">
+                  {getContent('category_3_icon', 'MUSEUMS')}
+                </div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">
+                  {getContent('category_3_title', 'MUSEUMS')}
+                </div>
+                <div className="font-semibold text-[0.7rem] sm:text-xs opacity-90">
+                  {getContent('category_3_subtitle', '& ARTIFACTS')}
+                </div>
+              </div>
             </Link>
 
+            {/* Desert Safari */}
             <Link
               href={getContent('category_4_link', '/services/adventure-tours')}
-              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
+              className="group relative rounded-xl overflow-hidden shadow-lg bg-black/5"
             >
-              <div className="text-3xl mb-2">{getContent('category_4_icon', '🐪')}</div>
-              <div className="font-bold text-sm">{getContent('category_4_title', 'DESERT')}</div>
-              <div className="font-bold text-sm">{getContent('category_4_subtitle', 'SAFARI')}</div>
+              <div className="relative w-full h-32 sm:h-40 md:h-48">
+                <SafeImage
+                  src={getContent('category_4_image', '/images/desert&safary/DSC_9908.JPG')}
+                  alt={getContent('category_4_title', 'DESERT SAFARI')}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-4 text-center text-white">
+                <div className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] opacity-90 mb-1">
+                  {getContent('category_4_icon', 'DESERT')}
+                </div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">
+                  {getContent('category_4_title', 'DESERT')}
+                </div>
+                <div className="font-semibold text-[0.7rem] sm:text-xs opacity-90">
+                  {getContent('category_4_subtitle', 'SAFARI')}
+                </div>
+              </div>
             </Link>
 
+            {/* Red Sea Diving */}
             <Link
               href={getContent('category_5_link', '/experiences/diving')}
-              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
+              className="group relative rounded-xl overflow-hidden shadow-lg bg-black/5"
             >
-              <div className="text-3xl mb-2">{getContent('category_5_icon', '🤿')}</div>
-              <div className="font-bold text-sm">{getContent('category_5_title', 'RED SEA')}</div>
-              <div className="font-bold text-sm">{getContent('category_5_subtitle', 'DIVING')}</div>
+              <div className="relative w-full h-32 sm:h-40 md:h-48">
+                <SafeImage
+                  src={getContent('category_5_image', '/images/desert&safary/DSC_9826.JPG')}
+                  alt={getContent('category_5_title', 'RED SEA DIVING')}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-4 text-center text-white">
+                <div className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] opacity-90 mb-1">
+                  {getContent('category_5_icon', 'DIVING')}
+                </div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">
+                  {getContent('category_5_title', 'RED SEA')}
+                </div>
+                <div className="font-semibold text-[0.7rem] sm:text-xs opacity-90">
+                  {getContent('category_5_subtitle', 'DIVING')}
+                </div>
+              </div>
             </Link>
 
+            {/* Nile Cruises */}
             <Link
               href={getContent('category_6_link', '/hotels/nile-cruises')}
-              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
+              className="group relative rounded-xl overflow-hidden shadow-lg bg-black/5"
             >
-              <div className="text-3xl mb-2">{getContent('category_6_icon', '⛵')}</div>
-              <div className="font-bold text-sm">{getContent('category_6_title', 'NILE')}</div>
-              <div className="font-bold text-sm">{getContent('category_6_subtitle', 'CRUISES')}</div>
+              <div className="relative w-full h-32 sm:h-40 md:h-48">
+                <SafeImage
+                  src={getContent('category_6_image', '/images/Royal Cleopatra/DSC_8628.jpg')}
+                  alt={getContent('category_6_title', 'NILE CRUISES')}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-4 text-center text-white">
+                <div className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] opacity-90 mb-1">
+                  {getContent('category_6_icon', 'CRUISES')}
+                </div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">
+                  {getContent('category_6_title', 'NILE')}
+                </div>
+                <div className="font-semibold text-[0.7rem] sm:text-xs opacity-90">
+                  {getContent('category_6_subtitle', 'CRUISES')}
+                </div>
+              </div>
             </Link>
 
+            {/* Cultural Tours */}
             <Link
               href={getContent('category_7_link', '/experiences/cultural')}
-              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
+              className="group relative rounded-xl overflow-hidden shadow-lg bg-black/5"
             >
-              <div className="text-3xl mb-2">{getContent('category_7_icon', '🎭')}</div>
-              <div className="font-bold text-sm">{getContent('category_7_title', 'CULTURAL')}</div>
-              <div className="font-bold text-sm">{getContent('category_7_subtitle', 'TOURS')}</div>
+              <div className="relative w-full h-32 sm:h-40 md:h-48">
+                <SafeImage
+                  src={getContent('category_7_image', '/images/Alexandria/IMG_6334.JPG')}
+                  alt={getContent('category_7_title', 'CULTURAL TOURS')}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-4 text-center text-white">
+                <div className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] opacity-90 mb-1">
+                  {getContent('category_7_icon', 'CULTURE')}
+                </div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">
+                  {getContent('category_7_title', 'CULTURAL')}
+                </div>
+                <div className="font-semibold text-[0.7rem] sm:text-xs opacity-90">
+                  {getContent('category_7_subtitle', 'TOURS')}
+                </div>
+              </div>
             </Link>
 
+            {/* Egyptian Cuisine */}
             <Link
               href={getContent('category_8_link', '/experiences/food')}
-              className="bg-primary hover-bg-accent transition-colors text-white p-6 text-center rounded-lg"
+              className="group relative rounded-xl overflow-hidden shadow-lg bg-black/5"
             >
-              <div className="text-3xl mb-2">{getContent('category_8_icon', '🍽️')}</div>
-              <div className="font-bold text-sm">{getContent('category_8_title', 'EGYPTIAN')}</div>
-              <div className="font-bold text-sm">{getContent('category_8_subtitle', 'CUISINE')}</div>
+              <div className="relative w-full h-32 sm:h-40 md:h-48">
+                <SafeImage
+                  src={getContent('category_8_image', '/images/cultural&historical/IMG_3143.JPG')}
+                  alt={getContent('category_8_title', 'EGYPTIAN CUISINE')}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-4 text-center text-white">
+                <div className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] opacity-90 mb-1">
+                  {getContent('category_8_icon', 'CUISINE')}
+                </div>
+                <div className="font-semibold text-xs sm:text-sm leading-tight">
+                  {getContent('category_8_title', 'EGYPTIAN')}
+                </div>
+                <div className="font-semibold text-[0.7rem] sm:text-xs opacity-90">
+                  {getContent('category_8_subtitle', 'CUISINE')}
+                </div>
+              </div>
             </Link>
           </div>
         </div>
@@ -243,14 +389,11 @@ export default function TravelOKHomepage() {
               return (
               <div key={pkg.id} className="card-travelok group cursor-pointer relative transition-shadow hover:shadow-xl">
                 <div className="relative h-48">
-                  <Image
+                  <SafeImage
                     src={getImageForPackage() || pkg.image}
                     alt={pkg.title}
                     fill
                     className="object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = pkg.image;
-                    }}
                   />
                   <div className="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
                     {pkg.duration}
@@ -337,7 +480,7 @@ export default function TravelOKHomepage() {
               return (
                 <div key={svc.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden">
                   <div className="relative h-40">
-                    <Image src={image} alt={title} fill className="object-cover" />
+                    <SafeImage src={image} alt={title} fill className="object-cover" />
                   </div>
                   <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
@@ -374,7 +517,7 @@ export default function TravelOKHomepage() {
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="md:flex">
             <div className="md:w-1/2">
-              <Image
+              <SafeImage
                 src={getContent('featured_article_image', '/images/Royal Cleopatra/DSC_8568.jpg')}
                 alt={getContent('featured_article_title', 'Luxury Dahabiya Cruise')}
                 width={600}
@@ -433,15 +576,13 @@ export default function TravelOKHomepage() {
               return (
               <div key={destination.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="relative">
-                  <Image
+                  <SafeImage
                     src={destImage}
                     alt={destTitle}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = destination.image || '/images/Royal Cleopatra/DSC_8507.jpg';
-                    }}
+                    fallbackSrc={destination.image || '/images/Royal Cleopatra/DSC_8507.jpg'}
                   />
                   <div className="absolute top-4 left-4 bg-travelok-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
                     {destRegion}
@@ -478,7 +619,7 @@ export default function TravelOKHomepage() {
         </div>
       </div>
 
-      <div className="bg-travelok-blue-dark py-8">
+      <div className="bg-slate-50 py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
             <Link href={getContent('dest_link_1_url', '/find-destination')} className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-3 sm:p-4 text-center rounded min-h-[80px] flex flex-col items-center justify-center">
@@ -527,15 +668,13 @@ export default function TravelOKHomepage() {
               {getContent('heritage_sites_title', 'Ancient Egyptian Heritage Sites')}
             </h3>
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <Image
+              <SafeImage
                 src={getContent('heritage_sites_image', '/images/Royal Cleopatra/DSC_8507.jpg')}
                 alt={getContent('heritage_sites_title', 'Ancient Egyptian Heritage Sites')}
                 width={600}
                 height={300}
                 className="w-full h-64 object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = '/images/Royal Cleopatra/DSC_8507.jpg';
-                }}
+                fallbackSrc="/images/Royal Cleopatra/DSC_8507.jpg"
               />
               <div className="p-6">
                 <div className="text-sm text-gray-600 mb-2">{getContent('heritage_sites_location', '📍 Karnak Temple Complex, Luxor')}</div>
@@ -551,15 +690,13 @@ export default function TravelOKHomepage() {
               {getContent('nile_experiences_title', 'Nile River Experiences')}
             </h3>
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <Image
+              <SafeImage
                 src={getContent('nile_experiences_image', '/images/Royal Cleopatra/DSC_8628.jpg')}
                 alt={getContent('nile_experiences_title', 'Nile River Experiences')}
                 width={600}
                 height={300}
                 className="w-full h-64 object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = '/images/Royal Cleopatra/DSC_8628.jpg';
-                }}
+                fallbackSrc="/images/Royal Cleopatra/DSC_8628.jpg"
               />
               <div className="p-6">
                 <p className="text-gray-700">
