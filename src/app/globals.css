@@ -1160,7 +1160,7 @@ color: #ffffff !important;
 
 /* Light/Pale theme helpers to avoid dark blocks across the site */
 .bg-deep-blue { background-color: #eaf3fb !important; } /* pale blue section background */
-.text-deep-blue, .text-#0b2e4f {
+.text-deep-blue {
   color: #0b2e4f !important;
 }
 .pale-card { background: #ffffff; border: 1px solid rgba(10,30,45,0.08); box-shadow: 0 6px 20px rgba(10,30,45,0.06); }

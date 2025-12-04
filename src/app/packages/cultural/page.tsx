@@ -27,7 +27,7 @@ interface CulturalPackage {
 
 const culturalGalleryImages = [
   {
-    src: '/images/destinations/karnak-temple.jpg',
+    src: '/images/Royal Cleopatra/DSC_8568.jpg',
     alt: 'Ancient Egyptian Temple',
     title: 'Temple Explorations'
   },
@@ -93,7 +93,7 @@ export default function CulturalPackagesPage() {
             durationDays: 9,
             maxGuests: 12,
             highlights: ['Expert Egyptologists', 'Museum Access', 'Archaeological Sites', 'Hieroglyph Workshops', 'Traditional Crafts'],
-            mainImageUrl: '/images/destinations/karnak-temple.jpg',
+            mainImageUrl: '/images/Royal Cleopatra/DSC_8568.jpg',
             featured: true,
             category: 'cultural'
           },
@@ -146,7 +146,7 @@ export default function CulturalPackagesPage() {
     <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-indigo-50">
       {/* Hero Section */}
       <UnifiedHero
-        imageSrc="/images/destinations/karnak-temple.jpg"
+        imageSrc="/images/Royal Cleopatra/DSC_8568.jpg"
         title="Cultural Packages"
         subtitle="Immerse Yourself in Ancient Egyptian Civilization & Living Heritage"
         hieroglyphicTitle={false}

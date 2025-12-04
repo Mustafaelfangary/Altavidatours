@@ -28,11 +28,11 @@ export const attractions: Attraction[] = [
     category: AttractionCategory.HISTORY,
     location: 'Giza',
     description: 'The Great Pyramids of Giza are the most iconic monuments of ancient Egypt. Built over 4,500 years ago, these massive structures continue to amaze visitors with their architectural precision and historical significance.',
-    image: '/Princess Cleopatra/DSC_8502.jpg',
+    image: '/images/Royal Cleopatra/DSC_8502.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8502.jpg',
-      '/Princess Cleopatra/DSC_8534.jpg',
-      '/Princess Cleopatra/DSC_8555.jpg'
+      '/images/Royal Cleopatra/DSC_8502.jpg',
+      '/images/Royal Cleopatra/DSC_8534.jpg',
+      '/images/Royal Cleopatra/DSC_8555.jpg'
     ],
     highlights: [
       'Great Pyramid of Khufu',
@@ -51,10 +51,10 @@ export const attractions: Attraction[] = [
     category: AttractionCategory.HISTORY,
     location: 'Luxor',
     description: 'The Karnak Temple Complex is the largest religious building ever constructed. This vast open-air museum features massive columns, towering obelisks, and intricate hieroglyphics.',
-    image: '/images/destinations/karnak-temple.jpg',
+    image: '/images/Royal Cleopatra/DSC_8568.jpg',
     gallery: [
-      '/images/destinations/karnak-temple.jpg',
-      '/Princess Cleopatra/DSC_8568.jpg'
+      '/images/Royal Cleopatra/DSC_8568.jpg',
+      '/images/Royal Cleopatra/DSC_8568.jpg'
     ],
     highlights: [
       'Great Hypostyle Hall',
@@ -73,10 +73,10 @@ export const attractions: Attraction[] = [
     category: AttractionCategory.HISTORY,
     location: 'Luxor',
     description: 'The Valley of the Kings is the burial ground of Egypt\'s greatest pharaohs. Explore the elaborately decorated tombs including the famous tomb of Tutankhamun.',
-    image: '/Princess Cleopatra/DSC_8568.jpg',
+    image: '/images/Royal Cleopatra/DSC_8568.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8568.jpg',
-      '/Princess Cleopatra/DSC_8582.jpg'
+      '/images/Royal Cleopatra/DSC_8568.jpg',
+      '/images/Royal Cleopatra/DSC_8582.jpg'
     ],
     highlights: [
       'Tomb of Tutankhamun',
@@ -95,10 +95,10 @@ export const attractions: Attraction[] = [
     category: AttractionCategory.HISTORY,
     location: 'Aswan',
     description: 'The twin temples of Abu Simbel are among Egypt\'s most magnificent monuments. Carved into a mountainside, these temples feature colossal statues of Ramses II.',
-    image: '/Princess Cleopatra/DSC_8559.jpg',
+    image: '/images/Royal Cleopatra/DSC_8559.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8559.jpg',
-      '/Princess Cleopatra/DSC_8593.jpg'
+      '/images/Royal Cleopatra/DSC_8559.jpg',
+      '/images/Royal Cleopatra/DSC_8593.jpg'
     ],
     highlights: [
       'Four colossal statues of Ramses II',
@@ -117,10 +117,10 @@ export const attractions: Attraction[] = [
     category: AttractionCategory.HISTORY,
     location: 'Aswan',
     description: 'The Temple of Philae is dedicated to the goddess Isis. Located on an island in the Nile, this beautiful temple complex is accessible by boat.',
-    image: '/Princess Cleopatra/DSC_8596.jpg',
+    image: '/images/Royal Cleopatra/DSC_8596.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8596.jpg',
-      '/Princess Cleopatra/DSC_8608.jpg'
+      '/images/Royal Cleopatra/DSC_8596.jpg',
+      '/images/Royal Cleopatra/DSC_8608.jpg'
     ],
     highlights: [
       'Temple of Isis',
@@ -139,10 +139,10 @@ export const attractions: Attraction[] = [
     category: AttractionCategory.OUTDOOR,
     location: 'Luxor to Aswan',
     description: 'Experience the timeless beauty of Egypt on a Nile River cruise. Sail past ancient temples, lush farmland, and traditional villages.',
-    image: '/Princess Cleopatra/DSC_8582.jpg',
+    image: '/images/Royal Cleopatra/DSC_8582.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8582.jpg',
-      '/Princess Cleopatra/DSC_8596.jpg'
+      '/images/Royal Cleopatra/DSC_8582.jpg',
+      '/images/Royal Cleopatra/DSC_8596.jpg'
     ],
     highlights: [
       'Luxury cruise ships',
@@ -161,7 +161,7 @@ export const attractions: Attraction[] = [
     category: AttractionCategory.ARTS,
     location: 'Cairo',
     description: 'Khan el-Khalili is Cairo\'s famous bazaar, a labyrinth of narrow streets filled with shops selling everything from spices to jewelry.',
-    image: '/Princess Cleopatra/DSC_8534.jpg',
+    image: '/images/Royal Cleopatra/DSC_8534.jpg',
     gallery: [
       '/images/Royal Cleopatra/DSC_8534.jpg',
       '/images/Royal Cleopatra/DSC_8555.jpg'
@@ -183,9 +183,9 @@ export const attractions: Attraction[] = [
     category: AttractionCategory.OUTDOOR,
     location: 'Hurghada & Sharm El Sheikh',
     description: 'The Red Sea offers world-class diving and snorkeling with crystal-clear waters, vibrant coral reefs, and diverse marine life.',
-    image: '/Princess Cleopatra/DSC_8593.jpg',
+    image: '/images/Royal Cleopatra/DSC_8593.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8593.jpg',
+      '/images/Royal Cleopatra/DSC_8593.jpg',
       '/images/experiences/sunset-sailing.jpg'
     ],
     highlights: [

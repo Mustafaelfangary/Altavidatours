@@ -49,7 +49,7 @@ export const hardcodedItineraries = [
     duration: 7,
     shortDescription: '7-day classic Egypt highlights tour.',
     file: '07 DAYS EGYPT CLASSIC.docx',
-    image: '/images/destinations/karnak-temple.jpg'
+    image: '/images/Royal Cleopatra/DSC_8568.jpg'
   },
   {
     id: '06-days-dahabiya-luxor',

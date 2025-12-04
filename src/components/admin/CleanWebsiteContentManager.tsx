@@ -841,7 +841,7 @@ const WEBSITE_CONTENT_STRUCTURE: PageContent[] = [
           { key: 'service_cultural_name', title: 'Service Name', content: 'Cultural Experiences', contentType: 'TEXT' },
           { key: 'service_cultural_icon', title: 'Service Icon', content: '🏛️', contentType: 'TEXT' },
           { key: 'service_cultural_description', title: 'Description', content: 'Immerse yourself in local cultures, traditions, and historic sites with expert cultural guides.', contentType: 'TEXTAREA' },
-          { key: 'service_cultural_image', title: 'Service Image', content: '/images/destinations/karnak-temple.jpg', contentType: 'IMAGE' },
+          { key: 'service_cultural_image', title: 'Service Image', content: '/images/Royal Cleopatra/DSC_8568.jpg', contentType: 'IMAGE' },
           { key: 'service_cultural_pricing', title: 'Pricing Text', content: 'From $600', contentType: 'TEXT' },
           { key: 'service_cultural_services', title: 'Services List (comma-separated)', content: 'Historical Tours,Local Immersion,Art & Museums,Traditional Workshops', contentType: 'TEXT' },
           { key: 'service_cultural_highlights', title: 'Highlights (comma-separated)', content: 'Authentic Culture,Local Experts,Educational,Heritage Sites', contentType: 'TEXT' }
