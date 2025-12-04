@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 
-const config = {
+const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -294,6 +294,7 @@ const config = {
     }),
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
+  ],
   important: true, // This ensures Tailwind classes override Material-UI styles
 };
 

@@ -199,7 +199,7 @@ export async function GET(request: NextRequest) {
       },
       {
         id: 'mock-2',
-        url: '/images/destinations/karnak-temple.jpg',
+        url: '/images/Royal Cleopatra/DSC_8568.jpg',
         alt: 'Ancient Temple',
         caption: 'Karnak Temple Complex',
         category: 'destination',

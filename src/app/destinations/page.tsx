@@ -122,7 +122,7 @@ export default function DestinationsPage() {
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-blue-50">
       {/* Hero Section */}
       <UnifiedHero
-        imageSrc="/images/destinations/karnak-temple.jpg"
+        imageSrc="/images/Royal Cleopatra/DSC_8568.jpg"
         title="Destinations"
         subtitle="Explore the World's Most Incredible Places with Expert Guided Tours"
         hieroglyphicTitle={false}

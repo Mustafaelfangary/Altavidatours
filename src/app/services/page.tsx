@@ -32,7 +32,7 @@ export default function ServicesPage() {
       name: getContent('service_cultural_name', 'Cultural Experiences'),
       icon: getContent('service_cultural_icon', '🏛️'),
       description: getContent('service_cultural_description', 'Immerse yourself in local cultures, traditions, and historic sites with expert cultural guides.'),
-      image: getContent('service_cultural_image', '/images/destinations/karnak-temple.jpg'),
+      image: getContent('service_cultural_image', '/images/Royal Cleopatra/DSC_8568.jpg'),
       services: getContent('service_cultural_services', 'Historical Tours,Local Immersion,Art & Museums,Traditional Workshops').split(','),
       highlights: getContent('service_cultural_highlights', 'Authentic Culture,Local Experts,Educational,Heritage Sites').split(','),
       color: 'blue',
