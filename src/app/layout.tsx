@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
+import Script from 'next/script';
+import { ReactNode } from 'react';
 import './globals.css';
+import '../styles/asmallworld-theme.css';
 import '../styles/mobile-enhancements.css';
 import { Providers } from './providers';
 import { LayoutWrapper } from '@/components/LayoutWrapper';
 import MobileOptimizedLayout from '@/components/mobile/MobileOptimizedLayout';
-import { generateSEO, generateOrganizationSchema } from '@/lib/seo';
 import { trackWebVitals } from '@/lib/performance';
-import Script from 'next/script';
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
-// Import the client component wrapper instead of using dynamic import directly
 import CleopatraAssistantWrapper from '@/components/assistant/CleopatraAssistantWrapper';
 import NavigationLoader from '@/components/ui/NavigationLoader';
 import GlobalLoadingInterceptor from '@/components/ui/GlobalLoadingInterceptor';
@@ -29,14 +29,18 @@ const playfair = Playfair_Display({
   display: 'swap',
 });
 
-export const metadata: Metadata = generateSEO();
+export const metadata: Metadata = {
+  title: 'Altavida Tours',
+  description: 'Luxury travel experiences',
+  // Add other metadata properties as needed
+};
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  viewportFit: 'cover', // Enable safe area support
+  viewportFit: 'cover',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#2563eb' },
     { media: '(prefers-color-scheme: dark)', color: '#1e40af' }
@@ -46,184 +50,66 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className="scroll-smooth">
       <head>
-        
         {/* Performance optimizations */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
-        {/* Preload site logo to prevent flicker on initial paint */}
-        <link rel="preload" as="image" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" />
+        
+        {/* Google Fonts */}
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Neue+Haas+Grotesk+Display:wght@100;200;300;400;500;600;700;800;900&display=swap" 
+          rel="stylesheet" 
+        />
+        
+        {/* Preload critical assets */}
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/logos/altavida-logo-1.png" 
+          type="image/png"
+        />
+        <link 
+          rel="preload" 
+          as="style" 
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Neue+Haas+Grotesk+Display:wght@100;200;300;400;500;600;700;800;900&display=swap" 
+        />
 
         {/* PWA meta tags */}
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Altavida Tours.com" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Altavida Tours" />
+        <meta name="theme-color" content="#1a1a1a" />
+        <meta name="msapplication-TileColor" content="#1a1a1a" />
 
         {/* Favicon and app icons */}
-        <link rel="icon" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" sizes="any" />
-        <link rel="icon" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
-
-        {/* Structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateOrganizationSchema())
-          }}
-        />
-        {/* WebSite + SearchAction JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Altavida Tours.com",
-              "url": process.env.NEXT_PUBLIC_SITE_URL || "https://www.altavidatours.com",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.altavidatours.com"}/search?q={search_term_string}`,
-                "query-input": "required name=search_term_string"
-              }
-            })
-          }}
-        />
-
-        {/* 3D model viewer - load only when needed */}
-        <Script
-          src="https://unpkg.com/@google/model-viewer@v4.0.0/dist/model-viewer.min.js"
-          strategy="lazyOnload"
-          type="module"
-        />
       </head>
-      <body className={`${inter.variable} ${playfair.variable} ${inter.className} antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased text-asw-black bg-white`}>
         <Providers>
-          <MobileOptimizedLayout>
-            <LayoutWrapper>
+          <GlobalLoadingInterceptor />
+          <NavigationLoader />
+          <LayoutWrapper>
+            <MobileOptimizedLayout>
+              <AutoTranslate />
+              <MegaMenuTest />
+              <CleopatraAssistantWrapper />
               {children}
-            </LayoutWrapper>
-          </MobileOptimizedLayout>
-          {/* Register the service worker for PWA */}
+            </MobileOptimizedLayout>
+          </LayoutWrapper>
           <ServiceWorkerRegister />
+          <LogoAutoRefresh />
         </Providers>
-
-        {/* Navigation loader for route transitions */}
-        <NavigationLoader />
-        
-        {/* Global loading interceptor for API calls */}
-        <GlobalLoadingInterceptor />
-        
-        {/* Floating AI assistant with 3D Cleopatra */}
-        <CleopatraAssistantWrapper />
-        
-        {/* Automatic translation system */}
-        <AutoTranslate />
-        
-        {/* Mega Menu Test Component - Remove in production */}
-        {process.env.NODE_ENV === 'development' && <MegaMenuTest />}
-        
-        {/* Auto-refresh logos when changed in admin */}
-        <LogoAutoRefresh />
-        {/* Service worker registration component mounted via client component above */}
-
-        {/* Analytics and performance monitoring */}
-        {process.env.NODE_ENV === 'production' && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
-                  page_title: document.title,
-                  page_location: window.location.href,
-                });
-              `}
-            </Script>
-
-            {/* Web Vitals tracking */}
-            <Script id="web-vitals" strategy="afterInteractive">
-              {`
-                (function() {
-                  try {
-                    // Simple performance tracking without web-vitals dependency
-                    const trackWebVitals = ${trackWebVitals.toString()};
-
-                    // Track basic performance metrics
-                    if ('performance' in window) {
-                      window.addEventListener('load', function() {
-                        setTimeout(function() {
-                          const navigation = performance.getEntriesByType('navigation')[0];
-                          if (navigation) {
-                            trackWebVitals({
-                              name: 'page_load',
-                              value: navigation.loadEventEnd - navigation.navigationStart,
-                              id: 'page-load-' + Date.now()
-                            });
-                          }
-                        }, 0);
-                      });
-                    }
-
-                    // Track CLS (Cumulative Layout Shift) manually
-                    let clsValue = 0;
-                    let clsEntries = [];
-                    let sessionValue = 0;
-                    let sessionEntries = [];
-
-                    if ('PerformanceObserver' in window) {
-                      try {
-                        const observer = new PerformanceObserver(function(list) {
-                          for (const entry of list.getEntries()) {
-                            if (!entry.hadRecentInput) {
-                              const firstSessionEntry = sessionEntries[0];
-                              const lastSessionEntry = sessionEntries[sessionEntries.length - 1];
-
-                              if (sessionValue && entry.startTime - lastSessionEntry.startTime < 1000 && entry.startTime - firstSessionEntry.startTime < 5000) {
-                                sessionValue += entry.value;
-                                sessionEntries.push(entry);
-                              } else {
-                                sessionValue = entry.value;
-                                sessionEntries = [entry];
-                              }
-
-                              if (sessionValue > clsValue) {
-                                clsValue = sessionValue;
-                                clsEntries = [...sessionEntries];
-                                trackWebVitals({
-                                  name: 'CLS',
-                                  value: clsValue,
-                                  id: 'cls-' + Date.now()
-                                });
-                              }
-                            }
-                          }
-                        });
-                        observer.observe({ type: 'layout-shift', buffered: true });
-                      } catch (e) {
-                        // PerformanceObserver not supported
-                      }
-                    }
-                  } catch (error) {
-                    console.warn('Performance tracking not available:', error);
-                  }
-                })();
-              `}
-            </Script>
-          </>
-        )}
       </body>
     </html>
   );

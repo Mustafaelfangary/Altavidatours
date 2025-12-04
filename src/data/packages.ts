@@ -3,7 +3,7 @@ export interface Package {
   title: string;
   duration: string;
   days: number;
-  type: 'classic' | 'luxury' | 'cruise' | 'adventure' | 'cultural';
+  type: 'classic' | 'luxury' | 'cruise' | 'adventure' | 'cultural' | 'family';
   destinations: string[];
   highlights: string[];
   price: {
@@ -54,8 +54,8 @@ export const packages: Package[] = [
     image: '/images/Royal Cleopatra/DSC_8502.jpg',
     gallery: [
       '/images/Royal Cleopatra/DSC_8502.jpg',
-      '/images/destinations/karnak-temple.jpg',
-      '/images/Royal Cleopatra/DSC_8568.jpg'
+      '/images/Royal Cleopatra/DSC_8507.jpg',
+      '/images/cultural&historical/DSC_8401.JPG'
     ],
     description: 'Experience the best of ancient Egypt in this comprehensive 7-day journey through Cairo, Luxor, and Aswan. Visit iconic landmarks including the Pyramids of Giza, Valley of the Kings, and magnificent temples along the Nile.',
     itinerary: [
@@ -144,10 +144,10 @@ export const packages: Package[] = [
       'Hotels with breakfast',
       'All taxes and service charges'
     ],
-    image: '/images/Royal Cleopatra/DSC_8534.jpg',
+    image: '/images/Alexandria/IMG_6334.JPG',
     gallery: [
-      '/images/Royal Cleopatra/DSC_8534.jpg',
-      '/images/Royal Cleopatra/DSC_8555.jpg'
+      '/images/Alexandria/IMG_6334.JPG',
+      '/images/Alexandria/IMG_6504.JPG'
     ],
     description: 'Explore the treasures of Cairo and the Mediterranean charm of Alexandria in this cultural journey through Egypt\'s most historic cities.',
     itinerary: []
@@ -213,10 +213,10 @@ export const packages: Package[] = [
       'Hotels with breakfast',
       'Water sports activities'
     ],
-    image: '/images/Royal Cleopatra/DSC_8593.jpg',
+    image: '/images/desert&safary/DSC_9908.JPG',
     gallery: [
-      '/images/Royal Cleopatra/DSC_8593.jpg',
-      '/images/Royal Cleopatra/DSC_8596.jpg'
+      '/images/desert&safary/DSC_9908.JPG',
+      '/images/desert&safary/DSC_9912.JPG'
     ],
     description: 'Combine ancient wonders with Red Sea adventures in this exciting 8-day package featuring pyramids, temples, diving, and beach relaxation.',
     itinerary: []
@@ -252,7 +252,7 @@ export const packages: Package[] = [
     image: '/images/Royal Cleopatra/DSC_8559.jpg',
     gallery: [
       '/images/Royal Cleopatra/DSC_8559.jpg',
-      '/images/destinations/karnak-temple.jpg'
+      '/images/Royal Cleopatra/DSC_8507.jpg'
     ],
     description: 'The ultimate Egyptian experience covering all major highlights from Cairo to Abu Simbel, including a Nile cruise and comprehensive cultural immersion.',
     itinerary: []
@@ -284,10 +284,10 @@ export const packages: Package[] = [
       'Luxury hotels',
       'All transfers'
     ],
-    image: '/images/experiences/sunset-sailing.jpg',
+    image: '/images/Royal Cleopatra/DSC_8608.jpg',
     gallery: [
-      '/images/experiences/sunset-sailing.jpg',
-      '/images/Royal Cleopatra/DSC_8608.jpg'
+      '/images/Royal Cleopatra/DSC_8608.jpg',
+      '/images/Royal Cleopatra/DSC_8585.jpg'
     ],
     description: 'Experience Egypt in ultimate luxury aboard traditional sailing vessels, combining cultural discovery with premium accommodations and personalized service.',
     itinerary: []
@@ -324,6 +324,41 @@ export const packages: Package[] = [
       '/images/Royal Cleopatra/DSC_8534.jpg'
     ],
     description: 'Combine the wonders of ancient Egypt with the spiritual journey to Mount Sinai, experiencing both pharaonic heritage and biblical history.',
+    itinerary: []
+  },
+  {
+    id: 'family-egypt-7days',
+    title: '7 Days Family Egypt Adventure',
+    duration: '7 Days / 6 Nights',
+    days: 7,
+    type: 'family',
+    destinations: ['Cairo', 'Luxor', 'Hurghada'],
+    highlights: [
+      'Pyramids of Giza',
+      'Egyptian Museum',
+      'Valley of the Kings',
+      'Beach activities',
+      'Family-friendly tours',
+      'Camel rides'
+    ],
+    price: {
+      from: 1199,
+      currency: 'USD'
+    },
+    includes: [
+      'Domestic flights',
+      'All transfers',
+      'Professional guide',
+      'All entrance fees',
+      'Hotels with breakfast',
+      'Family activities'
+    ],
+    image: '/images/Alexandria/IMG_6504.JPG',
+    gallery: [
+      '/images/Alexandria/IMG_6504.JPG',
+      '/images/Alexandria/IMG_6526.JPG'
+    ],
+    description: 'A perfect family getaway to explore Egypt\'s wonders with activities tailored for all ages, combining history, adventure, and relaxation.',
     itinerary: []
   }
 ];

@@ -116,7 +116,7 @@ export default function MobileNavigation({ isOpen, onToggle }: MobileNavigationP
 
   // Get dynamic mobile logo with cache busting
   const getMobileLogo = () => {
-    const logoUrl = getGlobalContent('navbar_logo', '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
+    const logoUrl = getGlobalContent('navbar_logo', '/altavida-logo-1.png');
     
     // During server-side rendering or before client hydration, return URL without timestamp
     if (!isClient || mobileLogoTimestamp === null) {
@@ -452,7 +452,7 @@ export default function MobileNavigation({ isOpen, onToggle }: MobileNavigationP
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/70 z-40"
+              className="fixed inset-0 bg-white/80 z-40"
               onClick={onToggle}
             />
 
@@ -462,10 +462,10 @@ export default function MobileNavigation({ isOpen, onToggle }: MobileNavigationP
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-travelok-blue-800 via-travelok-blue-900/95 to-black/90 text-white shadow-2xl z-50 overflow-y-auto border-l-2 border-travelok-orange/30 backdrop-blur-sm"
+              className="fixed top-0 right-0 h-full w-80 bg-white text-[#0b2e4f] shadow-2xl z-50 overflow-y-auto border-l border-gray-200"
             >
               {/* Enhanced Menu Header */}
-              <div className="bg-gradient-to-br from-travelok-blue via-travelok-blue-dark to-travelok-blue-800 p-6 text-white relative overflow-hidden">
+              <div className="bg-[#f7f7f2] p-6 text-[#0b2e4f] relative overflow-hidden">
                 {/* Background pattern */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute inset-0" style={{

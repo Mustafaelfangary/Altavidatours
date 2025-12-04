@@ -339,15 +339,15 @@ export default function UnifiedCard({
   };
 
   const cardContent = (
-    <div 
-      className={`group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-gray-100 hover:border-gray-200 h-full flex flex-col`}
+      <div 
+        className={`group glass-card shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-gray-200 hover:border-[#1193b1]/20 h-full flex flex-col`}
       style={{
         animationDelay: `${animationDelay}ms`,
         animation: 'fadeInUp 0.6s ease-out forwards'
       }}
     >
       {/* Image */}
-      <div className={`relative ${heightClasses[imageHeight]} overflow-hidden bg-gray-200`}>
+      <div className={`relative ${heightClasses[imageHeight]} overflow-hidden bg-gray-100`}>
         {imageUrl ? (
           <img
             src={imageUrl}
@@ -363,29 +363,29 @@ export default function UnifiedCard({
             }}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 z-0">
-            <span className="text-6xl text-gray-400">𓇳</span>
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1193b1]/10 to-[#1193b1]/20 z-0">
+            <span className="text-6xl text-[#073b5a]/30">𓇳</span>
           </div>
         )}
         {/* Badge */}
-        {showBadge && (
-          <div className={`absolute top-3 left-3 z-20 ${config.badgeBg} ${config.badgeText} px-2 py-1 rounded text-xs font-semibold shadow-sm border ${config.badgeBorder}`}>
+          {showBadge && (
+          <div className={`absolute top-3 left-3 z-20 bg-[#1193b1] text-white px-3 py-1 rounded-full text-xs font-bold shadow border border-[#1193b1]/20 luxury-font`}> 
             <span className="mr-1">{config.icon}</span>
             {metadata.featured ? 'FEATURED' : config.badge}
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1193b1]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none"></div>
       </div>
       
       {/* Content */}
       <div className="p-6 text-center flex-1 flex flex-col">
-        <h3 className={`text-xl font-bold text-gray-800 mb-2 ${config.hoverColor} transition-colors duration-300`}>
+        <h3 className={`text-xl font-bold text-[#073b5a] mb-2 section-heading luxury-font ${config.hoverColor} transition-colors duration-300`}>
           {title}
         </h3>
         
         {/* Description */}
         {(shortDescription || description) && (
-          <p className="text-gray-600 text-sm mb-4 line-clamp-2 flex-1">
+          <p className="text-gray-700/85 text-sm mb-4 line-clamp-2 flex-1 luxury-font">
             {shortDescription || description}
           </p>
         )}
@@ -400,13 +400,13 @@ export default function UnifiedCard({
               {metadata.tags.slice(0, 3).map((tag, index) => (
                 <span
                   key={index}
-                  className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full"
+                  className="text-xs px-2 py-1 bg-[#1193b1]/10 text-[#073b5a] rounded-full"
                 >
                   {tag}
                 </span>
               ))}
               {metadata.tags.length > 3 && (
-                <span className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
+                <span className="text-xs px-2 py-1 bg-[#1193b1]/10 text-[#073b5a] rounded-full">
                   +{metadata.tags.length - 3}
                 </span>
               )}
@@ -419,7 +419,7 @@ export default function UnifiedCard({
           {primaryButton ? (
             <ViewDetailsButton 
               href={primaryButton.href}
-              className="w-full"
+              className="w-full bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white luxury-font text-lg px-4 py-2 rounded-md"
               icon={primaryButton.icon}
             >
               {primaryButton.text}
@@ -427,14 +427,14 @@ export default function UnifiedCard({
           ) : (
             <ViewDetailsButton 
               href={href}
-              className="w-full"
+              className="w-full bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white luxury-font text-lg px-4 py-2 rounded-md"
             />
           )}
           {secondaryButton && (
             <ViewDetailsButton 
               href={secondaryButton.href}
               variant="outline"
-              className="w-full"
+              className="w-full border-[#1193b1] text-[#073b5a] bg-white luxury-font text-lg opacity-90 hover:opacity-100"
               icon={secondaryButton.icon}
             >
               {secondaryButton.text}

@@ -60,8 +60,6 @@ function ContactDeveloperModal() {
     return contentValue || fallback;
   };
 
-
-
   // WhatsApp handler
   const handleWhatsApp = () => {
     const phone = get('footer_developer_phone', '+201234567890').replace(/\s+/g, '').replace('+', '');
@@ -164,13 +162,11 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
 
   // Get dynamic footer logo with cache busting
   const getFooterLogo = () => {
-    // Prefer branding settings, fallback to global media
-    const logoUrl = getBrandingContent('footer_logo', '') || getGlobalContent('footer_logo', '/icons/AppIcons/android/mipmap-xxxhdpi/altavida.png');
+    // Use direct path to logo with fallback
+    const logoUrl = getBrandingContent('footer_logo', '') || 
+                   getGlobalContent('footer_logo', '/AppIcons/android/mipmap-xxxhdpi/altavida.png');
     // Add cache-busting timestamp
-    if (logoUrl.includes('?')) {
-      return `${logoUrl}&t=${footerLogoTimestamp}`;
-    }
-    return `${logoUrl}?t=${footerLogoTimestamp}`;
+    return `${logoUrl}${logoUrl.includes('?') ? '&' : '?'}t=${footerLogoTimestamp}`;
   };
 
   // Helper to get a setting value with priority: footerSettings > content > settings > fallback
@@ -206,7 +202,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
       <footer className="bg-gradient-to-b from-ocean-blue-50 to-navy-blue-50 min-h-[200px] flex items-center justify-center">
         <div className="text-center">
           <EgyptHieroglyphic className="mx-auto mb-4" size="3rem" />
-          <div className="text-egyptian-gold text-2xl mb-2">𓈖 𓂀 𓇳</div>
+          <div className="text-neutral-600 text-2xl mb-2">𓈖 𓂀 𓇳</div>
           <p className="text-hieroglyph-brown font-semibold">{get('footer_loading_text', 'Loading Royal Footer...')}</p>
         </div>
       </footer>
@@ -214,7 +210,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
   }
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-white via-blue-50 to-blue-100 on-light">
+    <footer className="relative overflow-hidden bg-white border-t border-gray-100">
       {/* Pale background */}
       <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50 to-blue-100"></div>
 
@@ -240,15 +236,30 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
           {/* Modern Header - Mobile Optimized */}
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <div className="flex items-center justify-center mb-4 sm:mb-6">
-              <Image
-                src={getFooterLogo()}
-                alt="Site Logo"
-                width={120}
-                height={120}
-                className="h-20 sm:h-24 md:h-32 w-auto object-contain"
-                unoptimized={true}
-                key={`footer-logo-${footerLogoTimestamp}`}
-              />
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '100%',
+                maxWidth: '200px',
+                margin: '0 auto',
+                padding: '1rem 0'
+              }}>
+                <Image
+                  src={getFooterLogo()}
+                  alt="Site Logo"
+                  width={120}
+                  height={56}
+                  className="h-auto w-full max-w-[180px] object-contain"
+                  unoptimized={true}
+                  key={`footer-logo-${footerLogoTimestamp}`}
+                  onError={(e) => {
+                    console.warn('Footer logo failed to load, falling back to default');
+                    e.currentTarget.src = '/AppIcons/android/mipmap-xxxhdpi/altavida.png';
+                    setFooterLogoTimestamp(Date.now());
+                  }}
+                />
+              </div>
             </div>
 
             {/* Hieroglyphic Egypt Header */}
@@ -258,14 +269,14 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
             </div>
 
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 px-4">
-              <span className="text-egyptian-gold mr-2 sm:mr-3">𓇳</span>
+              <span className="text-neutral-600 mr-2 sm:mr-3">𓇳</span>
               {get('footer-title', 'Altavida Tours.com')}
-              <span className="text-egyptian-gold ml-2 sm:ml-3">𓇳</span>
+              <span className="text-neutral-600 ml-2 sm:ml-3">𓇳</span>
             </h2>
             <p className="text-gray-700 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed px-4 font-medium">
-              <span className="text-egyptian-gold mr-1 sm:mr-2">𓊪</span>
+              <span className="text-neutral-600 mr-1 sm:mr-2">𓊪</span>
               {get('footer-description', 'Discover Egypt with Altavida Tours.com. Your trusted partner for unforgettable journeys across the land of the pharaohs.')}
-              <span className="text-egyptian-gold ml-1 sm:ml-2">𓊪</span>
+              <span className="text-neutral-600 ml-1 sm:ml-2">𓊪</span>
             </p>
           </div>
 
@@ -274,10 +285,10 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
 
             {/* Navigation */}
             <div className="text-center sm:text-left">
-              <h3 className="text-ocean-blue font-bold text-base sm:text-lg mb-3 sm:mb-4">
-                <span className="text-egyptian-gold mr-1 sm:mr-2">𓊪</span>
+              <h3 className="text-[#073b5a] font-bold text-base sm:text-lg mb-3 sm:mb-4">
+                <span className="text-neutral-600 mr-1 sm:mr-2">𓊪</span>
                 {get('footer_quick_links_title', 'Quick Links')}
-                <span className="text-egyptian-gold ml-1 sm:ml-2">𓊪</span>
+                <span className="text-neutral-600 ml-1 sm:ml-2">𓊪</span>
               </h3>
               <ul className="space-y-2 sm:space-y-3">
                 {[
@@ -301,10 +312,10 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
 
             {/* Contact Info - Mobile Enhanced */}
             <div className="text-center sm:text-left">
-              <h3 className="text-ocean-blue font-bold text-base sm:text-lg mb-3 sm:mb-4">
-                <span className="text-egyptian-gold mr-1 sm:mr-2">𓇳</span>
+              <h3 className="text-[#073b5a] font-bold text-base sm:text-lg mb-3 sm:mb-4">
+                <span className="text-neutral-600 mr-1 sm:mr-2">𓇳</span>
                 Contact Info
-                <span className="text-egyptian-gold ml-1 sm:ml-2">𓇳</span>
+                <span className="text-neutral-600 ml-1 sm:ml-2">𓇳</span>
               </h3>
               <div className="space-y-2 sm:space-y-3">
                 {[
@@ -336,10 +347,10 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
 
             {/* Social Media - Mobile Enhanced */}
             <div className="text-center sm:text-left">
-              <h3 className="text-ocean-blue font-bold text-base sm:text-lg mb-3 sm:mb-4">
-                <span className="text-egyptian-gold mr-1 sm:mr-2">𓈖</span>
+              <h3 className="text-[#073b5a] font-bold text-base sm:text-lg mb-3 sm:mb-4">
+                <span className="text-neutral-600 mr-1 sm:mr-2">𓈖</span>
                 {get('footer_follow_us_title', 'Follow Us')}
-                <span className="text-egyptian-gold ml-1 sm:ml-2">𓈖</span>
+                <span className="text-neutral-600 ml-1 sm:ml-2">𓈖</span>
               </h3>
               <div className="flex justify-center sm:justify-start space-x-3 sm:space-x-4">
                 {[
@@ -353,7 +364,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
                     className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center hover:bg-emerald-100 hover:scale-110 transition-all duration-300 group focus-visible:outline-2 focus-visible:outline-emerald-400"
                     aria-label={social.label}
                   >
-                    <social.icon className="w-5 h-5 sm:w-6 sm:h-6 text-ocean-blue group-hover:text-emerald-700" />
+                    <social.icon className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 group-hover:text-[#1193b1]" />
                   </Link>
                 ))}
               </div>
@@ -361,22 +372,20 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
 
             {/* Newsletter - Mobile Enhanced */}
             <div className="text-center sm:text-left">
-              <h3 className="text-ocean-blue font-bold text-base sm:text-lg mb-3 sm:mb-4">
-                <span className="text-egyptian-gold mr-1 sm:mr-2">𓂀</span>
+              <h3 className="text-[#073b5a] font-bold text-base sm:text-lg mb-3 sm:mb-4">
+                <span className="text-neutral-600 mr-1 sm:mr-2">𓂀</span>
                 {get('footer_newsletter_title', 'Newsletter')}
-                <span className="text-egyptian-gold ml-1 sm:ml-2">𓂀</span>
+                <span className="text-neutral-600 ml-1 sm:ml-2">𓂀</span>
               </h3>
               <p className="text-gray-700 mb-3 sm:mb-4 text-sm sm:text-base font-medium px-2 sm:px-0">
                 {get('footer-newsletter-text', 'Subscribe to get updates on our latest offers and journeys.')}
               </p>
-
               <div className="space-y-2 sm:space-y-3 px-2 sm:px-0">
                 <input
                   type="email"
                   placeholder="Enter your email..."
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 text-gray-900 placeholder-gray-600 text-sm sm:text-base"
                 />
-
                 <button className="w-full bg-gradient-to-r from-egyptian-gold to-sunset-orange text-deep-blue font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg hover:from-egyptian-amber hover:to-egyptian-gold hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 text-sm sm:text-base shadow-lg focus-visible:outline-2 focus-visible:outline-emerald-400">
                   <Send className="w-4 h-4" />
                   <span className="mr-1">𓇳</span>
@@ -385,7 +394,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
                 </button>
               </div>
             </div>
-          </div>
+          </div> {/* End grid */}
 
           {/* Our Partners Section */}
           <div className="mt-8 pt-8 border-t border-white/20">
@@ -429,7 +438,6 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
                 className="w-full h-full object-cover"
               />
             </div>
-
             {/* Contact Developer Button */}
             <div className="mt-2 sm:mt-0">
               <ContactDeveloperModal />
@@ -442,7 +450,6 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
               <p className="text-gray-700 font-medium text-sm md:text-base text-center md:text-left">
                 © {new Date().getFullYear()} {get('footer-company-name', 'Altavida Tours.com')}. All Rights Reserved.
               </p>
-
               <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 md:space-x-6">
                 <Link
                   href="/privacy"
@@ -459,7 +466,7 @@ export default function Footer({ settings = {}, footerSettings = {} }: FooterPro
               </div>
             </div>
           </div>
-        </div>
+        </div> {/* End inner content */}
       </Container>
     </footer>
   );

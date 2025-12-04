@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import en from '@/locales/en.json';
 import ar from '@/locales/ar.json';
 
-type Locale = 'en' | 'ar';
+type Locale = string;
 
 interface LanguageContextType {
   locale: Locale;
@@ -25,10 +25,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Load saved language from localStorage
     const savedLocale = localStorage.getItem('locale') as Locale;
-    if (savedLocale && (savedLocale === 'en' || savedLocale === 'ar')) {
+    if (savedLocale) {
       setLocaleState(savedLocale);
+      document.documentElement.dir = savedLocale === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = savedLocale;
     }
     setMounted(true);
   }, []);
@@ -43,16 +44,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const t = (key: string): string => {
     const keys = key.split('.');
-    let value: any = translations[locale];
-    
+    const trans = locale === 'ar' ? translations.ar : translations.en;
+    let value: any = trans;
     for (const k of keys) {
       if (value && typeof value === 'object') {
         value = value[k];
       } else {
-        return key; // Return key if translation not found
+        return key;
       }
     }
-    
     return typeof value === 'string' ? value : key;
   };
 

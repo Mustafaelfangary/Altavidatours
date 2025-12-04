@@ -37,11 +37,11 @@ export function ViewDetailsButton({
       asChild
       variant={variant}
       size={size}
-      className={`group transition-all duration-200 ${className}`}
+      className={`group transition-all duration-200 bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white px-4 py-2 rounded-md luxury-font ${className}`}
       onClick={handleClick}
       {...props}
     >
-      <Link href={href}>
+      <Link href={href} className="luxury-font">
         {children}
         {icon}
       </Link>

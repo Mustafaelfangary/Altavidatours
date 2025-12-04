@@ -26,7 +26,7 @@ export default function OptimizedImage({
   quality = 75,
   placeholder = 'empty',
   blurDataURL,
-  fallbackSrc = '/icons/altavida-logo-1.png'
+  fallbackSrc = '/altavida-logo-1.png'
 }: OptimizedImageProps) {
   const [imgSrc, setImgSrc] = useState(src);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +34,7 @@ export default function OptimizedImage({
 
   // Normalize the image path to support new categorized public assets
   const normalizeSrc = (imageSrc: string) => {
-    if (!imageSrc) return '/icons/altavida-logo-1.png';
+    if (!imageSrc) return '/altavida-logo-1.png';
     // If path begins with legacy '/images/', strip the prefix to resolve to new root categories
     if (imageSrc.startsWith('/images/')) {
       return imageSrc.replace(/^\/images\//, '/');

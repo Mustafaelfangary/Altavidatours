@@ -242,8 +242,8 @@ export default function LuxuryPackagesPage() {
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div className="text-white text-center">
+                  <div className="absolute inset-0 bg-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-[#0b2e4f] text-center">
                       <Crown className="w-8 h-8 mx-auto mb-2" />
                       <p className="text-sm font-semibold">{image.title}</p>
                     </div>
@@ -256,7 +256,7 @@ export default function LuxuryPackagesPage() {
           {/* Gallery Modal */}
           {selectedImage !== null && (
             <div 
-              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-white/90 z-50 flex items-center justify-center p-4"
               onClick={() => setSelectedImage(null)}
             >
               <div className="relative max-w-4xl max-h-full">
@@ -267,11 +267,11 @@ export default function LuxuryPackagesPage() {
                   height={600}
                   className="max-w-full max-h-full object-contain rounded-lg"
                 />
-                <div className="absolute bottom-4 left-4 right-4 text-white text-center">
+                <div className="absolute bottom-4 left-4 right-4 text-[#0b2e4f] text-center">
                   <h3 className="text-xl font-bold">{luxuryGalleryImages[selectedImage].title}</h3>
                 </div>
                 <Button
-                  className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white"
+                  className="absolute top-4 right-4 bg-white/80 hover:bg-white text-[#0b2e4f] border border-gray-300"
                   onClick={() => setSelectedImage(null)}
                 >
                   ×

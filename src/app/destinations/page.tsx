@@ -16,7 +16,7 @@ const destinationCategories = [
     name: 'Europe',
     icon: '🇪🇺',
     description: 'Discover the rich history, stunning architecture, and diverse cultures of Europe. From ancient ruins to modern cities.',
-    image: '/images/Royal Cleopatra/DSC_8502.jpg',
+    image: '/Princess Cleopatra/DSC_8233.jpg',
     countries: ['France', 'Italy', 'Greece', 'Spain', 'Germany', 'UK'],
     highlights: ['Historic Cities', 'Cultural Heritage', 'Renaissance Art', 'Mediterranean Coast'],
     color: 'blue'
@@ -26,7 +26,7 @@ const destinationCategories = [
     name: 'Asia',
     icon: '🌏',
     description: 'Experience the mystique of Asia with its ancient traditions, spiritual sites, and breathtaking landscapes.',
-    image: '/images/Royal Cleopatra/DSC_8568.jpg',
+    image: '/Princess Cleopatra/DSC_8240.jpg',
     countries: ['Japan', 'China', 'Thailand', 'India', 'Indonesia', 'Vietnam'],
     highlights: ['Ancient Temples', 'Traditional Culture', 'Exotic Cuisine', 'Tropical Paradise'],
     color: 'green'
@@ -36,7 +36,7 @@ const destinationCategories = [
     name: 'Americas',
     icon: '🌎',
     description: 'From vibrant cities to pristine wilderness, explore the diverse wonders of North and South America.',
-    image: '/images/Royal Cleopatra/DSC_8735.jpg',
+    image: '/Princess Cleopatra/DSC_8250.jpg',
     countries: ['USA', 'Canada', 'Brazil', 'Peru', 'Mexico', 'Argentina'],
     highlights: ['Natural Wonders', 'Modern Cities', 'Ancient Civilizations', 'Wildlife'],
     color: 'orange'
@@ -46,7 +46,7 @@ const destinationCategories = [
     name: 'Africa',
     icon: '🌍',
     description: 'Discover the cradle of civilization with incredible wildlife, ancient wonders, and vibrant cultures.',
-    image: '/images/Royal Cleopatra/DSC_8750.jpg',
+    image: '/Princess Cleopatra/DSC_8260.jpg',
     countries: ['Egypt', 'Kenya', 'Tanzania', 'Morocco', 'South Africa', 'Ethiopia'],
     highlights: ['Safari Adventures', 'Ancient Wonders', 'Desert Landscapes', 'Cultural Diversity'],
     color: 'red'
@@ -56,28 +56,28 @@ const destinationCategories = [
 const featuredDestinations = [
   {
     name: 'Luxor, Egypt',
-    image: '/images/destinations/karnak-temple.jpg',
+    image: '/Princess Cleopatra/DSC_8270.jpg',
     description: 'Ancient temples and pharaonic treasures',
     category: 'Africa',
     rating: 4.9
   },
   {
     name: 'Santorini, Greece',
-    image: '/images/Royal Cleopatra/DSC_8559.jpg',
+    image: '/Princess Cleopatra/DSC_8285.jpg',
     description: 'Stunning sunsets and white-washed villages',
     category: 'Europe',
     rating: 4.8
   },
   {
     name: 'Kyoto, Japan',
-    image: '/images/Royal Cleopatra/DSC_8581.jpg',
+    image: '/Princess Cleopatra/DSC_8290.jpg',
     description: 'Traditional temples and bamboo forests',
     category: 'Asia',
     rating: 4.9
   },
   {
     name: 'Machu Picchu, Peru',
-    image: '/images/Royal Cleopatra/DSC_8593.jpg',
+    image: '/Princess Cleopatra/DSC_8338.jpg',
     description: 'Ancient Incan citadel in the clouds',
     category: 'Americas',
     rating: 4.9

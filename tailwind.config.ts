@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 
-const config: Config = {
+const config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -63,41 +63,88 @@ const config: Config = {
           DEFAULT: 'hsl(var(--info))',
           foreground: 'hsl(var(--info-foreground))',
         },
-        // Egyptian palette colors
-        'ocean-blue': 'hsl(var(--ocean-blue))',
-        'coral-bright': 'hsl(var(--coral-bright))',
-        'mint-green': 'hsl(var(--mint-green))',
-        'lavender-purple': 'hsl(var(--lavender-purple))',
-        'sunshine-yellow': 'hsl(var(--sunshine-yellow))',
-        'rose-pink': 'hsl(var(--rose-pink))',
-        'sky-cyan': 'hsl(var(--sky-cyan))',
-
-        // TDS Travel brand colors
-        'tds-green': '#1BAE70',
-        'tds-green-dark': '#16925b',
-        'tds-green-light': '#20c97e',
-        'tds-green-lighter': '#4dd394',
-        'tds-green-lightest': '#7adda9',
-        'tds-blue': '#0B70E1',
-        'tds-blue-dark': '#0A2FA6',
-        'tds-blue-light': '#106EEA',
-        'tds-orange': '#FFA500',
-        'tds-white': '#ffffff',
-        'tds-black': '#000000',
-        'tds-gray': '#64748b',
-        'tds-light-gray': '#f1f5f9',
-
-        // Brand aliases
-        'brand-green': '#1BAE70',
-        'brand-blue': '#0B70E1',
-        'brand-orange': '#FFA500',
+        border: {
+          DEFAULT: 'hsl(var(--border))',
+        },
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        // Enhanced Egyptian-inspired color palette
+        'egyptian-blue': {
+          '50': '#f0f9ff',
+          '100': '#e0f2fe',
+          '200': '#bae6fd',
+          '300': '#7dd3fc',
+          '400': '#38bdf8',
+          '500': '#0ea5e9',
+          '600': '#0284c7',
+          '700': '#0369a1',
+          '800': '#075985',
+          '900': '#0c4a6e',
+          '950': '#082f49',
+        },
+        'egyptian-gold': {
+          '50': '#fff9ed',
+          '100': '#fef3d9',
+          '200': '#fce5b3',
+          '300': '#fad58a',
+          '400': '#f8c05a',
+          '500': '#f59e0b',
+          '600': '#e67e22',
+          '700': '#c05621',
+          '800': '#9c4221',
+          '900': '#7b341e',
+        },
+        'desert-sand': {
+          '50': '#f8f5f0',
+          '100': '#f0e6d9',
+          '200': '#e0cdb3',
+          '300': '#d0b38a',
+          '400': '#c09866',
+          '500': '#b07d42',
+          '600': '#8f5e2e',
+          '700': '#6d4523',
+          '800': '#4f321a',
+          '900': '#362111',
+        },
+        'nile-green': {
+          '50': '#f0fdf4',
+          '100': '#dcfce7',
+          '200': '#bbf7d0',
+          '300': '#86efac',
+          '400': '#4ade80',
+          '500': '#22c55e',
+          '600': '#16a34a',
+          '700': '#15803d',
+          '800': '#166534',
+          '900': '#14532d',
+        },
+        'papyrus': {
+          '50': '#f8f6f0',
+          '100': '#f1ecde',
+          '200': '#e3d8bd',
+          '300': '#d4c39a',
+          '400': '#c5ae77',
+          '500': '#b69954',
+          '600': '#8f7a43',
+          '700': '#6d5c33',
+          '800': '#4f4224',
+          '900': '#362d19',
+        },
         
-        // TravelOK color scheme (mapped to Altavidatours palette)
-        'travelok-blue': '#0e6fbf', // Altavida ocean
-        'travelok-blue-dark': '#0b5aa0',
-        'travelok-blue-light': '#1a7fda',
-        'travelok-orange': '#ff7a2d', // Altavida sunset
-        'travelok-orange-dark': '#e56522',
+        // Modern accent colors
+        'coral': '#FF6B6B',
+        'coral-dark': '#e05a5a',
+        'teal': '#0D9488',
+        'teal-dark': '#0f766e',
+        'amber': '#F59E0B',
+        'amber-dark': '#d97706',
+        
+        // Brand aliases with new color scheme
+        'brand-primary': '#0ea5e9',
+        'brand-secondary': '#f59e0b',
+        'brand-accent': '#10b981',
+        'brand-dark': '#082f49',
+        'brand-light': '#f0f9ff',
 
         // Clean text colors
         'text-primary': 'hsl(var(--text-primary))',
@@ -141,13 +188,18 @@ const config: Config = {
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',
+        'fade-in-up': 'fadeInUp 0.6s ease-out',
+        'fade-in-down': 'fadeInDown 0.6s ease-out',
+        'fade-in-left': 'fadeInLeft 0.6s ease-out',
+        'fade-in-right': 'fadeInRight 0.6s ease-out',
         'slide-up': 'slideUp 0.6s ease-out',
+        'slide-down': 'slideDown 0.6s ease-out',
         'slide-in-left': 'slideInLeft 0.6s ease-out',
         'slide-in-right': 'slideInRight 0.6s ease-out',
-        'scale-in': 'scaleIn 0.4s ease-out',
-        'bounce-slow': 'bounce 2s infinite',
-        'pulse-slow': 'pulse 3s infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'float': 'float 6s ease-in-out infinite',
+        'bounce-slow': 'bounce 3s infinite',
+        'scale-in': 'scaleIn 0.4s ease-out',
         'shimmer': 'shimmer 2s infinite',
         'ripple': 'ripple 0.6s ease-out',
         'glow': 'glow 3s ease-in-out infinite',
@@ -157,25 +209,45 @@ const config: Config = {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(30px)' },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        slideInLeft: {
-          '0%': { opacity: '0', transform: 'translateX(-30px)' },
+        fadeInDown: {
+          '0%': { opacity: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeInLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
-        slideInRight: {
-          '0%': { opacity: '0', transform: 'translateX(30px)' },
+        fadeInRight: {
+          '0%': { opacity: '0', transform: 'translateX(20px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(30px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideDown: {
+          '0%': { transform: 'translateY(-30px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideInLeft: {
+          '0%': { transform: 'translateX(-30px)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        slideInRight: {
+          '0%': { transform: 'translateX(30px)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
         scaleIn: {
           '0%': { opacity: '0', transform: 'scale(0.9)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
         },
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
@@ -213,9 +285,15 @@ const config: Config = {
     },
   },
   plugins: [
-    require('tailwindcss-animate'),
+    require('tailwindcss-animate')({
+      classes: [
+        'fade-in', 'fade-in-up', 'fade-in-down', 'fade-in-left', 'fade-in-right',
+        'slide-up', 'slide-down', 'slide-in-left', 'slide-in-right',
+        'pulse-slow', 'float', 'bounce-slow', 'scale-in', 'shimmer', 'ripple', 'glow'
+      ]
+    }),
     require('@tailwindcss/line-clamp'),
-  ],
+    require('@tailwindcss/typography'),
   important: true, // This ensures Tailwind classes override Material-UI styles
 };
 
