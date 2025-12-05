@@ -102,7 +102,6 @@ export default function RootLayout({
           <LayoutWrapper>
             <MobileOptimizedLayout>
               <AutoTranslate />
-              <MegaMenuTest />
               <CleopatraAssistantWrapper />
               {children}
             </MobileOptimizedLayout>

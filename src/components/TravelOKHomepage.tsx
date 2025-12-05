@@ -245,7 +245,7 @@ export default function TravelOKHomepage() {
             {/* Museums & Artifacts */}
             <Link href={getContent('category_3_link', '/attractions/museums')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
               <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_3_image','/cultural&historical/DSC_8401.JPG')} alt="Museums & Artifacts" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <Image src={getContent('category_3_image','/cultural-historical/DSC_8401.jpeg')} alt="Museums & Artifacts" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
               </div>
               <div className="p-3 text-center">
@@ -395,7 +395,7 @@ export default function TravelOKHomepage() {
               ];
               const cultural = [
                 '/images/cultural-historical/saqqara-pyramid.jpg',
-                '/images/cultural&historical/DSC_8401.JPG',
+                '/images/cultural-historical/DSC_8401.jpeg',
                 '/images/cultural&historical/DSCF1165.JPG',
                 '/images/cultural&historical/IMG_3143.JPG'
               ];
@@ -446,7 +446,7 @@ export default function TravelOKHomepage() {
               const type = getContent(`${base}_type`, svc.serviceType || '');
               const summary = getContent(`${base}_summary`, svc.summary || '');
               const price = getContent(`${base}_price`, svc.price != null ? String(svc.price) : '');
-              const image = getContent(`${base}_image`, ['/images/cultural&historical/DSC_8401.JPG','/images/Alexandria/IMG_6504.JPG','/images/desert&safary/DSC_9166.JPG'][idx % 3]);
+              const image = getContent(`${base}_image`, ['/images/cultural-historical/DSC_8401.jpeg','/images/Alexandria/IMG_6504.JPG','/images/desert&safary/DSC_9166.JPG'][idx % 3]);
               return (
                 <div key={svc.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden">
                   <div className="relative h-40">
@@ -528,7 +528,7 @@ export default function TravelOKHomepage() {
                 '/images/desert&safary/DSC_9166.JPG',
                 '/images/desert&safary/DSC_9826.JPG',
                 '/images/Alexandria/IMG_6504.JPG',
-                '/images/cultural&historical/DSC_8401.JPG',
+                '/images/cultural-historical/DSC_8401.jpeg',
                 '/images/cultural&historical/DSCF1165.JPG',
                 '/images/desert&safary/DSC_9912.JPG'
               ];

@@ -54,6 +54,7 @@ export default function TravelOKNavbar() {
   const [logoUrl, setLogoUrl] = useState('/altavida-logo-1.svg');
   const [scrolled, setScrolled] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -467,7 +468,7 @@ export default function TravelOKNavbar() {
       </div>
 
       {/* Main Navigation - glass over white then solid on scroll */}
-      <nav className={`sticky top-0 z-40 transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'backdrop-blur bg-white/95 shadow-sm' : 'backdrop-blur bg-white/70'} border-b border-slate-200`} ref={containerRef as any} style={{ overflow: 'visible' }}>
+      <nav className={`modern-nav sticky top-0 z-[200] transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'backdrop-blur bg-white/95 shadow-sm' : 'backdrop-blur bg-white/70'} border-b border-slate-200`} ref={containerRef as any} style={{ overflow: 'visible' }}>
         <div className="max-w-[1400px] mx-auto px-2 lg:px-3" style={{ overflow: 'visible' }}>
           <div className="flex items-center justify-start gap-1" style={{ overflow: 'visible' }}>
             {/* Mobile Menu Button */}
@@ -482,15 +483,16 @@ export default function TravelOKNavbar() {
             </button>
 
             {/* Home Link */}
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="hidden lg:block px-2 py-3 text-[12px] tracking-[0.12em] font-semibold nav-link border-r border-transparent text-slate-800"
+              style={{ display: isDesktop ? 'block' : 'none' }}
             >
               HOME
             </Link>
 
             {/* Navigation Items - Desktop */}
-            <div className="relative hidden lg:flex items-center flex-1" style={{ overflow: 'visible' }}>
+            <div className="relative hidden lg:flex items-center flex-1" style={{ overflow: 'visible', display: isDesktop ? 'flex' : 'none' }}>
               {/* Left gradient + button indicator */}
               <div className={`pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-white to-transparent transition-opacity ${showLeft ? 'opacity-100' : 'opacity-0'}`} />
               <button
@@ -882,3 +884,11 @@ export default function TravelOKNavbar() {
     </>
   );
 }
+
+  // Check if desktop on mount and resize
+  useEffect(() => {
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
