@@ -11,9 +11,8 @@ import { AdminProvider } from '@/components/admin/AdminProvider';
 import AdminTextFixer from '@/components/admin/AdminTextFixer';
 import { Loader2 } from 'lucide-react';
 import '../globals.css';
-import '../../styles/admin.css';
-import '../../styles/admin-contrast-fix.css';
-import '../../styles/mui-admin-override.css';
+import '../../styles/admin.minimal.css';
+import '../../styles/admin-contrast-fix.minimal.css';
 
 // Wrapper component to handle session and loading state
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
