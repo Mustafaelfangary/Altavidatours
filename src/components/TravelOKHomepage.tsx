@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FC } from "react";
 import { useRouter } from "next/navigation";
 import { packages } from '@/data/packages';
 import { destinations } from '@/data/destinations';
@@ -42,7 +42,7 @@ export default function TravelOKHomepage() {
   }, []);
  
   // Animated package card with slideshow and 3D hover
-  function AnimatedPackageCard({ pkg, images, index }: { pkg: any; images: string[]; index: number }) {
+  const AnimatedPackageCard: FC<{ pkg: any; images: string[]; index: number }> = ({ pkg, images, index }) => {
     const [idx, setIdx] = useState(0);
 
     useEffect(() => {
@@ -54,9 +54,9 @@ export default function TravelOKHomepage() {
     const current = images && images[idx] ? images[idx] : (images?.[0] || pkg.image);
 
     return (
-      <div className={`group relative bg-white rounded-2xl border border-gray-100 shadow-[0_12px_40px_rgba(11,46,79,0.08)] hover:shadow-[0_26px_70px_rgba(11,46,79,0.16)] transition-all duration-500 [transform-style:preserve-3d] hover:[transform:translateY(-10px)_rotateX(2deg)] ${index % 2 === 1 ? 'md:mt-10 lg:mt-16' : ''}`}>
-        <div className="absolute inset-0 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{boxShadow:'inset 0 1px 0 rgba(255,255,255,.6), 0 30px 80px rgba(11,46,79,.15)', filter:'saturate(110%)'}}></div>
-        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
+      <div className={`group relative bg-white rounded-2xl border border-gray-100 shadow-[0_12px_40px_rgba(11,46,79,0.08)] hover:shadow-[0_26px_70px_rgba(11,46,79,0.16)] transition-all duration-500 [transform-style:preserve-3d] hover:[transform:translateY(-8px)_rotateX(1.5deg)] ${index % 2 === 1 ? 'md:mt-8 lg:mt-12' : ''}`}>
+        <div className="absolute inset-0 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{boxShadow:'inset 0 1px 0 rgba(255,255,255,.6), 0 24px 60px rgba(11,46,79,.14)', filter:'saturate(110%)'}}></div>
+        <div className="relative h-44 md:h-52 overflow-hidden rounded-t-2xl">
           <Image
             key={current}
             src={current || pkg.image}
@@ -96,10 +96,10 @@ export default function TravelOKHomepage() {
         </div>
       </div>
     );
-  }
+  };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Hero Section with Modern Design */}
       <section className="hero-modern">
         <div className="hero-content">
@@ -210,7 +210,7 @@ export default function TravelOKHomepage() {
       </section>
 
       <div className="bg-gray-50 text-[#0b2e4f] py-8">
-        <div className="container mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <div className="flex items-center justify-center py-4">
             <h2 className="text-2xl font-bold tracking-wider">{getContent('homepage_things_to_do_title', 'THINGS TO DO')}</h2>
           </div>
@@ -218,11 +218,11 @@ export default function TravelOKHomepage() {
       </div>
 
       <div className="bg-white text-[#0b2e4f] py-8">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 py-6">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-3 sm:gap-4 py-3">
             {/* Pyramids & Sphinx */}
             <Link href={getContent('category_1_link', '/attractions/pyramids')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="relative h-32 sm:h-36">
+              <div className="relative h-20 sm:h-24">
                 <Image src={getContent('category_1_image','/images/cultural-historical/saqqara-pyramid.jpg')} alt="Pyramids & Sphinx" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
               </div>
@@ -310,11 +310,11 @@ export default function TravelOKHomepage() {
           </div>
 
           {/* Our Top Picks Section */}
-          <div className="mt-16 text-center">
+          <div className="mt-10 text-center">
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2e4f] mb-4">Our Top Picks</h2>
             <p className="text-gray-600 max-w-2xl mx-auto mb-8">Handpicked experiences for an unforgettable journey through Egypt</p>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 max-w-5xl mx-auto">
               {[
                 { 
                   name: 'Alexandria', 
@@ -344,7 +344,7 @@ export default function TravelOKHomepage() {
                 <Link 
                   key={index} 
                   href={item.href}
-                  className="group relative overflow-hidden rounded-xl aspect-square md:aspect-[3/4]"
+                  className="group relative overflow-hidden rounded-xl aspect-[4/5] md:aspect-[3/4] max-h-52"
                 >
                   <div className="relative w-full h-full">
                     <Image
@@ -367,7 +367,7 @@ export default function TravelOKHomepage() {
       </div>
 
       <div className="bg-white py-12">
-        <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[#0b2e4f] mb-4">
               {getContent('homepage_featured_packages_title', 'Featured Experiences')}
@@ -419,7 +419,7 @@ export default function TravelOKHomepage() {
 
       {/* Featured Article Section */}
       <div className="bg-gray-50 text-[#073b5a] py-8">
-        <div className="container mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <div className="flex items-center justify-center py-4">
             <h2 className="text-2xl font-bold tracking-wider">{getContent('homepage_featured_experience_title', 'FEATURED EXPERIENCE')}</h2>
           </div>
@@ -449,7 +449,7 @@ export default function TravelOKHomepage() {
               const image = getContent(`${base}_image`, ['/images/cultural-historical/DSC_8401.jpeg','/images/Alexandria/IMG_6504.JPG','/images/desert&safary/DSC_9166.JPG'][idx % 3]);
               return (
                 <div key={svc.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden">
-                  <div className="relative h-40">
+                  <div className="relative h-28">
                     <Image src={image} alt={title} fill className="object-cover" />
                   </div>
                   <div className="p-6">
@@ -487,9 +487,9 @@ export default function TravelOKHomepage() {
               <Image
                 src={getContent('featured_article_image', '/images/Royal Cleopatra/DSC_8568.jpg')}
                 alt={getContent('featured_article_title', 'Luxury Dahabiya Cruise')}
-                width={600}
-                height={400}
-                className="w-full h-64 md:h-full object-cover"
+                width={560}
+                height={320}
+                className="w-full h-52 md:h-72 object-cover"
               />
             </div>
             <div className="md:w-1/2 p-8">
@@ -542,13 +542,13 @@ export default function TravelOKHomepage() {
 
               return (
               <div key={destination.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative">
+                <div className="relative h-40">
                   <Image
                     src={destImage}
                     alt={destTitle}
                     width={300}
-                    height={200}
-                    className="w-full h-48 object-cover"
+                    height={170}
+                    className="w-full h-full object-cover"
                     onError={(e) => {
                       e.currentTarget.src = destination.image || '/images/Royal Cleopatra/DSC_8507.jpg';
                     }}
@@ -589,7 +589,7 @@ export default function TravelOKHomepage() {
       </div>
 
       <div className="bg-deep-blue py-8">
-        <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
             <Link href={getContent('dest_link_1_url', '/find-destination')} className="bg-white border border-gray-200 hover:bg-[#f1fcfe] transition-colors text-[#073b5a] hover:text-[#073b5a] p-3 sm:p-4 text-center rounded min-h-[80px] flex flex-col items-center justify-center">
               <div className="text-xl sm:text-2xl mb-1 sm:mb-2">{getContent('dest_link_1_icon', '📍')}</div>

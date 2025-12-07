@@ -1,10 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Inter, Playfair_Display, Montserrat } from 'next/font/google';
 import Script from 'next/script';
 import { ReactNode } from 'react';
 import './globals.css';
-import '../styles/asmallworld-theme.css';
-import '../styles/mobile-enhancements.css';
 import { Providers } from './providers';
 import { LayoutWrapper } from '@/components/LayoutWrapper';
 import MobileOptimizedLayout from '@/components/mobile/MobileOptimizedLayout';
@@ -26,6 +24,12 @@ const inter = Inter({
 const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
+  display: 'swap',
+});
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat',
   display: 'swap',
 });
 
@@ -60,23 +64,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         
-        {/* Google Fonts */}
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Neue+Haas+Grotesk+Display:wght@100;200;300;400;500;600;700;800;900&display=swap" 
-          rel="stylesheet" 
-        />
-        
         {/* Preload critical assets */}
         <link 
           rel="preload" 
           as="image" 
           href="/logos/altavida-logo-1.png" 
           type="image/png"
-        />
-        <link 
-          rel="preload" 
-          as="style" 
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Neue+Haas+Grotesk+Display:wght@100;200;300;400;500;600;700;800;900&display=swap" 
         />
 
         {/* PWA meta tags */}
@@ -95,7 +88,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased text-asw-black bg-white`}>
+      <body className={`${inter.variable} ${playfair.variable} ${montserrat.variable} font-sans antialiased text-asw-black bg-white`}>
         <Providers>
           <GlobalLoadingInterceptor />
           <NavigationLoader />

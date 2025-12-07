@@ -46,21 +46,23 @@ export default function AutoZoomProvider({ children, enabled = true }: AutoZoomP
         // Mark as processed
         img.setAttribute('data-zoomable-processed', 'true');
 
+        const htmlImg = img as HTMLImageElement;
+
         // Add hover effects
-        img.style.transition = 'transform 0.3s ease, filter 0.3s ease';
-        img.style.cursor = 'pointer';
+        htmlImg.style.transition = 'transform 0.3s ease, filter 0.3s ease';
+        htmlImg.style.cursor = 'pointer';
 
         // Add hover listeners
         const handleMouseEnter = () => {
-          img.style.transform = 'scale(1.05)';
-          img.style.filter = 'brightness(1.1)';
-          img.style.boxShadow = '0 8px 32px rgba(17,147,177,0.25)';
+          htmlImg.style.transform = 'scale(1.05)';
+          htmlImg.style.filter = 'brightness(1.1)';
+          htmlImg.style.boxShadow = '0 8px 32px rgba(17,147,177,0.25)';
         };
 
         const handleMouseLeave = () => {
-          img.style.transform = 'scale(1)';
-          img.style.filter = 'brightness(1)';
-          img.style.boxShadow = 'none';
+          htmlImg.style.transform = 'scale(1)';
+          htmlImg.style.filter = 'brightness(1)';
+          htmlImg.style.boxShadow = 'none';
         };
 
         const handleClick = (e: Event) => {
@@ -68,18 +70,18 @@ export default function AutoZoomProvider({ children, enabled = true }: AutoZoomP
           e.stopPropagation();
           
           // Create and show zoom modal
-          showZoomModal(img.src, img.alt || 'Image');
+          showZoomModal(htmlImg.src, htmlImg.alt || 'Image');
         };
 
-        img.addEventListener('mouseenter', handleMouseEnter);
-        img.addEventListener('mouseleave', handleMouseLeave);
-        img.addEventListener('click', handleClick);
+        htmlImg.addEventListener('mouseenter', handleMouseEnter);
+        htmlImg.addEventListener('mouseleave', handleMouseLeave);
+        htmlImg.addEventListener('click', handleClick);
 
         // Store cleanup function
-        img.__zoomCleanup = () => {
-          img.removeEventListener('mouseenter', handleMouseEnter);
-          img.removeEventListener('mouseleave', handleMouseLeave);
-          img.removeEventListener('click', handleClick);
+        (htmlImg as any).__zoomCleanup = () => {
+          htmlImg.removeEventListener('mouseenter', handleMouseEnter);
+          htmlImg.removeEventListener('mouseleave', handleMouseLeave);
+          htmlImg.removeEventListener('click', handleClick);
         };
       });
     };
