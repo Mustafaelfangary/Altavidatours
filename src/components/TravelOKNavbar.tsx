@@ -467,7 +467,7 @@ export default function TravelOKNavbar() {
       </div>
 
       {/* Main Navigation - glass over white then solid on scroll */}
-      <nav className={`sticky top-0 z-40 transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'backdrop-blur bg-white/95 shadow-sm' : 'backdrop-blur bg-white/70'} border-b border-slate-200`} ref={containerRef as any} style={{ overflow: 'visible' }}>
+      <nav className={`main-nav travelok-navbar navbar-sticky sticky top-0 z-50 transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'backdrop-blur bg-white/95 shadow-sm' : 'backdrop-blur bg-white/70'} border-b border-slate-200`} ref={containerRef as any} style={{ overflow: 'visible' }}>
         <div className="max-w-[1400px] mx-auto px-2 lg:px-3" style={{ overflow: 'visible' }}>
           <div className="flex items-center justify-start gap-1" style={{ overflow: 'visible' }}>
             {/* Mobile Menu Button */}
@@ -536,19 +536,19 @@ export default function TravelOKNavbar() {
                       <div
                         ref={portalRef}
                         className="pointer-events-auto"
-                        style={{ position: 'absolute', top: panelPos[item.id].top, left: panelPos[item.id].left, zIndex: 1000 }}
+                        style={{ position: 'absolute', top: panelPos[item.id].top, left: panelPos[item.id].left, zIndex: 60 }}
                         onPointerEnter={() => openDropdown(item.id)}
                         onPointerLeave={() => {
                           if (openViaClick === item.id) return;
                           scheduleCloseDropdown(250);
                         }}
                       >
-                        <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: panelPos[item.id].width, height: 10 }} />
+                        <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: panelPos[item.id].width, height: 12 }} />
                         <div
                           id={`mega-${item.id}`}
                           role="menu"
-                          className="bg-white/98 backdrop-blur border border-slate-200 shadow-xl min-w-[820px] rounded-xl overflow-hidden"
-                          style={{ position: 'absolute', top: 10, left: 0 }}
+                          className="bg-white border border-slate-200 shadow-2xl min-w-[820px] max-w-[92vw] rounded-xl overflow-hidden"
+                          style={{ position: 'absolute', top: 12, left: 0 }}
                         >
                           <div className="p-6">
                             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">

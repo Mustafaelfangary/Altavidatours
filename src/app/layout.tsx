@@ -3,11 +3,11 @@ import { Inter, Playfair_Display } from 'next/font/google';
 import Script from 'next/script';
 import { ReactNode } from 'react';
 import './globals.css';
-import '../styles/asmallworld-theme.css';
-import '../styles/mobile-enhancements.css';
+import '../styles/fixes-nav-layer.css';
 import { Providers } from './providers';
 import { LayoutWrapper } from '@/components/LayoutWrapper';
-import MobileOptimizedLayout from '@/components/mobile/MobileOptimizedLayout';
+// Disabled mobile-forcing wrapper to restore desktop layout
+// import MobileOptimizedLayout from '@/components/mobile/MobileOptimizedLayout';
 import { trackWebVitals } from '@/lib/performance';
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
 import CleopatraAssistantWrapper from '@/components/assistant/CleopatraAssistantWrapper';
@@ -100,12 +100,11 @@ export default function RootLayout({
           <GlobalLoadingInterceptor />
           <NavigationLoader />
           <LayoutWrapper>
-            <MobileOptimizedLayout>
-              <AutoTranslate />
-              <MegaMenuTest />
-              <CleopatraAssistantWrapper />
-              {children}
-            </MobileOptimizedLayout>
+            {/* Render children directly to allow responsive desktop layout */}
+            <AutoTranslate />
+            <MegaMenuTest />
+            <CleopatraAssistantWrapper />
+            {children}
           </LayoutWrapper>
           <ServiceWorkerRegister />
           <LogoAutoRefresh />

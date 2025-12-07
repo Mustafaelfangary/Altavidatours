@@ -118,11 +118,7 @@ a:hover {
 
 /* Navigation */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
+  /* Position/z-index handled by component to avoid theme conflicts */
   background-color: var(--asw-white);
   padding: 1rem 0;
   transition: all var(--transition-normal);

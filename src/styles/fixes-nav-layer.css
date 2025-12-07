@@ -1,0 +1,36 @@
+k/* Global stabilization for navbar/mega menu layering and background bleed */
+:root {
+  --nav-z: 100;         /* header */
+  --nav-overlay-z: 200; /* dropdowns over header */
+}
+
+/* Ensure the main navbar stays visible and on top */
+header.main-nav, nav.main-nav, .app-navbar, .travelok-navbar, .navbar-sticky {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: var(--nav-z) !important;
+  background: rgba(255,255,255,0.95) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-bottom: 1px solid rgba(20,30,45,0.08) !important;
+}
+
+/* Mega panels, profile menus above header */
+.mega-panel,
+[data-dropdown='profile-menu'] {
+  z-index: var(--nav-overlay-z) !important;
+  background: #fff !important;
+}
+
+/* Prevent section/hero/backgrounds from overlapping header */
+.hero, .hero-section, .hero-banner,
+.section, .content-section,
+main, header:not(.main-nav) {
+  position: relative;
+  z-index: 0;
+}
+
+/* Neutralize global theme navbar positioning conflicts */
+.navbar { /* only visual styles; positioning handled by component */
+  /* Do not set position or z-index here */
+}
