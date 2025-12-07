@@ -1,0 +1,32 @@
+﻿:root {
+  /* Colors */
+  --primary: #1976d2;
+  --primary-dark: #1565c0;
+  --secondary: #9c27b0;
+  --success: #2e7d32;
+  --error: #d32f2f;
+  --warning: #ed6c02;
+  --info: #0288d1;
+  
+  /* Text */
+  --text-primary: rgba(0, 0, 0, 0.87);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Typography */
+  --font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  
+  /* Breakpoints */
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 960px;
+  --breakpoint-lg: 1280px;
+}

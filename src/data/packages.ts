@@ -55,7 +55,7 @@ export const packages: Package[] = [
     gallery: [
       '/images/Royal Cleopatra/DSC_8502.jpg',
       '/images/Royal Cleopatra/DSC_8507.jpg',
-      '/images/cultural&historical/DSC_8401.JPG'
+      '/images/cultural-historical/DSC_8401.jpeg'
     ],
     description: 'Experience the best of ancient Egypt in this comprehensive 7-day journey through Cairo, Luxor, and Aswan. Visit iconic landmarks including the Pyramids of Giza, Valley of the Kings, and magnificent temples along the Nile.',
     itinerary: [

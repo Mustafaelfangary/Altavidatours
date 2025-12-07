@@ -125,7 +125,7 @@ async function main() {
     {
       key: 'homepage_destination_sharm-el-sheikh_image',
       title: 'Homepage Sharm El Sheikh Image',
-      mediaUrl: '/images/cultural&historical/DSC_8401.JPG',
+      mediaUrl: '/images/cultural-historical/DSC_8401.jpeg',
       contentType: 'IMAGE',
       page: 'homepage',
       section: 'destinations',

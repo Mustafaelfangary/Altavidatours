@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { readdir, stat } from "fs/promises";
 import { join } from "path";
 import { existsSync } from "fs";
+import { prisma } from "@/lib/prisma";
 
 // Shapes returned to the client
 interface MediaItem {
@@ -107,32 +108,25 @@ export async function GET(request: NextRequest) {
 
     // 1) Database-backed assets (if table exists)
     try {
-      const { PrismaClient } = await import("@prisma/client");
-      const prisma = new PrismaClient();
+      const dbMediaAssets = await prisma.mediaAsset.findMany({
+        orderBy: { createdAt: "desc" },
+      });
 
-      try {
-        const dbMediaAssets = await prisma.mediaAsset.findMany({
-          orderBy: { createdAt: "desc" },
+      for (const asset of dbMediaAssets) {
+        mediaItems.push({
+          id: `db_${asset.id}`,
+          url: asset.url,
+          type: asset.mimeType || "image/jpeg",
+          name: asset.originalName,
+          filename: asset.filename,
+          size: asset.size,
+          createdAt: asset.createdAt.toISOString(),
+          uploadedAt: asset.createdAt.toISOString(),
+          source: "database",
         });
-
-        for (const asset of dbMediaAssets) {
-          mediaItems.push({
-            id: `db_${asset.id}`,
-            url: asset.url,
-            type: asset.mimeType || "image/jpeg",
-            name: asset.originalName,
-            filename: asset.filename,
-            size: asset.size,
-            createdAt: asset.createdAt.toISOString(),
-            uploadedAt: asset.createdAt.toISOString(),
-            source: "database",
-          });
-        }
-      } finally {
-        await prisma.$disconnect();
       }
     } catch (dbError) {
-      // Table might not exist; ignore
+      // Table or model might not exist; ignore
     }
 
     // 2) Scan public/uploads

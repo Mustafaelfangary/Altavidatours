@@ -53,7 +53,7 @@ export const mockRootProps = {
       name: 'Karnak Temple' as const,
       category: 'history' as const,
       location: 'Luxor' as const,
-      image: '/images/destinations/karnak-temple.jpg' as const
+      image: '/images/Royal Cleopatra/DSC_8568.jpg' as const
     },
     {
       id: 'valley-kings' as const,

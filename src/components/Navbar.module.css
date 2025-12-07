@@ -1,28 +1,35 @@
-/* Navbar.module.css */
+/* Navbar.module.css - Luxury Global Travel Navigation */
 
 .navButton {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
-  backdrop-filter: blur(15px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.8rem;
+  background:
+    radial-gradient(circle at top left, rgba(248, 231, 184, 0.35), transparent 60%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.92));
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(248, 231, 184, 0.7);
+  border-radius: 999px;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: white;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(0, 128, 255, 0.15);
+  color: #f9fafb;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.5);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  height: 36px;
+  gap: 0.4rem;
+  height: 38px;
   min-width: 120px;
   justify-content: space-between;
 }
 
 .navButton:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background:
+    radial-gradient(circle at top left, rgba(255, 249, 219, 0.5), transparent 60%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
   transform: translateY(-1px);
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.7);
 }
 
 .dropdownItem {
@@ -30,16 +37,16 @@
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
-  color: #555;
+  color: #0f172a;
   text-decoration: none;
   font-size: 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: all 0.2s ease;
 }
 
 .dropdownItem:hover {
-  background: rgba(59, 130, 246, 0.1);
-  color: hsl(221.2, 83.2%, 53.3%);
+  background: linear-gradient(90deg, rgba(248, 231, 184, 0.35), rgba(15, 23, 42, 0.05));
+  color: #020617;
 }
 
 .languageItem {
@@ -47,18 +54,18 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: 999px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .languageItem:hover {
-  background: rgba(59, 130, 246, 0.1);
-  color: hsl(221.2, 83.2%, 53.3%);
+  background: rgba(248, 231, 184, 0.35);
+  color: #020617;
 }
 
 .activeLanguage {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(248, 231, 184, 0.45);
   font-weight: 600;
 }
 
@@ -67,14 +74,44 @@
   align-items: center;
   gap: 10px;
   padding: 10px 12px;
-  color: #ef4444;
+  color: #b91c1c;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .signOutButton:hover {
-  background: rgba(239, 68, 68, 0.1);
-  color: #dc2626;
+  background: rgba(248, 113, 113, 0.08);
+  color: #7f1d1d;
+}
+
+/* Mega menu 3D panel and items */
+.megaMenuPanel {
+  transform-origin: top center;
+  animation: megaMenuIn 180ms cubic-bezier(0.18, 0.89, 0.32, 1.1);
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.45);
+  border-radius: 18px !important;
+  perspective: 1000px;
+}
+
+.megaMenuItem {
+  transform: translateZ(0);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.megaMenuItem:hover {
+  transform: translateY(-2px) translateZ(12px);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.28);
+}
+
+@keyframes megaMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97) rotateX(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
 }

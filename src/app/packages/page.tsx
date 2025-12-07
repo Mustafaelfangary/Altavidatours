@@ -77,7 +77,7 @@ export default function PackagesPage() {
             price: 5200,
             destination: 'Full Egypt Circuit',
             description: 'Complete Egyptian odyssey from Alexandria to Abu Simbel, including all UNESCO sites, luxury accommodations, and private guided experiences.',
-            mainImage: '/cultural&historical/DSC_8401.JPG'
+            mainImage: '/images/cultural-historical/DSC_8401.JPG'
           },
           {
             id: '5',
@@ -229,7 +229,7 @@ export default function PackagesPage() {
       <Container maxWidth="xl" sx={{ pb: 8 }}>
         <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
           {filteredPackages.map((pkg) => (
-            <Grid item={true} xs={12} md={6} lg={4} key={pkg.id} component="div">
+            <Box key={pkg.id} sx={{ width: { xs: '100%', md: '50%', lg: '33.3333%' }, pr: { md: 2 }, pb: 2 }}>
               <Card
                 sx={{
                   height: '100%',
@@ -246,7 +246,7 @@ export default function PackagesPage() {
                   <CardMedia
                     component="img"
                     height="280"
-                    image={pkg.mainImage || pkg.mainImageUrl || '/cultural&historical/DSCF1165.JPG'}
+                    image={pkg.mainImage || pkg.mainImageUrl || '/cultural-historical/DSCF1165.JPG'}
                     alt={pkg.name}
                     sx={{ objectFit: 'cover' }}
                   />
@@ -332,7 +332,7 @@ export default function PackagesPage() {
                   </Box>
                 </CardContent>
               </Card>
-            </Grid>
+            </Box>
           ))}
         </Grid>
       </Container>
@@ -376,7 +376,7 @@ export default function PackagesPage() {
                 description: getContent('packages_feature_3_description', 'Certified Egyptologists and local specialists bringing ancient history to life with insider knowledge and stories.')
               }
             ].map((feature, index) => (
-              <Grid item={true} xs={12} md={4} key={index} component="div">
+              <Box key={index} sx={{ width: { xs: '100%', md: '33.3333%' }, p: { xs: 2, md: 4 } }}>
                 <Box
                   sx={{
                     textAlign: 'center',
@@ -400,7 +400,7 @@ export default function PackagesPage() {
                     {feature.description}
                   </Typography>
                 </Box>
-              </Grid>
+              </Box>
             ))}
           </Grid>
         </Container>

@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 
-const config = {
+const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -150,9 +150,6 @@ const config = {
         'text-primary': 'hsl(var(--text-primary))',
         'text-secondary': 'hsl(var(--text-secondary))',
         'text-accent': 'hsl(var(--text-accent))',
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -294,6 +291,7 @@ const config = {
     }),
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
+  ],
   important: true, // This ensures Tailwind classes override Material-UI styles
 };
 

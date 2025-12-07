@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
@@ -54,6 +54,7 @@ export default function TravelOKNavbar() {
   const [logoUrl, setLogoUrl] = useState('/altavida-logo-1.svg');
   const [scrolled, setScrolled] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -67,7 +68,7 @@ export default function TravelOKNavbar() {
       console.log('Is admin?', session.user.role === 'ADMIN');
     }
   }, [session]);
-  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const portalRef = useRef<HTMLDivElement | null>(null);
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -143,6 +144,14 @@ export default function TravelOKNavbar() {
     const img = new window.Image();
     img.src = '/altavida-logo-1.svg';
     img.onerror = () => setLogoUrl('/altavida-logo-1.png');
+  }, []);
+
+  // Check if desktop on mount and resize
+  useEffect(() => {
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
   }, []);
 
   // Fetch dahabiyas and itineraries for dropdowns
@@ -394,7 +403,7 @@ export default function TravelOKNavbar() {
     };
   }, [activeDropdown]);
 
-  const onKeyDownTopItem = (e: React.KeyboardEvent, itemId: string) => {
+  const onKeyDownTopItem = (e: KeyboardEvent, itemId: string) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       toggleDropdownClick(itemId);
@@ -467,13 +476,13 @@ export default function TravelOKNavbar() {
       </div>
 
       {/* Main Navigation - glass over white then solid on scroll */}
-      <nav className={`sticky top-0 z-40 transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'backdrop-blur bg-white/95 shadow-sm' : 'backdrop-blur bg-white/70'} border-b border-slate-200`} ref={containerRef as any} style={{ overflow: 'visible' }}>
-        <div className="max-w-[1400px] mx-auto px-2 lg:px-3" style={{ overflow: 'visible' }}>
+      <nav className={`modern-nav sticky top-0 z-[200] transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'backdrop-blur bg-[#0b2e4f]/95 shadow-sm' : 'backdrop-blur bg-[#0b2e4f]/90'} border-b border-white/10`} ref={containerRef as any} style={{ overflow: 'visible' }}>
+        <div className="max-w-6xl mx-auto px-2 lg:px-3" style={{ overflow: 'visible' }}>
           <div className="flex items-center justify-start gap-1" style={{ overflow: 'visible' }}>
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-4 text-slate-800 hover:bg-slate-100 transition-colors mobile-menu-button"
+              className="lg:hidden p-4 text-white hover:bg-white/10 transition-colors mobile-menu-button"
               data-testid="mobile-menu-button"
               aria-label={mobileMenuOpen ? 'close menu' : 'open menu'}
               aria-expanded={mobileMenuOpen}
@@ -482,15 +491,16 @@ export default function TravelOKNavbar() {
             </button>
 
             {/* Home Link */}
-            <Link 
-              href="/" 
-              className="hidden lg:block px-2 py-3 text-[12px] tracking-[0.12em] font-semibold nav-link border-r border-transparent text-slate-800"
+            <Link
+              href="/"
+              className="hidden lg:block px-2 py-3 text-[13px] tracking-[0.12em] font-semibold nav-link border-r border-transparent text-white hover:text-[#c7a15a]"
+              style={{ display: isDesktop ? 'block' : 'none' }}
             >
               HOME
             </Link>
 
             {/* Navigation Items - Desktop */}
-            <div className="relative hidden lg:flex items-center flex-1" style={{ overflow: 'visible' }}>
+            <div className="relative hidden lg:flex items-center flex-1" style={{ overflow: 'visible', display: isDesktop ? 'flex' : 'none' }}>
               {/* Left gradient + button indicator */}
               <div className={`pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-white to-transparent transition-opacity ${showLeft ? 'opacity-100' : 'opacity-0'}`} />
               <button
@@ -523,7 +533,7 @@ export default function TravelOKNavbar() {
                     aria-controls={`mega-${item.id}`}
                     onClick={() => toggleDropdownClick(item.id)}
                     onKeyDown={(e) => onKeyDownTopItem(e, item.id)}
-                    className={`px-2 py-2.5 text-[11px] tracking-[0.12em] font-semibold nav-link border-r border-transparent flex items-center gap-1.5 ${activeDropdown === item.id || isActive(item.mainHref) ? 'text-[#0e2437]' : 'text-slate-800 hover:text[#c7a15a]'}`}
+                    className={`px-2 py-2.5 text-[11px] tracking-[0.12em] font-semibold nav-link border-r border-transparent flex items-center gap-1.5 ${activeDropdown === item.id || isActive(item.mainHref) ? 'text-[#c7a15a]' : 'text-white hover:text-[#c7a15a]'}`}
                   >
                     <span className="hidden xl:inline"><item.icon size={14} /></span>
                     <span>{item.label}</span>
@@ -547,60 +557,62 @@ export default function TravelOKNavbar() {
                         <div
                           id={`mega-${item.id}`}
                           role="menu"
-                          className="bg-white/98 backdrop-blur border border-slate-200 shadow-xl min-w-[820px] rounded-xl overflow-hidden"
-                          style={{ position: 'absolute', top: 10, left: 0 }}
+                          className="bg-[#fffaf0] border border-slate-200/80 shadow-md w-[min(90vw,320px)] rounded-2xl overflow-hidden"
+                          style={{ position: 'absolute', top: 10, left: -16 }}
                         >
-                          <div className="p-6">
-                            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-                              <div className="p-2 bg-slate-50 rounded-lg">
-                                <item.icon size={22} className="text-[#c7a15a]" />
+                          <div className="px-3.5 py-2.5">
+                            <div className="flex items-center gap-2 mb-2.5 pb-2 border-b border-slate-200/80">
+                              <div className="p-1.5 bg-white rounded-lg border border-slate-200/70">
+                                <item.icon size={18} className="text-[#c7a15a]" />
                               </div>
-                              <div>
-                                <h3 className="text-[14px] font-bold text-slate-900 leading-tight">{item.label}</h3>
-                                <p className="text-[13px] text-slate-600">{item.description}</p>
+                              <div className="leading-tight">
+                                <h3 className="text-[11px] font-semibold tracking-[0.22em] text-slate-900 uppercase">{item.label}</h3>
+                                <p className="text-[11px] text-slate-600">{item.description}</p>
                               </div>
                             </div>
 
-                            <div className="grid grid-cols-3 gap-6">
-                              <div className="col-span-2">
-                                <h4 className="text-[11px] font-semibold text-slate-900 mb-3 uppercase tracking-[0.14em]">Popular Options</h4>
-                                <div className="space-y-2">
+                            <div className="space-y-1.25">
+                              <div>
+                                <h4 className="text-[10px] font-semibold text-slate-700 mb-1 tracking-[0.24em] uppercase">Popular Options</h4>
+                                <div className="space-y-0.5">
                                   {item.items.slice(0, 6).map((subItem) => (
-                                    <Link key={subItem.href} href={subItem.href} className="group flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-all">
-                                      <span className="text-lg mt-0.5">{subItem.icon}</span>
-                                      <div className="flex-1">
-                                        <div className="font-medium text-[14px] text-slate-900 group-hover:text-[#0e2437]">{subItem.label}</div>
-                                        <div className="text-[13px] text-slate-600 mt-1">{subItem.description}</div>
-                                      </div>
-                                      <ArrowRight size={16} className="text-slate-400 group-hover:text-[#0e2437] mt-1" />
+                                    <Link
+                                      key={subItem.href}
+                                      href={subItem.href}
+                                      className="block px-3 py-1.25 rounded-lg hover:bg-white hover:shadow-sm transition-colors text-left"
+                                    >
+                                      <div className="text-[12px] font-semibold text-slate-900 leading-snug">{subItem.label}</div>
+                                      <div className="text-[11px] text-slate-600 leading-snug">{subItem.description}</div>
                                     </Link>
                                   ))}
                                 </div>
                               </div>
 
-                              <div className="col-span-1">
-                                <h4 className="text-[11px] font-semibold text-slate-900 mb-3 uppercase tracking-[0.14em]">Quick Access</h4>
-                                <div className="space-y-2">
+                              <div className="pt-1 border-top border-slate-200/80 mt-1.5 space-y-1.25">
+                                <h4 className="text-[10px] font-semibold text-slate-700 tracking-[0.24em] uppercase">Quick Access</h4>
+                                <div className="space-y-0.5">
                                   {item.featured.map((featured) => (
-                                    <Link key={featured.href} href={featured.href} className="group flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50">
-                                      <featured.icon size={18} className="text-[#c7a15a]" />
-                                      <span className="font-medium text-[14px] text-slate-900 group-hover:text-[#c7a15a]">{featured.label}</span>
+                                    <Link
+                                      key={featured.href}
+                                      href={featured.href}
+                                      className="flex items-center justify-between px-3 py-1.25 rounded-lg hover:bg-white hover:shadow-sm transition-colors"
+                                    >
+                                      <span className="text-[12px] font-semibold text-slate-900">{featured.label}</span>
+                                      <featured.icon size={15} className="text-[#c7a15a]" />
                                     </Link>
                                   ))}
                                 </div>
-                                <div className="mt-4 pt-4 border-t border-slate-100">
-                                  <Link
-                                    href={item.mainHref}
-                                    className="flex items-center justify-center gap-2 w-full py-2 px-4 rounded-full bg-[#c7a15a] text-white font-semibold hover:bg-[#b38b49] transition-colors text-[13px]"
-                                    onClick={() => {
-                                      setActiveDropdown(null);
-                                      setOpenViaClick(null);
-                                    }}
-                                  >
-                                    <span>View All {item.label}</span>
-                                    <ArrowRight size={16} />
-                                  </Link>
-                                </div>
+                                <Link
+                                  href={item.mainHref}
+                                  className="mt-1.5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#c7a15a] px-4 py-1.75 text-[11px] font-semibold text-white hover:bg-[#b38b49] transition-colors"
+                                  onClick={() => {
+                                    setActiveDropdown(null);
+                                    setOpenViaClick(null);
+                                  }}
+                                >
+                                  <span>View All {item.label}</span>
+                                  <ArrowRight size={14} />
+                                </Link>
                               </div>
                             </div>
                           </div>
@@ -614,7 +626,7 @@ export default function TravelOKNavbar() {
               {/* Desktop search */}
               <form
                 onSubmit={(e) => { e.preventDefault(); router.push(`/search?q=${encodeURIComponent(query.trim())}`); }}
-                className="ml-3 mr-1 flex items-center bg-slate-100 rounded-full border border-slate-200 px-3 py-1.5 text-sm"
+                className="ml-3 mr-1 flex items-center bg-white/10 rounded-full border border-white/20 px-3 py-1.5 text-sm"
                 role="search"
                 aria-label="Site search"
               >
@@ -623,14 +635,14 @@ export default function TravelOKNavbar() {
                   onChange={(e) => setQuery(e.target.value)}
                   type="search"
                   placeholder="Search destinations, tours..."
-                  className="bg-transparent outline-none text-[13px] placeholder:text-slate-400 w-44"
+                  className="bg-transparent outline-none text-[13px] placeholder:text-white/50 text-white w-44"
                 />
               </form>
 
               {/* Additional Links */}
               <Link
                 href="/gallery"
-                className="px-3 py-3 text-[12px] tracking-[0.12em] font-semibold text-slate-800 hover:text-[#c7a15a] transition-colors border-r border-transparent flex items-center gap-2"
+                className="px-3 py-3 text-[12px] tracking-[0.12em] font-semibold text-white hover:text-[#c7a15a] transition-colors border-r border-transparent flex items-center gap-2"
                 style={{ marginLeft: 8 }}
               >
                 <Camera size={14} />
@@ -663,7 +675,7 @@ export default function TravelOKNavbar() {
             <div className="hidden lg:flex items-center flex-shrink-0 justify-end">
               <Link
                 href="/blog"
-                className="px-3 py-3 text-[12px] tracking-[0.12em] font-semibold text-slate-800 hover:text-[#0e2437] transition-colors border-l border-transparent flex items-center gap-2"
+                className="px-3 py-3 text-[12px] tracking-[0.12em] font-semibold text-white hover:text-[#c7a15a] transition-colors border-l border-transparent flex items-center gap-2"
               >
                 <BookOpen size={14} />
                 <span>BLOG</span>
@@ -685,7 +697,7 @@ export default function TravelOKNavbar() {
                       e.stopPropagation();
                       setProfileMenuOpen(!profileMenuOpen);
                     }}
-                    className="flex items-center gap-2 text-[12px] tracking-[0.12em] font-semibold text-slate-800 hover:text-[#0e2437] transition-colors cursor-pointer"
+                    className="flex items-center gap-2 text-[12px] tracking-[0.12em] font-semibold text-white hover:text-[#c7a15a] transition-colors cursor-pointer"
                     type="button"
                   >
                     <UserCircle size={18} />
@@ -742,7 +754,7 @@ export default function TravelOKNavbar() {
               ) : (
                 <Link
                   href="/auth/signin"
-                  className="px-4 py-3 text-[12px] tracking-[0.12em] font-bold text-slate-900 hover:bg-slate-100 transition-colors border-l border-slate-200 flex items-center gap-2"
+                  className="px-4 py-3 text-[12px] tracking-[0.12em] font-bold text-white hover:text-[#c7a15a] hover:bg-white/10 transition-colors border-l border-white/10 flex items-center gap-2"
                 >
                   <User size={16} />
                   <span>SIGN IN</span>

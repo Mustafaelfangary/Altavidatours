@@ -7,12 +7,9 @@ const __dirname = dirname(__filename);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   outputFileTracingRoot: __dirname,
-  
-  // Experimental features
-  experimental: {
-    // This is needed for Prisma to work with Next.js 13+
-    serverComponentsExternalPackages: ['@prisma/client'],
-  },
+
+  // Ensure Prisma is treated as a server-only external package
+  serverExternalPackages: ['@prisma/client'],
 
   // Server configuration
   env: {
@@ -30,15 +27,13 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
 
-  // Performance optimizations
+  // Experimental & performance optimizations
   experimental: {
     optimizeCss: true,
     optimizePackageImports: [
       'lucide-react',
       '@mui/material',
       '@mui/icons-material',
-      '@prisma/client',
-      '@prisma/adapter-pg'
     ]
   },
   

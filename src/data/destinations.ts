@@ -36,10 +36,10 @@ export const destinations: Destination[] = [
       'Islamic Cairo'
     ],
     bestTimeToVisit: 'October to April',
-    image: '/images/destinations/karnak-temple.jpg',
+    image: '/images/Royal Cleopatra/DSC_8568.jpg',
     gallery: [
-      '/images/destinations/karnak-temple.jpg',
-      '/Princess Cleopatra/DSC_8534.jpg'
+      '/images/Royal Cleopatra/DSC_8568.jpg',
+      '/images/Royal Cleopatra/DSC_8534.jpg'
     ],
     attractions: [
       {
@@ -47,21 +47,21 @@ export const destinations: Destination[] = [
         name: 'Great Pyramids of Giza',
         type: 'monument',
         description: 'The last remaining wonder of the ancient world, these magnificent pyramids have stood for over 4,500 years.',
-        image: '/images/destinations/karnak-temple.jpg'
+        image: '/images/Royal Cleopatra/DSC_8568.jpg'
       },
       {
         id: 'egyptian-museum',
         name: 'Egyptian Museum',
         type: 'museum',
         description: 'Houses the world\'s most extensive collection of ancient Egyptian artifacts, including treasures from Tutankhamun\'s tomb.',
-        image: '/Princess Cleopatra/DSC_8559.jpg'
+        image: '/images/Royal Cleopatra/DSC_8559.jpg'
       },
       {
         id: 'khan-el-khalili',
         name: 'Khan El Khalili Bazaar',
         type: 'cultural',
         description: 'A historic bazaar dating back to the 14th century, perfect for shopping for souvenirs and experiencing local culture.',
-        image: '/Princess Cleopatra/DSC_8596.jpg'
+        image: '/images/Royal Cleopatra/DSC_8596.jpg'
       }
     ],
     climate: {
@@ -84,9 +84,9 @@ export const destinations: Destination[] = [
       'Colossi of Memnon'
     ],
     bestTimeToVisit: 'October to April',
-    image: '/Princess Cleopatra/DSC_8568.jpg',
+    image: '/images/Royal Cleopatra/DSC_8568.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8568.jpg',
+      '/images/Royal Cleopatra/DSC_8568.jpg',
       '/images/experiences/sunset-sailing.jpg'
     ],
     attractions: [
@@ -95,14 +95,14 @@ export const destinations: Destination[] = [
         name: 'Valley of the Kings',
         type: 'monument',
         description: 'The burial ground of pharaohs for over 500 years, containing 63 tombs including that of Tutankhamun.',
-        image: '/Princess Cleopatra/DSC_8568.jpg'
+        image: '/images/Royal Cleopatra/DSC_8568.jpg'
       },
       {
         id: 'karnak-temple',
         name: 'Karnak Temple Complex',
         type: 'temple',
         description: 'The largest temple complex ever built, dedicated primarily to the god Amun-Ra.',
-        image: '/images/destinations/karnak-temple.jpg'
+        image: '/images/Royal Cleopatra/DSC_8568.jpg'
       }
     ],
     climate: {
@@ -125,10 +125,10 @@ export const destinations: Destination[] = [
       'Abu Simbel (nearby)'
     ],
     bestTimeToVisit: 'October to April',
-    image: '/Princess Cleopatra/DSC_8582.jpg',
+    image: '/images/Royal Cleopatra/DSC_8582.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8582.jpg',
-      '/Princess Cleopatra/DSC_8608.jpg'
+      '/images/Royal Cleopatra/DSC_8582.jpg',
+      '/images/Royal Cleopatra/DSC_8608.jpg'
     ],
     attractions: [
       {
@@ -136,14 +136,14 @@ export const destinations: Destination[] = [
         name: 'Philae Temple',
         type: 'temple',
         description: 'Dedicated to the goddess Isis, this beautiful temple was relocated to save it from flooding.',
-        image: '/Princess Cleopatra/DSC_8582.jpg'
+        image: '/images/Royal Cleopatra/DSC_8582.jpg'
       },
       {
         id: 'abu-simbel',
         name: 'Abu Simbel Temples',
         type: 'temple',
         description: 'Magnificent rock-cut temples built by Ramesses II, relocated in an amazing UNESCO operation.',
-        image: '/Princess Cleopatra/DSC_8608.jpg'
+        image: '/images/Royal Cleopatra/DSC_8608.jpg'
       }
     ],
     climate: {
@@ -166,9 +166,9 @@ export const destinations: Destination[] = [
       'Montaza Palace'
     ],
     bestTimeToVisit: 'April to June, September to November',
-    image: '/Princess Cleopatra/DSC_8555.jpg',
+    image: '/images/Royal Cleopatra/DSC_8555.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8555.jpg'
+      '/images/Royal Cleopatra/DSC_8555.jpg'
     ],
     attractions: [
       {
@@ -176,7 +176,7 @@ export const destinations: Destination[] = [
         name: 'Bibliotheca Alexandrina',
         type: 'cultural',
         description: 'A modern tribute to the ancient Library of Alexandria, featuring museums and cultural centers.',
-        image: '/Princess Cleopatra/DSC_8555.jpg'
+        image: '/images/Royal Cleopatra/DSC_8555.jpg'
       },
       {
         id: 'qaitbay-citadel',
@@ -206,9 +206,9 @@ export const destinations: Destination[] = [
       'Water Sports'
     ],
     bestTimeToVisit: 'March to May, September to November',
-    image: '/Princess Cleopatra/DSC_8593.jpg',
+    image: '/images/Royal Cleopatra/DSC_8593.jpg',
     gallery: [
-      '/Princess Cleopatra/DSC_8593.jpg'
+      '/images/Royal Cleopatra/DSC_8593.jpg'
     ],
     attractions: [
       {
@@ -216,7 +216,7 @@ export const destinations: Destination[] = [
         name: 'Giftun Islands',
         type: 'natural',
         description: 'Protected islands with pristine beaches and excellent snorkeling opportunities.',
-        image: '/Princess Cleopatra/DSC_8593.jpg'
+        image: '/images/Royal Cleopatra/DSC_8593.jpg'
       }
     ],
     climate: {
@@ -239,7 +239,7 @@ export const destinations: Destination[] = [
       'Mount Sinai'
     ],
     bestTimeToVisit: 'March to May, September to November',
-    image: '/Princess Cleopatra/DSC_8534.jpg',
+    image: '/images/Royal Cleopatra/DSC_8534.jpg',
     gallery: [
       '/images/Royal Cleopatra/DSC_8534.jpg'
     ],
@@ -249,7 +249,7 @@ export const destinations: Destination[] = [
         name: 'Ras Mohammed National Park',
         type: 'natural',
         description: 'Egypt\'s first national park, featuring some of the world\'s most spectacular coral reefs.',
-        image: '/Princess Cleopatra/DSC_8534.jpg'
+        image: '/images/Royal Cleopatra/DSC_8534.jpg'
       },
       {
         id: 'mount-sinai',
