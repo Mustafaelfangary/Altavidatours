@@ -109,38 +109,38 @@ export default function BeachExtensionsPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="max-w-6xl mx-auto px-4 pt-8 pb-8">
         {/* Beach Destinations */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Beach Destinations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Beach Destinations</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {destinations.map((destination, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="h-48 bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
                   <Waves size={48} className="text-white" />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{destination.name}</h3>
-                  <p className="text-gray-600 mb-4">{destination.description}</p>
+                <div className="p-5">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{destination.name}</h3>
+                  <p className="text-gray-600 mb-3">{destination.description}</p>
                   
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-sm text-gray-500">{destination.duration}</span>
                     <span className="text-lg font-bold text-cyan-600">{destination.price}</span>
                   </div>
 
-                  <div className="mb-6">
+                  <div className="mb-4">
                     <h4 className="font-semibold text-gray-900 mb-2">Features:</h4>
                     <ul className="space-y-1">
                       {destination.features.map((feature, idx) => (
                         <li key={idx} className="text-sm text-gray-700 flex items-center space-x-2">
-                          <Waves className="text-cyan-500" size={14} />
+                          <Waves className="text-cyan-500" size={12} />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <button className="w-full bg-cyan-600 text-white py-2 px-4 rounded-lg hover:bg-cyan-700 transition-colors font-semibold">
+                  <button className="w-full bg-cyan-600 text-white py-2 px-3 rounded-lg hover:bg-cyan-700 transition-colors font-semibold">
                     Book This Destination
                   </button>
                 </div>
@@ -150,13 +150,13 @@ export default function BeachExtensionsPage() {
         </section>
 
         {/* Beach Features */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Beach Experience Features</h2>
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Beach Experience Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {beachFeatures.map((feature, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-6 text-center">
-                <div className="bg-cyan-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <feature.icon size={32} className="text-cyan-600" />
+              <div key={index} className="bg-white rounded-lg shadow-lg p-5 text-center">
+                <div className="bg-cyan-100 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-3">
+                  <feature.icon size={28} className="text-cyan-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
                 <p className="text-gray-600 text-sm">{feature.description}</p>
@@ -166,10 +166,10 @@ export default function BeachExtensionsPage() {
         </section>
 
         {/* Why Choose Beach Extensions */}
-        <section className="mb-16">
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Why Add Beach Extensions?</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section className="mb-12">
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4 text-center">Why Add Beach Extensions?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Perfect Combination</h3>
                 <ul className="space-y-2 text-gray-700">
@@ -193,9 +193,9 @@ export default function BeachExtensionsPage() {
         </section>
 
         {/* Package Combinations */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Popular Combinations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Popular Combinations</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white rounded-lg shadow-lg p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Nile + Hurghada</h3>
               <p className="text-gray-600 mb-4">

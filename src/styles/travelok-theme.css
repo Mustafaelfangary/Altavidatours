@@ -1,18 +1,19 @@
 /* TravelOK Theme - Blue and Orange Color Scheme */
 
 :root {
-  /* TravelOK Primary Colors */
-  --travelok-blue: #1e64c7;
-  --travelok-blue-dark: #1854a0;
-  --travelok-blue-light: #2970d4;
-  --travelok-blue-lighter: #4d88dd;
-  --travelok-blue-lightest: #70a0e6;
-  
-  --travelok-orange: #ff6600;
-  --travelok-orange-light: #ff8833;
-  --travelok-orange-dark: #e55a00;
-  
-  --travelok-green: #228b22;
+  /* Egyptian Tourism Brand Palette */
+  --travelok-blue: #0B2E4F;           /* Nile Deep Blue */
+  --travelok-blue-dark: #08243E;      /* Royal Navy */
+  --travelok-blue-light: #1E64C7;     /* Azure Accent */
+  --travelok-blue-lighter: #4D88DD;   /* Light Azure */
+  --travelok-blue-lightest: #70A0E6;  /* Pale Azure */
+
+  --travelok-orange: #D4AF37;         /* Egyptian Gold */
+  --travelok-orange-light: #E5C66B;   /* Golden Sand */
+  --travelok-orange-dark: #B8932C;    /* Royal Gold */
+
+  --travelok-sand: #F7F4EA;           /* Desert Sand */
+  --travelok-green: #1BAE70;          /* Oasis Green */
   --travelok-white: #ffffff;
   --travelok-gray: #6b7280;
   --travelok-dark: #1f2937;
@@ -34,7 +35,7 @@
 .btn-travelok-primary:hover {
   background: linear-gradient(135deg, var(--travelok-blue-dark) 0%, var(--travelok-blue) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(30, 100, 199, 0.3);
+  box-shadow: 0 8px 25px rgba(11, 46, 79, 0.3);
 }
 
 .btn-travelok-secondary {
@@ -52,7 +53,7 @@
 .btn-travelok-secondary:hover {
   background: linear-gradient(135deg, var(--travelok-orange-dark) 0%, var(--travelok-orange) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 102, 0, 0.3);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
 }
 
 /* TravelOK Card Styles */
@@ -73,6 +74,8 @@
 /* TravelOK Text Utilities */
 .text-travelok-blue { color: var(--travelok-blue); }
 .text-travelok-blue-dark { color: var(--travelok-blue-dark); }
+.text-travelok-gold { color: var(--travelok-orange); }
+.text-travelok-sand { color: var(--travelok-sand); }
 .text-travelok-orange { color: var(--travelok-orange); }
 .text-travelok-green { color: var(--travelok-green); }
 .text-travelok-gray { color: var(--travelok-gray); }
@@ -80,5 +83,19 @@
 
 /* TravelOK Background Utilities */
 .bg-travelok-blue { background-color: var(--travelok-blue); }
+.bg-travelok-blue-dark { background-color: var(--travelok-blue-dark); }
 .bg-travelok-orange { background-color: var(--travelok-orange); }
 .bg-travelok-green { background-color: var(--travelok-green); }
+.bg-travelok-sand { background-color: var(--travelok-sand); }
+
+/* Brand Utility: Glass navbar over deep blue */
+.navbar-glass {
+  background: rgba(11, 46, 79, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+/* Brand Utility: Top utility bar gradient */
+.brand-topbar {
+  background: linear-gradient(90deg, rgba(11, 46, 79, 1) 0%, rgba(30, 100, 199, 0.95) 60%, rgba(11, 46, 79, 0.95) 100%);
+}

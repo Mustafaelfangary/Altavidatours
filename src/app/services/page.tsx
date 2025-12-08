@@ -104,11 +104,11 @@ export default function ServicesPage() {
         </div>
       </UnifiedHero>
 
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 {getContent('services_section_title', 'Travel')} <span className="text-blue-600">Services</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -117,7 +117,7 @@ export default function ServicesPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {serviceCategories.map((service, index) => {
               const colors = getColorClasses(service.color);
               return (
@@ -190,10 +190,10 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="pt-8 pb-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-5">
               {getContent('services_cta_title', 'Ready to Plan Your Perfect Trip?')}
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">

@@ -127,11 +127,11 @@ export default function LuxuryTravelPage() {
       </UnifiedHero>
 
       {/* Luxury Features */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Luxury <span className="text-orange-600">Excellence</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto mb-12">
@@ -140,7 +140,7 @@ export default function LuxuryTravelPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {luxuryFeatures.map((feature, index) => (
               <AnimatedSection key={index} delay={index * 100}>
                 <div className="text-center p-6 bg-gradient-to-br from-orange-50 to-red-50 rounded-lg hover:shadow-lg transition-all duration-300">
@@ -157,11 +157,11 @@ export default function LuxuryTravelPage() {
       </section>
 
       {/* Luxury Services */}
-      <section className="py-16 bg-gradient-to-r from-orange-50 to-red-50">
+      <section className="pt-8 pb-8 bg-gradient-to-r from-orange-50 to-red-50">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Premium <span className="text-orange-600">Services</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -170,7 +170,7 @@ export default function LuxuryTravelPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {luxuryServices.map((service, index) => (
               <AnimatedSection key={service.id} delay={index * 100}>
                 <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-orange-200 bg-white">
@@ -231,11 +231,11 @@ export default function LuxuryTravelPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Client <span className="text-orange-600">Testimonials</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -244,10 +244,10 @@ export default function LuxuryTravelPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {testimonials.map((testimonial, index) => (
               <AnimatedSection key={index} delay={index * 100}>
-                <Card className="p-8 bg-gradient-to-br from-orange-50 to-red-50 border-orange-200">
+                <Card className="p-6 bg-gradient-to-br from-orange-50 to-red-50 border-orange-200">
                   <CardContent className="p-0">
                     <div className="flex items-center mb-6">
                       <div className="relative w-16 h-16 mr-4">
@@ -280,10 +280,10 @@ export default function LuxuryTravelPage() {
       </section>
 
       {/* Luxury Guarantee */}
-      <section className="py-16 bg-gradient-to-r from-orange-600 to-red-600 text-white">
+      <section className="pt-8 pb-8 bg-gradient-to-r from-orange-600 to-red-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-5">
               Our Luxury Guarantee
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
@@ -305,10 +305,10 @@ export default function LuxuryTravelPage() {
       </section>
 
       {/* Concierge Services */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
-            <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-8 text-center border border-orange-200">
+            <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-6 text-center border border-orange-200">
               <Crown className="w-16 h-16 text-orange-600 mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 24/7 Luxury Concierge

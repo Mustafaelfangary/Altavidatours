@@ -106,13 +106,13 @@ export default function AswanToLuxorPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="max-w-6xl mx-auto px-4 pt-8 pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Overview */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">{getContent('aswan_luxor_overview_title', 'Journey Overview')}</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-5">{getContent('aswan_luxor_overview_title', 'Journey Overview')}</h2>
               <p className="text-lg text-gray-700 mb-6">
                 {getContent('aswan_luxor_overview_p1', "The Aswan to Luxor route offers a unique perspective on Nile cruising, taking you upstream against the current. This journey allows you to experience the Nile's power and beauty while discovering some of Egypt's most magnificent archaeological sites.")}
               </p>
@@ -248,8 +248,8 @@ export default function AswanToLuxorPage() {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 bg-teal-600 rounded-lg p-8 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">{getContent('aswan_luxor_cta_title', 'Ready for Your Upstream Adventure?')}</h2>
+        <div className="mt-12 bg-teal-600 rounded-lg p-6 text-center text-white">
+          <h2 className="text-2xl font-bold mb-3">{getContent('aswan_luxor_cta_title', 'Ready for Your Upstream Adventure?')}</h2>
           <p className="text-xl mb-6">{getContent('aswan_luxor_cta_desc', 'Book your Aswan to Luxor cruise and experience the Nile from a unique perspective')}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

@@ -143,11 +143,11 @@ export default function FamilyVacationsPage() {
       </UnifiedHero>
 
       {/* Family Features */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Family <span className="text-orange-600">Focused</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto mb-12">
@@ -157,7 +157,7 @@ export default function FamilyVacationsPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {familyFeatures.map((feature, index) => (
               <AnimatedSection key={index} delay={index * 100}>
                 <div className="text-center p-6 bg-gradient-to-br from-orange-50 to-red-50 rounded-lg hover:shadow-lg transition-all duration-300">
@@ -200,11 +200,11 @@ export default function FamilyVacationsPage() {
       </section>
 
       {/* Family Services */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Family <span className="text-orange-600">Services</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -213,7 +213,7 @@ export default function FamilyVacationsPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {familyServices.map((service, index) => (
               <AnimatedSection key={service.id} delay={index * 100}>
                 <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-orange-200 bg-white">
@@ -285,11 +285,11 @@ export default function FamilyVacationsPage() {
       </section>
 
       {/* Family Travel Tips */}
-      <section className="py-16 bg-gradient-to-r from-orange-50 to-red-50">
+      <section className="pt-8 pb-8 bg-gradient-to-r from-orange-50 to-red-50">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Family Travel <span className="text-orange-600">Tips</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -298,7 +298,7 @@ export default function FamilyVacationsPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {familyTips.map((tip, index) => (
               <AnimatedSection key={index} delay={index * 100}>
                 <Card className="p-6 bg-white border-orange-200 hover:shadow-lg transition-all duration-300">
@@ -321,12 +321,12 @@ export default function FamilyVacationsPage() {
       </section>
 
       {/* Sample Family Itinerary */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection>
               <div className="text-center mb-12">
-                <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                   Sample <span className="text-orange-600">Family Itinerary</span>
                 </h2>
                 <p className="text-gray-600 max-w-3xl mx-auto">
@@ -365,10 +365,10 @@ export default function FamilyVacationsPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-orange-600 to-red-600 text-white">
+      <section className="pt-8 pb-8 bg-gradient-to-r from-orange-600 to-red-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-5">
               Ready for a Family Adventure?
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
@@ -390,11 +390,11 @@ export default function FamilyVacationsPage() {
       </section>
 
       {/* Family Testimonial */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="max-w-4xl mx-auto text-center">
-              <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-8 border border-orange-200">
+              <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-6 text-center border border-orange-200">
                 <div className="relative w-20 h-20 mx-auto mb-6">
                   <Image
                     src="/images/images/Royal Cleopatra/DSC_8848.jpg"

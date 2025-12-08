@@ -201,7 +201,7 @@ export default function FooterModern({ settings = {}, footerSettings = {} }: Foo
   }
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-travelok-blue-800 via-travelok-blue-900 to-black text-white">
+    <footer className="relative overflow-hidden text-white" style={{ background: 'linear-gradient(135deg, #0B2E4F 0%, #08243E 65%, #081A2D 100%)' }}>
       {/* TravelOK-style background */}
       <div className="absolute inset-0 bg-gradient-to-br from-travelok-blue-800/90 via-travelok-blue-900/95 to-black/90"></div>
 

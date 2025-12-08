@@ -148,7 +148,7 @@ export default function TestimonialsPage() {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="text-egyptian-gold text-5xl animate-pulse">⭐</span>
-              <h1 className="text-4xl md:text-6xl font-heading font-bold text-text-primary">
+              <h1 className="text-3xl md:text-4xl font-heading font-bold text-text-primary">
                 {getContent('testimonials_hero_title', 'Guest Testimonials')}
               </h1>
               <span className="text-egyptian-gold text-5xl animate-pulse">⭐</span>
@@ -167,14 +167,14 @@ export default function TestimonialsPage() {
             </p>
 
             {/* Stats */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mb-8">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-hieroglyph-brown">{reviews.length}</div>
+                <div className="text-2xl font-bold text-hieroglyph-brown">{reviews.length}</div>
                 <div className="text-gray-600">{getContent('testimonials_total_reviews_label', 'Total Reviews')}</div>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-3xl font-bold text-hieroglyph-brown">
+                  <span className="text-2xl font-bold text-hieroglyph-brown">
                     {averageRating.toFixed(1)}
                   </span>
                   <div className="flex">{renderStars(Math.round(averageRating))}</div>
@@ -238,10 +238,10 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Reviews Grid */}
-      <section className="py-16">
+      <section className="pt-8 pb-8">
         <Container maxWidth="lg">
           {filteredReviews.length === 0 ? (
-            <div className="text-center py-16">
+            <div className="text-center pt-8 pb-8">
               <div className="text-6xl text-egyptian-gold mb-4">⭐</div>
               <h3 className="text-2xl font-bold text-hieroglyph-brown mb-2">{getContent('testimonials_no_reviews_title', 'No Reviews Found')}</h3>
               <p className="text-gray-600 mb-6">
@@ -258,7 +258,7 @@ export default function TestimonialsPage() {
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredReviews.map((review, index) => (
                 <motion.div
                   key={review.id}
@@ -275,10 +275,10 @@ export default function TestimonialsPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-white/50 backdrop-blur-sm">
+      <section className="pt-8 pb-8 bg-white/50 backdrop-blur-sm">
         <Container maxWidth="lg">
           <div className="text-center">
-            <div className="bg-white/80 backdrop-blur-sm border border-egyptian-gold/30 rounded-2xl p-8 max-w-2xl mx-auto">
+            <div className="bg-white/80 backdrop-blur-sm border border-egyptian-gold/30 rounded-2xl p-6 max-w-2xl mx-auto">
               <div className="text-4xl text-egyptian-gold mb-4">𓊪</div>
               <h3 className="text-2xl font-bold text-hieroglyph-brown mb-3">
                 {getContent('testimonials_cta_title', 'Share Your Nile Experience')}

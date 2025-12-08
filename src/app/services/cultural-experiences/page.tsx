@@ -101,11 +101,11 @@ export default function CulturalExperiencesPage() {
         </div>
       </UnifiedHero>
 
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Cultural <span className="text-orange-600">Highlights</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto mb-12">
@@ -114,7 +114,7 @@ export default function CulturalExperiencesPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {culturalHighlights.map((highlight, index) => (
               <AnimatedSection key={index} delay={index * 100}>
                 <div className="text-center p-6">
@@ -130,7 +130,7 @@ export default function CulturalExperiencesPage() {
 
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Featured <span className="text-orange-600">Experiences</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -139,7 +139,7 @@ export default function CulturalExperiencesPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {culturalExperiences.map((experience, index) => (
               <AnimatedSection key={experience.id} delay={index * 100}>
                 <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-orange-200">
@@ -199,10 +199,10 @@ export default function CulturalExperiencesPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-orange-600 to-red-600 text-white">
+      <section className="pt-8 pb-8 bg-gradient-to-r from-orange-600 to-red-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-5">
               Immerse Yourself in Ancient Culture
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
@@ -222,10 +222,10 @@ export default function CulturalExperiencesPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
-            <div className="bg-orange-50 rounded-lg p-8 text-center">
+            <div className="bg-orange-50 rounded-lg p-6 text-center">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 Create Your Custom Cultural Journey
               </h3>

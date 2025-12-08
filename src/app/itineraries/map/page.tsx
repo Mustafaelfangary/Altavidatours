@@ -109,11 +109,11 @@ export default function RouteMapPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="max-w-6xl mx-auto px-4 pt-8 pb-8">
         {/* Route Overview */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{getContent('map_routes_title', 'Cruise Routes')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">{getContent('map_routes_title', 'Cruise Routes')}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {routes.map((route, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-6">
                 <div className="flex items-center justify-between mb-4">
@@ -161,8 +161,8 @@ export default function RouteMapPage() {
         </section>
 
         {/* Interactive Map Features */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{getContent('map_features_title', 'Map Features')}</h2>
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">{getContent('map_features_title', 'Map Features')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {mapFeatures.map((feature, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -177,10 +177,10 @@ export default function RouteMapPage() {
         </section>
 
         {/* Map Legend */}
-        <section className="mb-16">
-          <div className="bg-white rounded-lg shadow-lg p-8">
+        <section className="mb-12">
+          <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">{getContent('map_legend_title', 'Map Legend')}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">{getContent('map_site_types_title', 'Site Types')}</h3>
                 <div className="space-y-3">
@@ -228,8 +228,8 @@ export default function RouteMapPage() {
         </section>
 
         {/* CTA Section */}
-        <div className="mt-16 bg-indigo-600 rounded-lg p-8 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">{getContent('map_cta_title', 'Ready to Plan Your Route?')}</h2>
+        <div className="mt-12 bg-indigo-600 rounded-lg p-6 text-center text-white">
+          <h2 className="text-2xl font-bold mb-3">{getContent('map_cta_title', 'Ready to Plan Your Route?')}</h2>
           <p className="text-xl mb-6">{getContent('map_cta_desc', 'Use our route maps to plan your perfect Nile cruise itinerary')}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

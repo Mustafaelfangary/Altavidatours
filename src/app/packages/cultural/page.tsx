@@ -180,11 +180,11 @@ export default function CulturalPackagesPage() {
       </UnifiedHero>
 
       {/* Cultural Features Section */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Cultural <span className="text-blue-600">Immersion</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -193,7 +193,7 @@ export default function CulturalPackagesPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-6 mb-12">
             {[
               { icon: Landmark, title: 'Historic Sites', desc: 'Visit temples, tombs, and monuments with expert guides' },
               { icon: Scroll, title: 'Ancient Knowledge', desc: 'Learn hieroglyphs, mythology, and Egyptian history' },
@@ -215,11 +215,11 @@ export default function CulturalPackagesPage() {
       </section>
 
       {/* Cultural Gallery Section */}
-      <section className="py-16 bg-gradient-to-b from-blue-50 to-indigo-100">
+      <section className="pt-8 pb-8 bg-gradient-to-b from-blue-50 to-indigo-100">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Cultural <span className="text-blue-600">Gallery</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -282,17 +282,17 @@ export default function CulturalPackagesPage() {
       </section>
 
       {/* Cultural Packages Grid */}
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Featured <span className="text-blue-600">Cultural Packages</span>
               </h2>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {packages.map((pkg, index) => (
               <AnimatedSection key={pkg.id} delay={index * 100}>
                 <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-blue-200">

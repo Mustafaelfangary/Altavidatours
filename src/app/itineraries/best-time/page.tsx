@@ -136,10 +136,10 @@ export default function BestTimeToTravelPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="max-w-6xl mx-auto px-4 pt-8 pb-8">
         {/* Seasons Overview */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Seasons in Egypt</h2>
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Seasons in Egypt</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {seasons.map((season, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-6">
@@ -182,8 +182,8 @@ export default function BestTimeToTravelPage() {
         </section>
 
         {/* Monthly Weather Chart */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Monthly Weather Guide</h2>
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Monthly Weather Guide</h2>
           <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {monthlyWeather.map((month, index) => (
@@ -206,8 +206,8 @@ export default function BestTimeToTravelPage() {
         </section>
 
         {/* Travel Tips */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Travel Tips</h2>
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Travel Tips</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {travelTips.map((tip, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -222,10 +222,10 @@ export default function BestTimeToTravelPage() {
         </section>
 
         {/* Best Time Recommendations */}
-        <section className="mb-16">
-          <div className="bg-white rounded-lg shadow-lg p-8">
+        <section className="mb-12">
+          <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Best Time Recommendations</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">For Nile Cruises</h3>
                 <ul className="space-y-2 text-gray-700">
@@ -249,8 +249,8 @@ export default function BestTimeToTravelPage() {
         </section>
 
         {/* CTA Section */}
-        <div className="mt-16 bg-sky-600 rounded-lg p-8 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">Ready to Plan Your Perfect Trip?</h2>
+        <div className="mt-12 bg-sky-600 rounded-lg p-6 text-center text-white">
+          <h2 className="text-2xl font-bold mb-3">Ready to Plan Your Perfect Trip?</h2>
           <p className="text-xl mb-6">Choose the best time for your Egypt adventure and book your Nile cruise</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 

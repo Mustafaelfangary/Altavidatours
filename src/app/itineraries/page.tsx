@@ -212,11 +212,11 @@ export default function ItinerariesPage() {
       </section>
 
       {/* Itineraries Grid */}
-      <section className="py-16 on-light">
+      <section className="pt-8 pb-8 on-light">
         <div className="container mx-auto px-4">
           {filteredItineraries.length === 0 ? (
             <AnimatedSection animation="fade-up">
-              <div className="text-center py-16">
+              <div className="text-center pt-8 pb-8">
                 <div className="text-6xl mb-4">𓂀</div>
                 {itineraries.length === 0 ? (
                   <>
@@ -240,7 +240,7 @@ export default function ItinerariesPage() {
               </div>
             </AnimatedSection>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
               {filteredItineraries.map((itinerary, index) => (
                 <AnimatedSection key={itinerary.id} animation="fade-up" delay={index * 100}>
                   <Card className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 bg-white/95 backdrop-blur-sm border-2 border-ocean-blue/20 hover:border-ocean-blue/60 overflow-hidden rounded-2xl">
@@ -353,10 +353,10 @@ export default function ItinerariesPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-gray-50 via-gray-100 to-gray-50 border-t border-gray-200 on-light">
+      <section className="pt-8 pb-8 bg-gradient-to-r from-gray-50 via-gray-100 to-gray-50 border-t border-gray-200 on-light">
         <div className="container mx-auto px-4 text-center">
           <AnimatedSection animation="fade-up">
-            <h2 className="text-4xl font-bold mb-6 text-gray-900 underline-accent">
+            <h2 className="text-3xl font-bold mb-5 text-gray-900 underline-accent">
               {getSettingValue('itineraries_cta_title', 'Start Your Journey')}
             </h2>
             <p className="text-xl mb-8 text-black max-w-2xl mx-auto">

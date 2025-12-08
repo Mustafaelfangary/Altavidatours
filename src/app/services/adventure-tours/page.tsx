@@ -90,11 +90,11 @@ export default function AdventureToursPage() {
         </div>
       </UnifiedHero>
 
-      <section className="py-16 bg-white">
+      <section className="pt-8 pb-8 bg-white">
         <div className="container mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 Adventure <span className="text-orange-600">Tours</span>
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
@@ -103,7 +103,7 @@ export default function AdventureToursPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {adventureTours.map((tour, index) => (
               <AnimatedSection key={tour.id} delay={index * 100}>
                 <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-orange-200">
@@ -157,10 +157,10 @@ export default function AdventureToursPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-orange-600 to-red-600 text-white">
+      <section className="pt-8 pb-8 bg-gradient-to-r from-orange-600 to-red-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-5">
               Ready for Your Adventure?
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
