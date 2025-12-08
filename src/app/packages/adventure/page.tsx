@@ -201,10 +201,10 @@ export default function AdventurePackagesPage() {
               { icon: Compass, title: 'Archaeological Digs', desc: 'Participate in real archaeological discoveries' }
             ].map((feature, index) => (
               <AnimatedSection key={index} delay={index * 100}>
-                <Card className="text-center p-6 hover:shadow-xl transition-all duration-300 border-orange-200">
-                  <CardContent className="pt-6">
-                    <feature.icon className="w-12 h-12 text-orange-600 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
+                <Card className="egypt-card">
+                  <CardContent className="egypt-card-body text-center">
+                    <feature.icon className="w-10 h-10 text-orange-600 mx-auto mb-3" />
+                    <h3 className="text-lg font-bold text-gray-900 mb-1.5">{feature.title}</h3>
                     <p className="text-gray-600 text-sm">{feature.desc}</p>
                   </CardContent>
                 </Card>

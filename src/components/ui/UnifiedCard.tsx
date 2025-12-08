@@ -340,7 +340,7 @@ export default function UnifiedCard({
 
   const cardContent = (
       <div 
-        className={`group glass-card shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-gray-200 hover:border-[#1193b1]/20 h-full flex flex-col`}
+        className={`group egypt-card h-full flex flex-col`}
       style={{
         animationDelay: `${animationDelay}ms`,
         animation: 'fadeInUp 0.6s ease-out forwards'
@@ -369,23 +369,22 @@ export default function UnifiedCard({
         )}
         {/* Badge */}
           {showBadge && (
-          <div className={`absolute top-3 left-3 z-20 bg-[#1193b1] text-white px-3 py-1 rounded-full text-xs font-bold shadow border border-[#1193b1]/20 luxury-font`}> 
-            <span className="mr-1">{config.icon}</span>
-            {metadata.featured ? 'FEATURED' : config.badge}
+          <div className={`egypt-badge z-20`}> 
+            {metadata.duration ? `${metadata.duration} Days` : (metadata.featured ? 'FEATURED' : config.badge)}
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1193b1]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none"></div>
       </div>
       
       {/* Content */}
-      <div className="p-6 text-center flex-1 flex flex-col">
-        <h3 className={`text-xl font-bold text-[#073b5a] mb-2 section-heading luxury-font ${config.hoverColor} transition-colors duration-300`}>
+      <div className="egypt-card-body text-center flex-1 flex flex-col">
+        <h3 className={`text-lg font-bold text-[#073b5a] mb-2 luxury-font ${config.hoverColor} transition-colors duration-300`}>
           {title}
         </h3>
         
         {/* Description */}
         {(shortDescription || description) && (
-          <p className="text-gray-700/85 text-sm mb-4 line-clamp-2 flex-1 luxury-font">
+          <p className="text-gray-700/85 text-sm mb-3 line-clamp-2 flex-1 luxury-font">
             {shortDescription || description}
           </p>
         )}
@@ -396,17 +395,17 @@ export default function UnifiedCard({
         {/* Tags */}
         {metadata.tags && metadata.tags.length > 0 && (
           <div className="mb-4">
-            <div className="flex flex-wrap gap-1 justify-center">
+            <div className="flex flex-wrap gap-1.5 justify-center">
               {metadata.tags.slice(0, 3).map((tag, index) => (
                 <span
                   key={index}
-                  className="text-xs px-2 py-1 bg-[#1193b1]/10 text-[#073b5a] rounded-full"
+                  className="egypt-pill"
                 >
                   {tag}
                 </span>
               ))}
               {metadata.tags.length > 3 && (
-                <span className="text-xs px-2 py-1 bg-[#1193b1]/10 text-[#073b5a] rounded-full">
+                <span className="egypt-pill">
                   +{metadata.tags.length - 3}
                 </span>
               )}
@@ -414,32 +413,20 @@ export default function UnifiedCard({
           </div>
         )}
         
-        {/* Action Buttons */}
-        <div className="flex flex-col gap-3 mt-auto">
-          {primaryButton ? (
-            <ViewDetailsButton 
-              href={primaryButton.href}
-              className="w-full bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white luxury-font text-lg px-4 py-2 rounded-md"
-              icon={primaryButton.icon}
-            >
-              {primaryButton.text}
-            </ViewDetailsButton>
-          ) : (
-            <ViewDetailsButton 
-              href={href}
-              className="w-full bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white luxury-font text-lg px-4 py-2 rounded-md"
-            />
-          )}
-          {secondaryButton && (
-            <ViewDetailsButton 
-              href={secondaryButton.href}
-              variant="outline"
-              className="w-full border-[#1193b1] text-[#073b5a] bg-white luxury-font text-lg opacity-90 hover:opacity-100"
-              icon={secondaryButton.icon}
-            >
-              {secondaryButton.text}
-            </ViewDetailsButton>
-          )}
+        {/* Price + CTA */}
+        <div className="flex items-center justify-between mt-auto">
+          {metadata.price ? (
+            <div>
+              <div className="text-xs text-gray-500">From</div>
+              <div className="text-xl egypt-price">${metadata.price.toLocaleString()}</div>
+            </div>
+          ) : <div />}
+          <ViewDetailsButton 
+            href={primaryButton?.href || href}
+            className="egypt-cta"
+          >
+            {primaryButton?.text || 'View Details'}
+          </ViewDetailsButton>
         </div>
       </div>
     </div>
