@@ -1,178 +1,21 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { Container, Button, TextField, MenuItem } from '@mui/material';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Container, Typography, Box, Grid, Card, CardContent, Button, Paper } from '@mui/material';
+import { AnimatedSection, StaggeredAnimation, FloatingElement } from '@/components/ui/animated-section';
+import Navbar from '@/components/Navbar';
 import { useContent } from '@/hooks/useContent';
-import { Play, ChevronRight, Eye, Star, Send, CheckCircle, Phone, Mail, Clock } from 'lucide-react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { format } from 'date-fns';
 
-interface Booking {
-  id: string;
-  status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED';
-  startDate: string;
-  endDate: string;
-  totalPrice: number;
-  guestCount: number;
-  specialRequests?: string;
-  createdAt: string;
-  updatedAt: string;
-  package?: {
-    id: string;
-    name: string;
-    mainImageUrl?: string;
-    duration?: number;
-  };
-  dahabiya?: {
-    id: string;
-    name: string;
-    mainImageUrl?: string;
-  };
-}
+
 
 export default function TailorMadePage() {
-  const { getContent, loading: contentLoading, error } = useContent({ page: 'tailor-made' });
-
-  // Booking list/table state
-  const [bookings, setBookings] = useState<Booking[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [unauthorized, setUnauthorized] = useState(false);
-
-  // Tailor-made booking request form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    duration: '',
-    budget: '',
-    interests: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [submitMessage, setSubmitMessage] = useState('');
-
-  const scrollToBookings = () => {
-    const bookingsSection = document.getElementById('bookings-section');
-    if (bookingsSection) bookingsSection.scrollIntoView({ behavior: 'smooth' });
-  };
-  const scrollToForm = () => {
-    const formSection = document.getElementById('tailor-made-form');
-    if (formSection) formSection.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        setLoading(true);
-        setUnauthorized(false);
-        const response = await fetch('/api/bookings');
-        if (!response.ok) {
-          if (response.status === 401) {
-            setUnauthorized(true);
-            setBookings([]);
-            return;
-          }
-          throw new Error(`Failed to fetch bookings: ${response.status}`);
-        }
-        const data = await response.json();
-        setBookings(data.bookings || data || []);
-      } catch (err) {
-        console.error('Bookings fetch error:', err);
-        setBookings([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBookings();
-  }, []);
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'CONFIRMED':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'PENDING':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'CANCELLED':
-        return 'bg-red-100 text-red-800 border-red-200';
-      case 'COMPLETED':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formData.name || !formData.email || !formData.message) {
-      setSubmitStatus('error');
-      setSubmitMessage('Please fill in all required fields (Name, Email, and Message).');
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setSubmitStatus('error');
-      setSubmitMessage('Please provide a valid email address.');
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-    setSubmitMessage('');
-
-    try {
-      const response = await fetch('/api/tailor-made', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setSubmitMessage(result.message || 'Your request has been submitted successfully!');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          duration: '',
-          budget: '',
-          interests: '',
-          message: ''
-        });
-      } else {
-        setSubmitStatus('error');
-        setSubmitMessage(result.error || 'Failed to submit your request. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitStatus('error');
-      setSubmitMessage('Network error. Please check your connection and try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { getContent, getContentBlock, loading: contentLoading, error } = useContent({ page: 'tailor-made' });
 
   if (contentLoading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-700 text-lg">Loading Tailor-Made Experience...</p>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-pharaoh-gold mx-auto mb-4"></div>
+          <p className="text-deep-nile-blue font-semibold">Loading content...</p>
         </div>
       </div>
     );
@@ -180,322 +23,363 @@ export default function TailorMadePage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-700 text-xl font-bold">Content Loading Error</p>
+          <p className="text-red-600 font-semibold">Error loading content: {error}</p>
         </div>
       </div>
     );
   }
 
+  // Dynamic features array from content
+  const features = [
+    {
+      title: getContent('tailor-made_feature_1_title', 'Personalized Itinerary'),
+      description: getContent('tailor-made_feature_1_description', 'Design your perfect journey with our expert travel consultants. Choose your destinations, activities, and pace.'),
+      icon: '🗺️',
+    },
+    {
+      title: getContent('tailor-made_feature_2_title', 'Luxury Accommodations'),
+      description: getContent('tailor-made_feature_2_description', 'Select from our finest dahabiya boats and premium hotels to match your comfort preferences.'),
+      icon: '🏛️',
+    },
+    {
+      title: getContent('tailor-made_feature_3_title', 'Private Experiences'),
+      description: getContent('tailor-made_feature_3_description', 'Enjoy exclusive access to archaeological sites, private dining, and personalized cultural encounters.'),
+      icon: '👑',
+    },
+    {
+      title: getContent('tailor-made_feature_4_title', 'Expert Guides'),
+      description: getContent('tailor-made_feature_4_description', 'Travel with our most experienced Egyptologists and local guides for deeper cultural insights.'),
+      icon: '🎓',
+    },
+    {
+      title: getContent('tailor-made_feature_5_title', 'Flexible Duration'),
+      description: getContent('tailor-made_feature_5_description', 'From intimate 3-day escapes to comprehensive 14-day odysseys, we craft the perfect length for you.'),
+      icon: '⏰',
+    },
+    {
+      title: getContent('tailor-made_feature_6_title', 'Special Occasions'),
+      description: getContent('tailor-made_feature_6_description', 'Celebrate anniversaries, honeymoons, or special milestones with our bespoke celebration packages.'),
+      icon: '🎉',
+    },
+  ];
+
+  // Dynamic steps array from content
+  const steps = [
+    {
+      step: '01',
+      title: getContent('tailor-made_step_1_title', 'Consultation'),
+      description: getContent('tailor-made_step_1_description', 'Share your dreams and preferences with our travel experts during a personalized consultation.'),
+    },
+    {
+      step: '02',
+      title: getContent('tailor-made_step_2_title', 'Design'),
+      description: getContent('tailor-made_step_2_description', 'We craft a unique itinerary tailored to your interests, budget, and travel style.'),
+    },
+    {
+      step: '03',
+      title: getContent('tailor-made_step_3_title', 'Refinement'),
+      description: getContent('tailor-made_step_3_description', 'Review and refine your journey until every detail meets your expectations.'),
+    },
+    {
+      step: '04',
+      title: getContent('tailor-made_step_4_title', 'Experience'),
+      description: getContent('tailor-made_step_4_description', 'Embark on your perfectly crafted Nile adventure with our dedicated support.'),
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-ocean-blue-lightest">
+    <>
+      <Navbar />
+      
       {/* Hero Section */}
-      <section className="relative h-screen bg-gradient-to-r from-ocean-blue to-deep-blue overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={getContent('tailor_made_hero_image', '/images/tailor-made-hero.jpg')}
-            alt="Tailor-made journey"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-hieroglyph-brown/40"></div>
-        </div>
-
-        <div className="relative z-10 h-full flex items-center">
-          <Container maxWidth="lg">
-            <div className="text-white text-center">
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                {getContent('tailor_made_hero_title', 'Tailor-Made Journeys')}
-              </h1>
-
-              <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-                {getContent(
-                  'tailor_made_hero_subtitle',
-                  'Create your perfect Egyptian adventure. Every detail crafted to your desires, every moment designed for your dreams.'
-                )}
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-white text-blue-600 px-8 py-4 text-lg hover:bg-gray-100 rounded-full">
-                  <Play className="w-5 h-5 mr-2" />
-                  Watch How It Works
-                </Button>
-                <Button onClick={scrollToBookings} className="bg-blue-600 text-white px-8 py-4 text-lg hover:bg-blue-700 rounded-full">
-                  View Bookings
-                  <ChevronRight className="w-5 h-5 ml-2" />
-                </Button>
-                <Button onClick={scrollToForm} className="bg-emerald-600 text-white px-8 py-4 text-lg hover:bg-emerald-700 rounded-full">
-                  Start Planning
-                  <ChevronRight className="w-5 h-5 ml-2" />
-                </Button>
-              </div>
-            </div>
-          </Container>
-        </div>
-      </section>
-
-      {/* Bookings Table Section */}
-      <section id="bookings-section" className="py-16 bg-gradient-to-b from-blue-50 to-ocean-blue-lightest">
-        <Container maxWidth="lg">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Your Bookings</h2>
-            <p className="text-gray-600 mt-2">Review your Dahabiya journeys and manage details.</p>
-          </div>
-
-          {loading ? (
-            <div className="flex justify-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-ocean-blue"></div>
-            </div>
-          ) : unauthorized ? (
-            <div className="text-center py-12">
-              <p className="text-gray-700 mb-4 text-lg font-semibold">Please sign in to view your bookings.</p>
-              <Link href="/auth/signin">
-                <Button className="bg-blue-600 text-white hover:bg-blue-700">Sign In</Button>
-              </Link>
-            </div>
-          ) : bookings.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-700 mb-4 text-lg font-semibold">No bookings found</p>
-              <Link href="/packages">
-                <Button className="bg-gradient-to-r from-ocean-blue-400 to-navy-blue-400 hover:from-ocean-blue-500 hover:to-navy-blue-500 text-white">
-                  Browse Packages
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <div className="rounded-md border">
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="min-w-[220px]">Item</TableHead>
-                      <TableHead className="min-w-[220px]">Dates</TableHead>
-                      <TableHead>Guests</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Total</TableHead>
-                      <TableHead>Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {bookings.map((booking) => (
-                      <TableRow key={booking.id}>
-                        <TableCell>
-                          <div className="font-semibold text-gray-900">
-                            {booking.package?.name || booking.dahabiya?.name || 'Custom Booking'}
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            Booked {format(new Date(booking.createdAt), 'MMM dd, yyyy')}
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="text-sm text-gray-800">
-                            {format(new Date(booking.startDate), 'MMM dd, yyyy')} - {format(new Date(booking.endDate), 'MMM dd, yyyy')}
-                          </div>
-                          {booking.package?.duration && (
-                            <div className="text-xs text-gray-500">{booking.package.duration} days</div>
-                          )}
-                        </TableCell>
-                        <TableCell>
-                          <span className="font-medium text-gray-900">{booking.guestCount}</span>
-                        </TableCell>
-                        <TableCell>
-                          <Badge className={`${getStatusColor(booking.status)} border`}>{booking.status}</Badge>
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <span className="font-semibold text-emerald-600">${booking.totalPrice.toLocaleString()}</span>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <Link href={`/bookings/${booking.id}`} className="inline-flex items-center px-2 py-1 text-sm rounded border border-egyptian-gold/40 text-hieroglyph-brown hover:bg-egyptian-gold/10">
-                              <Eye className="w-4 h-4 mr-1" /> View
-                            </Link>
-                            {booking.status === 'COMPLETED' && (
-                              <Link href={`/bookings/${booking.id}/review`} className="inline-flex items-center px-2 py-1 text-sm rounded bg-ocean-blue text-white hover:bg-blue-700">
-                                <Star className="w-4 h-4 mr-1" /> Review
-                              </Link>
-                            )}
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </div>
-          )}
+      <Box
+        sx={{
+          background: 'linear-gradient(135deg, hsl(210, 85%, 25%) 0%, hsl(210, 80%, 35%) 50%, hsl(43, 85%, 58%) 100%)',
+          minHeight: '70vh',
+          display: 'flex',
+          alignItems: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'url("/images/papyrus-texture.png") repeat',
+            opacity: 0.1,
+          }}
+        />
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
+          <AnimatedSection animation="fade-in">
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: { xs: '2.5rem', md: '4rem' },
+                fontWeight: 700,
+                color: 'white',
+                textAlign: 'center',
+                mb: 3,
+                textShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              {getContent('tailor-made_hero_title', 'Tailor-Made Nile Cruises')}
+            </Typography>
+            <Typography
+              variant="h5"
+              sx={{
+                color: 'rgba(255, 255, 255, 0.9)',
+                textAlign: 'center',
+                maxWidth: '800px',
+                mx: 'auto',
+                mb: 4,
+                lineHeight: 1.6,
+              }}
+            >
+              {getContent('tailor-made_hero_subtitle', 'Create your perfect Egyptian adventure with our bespoke cruise experiences. Every journey is uniquely crafted to match your dreams and desires.')}
+            </Typography>
+            <Box sx={{ textAlign: 'center' }}>
+              <Button
+                variant="contained"
+                size="large"
+                sx={{
+                  background: 'linear-gradient(135deg, hsl(43, 85%, 58%) 0%, hsl(43, 90%, 48%) 100%)',
+                  color: 'hsl(210, 15%, 15%)',
+                  px: 4,
+                  py: 2,
+                  fontSize: '1.1rem',
+                  fontWeight: 600,
+                  borderRadius: '0.75rem',
+                  boxShadow: '0 8px 24px rgba(43, 85%, 58%, 0.4)',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, hsl(43, 90%, 48%) 0%, hsl(25, 85%, 65%) 100%)',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 12px 32px rgba(43, 85%, 58%, 0.5)',
+                  },
+                }}
+              >
+                {getContent('tailor-made_hero_button', 'Start Planning Your Journey')}
+              </Button>
+            </Box>
+          </AnimatedSection>
         </Container>
-      </section>
+      </Box>
 
-      {/* Tailor-Made Booking Request Form */}
-      <section id="tailor-made-form" className="py-20 bg-gradient-to-b from-blue-50 to-ocean-blue-lightest">
-        <Container maxWidth="lg">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                {getContent('tailor_made_form_title', 'Start Planning Your Journey')}
-              </h2>
-              <p className="text-xl text-gray-600 mb-8">
-                {getContent('tailor_made_form_subtitle', "Tell us about your dream Egyptian adventure and we'll create the perfect itinerary just for you.")}
-              </p>
+      {/* Features Section */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <AnimatedSection animation="slide-up">
+          <Typography
+            variant="h2"
+            sx={{
+              textAlign: 'center',
+              mb: 2,
+              color: 'hsl(210, 85%, 25%)',
+              fontWeight: 600,
+            }}
+          >
+            {getContent('tailor-made_features_title', 'Why Choose Tailor-Made?')}
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              textAlign: 'center',
+              mb: 6,
+              color: 'hsl(210, 10%, 45%)',
+              maxWidth: '600px',
+              mx: 'auto',
+            }}
+          >
+            Experience Egypt your way with our completely customizable cruise packages
+          </Typography>
+        </AnimatedSection>
 
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Phone className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-gray-800">Call Us</div>
-                    <div className="text-gray-600">+20 123 456 789</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-emerald-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-gray-800">Email Us</div>
-                    <div className="text-gray-600">info@cleopatradadhabiyat.com</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                    <Clock className="w-6 h-6 text-purple-600" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-gray-800">Response Time</div>
-                    <div className="text-gray-600">Within 24 hours</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 p-8 rounded-xl">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <TextField
-                    name="name"
-                    label="Full Name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    fullWidth
-                  />
-                  <TextField
-                    name="email"
-                    label="Email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    fullWidth
-                  />
-                </div>
-
-                <TextField
-                  name="phone"
-                  label="Phone Number"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  fullWidth
-                />
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <TextField
-                    name="duration"
-                    label="Preferred Duration"
-                    select
-                    value={formData.duration}
-                    onChange={handleInputChange}
-                    fullWidth
-                  >
-                    <MenuItem value="3-5 days">3-5 days</MenuItem>
-                    <MenuItem value="6-8 days">6-8 days</MenuItem>
-                    <MenuItem value="9-12 days">9-12 days</MenuItem>
-                    <MenuItem value="13+ days">13+ days</MenuItem>
-                  </TextField>
-
-                  <TextField
-                    name="budget"
-                    label="Budget Range"
-                    select
-                    value={formData.budget}
-                    onChange={handleInputChange}
-                    fullWidth
-                  >
-                    <MenuItem value="$2000-5000">$2,000 - $5,000</MenuItem>
-                    <MenuItem value="$5000-10000">$5,000 - $10,000</MenuItem>
-                    <MenuItem value="$10000-20000">$10,000 - $20,000</MenuItem>
-                    <MenuItem value="$20000+">$20,000+</MenuItem>
-                  </TextField>
-                </div>
-
-                <TextField
-                  name="interests"
-                  label="Special Interests"
-                  value={formData.interests}
-                  onChange={handleInputChange}
-                  placeholder="e.g., Ancient temples, Photography, Luxury dining..."
-                  fullWidth
-                />
-
-                <TextField
-                  name="message"
-                  label="Tell us about your dream journey"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  multiline
-                  rows={4}
-                  fullWidth
-                />
-
-                {submitStatus === 'success' && (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-                      <p className="text-green-800 font-medium">{submitMessage}</p>
-                    </div>
-                  </div>
-                )}
-
-                {submitStatus === 'error' && (
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
-                    <div className="flex items-center">
-                      <div className="w-5 h-5 text-red-600 mr-2">⚠️</div>
-                      <p className="text-red-800 font-medium">{submitMessage}</p>
-                    </div>
-                  </div>
-                )}
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full py-4 text-lg rounded-lg ${
-                    isSubmitting
-                      ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                      : 'bg-blue-600 text-white hover:bg-blue-700'
-                  }`}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, index) => (
+            <AnimatedSection key={index} animation="scale-in" delay={index * 100}>
+              <Card
+                  sx={{
+                    height: '100%',
+                    borderRadius: '1rem',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    '&:hover': {
+                      transform: 'translateY(-8px)',
+                      boxShadow: '0 12px 32px rgba(0, 0, 0, 0.15)',
+                    },
+                  }}
                 >
-                  {isSubmitting ? (
-                    <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5 mr-2" />
-                      Send My Request
-                    </>
-                  )}
-                </Button>
-              </form>
-            </div>
+                  <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                    <Box sx={{ fontSize: '3rem', mb: 2 }}>
+                      {feature.icon}
+                    </Box>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        mb: 2,
+                        color: 'hsl(210, 85%, 25%)',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {feature.title}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: 'hsl(210, 10%, 45%)',
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {feature.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+            </AnimatedSection>
+          ))}
+        </div>
+      </Container>
+
+      {/* Process Section */}
+      <Box sx={{ background: 'hsl(35, 15%, 95%)', py: 8 }}>
+        <Container maxWidth="lg">
+          <AnimatedSection animation="slide-up">
+            <Typography
+              variant="h2"
+              sx={{
+                textAlign: 'center',
+                mb: 2,
+                color: 'hsl(210, 85%, 25%)',
+                fontWeight: 600,
+              }}
+            >
+              {getContent('tailor-made_process_title', 'How It Works')}
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                textAlign: 'center',
+                mb: 6,
+                color: 'hsl(210, 10%, 45%)',
+                maxWidth: '600px',
+                mx: 'auto',
+              }}
+            >
+              Our simple 4-step process to create your perfect Nile cruise experience
+            </Typography>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step, index) => (
+              <AnimatedSection key={index} animation="slide-up" delay={index * 150}>
+                  <Box sx={{ textAlign: 'center' }}>
+                    <FloatingElement intensity={0.5}>
+                      <Paper
+                        sx={{
+                          width: 80,
+                          height: 80,
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          mx: 'auto',
+                          mb: 3,
+                          background: 'linear-gradient(135deg, hsl(210, 85%, 25%) 0%, hsl(210, 80%, 35%) 100%)',
+                          color: 'white',
+                          fontSize: '1.5rem',
+                          fontWeight: 700,
+                          boxShadow: '0 8px 24px rgba(210, 85%, 25%, 0.3)',
+                        }}
+                      >
+                        {step.step}
+                      </Paper>
+                    </FloatingElement>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        mb: 2,
+                        color: 'hsl(210, 85%, 25%)',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {step.title}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: 'hsl(210, 10%, 45%)',
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {step.description}
+                    </Typography>
+                  </Box>
+                </AnimatedSection>
+            ))}
           </div>
         </Container>
-      </section>
-    </div>
+      </Box>
+
+      {/* CTA Section */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <AnimatedSection animation="scale-in">
+          <Paper
+            sx={{
+              background: 'linear-gradient(135deg, hsl(210, 85%, 25%) 0%, hsl(43, 85%, 58%) 100%)',
+              borderRadius: '2rem',
+              p: 6,
+              textAlign: 'center',
+              color: 'white',
+            }}
+          >
+            <Typography
+              variant="h3"
+              sx={{
+                mb: 3,
+                fontWeight: 600,
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              {getContent('tailor-made_cta_title', 'Ready to Create Your Dream Journey?')}
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                mb: 4,
+                opacity: 0.9,
+                maxWidth: '600px',
+                mx: 'auto',
+              }}
+            >
+              {getContent('tailor-made_cta_description', 'Contact our travel experts today and let us craft the perfect Nile cruise experience just for you.')}
+            </Typography>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{
+                background: 'white',
+                color: 'hsl(210, 85%, 25%)',
+                px: 4,
+                py: 2,
+                fontSize: '1.1rem',
+                fontWeight: 600,
+                borderRadius: '0.75rem',
+                boxShadow: '0 8px 24px rgba(255, 255, 255, 0.3)',
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 12px 32px rgba(255, 255, 255, 0.4)',
+                },
+              }}
+            >
+              {getContent('tailor-made_cta_button', 'Get Started Today')}
+            </Button>
+          </Paper>
+        </AnimatedSection>
+      </Container>
+    </>
   );
 }

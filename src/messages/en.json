@@ -3,7 +3,16 @@
     "bookNow": "Book Now",
     "explore": "Explore",
     "learnMore": "Learn More",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "home": "Home",
+    "tours": "Tours",
+    "packages": "Packages",
+    "tailorMade": "Tailor-Made",
+    "about": "About Us",
+    "blog": "Blog",
+    "signIn": "Sign In",
+    "dashboard": "Dashboard",
+    "signOut": "Sign Out"
   },
   "home": {
     "hero": {
@@ -14,6 +23,52 @@
       "title": "Our Cruise Programs",
       "viewAll": "View All Cruises"
     }
+  },
+  "nav": {
+    "tours": "Tours",
+    "packages": "Packages",
+    "tailorMade": "Tailor-Made",
+    "about": "About Us",
+    "contact": "Contact",
+    "blog": "Blog",
+    "allExcursions": "All Excursions",
+    "historicalCultural": "Historical & Cultural",
+    "desertRedSea": "Desert & Red Sea",
+    "uniqueExperiences": "Unique Experiences",
+    "dailyTours": "Daily Tours",
+    "tourPackages": "Tour Packages",
+    "popularTours": "Popular Tours",
+    "allDailyTours": "All Daily Tours",
+    "shortGuidedTrips": "Short guided city & museum trips",
+    "culturalHistorical": "Cultural & Historical",
+    "cairoLuxorAswan": "Cairo, Luxor, Aswan highlights",
+    "safariSnorkeling": "Safari, Snorkeling, Diving",
+    "experiences": "Experiences",
+    "hotAirBalloon": "Hot-air balloon, felucca, cooking",
+    "gallery": "Gallery",
+    "photoInspiration": "Photo inspiration",
+    "askAnExpert": "Ask an Expert",
+    "personalHelp": "Personal help planning",
+    "egyptClassics": "Egypt Classics",
+    "allPackages": "All Packages",
+    "multiDayItineraries": "Curated multi-day itineraries",
+    "dahabiyaCruises": "Dahabiya Cruises",
+    "nileUnderSail": "Nile under sail",
+    "familyPackages": "Family Packages",
+    "kidFriendly": "Easy-paced, kid-friendly",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "dashboard": "Dashboard"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
   },
   "booking": {
     "title": "Book Your Cruise",
@@ -29,4 +84,4 @@
     "users": "Manage Users",
     "content": "Manage Content"
   }
-} 
+}

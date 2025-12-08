@@ -1,0 +1,1890 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* TravelOK / TreasureEgypt global imports */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import "../styles/theme-modern.css";
+@import "../styles/admin.css";
+@import "../styles/admin-contrast-fix.css";
+
+/* --- TravelOK global theme from TreasureEgyptTours --- */
+@layer base {
+  :root {
+    /* TravelOK Color Theme - Blue Primary, Orange Accent */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Primary Colors - TravelOK Blue */
+    --primary: 214 86% 49%; /* #1e64c7 - TravelOK Blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 214 86% 39%; /* Darker blue */
+    --primary-light: 214 86% 59%; /* Lighter blue */
+    --primary-muted: 214 86% 95%;
+
+    /* TravelOK Color Palette */
+    --travelok-blue: #1e64c7;
+    --travelok-blue-dark: #1854a0;
+    --travelok-blue-light: #2970d4;
+    --travelok-blue-lighter: #4d88dd;
+    --travelok-blue-lightest: #70a0e6;
+    --travelok-orange: #ff6600;
+    --travelok-orange-light: #ff8833;
+    --travelok-orange-dark: #e55a00;
+    --travelok-green: #228b22;
+    --travelok-white: #ffffff;
+    --travelok-gray: #6b7280;
+    --travelok-dark: #1f2937;
+
+    /* Card styling */
+    --card-radius: 0.75rem;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+
+    /* TravelOK Blue variations */
+    --travelok-blue-50: #eff6ff;
+    --travelok-blue-100: #dbeafe;
+    --travelok-blue-200: #bfdbfe;
+    --travelok-blue-300: #93c5fd;
+    --travelok-blue-400: #60a5fa;
+    --travelok-blue-500: #3b82f6;
+    --travelok-blue-600: #1e64c7;
+    --travelok-blue-700: #1d4ed8;
+    --travelok-blue-800: #1e40af;
+    --travelok-blue-900: #1e3a8a;
+
+    /* TravelOK Orange variations */
+    --travelok-orange-50: #fff7ed;
+    --travelok-orange-100: #ffedd5;
+    --travelok-orange-200: #fed7aa;
+    --travelok-orange-300: #fdba74;
+    --travelok-orange-400: #fb923c;
+    --travelok-orange-500: #ff6600;
+    --travelok-orange-600: #ea580c;
+    --travelok-orange-700: #c2410c;
+    --travelok-orange-800: #9a3412;
+    --travelok-orange-900: #7c2d12;
+
+    /* Secondary Colors - TravelOK Orange */
+    --secondary: 24 100% 50%; /* #ff6600 */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-dark: 24 100% 40%; 
+    --secondary-light: 24 100% 60%;
+    --secondary-muted: 24 100% 95%;
+
+    /* Accent Colors - TravelOK Green */
+    --accent: 120 60% 34%; /* #228b22 */
+    --accent-foreground: 0 0% 100%;
+
+    /* Tertiary Colors - TDS Green */
+    --tertiary: 158 85% 42%; /* #1BAE70 */
+    --tertiary-foreground: 0 0% 100%;
+    --tertiary-dark: 158 85% 35%;
+    --tertiary-light: 158 85% 55%;
+
+    /* Neutral Colors - Clean TDS styling */
+    --muted: 210 20% 94%;
+    --muted-foreground: 210 20% 45%;
+    --border: 210 25% 88%;
+    --input: 210 30% 94%;
+    --ring: 158 85% 42%; /* TDS Green ring */
+
+    /* Egyptian Tourism Brand Colors */
+    --brand-green: 158 85% 42%; /* Oasis Green #1BAE70 */
+    --brand-blue: 207 75% 18%; /* Nile Deep Blue #0B2E4F */
+    --brand-blue-dark: 207 84% 14%; /* Royal Navy #08243E */
+    --brand-orange: 46 63% 53%; /* Egyptian Gold #D4AF37 */
+    --brand-white: 0 0% 100%; /* #FFFFFF */
+    --brand-black: 0 0% 0%; /* #000000 */
+    --brand-gray: 210 20% 45%; /* Neutral gray */
+
+    /* TDS Travel Text Colors */
+    --text-primary: 0 0% 0%;
+    --text-secondary: 210 20% 45%;
+    --text-accent: 158 85% 42%; /* TDS Green */
+    --text-gradient: linear-gradient(
+      135deg,
+      hsl(158, 85%, 42%) 0%,
+      hsl(213, 89%, 46%) 100%
+    );
+
+    /* Status Colors - Egyptian Theme */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 120 40% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 100% 60%;
+    --warning-foreground: 30 25% 15%;
+    --info: 200 85% 45%;
+    --info-foreground: 0 0% 100%;
+
+    /* Border Radius */
+    --radius: 0.75rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+      0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+
+  .dark {
+    /* Ocean Blue theme even in dark mode */
+    --background: 220 20% 5%;
+    --foreground: 0 0% 100%;
+    --card: 220 20% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 200 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 100% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 20% 65%;
+    --accent: 200 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 25% 20%;
+    --input: 220 30% 15%;
+    --ring: 200 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: #ffffff;
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: "Montserrat", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  /* TravelOK Text Utilities */
+  .text-travelok-blue { color: var(--travelok-blue) !important; }
+  .text-travelok-blue-dark { color: var(--travelok-blue-dark) !important; }
+  .text-travelok-orange { color: var(--travelok-orange) !important; }
+  .text-travelok-green { color: var(--travelok-green) !important; }
+  .text-travelok-gray { color: var(--travelok-gray) !important; }
+  .text-travelok-dark { color: var(--travelok-dark) !important; }
+
+  /* Justified paragraph utilities for classic reading feel */
+  .text-justify { 
+    text-align: justify !important; 
+    text-justify: inter-word !important; 
+    hyphens: auto !important; 
+    overflow-wrap: break-word !important; 
+  }
+  .text-justify-last { 
+    text-align-last: justify !important; 
+  }
+
+  /* TravelOK Background Utilities */
+  .bg-travelok-blue { background-color: var(--travelok-blue) !important; }
+  .bg-travelok-orange { background-color: var(--travelok-orange) !important; }
+  .bg-travelok-green { background-color: var(--travelok-green) !important; }
+  .bg-travelok-blue, .bg-travelok-blue * { color: #ffffff !important; }
+  .bg-travelok-orange, .bg-travelok-orange * { color: #ffffff !important; }
+  .bg-travelok-green, .bg-travelok-green * { color: #ffffff !important; }
+  
+  .navbar a:hover, .homepage-menu a:hover, .nav-link:hover {
+    background: #d4af37;
+    color: #0b2e4f;
+  }
+
+  h1, h2, h3, h4, h5, h6, .section-heading {
+    font-family: var(--font-playfair), serif;
+    color: #0b2e4f;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 10px rgba(212,175,55,0.08);
+  }
+  
+  h1 {
+    font-size: clamp(2.1rem, 3.6vw, 2.5rem);
+  }
+  h2 { font-size: 1.9rem; }
+  h3 { font-size: 1.35rem; }
+
+  p, li, span, label {
+    color: #1f2937;
+    font-family: var(--font-montserrat), var(--font-inter), sans-serif;
+    font-size: 0.98rem;
+  }
+
+  .homepage-bg {
+    background: repeating-linear-gradient(135deg, #e3eef7 0px, #e3eef7 40px, #f9f6ee 40px, #f9f6ee 80px);
+  }
+
+  /* --- HOMEPAGE HERO & TOP SECTIONS (Treasure Egypt style sizing) --- */
+  .hero-modern {
+    min-height: 520px;
+    padding: 3.5rem 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-content {
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 3.4vw, 3rem);
+    line-height: 1.15;
+    max-width: 640px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    max-width: 560px;
+    color: #4b5563;
+  }
+
+  .search-modern {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 640px;
+  }
+
+  .search-modern input[type="search"] {
+    flex: 1;
+    height: 3rem;
+    border-radius: 9999px;
+    padding: 0 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .search-modern button {
+    height: 3rem;
+    padding: 0 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .quick-links {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+  }
+
+  .quick-link {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+  }
+
+  /* Section headers like Top Destinations / Explore The Region */
+  .section-header {
+    margin-bottom: 2.25rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 2.3vw, 2.15rem);
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+    max-width: 620px;
+    margin: 0 auto;
+    color: #4b5563;
+  }
+
+  /* Top Destinations / Explore Region card grid */
+  .grid-luxury {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .grid-luxury-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .card-luxury {
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  .card-luxury-image {
+    position: relative;
+  }
+
+  .card-luxury-content {
+    padding: 1rem 1.25rem 1.2rem;
+  }
+
+  .card-luxury-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  /* Shared homepage card image resolution (used across sections) */
+  .standard-card-image,
+  .card-luxury-image,
+  .things-card-image,
+  .service-card-image,
+  .discover-card-image,
+  .featured-article-image {
+    height: 60px;
+  }
+
+  /* Things To Do small cards – align visual style with card-luxury */
+  .things-grid {
+    row-gap: 1.25rem;
+  }
+
+  .things-card {
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.07);
+  }
+
+  .things-card-image {
+    height: 60px;
+  }
+
+  @media (min-width: 640px) {
+    .things-card-image {
+      height: 60px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .things-card-image {
+      height: 60px;
+    }
+  }
+
+  /* Our Top Picks – harmonize card look */
+  .top-picks-grid {
+    row-gap: 1.5rem;
+  }
+
+  .top-picks-card {
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+  }
+
+  /* Featured Experiences package grid */
+  .featured-packages-grid {
+    row-gap: 1.5rem;
+  }
+
+  /* Popular Services section */
+  .services-grid {
+    row-gap: 1.25rem;
+  }
+
+  .service-card {
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+  }
+
+  .service-card-image {
+  }
+
+  @media (min-width: 768px) {
+    .service-card-image {
+    }
+  }
+
+  /* Discover Ancient Egypt grid */
+  .discover-card {
+    border-radius: 1.25rem;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+  }
+
+  .discover-card-image {
+  }
+
+  @media (min-width: 1024px) {
+    .discover-card-image {
+    }
+  }
+
+  @media (min-width: 60px) {
+    .hero-modern {
+      padding-top: 3.75rem;
+      padding-bottom: 3.25rem;
+    }
+
+    .grid-luxury-4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-modern {
+      min-height: 520px;
+      padding-top: 4.25rem;
+      padding-bottom: 3.5rem;
+    }
+
+    .hero-content {
+      flex-direction: column;
+    }
+
+    .grid-luxury-4 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .standard-card-image,
+    .card-luxury-image,
+    .things-card-image,
+    .service-card-image,
+    .discover-card-image,
+    .featured-article-image {
+      height: 60px;
+    }
+  }
+
+  .homepage-grid, .destination-grid, .gallery-grid {
+    display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  padding: 2.5rem 0;
+  width: 100%;
+  max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .card,
+  .gallery-item,
+  .destination-card,
+  .box {
+    background: var(--color-card-bg);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease, background-color 0.25s ease;
+    color: #0f172a;
+  }
+  
+  .card:hover,
+  .gallery-item:hover,
+  .destination-card:hover,
+  .box:hover {
+    transform: translateY(-6px);
+  box-shadow: 0 18px 40px -12px rgba(15, 23, 42, 0.25);
+  border-color: rgba(209, 213, 219, 1);
+    background-color: #f9fafb;
+  }
+
+  .card img, .gallery-item img, .destination-card img {
+    width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 1.5rem 1.5rem 0 0;
+  background: #f9f6ee;
+  box-shadow: none;
+  display: block !important;
+  opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .card img {
+    height: clamp(160px, 22vw, 260px);
+  }
+
+  /* --- LUXURY BUTTON VARIANTS & STATES --- */
+  .btn,
+  .btn-gold,
+  .btn-primary {
+    background: var(--color-button-bg);
+  color: var(--color-button-text);
+  border-radius: 2rem;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(212,175,55,0.18);
+  padding: 0.85rem 2.2rem;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  border: none;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s, border 0.2s;
+  margin-top: auto;
+  margin-bottom: 1.2rem;
+  align-self: center;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+    z-index: 1;
+  }
+  
+  .btn:hover,
+.btn-gold:hover,
+.btn-primary:hover,
+.btn:focus,
+.btn-gold:focus,
+  .btn-primary:focus {
+    background: linear-gradient(90deg, #0b2e4f 0%, #d4af37 100%);
+  color: #fff;
+    box-shadow: 0 8px 32px 0 rgba(212,175,55,0.28);
+  }
+  
+  .btn:active,
+.btn-gold:active,
+  .btn-primary:active {
+    background: #d4af37;
+  color: #0b2e4f;
+    box-shadow: 0 2px 8px rgba(10,35,66,0.10);
+  }
+
+  .btn:disabled,
+.btn[disabled],
+.btn-gold:disabled,
+.btn-gold[disabled],
+.btn-primary:disabled,
+  .btn-primary[disabled] {
+    background: #e3eef7 !important;
+    color: #bcbcbc !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    opacity: 0.7 !important;
+  }
+
+  /* Outline variant */
+  .btn-outline {
+  background: transparent !important;
+  color: #0b2e4f !important;
+  border: 2.5px solid #d4af37 !important;
+  box-shadow: 0 2px 8px rgba(212,175,55,0.10);
+  font-weight: 700;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+  }
+  
+  .btn-outline:hover,
+  .btn-outline:focus {
+    background: #d4af37 !important;
+    color: #fff !important;
+    border-color: #0b2e4f !important;
+  }
+  
+  .btn-outline:active {
+    background: #0b2e4f !important;
+    color: #fff !important;
+    border-color: #d4af37 !important;
+  }
+
+  /* Dark variant */
+  .btn-dark {
+  background: #0b2e4f !important;
+  color: #fff !important;
+  border: 2.5px solid #0b2e4f !important;
+  box-shadow: 0 2px 8px rgba(10,35,66,0.13);
+  font-weight: 700;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+  }
+  
+  .btn-dark:hover,
+  .btn-dark:focus {
+    background: #d4af37 !important;
+    color: #0b2e4f !important;
+    border-color: #d4af37 !important;
+  }
+  
+  .btn-dark:active {
+    background: #fffbe6 !important;
+    color: #0b2e4f !important;
+    border-color: #d4af37 !important;
+  }
+
+  /* Block/full-width variant */
+  .btn-block {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+    text-align: center !important;
+  }
+
+  /* Icon button */
+  .btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.2rem;
+  border-radius: 50%;
+  background: #fffbe6;
+  color: #0b2e4f;
+  border: 2px solid #d4af37;
+  font-size: 1.3rem;
+  box-shadow: 0 2px 8px rgba(212,175,55,0.10);
+    transition: background 0.2s, color 0.2s, border 0.2s;
+  }
+  
+  .btn-icon:hover,
+  .btn-icon:focus {
+    background: #d4af37;
+    color: #fff;
+    border-color: #0b2e4f;
+  }
+
+  /* Button group */
+  .btn-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+    justify-content: flex-start;
+  }
+
+  /* Responsive adjustments */
+@media (max-width: 900px) {
+  .btn, .btn-gold, .btn-primary, .btn-outline, .btn-dark {
+    font-size: 1rem !important;
+    padding: 0.7rem 1.3rem !important;
+    border-radius: 1.3rem !important;
+  }
+}
+@media (max-width: 600px) {
+  .btn, .btn-gold, .btn-primary, .btn-outline, .btn-dark {
+    font-size: 0.95rem !important;
+    padding: 0.6rem 1rem !important;
+    border-radius: 1rem !important;
+    min-width: 100px !important;
+  }
+  .btn-block {
+    font-size: 1rem !important;
+    padding: 0.7rem 0.5rem !important;
+  }
+  }
+  /* --- END LUXURY BUTTON VARIANTS & STATES --- */
+
+  .feature {
+  background: #fffdf7;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(212,175,55,0.08);
+  padding: 1.5rem;
+    text-align: center;
+  }
+
+  .MegaMenuTest {
+  /* Hide debug mega menu test overlay in production */
+    display: none !important;
+  }
+
+  .homepage-link, .nav-link {
+  position: relative;
+  color: #0b2e4f;
+  font-weight: 600;
+    transition: color 0.2s;
+  }
+  
+  .homepage-link::after, .nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  background: linear-gradient(90deg, #0b2e4f 0%, #d4af37 100%);
+  border-radius: 2px;
+  transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  
+  .homepage-link:hover::after, .nav-link:hover::after, .nav-link.active::after {
+    transform: scaleX(1);
+  }
+}
+
+@layer components {
+  .egypt-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .egypt-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+  }
+  .egypt-card-body {
+    padding: 0.75rem 1rem 1rem;
+  }
+  .egypt-badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background-color: #0B2E4F;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    letter-spacing: 0.03em;
+  }
+  .egypt-pill {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(11, 46, 79, 0.08);
+    color: #0B2E4F;
+    border: 1px solid rgba(11, 46, 79, 0.18);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    line-height: 1;
+  }
+  .egypt-price {
+    color: #D97706;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .egypt-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0B2E4F;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+  }
+  .egypt-cta:hover {
+    background-color: #08243E;
+    color: #ffffff;
+  }
+}
+
+/* --- DESKTOP NAVBAR SUPPORT (Modern Component) --- */
+@media (min-width: 1024px) {
+  .mobile-menu-button, .mobile-navbar, .mobile-menu, .MobileOptimizedLayout {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+  }
+  
+  /* Support sticky navbar */
+  .modern-nav {
+    display: flex !important;
+    visibility: visible !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 200 !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  /* Force all nav children to display on desktop */
+  .modern-nav > div {
+    display: flex !important;
+    visibility: visible !important;
+    flex: 1 !important;
+  }
+  
+  /* Navigation items container */
+  .modern-nav .relative.hidden {
+    display: flex !important;
+    visibility: visible !important;
+    flex-direction: row !important;
+  }
+  
+  /* HOME link */
+  .modern-nav .hidden.lg\:block,
+  .modern-nav a.hidden {
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* Navigation buttons */
+  .modern-nav button {
+    display: inline-flex !important;
+    visibility: visible !important;
+  }
+}
+
+/* --- RESPONSIVE GRID LAYOUT (Desktop) --- */
+@media (min-width: 1024px) {
+  .homepage-grid, .destination-grid, .gallery-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2.8rem !important;
+    max-width: 1400px !important;
+    margin: 3rem auto !important;
+    padding: 2.8rem 0 !important;
+  }
+  
+  .card, [class*="card"], .gallery-item, [class*="gallery"], .destination-card {
+    min-height: 420px !important;
+    border-radius: 1.7rem !important;
+    box-shadow: 0 10px 36px 0 rgba(212,175,55,0.19), 0 2px 10px 0 rgba(10,35,66,0.13) !important;
+    border: 2.5px solid #d4af37 !important;
+    background: rgba(255,255,255,0.98) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    transition: box-shadow 0.2s, transform 0.2s;
+    overflow: hidden !important;
+  }
+  
+  .card img, [class*="card"] img, .gallery-item img, [class*="gallery"] img, .destination-card img {
+    height: 220px !important;
+    border-radius: 1.7rem 1.7rem 0 0 !important;
+
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+  .btn, .btn-gold, .btn-primary {
+    font-size: 1.22rem !important;
+    padding: 1.1rem 2.7rem !important;
+    border-radius: 2.2rem !important;
+    margin-top: auto !important;
+    margin-bottom: 1.7rem !important;
+    background: linear-gradient(90deg, #d4af37 0%, #0b2e4f 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 6px 18px rgba(212,175,55,0.19) !important;
+    border: none !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover, .btn-gold:hover, .btn-primary:hover {
+    background: linear-gradient(90deg, #0b2e4f 0%, #d4af37 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 10px 36px 0 rgba(212,175,55,0.23) !important;
+  }
+  .section-heading {
+    font-size: 2.2rem !important;
+    margin-bottom: 1.7rem !important;
+    color: #0b2e4f !important;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.045em !important;
+    text-shadow: 0 2px 18px rgba(212,175,55,0.13) !important;
+  }
+  .card h2, .card h3, .card h4, .card h5, .card h6 {
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    color: #0b2e4f !important;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.03em !important;
+    text-shadow: 0 1px 8px rgba(212,175,55,0.08) !important;
+  }
+  .card p, .card li {
+    color: #1f2937 !important;
+    font-size: 1.08rem !important;
+    font-family: 'Montserrat', 'Inter', sans-serif !important;
+    margin-bottom: 0.7rem !important;
+  }
+}
+/* --- END DESKTOP LUXURY NAVBAR & GRID FIXES (IMPROVED) --- */
+
+/* Legacy desktop navbar overrides removed; navbar layout is now driven by the React component and Tailwind classes. */
+
+/* --- MODERN REACT NAVBAR STYLING --- */
+.modern-nav {
+  background-color: #0b2e4f;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0.35rem 0.8rem;
+  min-height: 72px;
+  max-height: 80px;
+  overflow: visible !important;
+}
+
+.modern-nav .nav-link,
+.modern-nav a,
+.modern-nav button {
+  color: #ffffff;
+  background: transparent;
+  box-shadow: none;
+  transition: color 0.2s ease;
+  padding: 0.4rem 0.6rem;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.modern-nav .nav-link:hover,
+.modern-nav a:hover,
+.modern-nav button:hover {
+  color: #c7a15a !important;
+}
+
+.modern-nav svg {
+  color: inherit;
+}
+
+/* Force desktop navigation elements to show on large screens */
+@media (min-width: 1024px) {
+  .modern-nav {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  
+  .modern-nav .hidden {
+    display: none !important;
+  }
+  
+  .modern-nav .lg\:block,
+  .modern-nav .lg\:flex {
+    display: flex !important;
+  }
+  
+  .modern-nav .lg\:hidden {
+    display: none !important;
+  }
+}
+
+/* Mega menu styling is now handled by the React component (TravelOKNavbar.tsx) via Tailwind classes */
+
+/* Ensure desktop nav elements stay visible */
+@media (min-width: 1024px) {
+  .modern-nav > * {
+    display: flex !important;
+    visibility: visible !important;
+  }
+}
+/* --- END MODERN REACT NAVBAR STYLING --- */
+
+/* Global mega menu styles - for Portal menus (keep visible, but let components control position) */
+div[role="menu"],
+[id^="mega-"] {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 2000 !important;
+}
+
+/* Portal container should never hide */
+.Portal,
+[id*="portal"],
+[data-portal] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+/* --- MEGA MENU DROPDOWN (DESKTOP) --- */
+@media (min-width: 1024px) {
+  .mega-menu,
+  .mega-dropdown,
+  .navbar .mega-menu,
+  .TravelOKNavbar .mega-menu,
+  nav .mega-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 700px;
+    max-width: 90vw;
+    background: linear-gradient(90deg, #fffbe6 0%, #f9f6ee 100%);
+    color: #0b2e4f;
+    border-radius: 1.7rem;
+    box-shadow: 0 12px 48px rgba(212,175,55,0.18), 0 2px 8px rgba(10,35,66,0.10);
+    padding: 2rem 2.5rem 2rem 2.5rem;
+    z-index: 1002;
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 600;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    display: grid;
+    pointer-events: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .navbar li:hover > .mega-menu,
+  .navbar li:focus-within > .mega-menu,
+  .TravelOKNavbar li:hover > .mega-menu,
+  .TravelOKNavbar li:focus-within > .mega-menu,
+  nav li:hover > .mega-menu,
+  nav li:focus-within > .mega-menu {
+    display: grid !important;
+  }
+  .mega-menu-section {
+    padding: 0 1rem;
+    min-width: 180px;
+  }
+  .mega-menu-section h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.18rem;
+    color: #d4af37;
+    margin-bottom: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  .mega-menu-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .mega-menu-section li {
+    margin-bottom: 0.5rem;
+  }
+  .mega-menu-section a {
+    color: #0b2e4f !important;
+    background: transparent !important;
+    padding: 0.6rem 1.2rem !important;
+    border-radius: 1rem !important;
+    display: block !important;
+    font-weight: 600 !important;
+    font-size: 1.08rem !important;
+    transition: background 0.2s, color 0.2s;
+  }
+  .mega-menu-section a:hover {
+    background: #d4af37 !important;
+    color: #fff !important;
+  }
+}
+/* --- END MEGA MENU DROPDOWN (DESKTOP) --- */
+
+/* --- BUTTON VISIBILITY & CONFLICT FIX --- */
+.btn, .btn-gold, .btn-primary, .btn-outline, .btn-dark, .btn-block, .btn-icon {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+  z-index: 1 !important;
+}
+.btn-block {
+  display: block !important;
+}
+/* --- END BUTTON VISIBILITY & CONFLICT FIX --- */
+
+/* Show a warning if window is too small for desktop nav */
+@media (max-width: 1023px) {
+  .desktop-navbar-warning {
+    display: block;
+    background: #fffbe6;
+    color: #b45309;
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid #d4af37;
+  }
+}
+
+/* Responsive luxury adjustments */
+@media (max-width: 1200px) {
+  .homepage-grid, .destination-grid, .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 1.2rem 0;
+  }
+}
+@media (max-width: 900px) {
+  .homepage-grid, .destination-grid, .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  .card img, [class*="card"] img, .gallery-item img, [class*="gallery"] img, .destination-card img {
+    height: 120px;
+  }
+}
+@media (max-width: 600px) {
+  .homepage-grid, .destination-grid, .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding: 0.5rem 0;
+  }
+  .card img, [class*="card"] img, .gallery-item img, [class*="gallery"] img, .destination-card img {
+    height: 80px;
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+  h1, h2 {
+    font-size: 2rem;
+  }
+  .btn {
+    min-width: 120px;
+    font-size: 1rem;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #e3eef7;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0b2e4f;
+}
+
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+[dir="rtl"] .flex {
+  flex-direction: row-reverse;
+}
+
+img {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative;
+  pointer-events: auto !important;
+}
+
+/* --- TravelOK global theme overrides imported from TreasureEgyptTours --- */
+@layer base {
+  :root {
+    /* TravelOK Color Theme - Blue Primary, Orange Accent */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Primary Colors - TravelOK Blue */
+    --primary: 214 86% 49%; /* #1e64c7 - TravelOK Blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 214 86% 39%; /* Darker blue */
+    --primary-light: 214 86% 59%; /* Lighter blue */
+    --primary-muted: 214 86% 95%;
+
+    /* TravelOK Color Palette */
+    --travelok-blue: #1e64c7;
+    --travelok-blue-dark: #1854a0;
+    --travelok-blue-light: #2970d4;
+    --travelok-blue-lighter: #4d88dd;
+    --travelok-blue-lightest: #70a0e6;
+    --travelok-orange: #ff6600;
+    --travelok-orange-light: #ff8833;
+    --travelok-orange-dark: #e55a00;
+    --travelok-green: #228b22;
+    --travelok-white: #ffffff;
+    --travelok-gray: #6b7280;
+    --travelok-dark: #1f2937;
+
+    /* Card styling */
+    --card-radius: 0.75rem;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+
+    /* TravelOK Blue variations */
+    --travelok-blue-50: #eff6ff;
+    --travelok-blue-100: #dbeafe;
+    --travelok-blue-200: #bfdbfe;
+    --travelok-blue-300: #93c5fd;
+    --travelok-blue-400: #60a5fa;
+    --travelok-blue-500: #3b82f6;
+    --travelok-blue-600: #1e64c7;
+    --travelok-blue-700: #1d4ed8;
+    --travelok-blue-800: #1e40af;
+    --travelok-blue-900: #1e3a8a;
+
+    /* TravelOK Orange variations */
+    --travelok-orange-50: #fff7ed;
+    --travelok-orange-100: #ffedd5;
+    --travelok-orange-200: #fed7aa;
+    --travelok-orange-300: #fdba74;
+    --travelok-orange-400: #fb923c;
+    --travelok-orange-500: #ff6600;
+    --travelok-orange-600: #ea580c;
+    --travelok-orange-700: #c2410c;
+    --travelok-orange-800: #9a3412;
+    --travelok-orange-900: #7c2d12;
+
+    /* Secondary Colors - TravelOK Orange */
+    --secondary: 24 100% 50%; /* #ff6600 */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-dark: 24 100% 40%; 
+    --secondary-light: 24 100% 60%;
+    --secondary-muted: 24 100% 95%;
+
+    /* Accent Colors - TravelOK Green */
+    --accent: 120 60% 34%; /* #228b22 */
+    --accent-foreground: 0 0% 100%;
+
+    /* Tertiary Colors - TDS Green */
+    --tertiary: 158 85% 42%; /* #1BAE70 */
+    --tertiary-foreground: 0 0% 100%;
+    --tertiary-dark: 158 85% 35%;
+    --tertiary-light: 158 85% 55%;
+
+    /* Neutral Colors - Clean TDS styling */
+    --muted: 210 20% 94%;
+    --muted-foreground: 210 20% 45%;
+    --border: 210 25% 88%;
+    --input: 210 30% 94%;
+    --ring: 46 63% 53%; /* Gold focus ring */
+
+    /* TDS Travel Brand Colors */
+    --brand-green: 158 85% 42%; /* #1BAE70 */
+    --brand-blue: 213 89% 46%; /* #0B70E1 */
+    --brand-blue-dark: 224 90% 35%; /* #0A2FA6 */
+    --brand-orange: 39 100% 50%; /* #FFA500 */
+    --brand-white: 0 0% 100%; /* #FFFFFF */
+    --brand-black: 0 0% 0%; /* #000000 */
+    --brand-gray: 210 20% 45%; /* Neutral gray */
+
+    /* TDS Travel Text Colors */
+    --text-primary: 0 0% 0%;
+    --text-secondary: 210 20% 45%;
+    --text-accent: 158 85% 42%; /* TDS Green */
+    --text-gradient: linear-gradient(
+      135deg,
+      hsl(158, 85%, 42%) 0%,
+      hsl(213, 89%, 46%) 100%
+    );
+
+    /* Ocean Blue Profile Enhancements */
+    --pharaonic-gold-glow: 0 0 20px rgba(0, 128, 255, 0.4),
+      0 0 40px rgba(0, 128, 255, 0.2);
+    --pharaonic-avatar-shadow: 0 8px 25px rgba(0, 128, 255, 0.4),
+      0 0 20px rgba(0, 128, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    /* Status Colors - Egyptian Theme */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 120 40% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 100% 60%;
+    --warning-foreground: 30 25% 15%;
+    --info: 200 85% 45%;
+    --info-foreground: 0 0% 100%;
+
+    /* Border Radius */
+    --radius: 0.75rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+      0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+
+  .dark {
+    /* Ocean Blue theme even in dark mode */
+    --background: 220 20% 5%;
+    --foreground: 0 0% 100%;
+    --card: 220 20% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 200 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 100% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 20% 65%;
+    --accent: 200 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 25% 20%;
+    --input: 220 30% 15%;
+    --ring: 200 100% 50%;
+  }
+
+  /* Unified Hero Utilities */
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+    padding-top: 5rem; /* py-20 */
+    padding-bottom: 5rem;
+    min-height: 60vh;
+  }
+  @media (min-width: 768px) {
+    .hero-section { min-height: 70vh; }
+  }
+  @media (min-width: 1024px) {
+    .hero-section { min-height: 80vh; }
+  }
+
+  .hero-overlay-pale {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, rgb(219 234 254 / 0.7), rgb(219 234 254 / 0.5), rgb(191 219 254 / 0.8));
+  }
+
+  .hero-overlay-light {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, rgb(219 234 254 / 0.4), rgb(219 234 254 / 0.3), rgb(191 219 254 / 0.5));
+  }
+
+  .hero-overlay-heavy {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, rgb(219 234 254 / 0.9), rgb(219 234 254 / 0.8), rgb(191 219 254 / 0.95));
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/hieroglyphic-pattern.png');
+    opacity: 0.1;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Ensure hero main title is white regardless of pale background overrides */
+  .hero-section .hero-title,
+  .hero-section .hero-title * {
+    color: #ffffff !important;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%; /* Prevent iOS font auto-scaling */
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: #ffffff;
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: "Montserrat", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+  }
+
+  /* Global Responsive Image Fixes */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Prevent image overflow in containers */
+  .container img,
+  .card img,
+  [class*="grid"] img,
+  [class*="flex"] img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Ensure proper aspect ratio for hero images */
+  .hero-section img,
+  [class*="hero"] img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+@layer utilities {
+  /* TravelOK Text Utilities */
+  .text-travelok-blue { color: var(--travelok-blue) !important; }
+  .text-travelok-blue-dark { color: var(--travelok-blue-dark) !important; }
+  .text-travelok-orange { color: var(--travelok-orange) !important; }
+  .text-travelok-green { color: var(--travelok-green) !important; }
+  .text-travelok-gray { color: var(--travelok-gray) !important; }
+  .text-travelok-dark { color: var(--travelok-dark) !important; }
+
+  /* TravelOK Background Utilities */
+  .bg-travelok-blue { background-color: var(--travelok-blue) !important; }
+  .bg-travelok-orange { background-color: var(--travelok-orange) !important; }
+  .bg-travelok-green { background-color: var(--travelok-green) !important; }
+  .bg-travelok-blue, .bg-travelok-blue * { color: #ffffff !important; }
+  .bg-travelok-orange, .bg-travelok-orange * { color: #ffffff !important; }
+  .bg-travelok-green, .bg-travelok-green * { color: #ffffff !important; }
+
+  /* TravelOK Button Styles */
+  .btn-travelok-primary {
+    background: linear-gradient(135deg, var(--travelok-blue) 0%, var(--travelok-blue-light) 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+  }
+  .btn-travelok-primary:hover {
+    background: linear-gradient(135deg, var(--travelok-blue-dark) 0%, var(--travelok-blue) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 100, 199, 0.3);
+  }
+
+  .btn-travelok-secondary {
+    background: linear-gradient(135deg, var(--travelok-orange) 0%, var(--travelok-orange-light) 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+  }
+  .btn-travelok-secondary:hover {
+    background: linear-gradient(135deg, var(--travelok-orange-dark) 0%, var(--travelok-orange) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 102, 0, 0.3);
+  }
+
+  /* TravelOK Card Styles */
+  .card-travelok {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .card-travelok:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* --- TravelOK global theme overrides imported from TreasureEgyptTours --- */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import "../styles/theme-modern.css";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 214 86% 49%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 24 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 210 20% 45%;
+    --border: 210 25% 88%;
+    --input: 210 30% 94%;
+    --ring: 158 85% 42%;
+
+    --radius: 0.75rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+
+    /* TravelOK palette */
+    --travelok-blue: #1e64c7;
+    --travelok-blue-dark: #1854a0;
+    --travelok-blue-light: #2970d4;
+    --travelok-orange: #ff6600;
+    --travelok-gray: #6b7280;
+    --travelok-dark: #1f2937;
+  }
+
+  body {
+    background: #ffffff;
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: "Montserrat", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--travelok-blue-dark);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--travelok-gray);
+    line-height: 1.7;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+
+  a {
+    color: var(--travelok-blue);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--travelok-orange);
+  }
+}
+
+@layer base {
+  html { font-size: 15px; }
+  @media (max-width: 1024px) { html { font-size: 14px; } }
+  @media (max-width: 640px) { html { font-size: 13.5px; } }
+  .hero-section { min-height: 55vh; }
+  @media (min-width: 768px) { .hero-section { min-height: 65vh; } }
+  @media (min-width: 1024px) { .hero-section { min-height: 70vh; } }
+}
+
+@layer utilities {
+  .img-cover { object-fit: cover; width: 100%; height: 100%; }
+  .img-contain { object-fit: contain; width: 100%; height: 100%; }
+  .img-auto { width: 100%; height: auto; }
+  .image-band { max-height: 320px; overflow: hidden; }
+  .card-travelok {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .card-travelok:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-travelok-primary {
+    background: linear-gradient(135deg, var(--travelok-blue) 0%, var(--travelok-blue-light) 100%);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  .btn-travelok-primary:hover {
+    background: linear-gradient(135deg, var(--travelok-blue-dark) 0%, var(--travelok-blue) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 100, 199, 0.3);
+  }
+}
+
+/* Avoid forcing display/visibility on every image inside generic containers.
+   Component-level styles (e.g. Tailwind classes, Next/Image wrappers) should
+   control layout instead. */
+
+.absolute:not(img):not([role="menu"]):not([data-dropdown]):not(a):not(button):not([class*="dropdown"]):not([class*="menu"]) {
+  pointer-events: none;
+}
+[data-dropdown],
+[role="menu"],
+.dropdown-menu,
+[class*="dropdown"] {
+  pointer-events: auto !important;
+}
+
+/* Optimize font loading - Handled by Next.js in layout.tsx */
+/* Removed manual @font-face declarations to avoid conflicts */
+
+/* --- END UNIVERSAL IMAGE LOADING FIXES --- */
+
+/* Keep image defaults gentle so component styles can define exact sizing. */
+img,
+picture,
+figure {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+img[loading], img[decoding], img[src], img[data-src], img:not([src=""]), img:not([src="/favicon.ico"]) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  background: #f9f6ee !important;
+}
+img:before, img:after {
+  display: none !important;
+}
+img[onerror], img.broken, img[src=""], img:not([src]) {
+  opacity: 0.5 !important;
+  filter: grayscale(0.7) blur(1px) !important;
+  background: #e3eef7 !important;
+  content: '' !important;
+}
+
+/* Prevent lazyload/fade-in plugins from hiding images */
+img.lazyload, img[data-lazy], img[data-src], img[data-lazy-src], img[data-original] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+  transition: none !important;
+}
+
+/* Remove unwanted overlays/loaders on images */
+img + .loader, img + .spinner, .image-loader, .image-spinner {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Fix for images in legacy card-style containers only */
+.card img,
+.gallery-item img,
+.destination-card img {
+  width: 100%;
+  min-height: 140px;
+  max-height: 320px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 1.5rem 1.5rem 0 0;
+  background: #f9f6ee;
+}
+
+/* Responsive image fixes */
+@media (max-width: 900px) {
+  .card img,
+  .gallery-item img,
+  .destination-card img {
+    max-height: 200px;
+    min-height: 100px;
+    border-radius: 1.2rem 1.2rem 0 0;
+  }
+}
+@media (max-width: 600px) {
+  .card img,
+  .gallery-item img,
+  .destination-card img {
+    max-height: 160px;
+    min-height: 100px;
+    border-radius: 1rem 1rem 0 0;
+  }
+}
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  background: linear-gradient(90deg, #d4af37 0%, #0b2e4f 100%);
+  color: #fff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+
+/* --- END UNIVERSAL IMAGE LOADING FIXES --- */
+
+/* --- UNIVERSAL IMAGE 404 FALLBACK --- */
+img[src=""], img:not([src]), img.broken, img[onerror], img[src*="404"], img[src*="notfound"], img[src*="missing"], img[src*="undefined"], img[src*="null"] {
+  opacity: 1 !important;
+  filter: none !important;
+  background: #e3eef7 url('/images/fallback-image.jpg') center center/cover no-repeat !important;
+  min-height: 120px !important;
+  content: '' !important;
+}
+
+/* Optionally, for cards/galleries, ensure fallback always shows */
+.card img[src=""], .card img:not([src]), .gallery-item img[src=""], .gallery-item img:not([src]) {
+  background: #e3eef7 url('/images/fallback-image.jpg') center center/cover no-repeat !important;
+}
+/* --- END UNIVERSAL IMAGE 404 FALLBACK --- */
+
+.pharaonic-card {
+  min-height: auto !important;
+}
+
+.pharaonic-card h1,
+.pharaonic-card h2,
+.pharaonic-card h3,
+.pharaonic-card h4,
+.pharaonic-card h5,
+.pharaonic-card h6 {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+}
+
+.pharaonic-card p,
+.pharaonic-card li,
+.pharaonic-card span {
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Form Styling Improvements */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border-radius: 1.2rem;
+  background: var(--color-card-bg);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+input, 
+textarea, 
+select {
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.8rem;
+  background: #ffffff;
+  color: var(--color-text);
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+input:focus, 
+textarea:focus, 
+select:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+button[type="submit"] {
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 1.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  background: var(--color-button-bg);
+  color: var(--color-button-text);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+
+/* --- END COMPLETE LUXURY & RESPONSIVE REDESIGN --- */

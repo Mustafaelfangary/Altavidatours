@@ -11,13 +11,12 @@ interface UseScrollAnimationOptions {
 export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
   const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
   const [isVisible, setIsVisible] = useState(false);
-  // Use HTMLDivElement to align with AnimatedSection container type
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry && entry.isIntersecting) {
+        if (entry.isIntersecting) {
           setIsVisible(true);
           if (triggerOnce && ref.current) {
             observer.unobserve(ref.current);
@@ -48,7 +47,7 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
 
 export function useParallax(speed: number = 0.5) {
   const [offset, setOffset] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,7 +68,7 @@ export function useParallax(speed: number = 0.5) {
 
 export function useMouseParallax(intensity: number = 0.1) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {

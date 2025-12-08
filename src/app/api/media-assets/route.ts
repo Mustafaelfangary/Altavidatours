@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { z } from "zod";
+import { revalidatePath } from 'next/cache';
 
 const mediaAssetSchema = z.object({
   filename: z.string().min(1),
@@ -25,7 +26,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const type = searchParams.get('type');
 
-    const whereClause: Record<string, unknown> = {};
+    let whereClause: any = {};
     if (type) whereClause.type = type;
 
     const mediaAssets = await prisma.mediaAsset.findMany({
@@ -58,8 +59,8 @@ export async function POST(request: NextRequest) {
         type: validated.type,
         size: validated.size,
         mimeType: validated.mimeType,
-        alt: validated.alt ?? null,
-        caption: validated.caption ?? null,
+        alt: validated.alt,
+        caption: validated.caption,
       },
     });
 
@@ -89,18 +90,9 @@ export async function PUT(request: NextRequest) {
 
     const validated = mediaAssetSchema.partial().parse(updateData);
 
-    // Filter out undefined values
-    const updateDataFiltered: Record<string, unknown> = {};
-    Object.keys(validated).forEach(key => {
-      const value = validated[key as keyof typeof validated];
-      if (value !== undefined) {
-        updateDataFiltered[key] = value;
-      }
-    });
-
     const updatedMediaAsset = await prisma.mediaAsset.update({
       where: { id },
-      data: updateDataFiltered
+      data: validated
     });
 
     return NextResponse.json(updatedMediaAsset);

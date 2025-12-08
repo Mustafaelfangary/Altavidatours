@@ -16,7 +16,7 @@ interface UniversalVideoProps {
   onError?: (error: string) => void;
 }
 
-const UniversalVideo = React.memo(function UniversalVideo({
+export default function UniversalVideo({
   src,
   poster,
   autoPlay = true,
@@ -38,18 +38,19 @@ const UniversalVideo = React.memo(function UniversalVideo({
       setIsLoading(false);
       return;
     }
+
+    console.log('UniversalVideo: Loading video from:', src);
   }, [src]);
 
   const handleLoadedData = () => {
+    console.log('UniversalVideo: Video loaded successfully');
     setIsLoading(false);
     setError(null);
     if (onLoad) onLoad();
   };
 
   const handleError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
-    if (process.env.NODE_ENV === 'development') {
-      console.error('UniversalVideo: Video loading error:', e);
-    }
+    console.error('UniversalVideo: Video loading error:', e);
     const errorMessage = 'Failed to load video. Please check the URL and try again.';
     setError(errorMessage);
     setIsLoading(false);
@@ -58,10 +59,10 @@ const UniversalVideo = React.memo(function UniversalVideo({
 
   if (error) {
     return (
-      <div className={`bg-white flex items-center justify-center ${className}`} style={style}>
+      <div className={`bg-gray-100 flex items-center justify-center ${className}`} style={style}>
         <div className="text-center p-4">
-          <p className="text-text-primary text-sm">{error}</p>
-          <p className="text-text-primary text-xs mt-1">Video source: {src}</p>
+          <p className="text-red-600 text-sm">{error}</p>
+          <p className="text-gray-500 text-xs mt-1">Video source: {src}</p>
         </div>
       </div>
     );
@@ -69,24 +70,9 @@ const UniversalVideo = React.memo(function UniversalVideo({
 
   return (
     <div className={`relative ${className}`} style={style}>
-      {isLoading && poster && (
-        <div className="absolute inset-0 flex items-center justify-center z-10"
-             style={{
-               backgroundImage: `url(${poster})`,
-               backgroundSize: 'cover',
-               backgroundPosition: 'center'
-             }}>
-          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-          <div className="relative z-10 text-white text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
-            <p className="text-sm">Loading video...</p>
-          </div>
-        </div>
-      )}
-
-      {isLoading && !poster && (
-        <div className="absolute inset-0 flex items-center justify-center z-10 bg-black">
-          <div className="relative z-10 text-white text-center">
+      {isLoading && (
+        <div className="absolute inset-0 bg-black flex items-center justify-center z-10">
+          <div className="text-white text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
             <p className="text-sm">Loading video...</p>
           </div>
@@ -101,15 +87,12 @@ const UniversalVideo = React.memo(function UniversalVideo({
         loop={loop}
         controls={controls}
         playsInline={playsInline}
-        preload="metadata"
         onLoadedData={handleLoadedData}
         onError={handleError}
-        className={`w-full h-full object-cover transition-opacity duration-500 ${
-          isLoading ? 'opacity-0' : 'opacity-100'
-        }`}
+        className="w-full h-full object-cover"
         style={{
           filter: 'brightness(1.08) saturate(1.15) contrast(1.08)',
-          transition: 'filter 1s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease-in-out',
+          transition: 'filter 1s cubic-bezier(0.4,0,0.2,1)',
         }}
       >
         <source src={src} type="video/mp4" />
@@ -118,6 +101,4 @@ const UniversalVideo = React.memo(function UniversalVideo({
       </video>
     </div>
   );
-});
-
-export default UniversalVideo;
+} 

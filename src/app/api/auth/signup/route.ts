@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { hash } from "bcrypt";
 import prisma from "@/lib/prisma";
-import { sendEmail } from "@/lib/email";
 import { z } from "zod";
-import crypto from "crypto";
 
 const signUpSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -42,54 +40,31 @@ export async function POST(req: Request) {
     const hashedPassword = await hash(password, 10);
     console.log('Password hashed successfully');
 
-    // Generate email verification code
-    const verificationCode = crypto.randomInt(100000, 999999).toString();
-    const verificationExpires = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
-
     // Create the user
     console.log('Creating user in database...');
+    const userData = {
+      name,
+      email,
+      password: hashedPassword,
+      image,
+      role: "USER", // Default role for new users
+    } as const;
+
+    // Add phone only if it exists
+    if (phone) {
+      (userData as any).phone = phone;
+    }
+
     const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        phone,
-        password: hashedPassword,
-        image: image || null,
-        role: "USER" as const, // Default role for new users
-        emailVerified: null, // Will be set when email is verified
-        emailVerificationToken: verificationCode,
-        emailVerificationExpires: verificationExpires,
-      },
+      data: userData,
     });
     console.log('User created successfully:', { id: user.id, email: user.email });
 
-    // Send verification email
-    try {
-      await sendEmail({
-        to: email,
-        subject: '🏺 Verify Your Royal Account - Cleopatra Dahabiyat',
-        template: 'email-verification',
-        data: {
-          user: { name, email },
-          verificationCode,
-          expiresAt: verificationExpires
-        }
-      });
-      console.log('Verification email sent successfully');
-    } catch (emailError) {
-      console.error('Failed to send verification email:', emailError);
-      // Don't fail signup if email fails
-    }
-
     // Remove password from response
-    const { password: _password, emailVerificationToken: _token, ...userWithoutPassword } = user;
+    const { password: _, ...userWithoutPassword } = user;
 
     return NextResponse.json(
-      {
-        message: "Account created successfully. Please check your email for verification code.",
-        user: userWithoutPassword,
-        requiresVerification: true
-      },
+      { message: "User created successfully", user: userWithoutPassword },
       { status: 201 }
     );
   } catch (error) {

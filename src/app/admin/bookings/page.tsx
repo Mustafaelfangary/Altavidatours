@@ -1,80 +1,72 @@
-"use client";
+'use client';
+import prisma from '@/lib/prisma';
+import { useState } from 'react';
 
-import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
-import { Card } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
-
-async function fetchJSON<T>(url: string): Promise<T> {
-  const res = await fetch(url, { credentials: "include" });
-  if (!res.ok) throw new Error(`Failed to fetch ${url}`);
-  return res.json();
+interface Booking {
+  id: string;
+  name: string;
+  email: string;
+  guests: number;
+  createdAt: string;
 }
 
-export default function AdminBookingsListPage() {
-  const bookingsQ = useQuery({
-    queryKey: ["admin","bookings","list"],
-    queryFn: async () => {
-      const data = await fetchJSON<any>("/api/bookings");
-      const items = Array.isArray(data) ? data : data?.items || [];
-      const total = data?.total ?? items.length;
-      return { items, total };
-    },
-  });
+export default function AdminBookingsPage() {
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [message, setMessage] = useState('');
 
-  if (bookingsQ.isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[200px]"><Loader2 className="h-6 w-6 animate-spin"/></div>
-    );
+  async function loadBookings() {
+    const res = await fetch('/api/bookings');
+    const data = await res.json();
+    setBookings(data);
   }
 
-  if (bookingsQ.isError) {
-    return <div className="p-4 text-red-600">Failed to load bookings.</div>;
+  async function deleteBooking(id: string) {
+    if (confirm('Are you sure you want to delete this booking?')) {
+      const res = await fetch(`/api/bookings/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setMessage('Booking deleted successfully!');
+        loadBookings();
+      } else {
+        setMessage('Failed to delete booking.');
+      }
+    }
   }
-
-  const bookings = bookingsQ.data?.items ?? [];
 
   return (
-    <div className="space-y-4 p-4 md:p-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Bookings</h1>
-        <div className="text-sm text-muted-foreground">Total: {bookingsQ.data?.total ?? bookings.length}</div>
+    <div className="max-w-4xl mx-auto py-12 px-4">
+      <h1 className="text-3xl font-bold mb-6">Admin Dashboard - Bookings</h1>
+      {message && <div className="mb-4 p-4 bg-green-100 text-green-700 rounded">{message}</div>}
+      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guests</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {bookings.map((booking) => (
+              <tr key={booking.id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{booking.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{booking.email}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{booking.guests}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(booking.createdAt).toLocaleDateString()}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <button
+                    onClick={() => deleteBooking(booking.id)}
+                    className="text-red-600 hover:text-red-900"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-
-      <Card className="p-0 overflow-hidden">
-        {bookings.length === 0 ? (
-          <div className="p-6 text-sm text-muted-foreground">No bookings found.</div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="text-left text-muted-foreground">
-                  <th className="p-2">Customer</th>
-                  <th className="p-2">Tour</th>
-                  <th className="p-2">Status</th>
-                  <th className="p-2">Created</th>
-                  <th className="p-2 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {bookings.map((b: any) => (
-                  <tr key={b.id} className="border-t">
-                    <td className="p-2">{b.customerName ?? b.user?.name ?? "-"}</td>
-                    <td className="p-2">{b.tour?.title ?? b.tourTitle ?? "-"}</td>
-                    <td className="p-2">{b.status ?? "-"}</td>
-                    <td className="p-2">{b.createdAt ? new Date(b.createdAt).toLocaleString() : "-"}</td>
-                    <td className="p-2">
-                      <div className="flex justify-end">
-                        <Link className="underline" href={`/admin/bookings/${b.id}`}>View</Link>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </Card>
     </div>
   );
-}
+} 

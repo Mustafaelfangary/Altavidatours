@@ -1,48 +1,49 @@
 import type { Prisma } from "@prisma/client";
 import type { Decimal } from "@prisma/client/runtime/library";
 
-// Current Package types based on the actual Package model
-export interface PackageWithRelations {
+export interface NileCruisePackageWithRelations {
   id: string;
   name: string;
   description: string;
-  shortDescription?: string;
+  duration: number;
   price: Decimal;
-  durationDays: number;
-  mainImageUrl?: string;
+  inclusions: string[];
+  exclusions: string[];
+  highlights: string[];
+  cruiseId: string;
   createdAt: Date;
   updatedAt: Date;
-  itineraryDays: Array<{
+  cruise: {
     id: string;
-    dayNumber: number;
-    title: string;
-    description: string;
+    name: string;
     images: Array<{
-      id: string;
       url: string;
-      alt?: string;
+      alt: string | null;
     }>;
+  };
+  itinerary: Array<{
+    id: string;
+    day: number;
+    description: string;
+    packageId: string;
   }>;
 }
 
-export interface PackageFormData {
+export interface NileCruisePackageFormData {
   name: string;
   description: string;
-  shortDescription?: string;
+  duration: number;
   price: number;
-  durationDays: number;
-  mainImageUrl?: string;
-  itineraryDays: Array<{
-    dayNumber: number;
-    title: string;
+  inclusions: string[];
+  exclusions: string[];
+  highlights: string[];
+  cruiseId: string;
+  itinerary: Array<{
+    day: number;
     description: string;
-    images?: Array<{
-      url: string;
-      alt?: string;
-    }>;
   }>;
 }
 
-export interface PackageCreateInput extends Omit<PackageFormData, 'price'> {
+export interface NileCruisePackageCreateInput extends Omit<NileCruisePackageFormData, 'price'> {
   price: Decimal;
 }

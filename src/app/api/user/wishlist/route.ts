@@ -10,20 +10,35 @@ export async function GET() {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    // Mock wishlist since UserWishlist model was removed
-    const mockWishlist = [
-      {
-        id: '1',
-        name: 'Cleopatra Dahabiya',
-        description: 'Luxury traditional dahabiya cruise',
-        pricePerDay: 500,
-        mainImage: '/images/dahabiyas/cleopatra.jpg',
-        capacity: 12,
-        addedAt: new Date()
-      }
-    ];
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: {
+        UserWishlist: {
+          include: {
+            dailyTours: {
+              include: {
+                images: true,
+                cabins: {
+                  select: {
+                    id: true,
+                    name: true,
+                    price: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
 
-    return NextResponse.json(mockWishlist);
+    if (!user) {
+      return new NextResponse('User not found', { status: 404 });
+    }
+
+    // Extract dailyTours from the UserWishlist relation
+    const wishlist = user.UserWishlist.map(item => item.dailyTours);
+    return NextResponse.json(wishlist);
   } catch (error) {
     console.error('Failed to fetch wishlist:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
@@ -38,44 +53,55 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { dahabiyaId } = body;
+    const { dailyTourId } = body;
 
-    if (!dahabiyaId) {
+    if (!dailyTourId) {
       return new NextResponse('Invalid request', { status: 400 });
     }
 
-    // Check if dahabiya exists
-    const dahabiya = await prisma.dahabiya.findUnique({
-      where: { id: dahabiyaId },
+    // Check if dailyTour exists
+    const dailyTour = await prisma.dailyTour.findUnique({
+      where: { id: dailyTourId },
     });
 
-    if (!dahabiya) {
-      return new NextResponse('Dahabiya not found', { status: 404 });
+    if (!dailyTour) {
+      return new NextResponse('Daily tour not found', { status: 404 });
     }
 
-    // Mock adding to wishlist since UserWishlist model was removed
-    const mockWishlist = [
-      {
-        id: '1',
-        name: 'Cleopatra Dahabiya',
-        description: 'Luxury traditional dahabiya cruise',
-        pricePerDay: 500,
-        mainImage: '/images/dahabiyas/cleopatra.jpg',
-        capacity: 12,
-        addedAt: new Date()
+    // Add dailyTour to user's wishlist
+    await prisma.userWishlist.create({
+      data: {
+        A: dailyTourId,
+        B: session.user.id,
       },
-      {
-        id: dahabiyaId,
-        name: 'New Dahabiya',
-        description: 'Added to wishlist',
-        pricePerDay: 400,
-        mainImage: '/images/dahabiyas/default.jpg',
-        capacity: 10,
-        addedAt: new Date()
-      }
-    ];
+    });
 
-    return NextResponse.json(mockWishlist);
+    // Fetch updated wishlist
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: {
+        UserWishlist: {
+          include: {
+            dailyTours: {
+              include: {
+                images: true,
+                cabins: {
+                  select: {
+                    id: true,
+                    name: true,
+                    price: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    // Extract dailyTours from the UserWishlist relation
+    const wishlist = user?.UserWishlist.map(item => item.dailyTours) || [];
+    return NextResponse.json(wishlist);
   } catch (error) {
     console.error('Failed to add to wishlist:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
@@ -90,27 +116,48 @@ export async function DELETE(request: Request) {
     }
 
     const { searchParams } = new URL(request.url);
-    const dahabiyaId = searchParams.get('dahabiyaId');
+    const dailyTourId = searchParams.get('dailyTourId');
 
-    if (!dahabiyaId) {
+    if (!dailyTourId) {
       return new NextResponse('Invalid request', { status: 400 });
     }
 
-    // Mock removing from wishlist since UserWishlist model was removed
-    const mockWishlist = [
-      {
-        id: '1',
-        name: 'Cleopatra Dahabiya',
-        description: 'Luxury traditional dahabiya cruise',
-        pricePerDay: 500,
-        mainImage: '/images/dahabiyas/cleopatra.jpg',
-        capacity: 12,
-        addedAt: new Date()
-      }
-      // Item with dahabiyaId would be removed from the list
-    ];
+    // Remove dailyTour from user's wishlist
+    await prisma.userWishlist.delete({
+      where: {
+        A_B: {
+          A: dailyTourId,
+          B: session.user.id,
+        },
+      },
+    });
 
-    return NextResponse.json(mockWishlist);
+    // Fetch updated wishlist
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: {
+        UserWishlist: {
+          include: {
+            dailyTours: {
+              include: {
+                images: true,
+                cabins: {
+                  select: {
+                    id: true,
+                    name: true,
+                    price: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    // Extract dailyTours from the UserWishlist relation
+    const wishlist = user?.UserWishlist.map(item => item.dailyTours) || [];
+    return NextResponse.json(wishlist);
   } catch (error) {
     console.error('Failed to remove from wishlist:', error);
     return new NextResponse('Internal Server Error', { status: 500 });

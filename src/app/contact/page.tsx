@@ -1,159 +1,167 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from 'react';
-import { AnimatedSection } from '@/components/ui/animated-section';
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from 'sonner';
+import { Container, Typography, Grid, Box, TextField, Paper } from '@mui/material';
+import { ContactForm } from '@/components/contact/contact-form';
+import { useTranslation } from '@/lib/i18n';
 import { useContent } from '@/hooks/useContent';
-import { useLanguage } from '@/contexts/LanguageContext';
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  Users,
-  MessageCircle,
-  Send,
-  Globe,
-  Calendar,
-  Star,
-  Award,
-  Shield,
-  Heart,
-  CheckCircle,
-  ArrowRight,
-  ExternalLink
-} from 'lucide-react';
-import { TravelOKContactForm } from '@/components/contact/TravelOKContactForm';
 
 export default function ContactPage() {
-  const { getContent } = useContent({ page: 'contact' });
-  const { t } = useLanguage();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
+  const t = useTranslation();
+  const { getContent, getContentBlock, loading: contentLoading, error } = useContent({ page: 'contact' });
 
-  if (loading) {
+  if (contentLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-travelok-blue/10 to-travelok-blue/20">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-travelok-blue mx-auto mb-4"></div>
-          <p className="text-xl text-travelok-blue">{t('common.loading')}</p>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-pharaoh-gold mx-auto mb-4"></div>
+          <p className="text-deep-nile-blue font-semibold">Loading content...</p>
         </div>
       </div>
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 font-semibold">Error loading content: {error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      toast.success('Message sent successfully!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      toast.error('Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <main>
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-br from-travelok-blue to-travelok-blue-dark">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            {getContent('contact_hero_title', '🛥️ Contact AltaVida Tours')}
-          </h1>
-          <p className="text-xl md:text-2xl text-travelok-orange mb-8 max-w-3xl mx-auto">
-            {getContent('contact_hero_subtitle', 'Ready to embark on your Egyptian dahabiya adventure? Get in touch with our travel experts.')}
-          </p>
-          <div className="flex justify-center space-x-8 text-sm">
-            <div className="flex items-center">
-              <Clock className="w-5 h-5 mr-2" />
-              {getContent('contact_feature_1', '24/7 Support')}
-            </div>
-            <div className="flex items-center">
-              <CheckCircle className="w-5 h-5 mr-2" />
-              {getContent('contact_feature_2', 'Expert Guidance')}
-            </div>
-            <div className="flex items-center">
-              <Heart className="w-5 h-5 mr-2" />
-              {getContent('contact_feature_3', 'Personalized Service')}
-            </div>
-          </div>
-        </div>
-      </section>
+      <Box
+        sx={{
+          position: 'relative',
+          height: '40vh',
+          display: 'flex',
+          alignItems: 'center',
+          color: 'white',
+          bgcolor: 'primary.main',
+        }}
+      >
+        <Container maxWidth="lg">
+          <Typography variant="h1" sx={{ fontWeight: 'bold' }}>
+            {getContent('contact_hero_title', 'Contact Us')}
+          </Typography>
+          <Typography variant="h5" sx={{ mt: 2 }}>
+            {getContent('contact_hero_subtitle', 'We\'d love to hear from you')}
+          </Typography>
+        </Container>
+      </Box>
 
-      {/* Contact Form Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection animation="fade-in">
-            <TravelOKContactForm />
-          </AnimatedSection>
-        </div>
-      </section>
+      {/* Contact Information and Form */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Grid container spacing={6}>
+          {/* Contact Information */}
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <Paper sx={{ p: 4, height: '100%' }}>
+              <Typography variant="h4" sx={{ mb: 4 }}>
+                {getContent('contact_info_title', 'Get in Touch')}
+              </Typography>
 
-      {/* Quick Contact Options */}
-      <section className="py-16 bg-travelok-blue/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-travelok-blue-dark mb-4">
-              {getContent('contact_instant_title', '🚀 Prefer Instant Communication?')}
-            </h2>
-            <p className="text-lg text-travelok-gray max-w-2xl mx-auto">
-              {getContent('contact_instant_subtitle', 'Connect with us instantly through your favorite platform')}
-            </p>
-          </div>
+              <Box sx={{ mb: 4 }}>
+                <Typography variant="h6" sx={{ mb: 1 }}>
+                  {getContent('contact_address_title', 'Address')}
+                </Typography>
+                <Typography sx={{ whiteSpace: 'pre-line' }}>
+                  {getContent('contact_address_content', '123 Nile Street\nLuxor, Egypt')}
+                </Typography>
+              </Box>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="font-bold text-travelok-blue-dark mb-2">{getContent('contact_whatsapp_title', 'WhatsApp')}</h3>
-              <p className="text-sm text-travelok-gray mb-4">{getContent('contact_whatsapp_desc', 'Instant messaging')}</p>
-              <button
-                onClick={() => window.open(getContent('whatsapp_link', 'https://wa.me/20952370574'), '_blank')}
-                className="btn-travelok-secondary w-full text-sm py-2"
-              >
-                {getContent('contact_whatsapp_btn', '💬 Chat Now')}
-              </button>
-            </div>
+              <Box sx={{ mb: 4 }}>
+                <Typography variant="h6" sx={{ mb: 1 }}>
+                  {getContent('contact_phone_title', 'Phone')}
+                </Typography>
+                <Typography sx={{ whiteSpace: 'pre-line' }}>
+                  {getContent('contact_phone_content', '+20 123 456 7890\n+20 123 456 7891')}
+                </Typography>
+              </Box>
 
-            <div className="text-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Send className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="font-bold text-travelok-blue-dark mb-2">{getContent('contact_telegram_title', 'Telegram')}</h3>
-              <p className="text-sm text-travelok-gray mb-4">{getContent('contact_telegram_desc', 'Quick updates')}</p>
-              <button
-                onClick={() => window.open(getContent('telegram_link', 'https://t.me/altavidatours'), '_blank')}
-                className="btn-travelok-secondary w-full text-sm py-2"
-              >
-                {getContent('contact_telegram_btn', '🚀 Join Channel')}
-              </button>
-            </div>
+              <Box sx={{ mb: 4 }}>
+                <Typography variant="h6" sx={{ mb: 1 }}>
+                  {getContent('contact_email_title', 'Email')}
+                </Typography>
+                <Typography sx={{ whiteSpace: 'pre-line' }}>
+                  {getContent('contact_email_content', 'info@egiptotrips.com\nbookings@egiptotrips.com')}
+                </Typography>
+              </Box>
 
-            <div className="text-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-blue-700" />
-              </div>
-              <h3 className="font-bold text-travelok-blue-dark mb-2">{getContent('contact_facebook_title', 'Facebook')}</h3>
-              <p className="text-sm text-travelok-gray mb-4">{getContent('contact_facebook_desc', 'Community & reviews')}</p>
-              <button
-                onClick={() => window.open(getContent('facebook_link', 'https://facebook.com/altavidatours'), '_blank')}
-                className="btn-travelok-secondary w-full text-sm py-2"
-              >
-                {getContent('contact_facebook_btn', '👥 Follow Us')}
-              </button>
-            </div>
+              <Box>
+                <Typography variant="h6" sx={{ mb: 1 }}>
+                  {getContent('contact_hours_title', 'Business Hours')}
+                </Typography>
+                <Typography sx={{ whiteSpace: 'pre-line' }}>
+                  {getContent('contact_hours_content', 'Monday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM\nSunday: Closed')}
+                </Typography>
+              </Box>
+            </Paper>
+          </Box>
 
-            <div className="text-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-pink-600" />
-              </div>
-              <h3 className="font-bold text-travelok-blue-dark mb-2">{getContent('contact_instagram_title', 'Instagram')}</h3>
-              <p className="text-sm text-travelok-gray mb-4">{getContent('contact_instagram_desc', 'Visual inspiration')}</p>
-              <button
-                onClick={() => window.open(getContent('instagram_link', 'https://instagram.com/altavidatours'), '_blank')}
-                className="btn-travelok-secondary w-full text-sm py-2"
-              >
-                {getContent('contact_instagram_btn', '📸 Follow')}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+          {/* Contact Form */}
+          <Box sx={{ flex: 2, minWidth: 0 }}>
+            <Paper sx={{ p: 4 }}>
+              <Typography variant="h4" sx={{ mb: 4 }}>
+                {getContent('contact_form_title', 'Send us a Message')}
+              </Typography>
+              <ContactForm />
+            </Paper>
+          </Box>
+        </Grid>
+      </Container>
+
+      {/* Map Section */}
+      <Box sx={{ height: '400px', bgcolor: 'grey.200' }}>
+        {/* Add map component here */}
+      </Box>
+    </main>
   );
 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { z } from "zod";
 import { hash } from "bcrypt";
 
@@ -17,6 +17,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
 
     if (!session || session.user.role !== "ADMIN") {
@@ -26,7 +27,6 @@ export async function GET(
       );
     }
 
-    const { id } = await params;
     const user = await prisma.user.findUnique({
       where: { id },
       select: {
@@ -60,6 +60,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
 
     if (!session || session.user.role !== "ADMIN") {
@@ -69,7 +70,6 @@ export async function PATCH(
       );
     }
 
-    const { id } = await params;
     const body = await request.json();
     const validated = userUpdateSchema.parse(body);
 
@@ -90,18 +90,8 @@ export async function PATCH(
       }
     }
 
-    // Build update data object with only defined values
-    const updateData: {
-      name?: string;
-      email?: string;
-      password?: string;
-      role?: 'ADMIN' | 'USER';
-    } = {};
-    if (validated.name !== undefined) updateData.name = validated.name;
-    if (validated.email !== undefined) updateData.email = validated.email;
-    if (validated.role !== undefined) updateData.role = validated.role;
-
     // If password is being updated, hash it
+    let updateData = { ...validated };
     if (validated.password) {
       updateData.password = await hash(validated.password, 12);
     }
@@ -139,6 +129,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
 
     if (!session || session.user.role !== "ADMIN") {
@@ -147,8 +138,6 @@ export async function DELETE(
         { status: 401 }
       );
     }
-
-    const { id } = await params;
 
     // Prevent deleting the last admin user
     if (session.user.id === id) {

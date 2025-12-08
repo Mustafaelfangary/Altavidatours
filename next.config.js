@@ -18,15 +18,11 @@ const nextConfig = {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'your-secret-key-here'
   },
   
-  // TypeScript and ESLint configurations
+  // TypeScript configuration
   typescript: {
     ignoreBuildErrors: true,
   },
   
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-
   // Experimental & performance optimizations
   experimental: {
     optimizeCss: true,
@@ -37,6 +33,9 @@ const nextConfig = {
     ]
   },
   
+  // Turbopack configuration
+  turbopack: {},
+
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],

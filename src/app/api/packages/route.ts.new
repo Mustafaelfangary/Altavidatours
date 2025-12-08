@@ -1,0 +1,122 @@
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { prisma } from "@/lib/prisma";
+import { authOptions } from "@/lib/auth";
+import type { Prisma } from "@prisma/client";
+import type { Decimal } from "@prisma/client/runtime/library";
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const cruiseId = searchParams.get("cruiseId");
+    
+    const query = cruiseId ? { where: { cruiseId } } : {};
+    const packages = await prisma.nileCruisePackage.findMany({
+      ...query,
+      include: {
+        cruise: {
+          include: {
+            images: true
+          }
+        },
+        itinerary: {
+          orderBy: {
+            day: 'asc'
+          }
+        }
+      },
+    });
+
+    return NextResponse.json(packages);
+  } catch (error) {
+    return NextResponse.json({ error: "Failed to fetch packages" }, { status: 500 });
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session || session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const body = await request.json();
+    
+    const createData: Prisma.NileCruisePackageCreateInput = {
+      name: body.name,
+      description: body.description,
+      duration: body.duration,
+      price: new Decimal(body.price),
+      inclusions: body.inclusions,
+      exclusions: body.exclusions,
+      highlights: body.highlights,
+      cruise: {
+        connect: { id: body.cruiseId }
+      },
+      itinerary: {
+        createMany: {
+          data: body.itinerary.map((item: { day: number; description: string }) => ({
+            day: item.day,
+            description: item.description,
+          })),
+        },
+      },
+    };
+
+    const newPackage = await prisma.nileCruisePackage.create({
+      data: createData,
+      include: {
+        itinerary: true,
+        cruise: {
+          include: {
+            images: true
+          }
+        }
+      },
+    });
+
+    return NextResponse.json(newPackage);
+  } catch (error) {
+    console.error('Failed to create package:', error);
+    return NextResponse.json({ error: "Failed to create package" }, { status: 500 });
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session || session.user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const body = await request.json();
+    
+    const updateData: Prisma.NileCruisePackageUpdateInput = {
+      name: body.name,
+      description: body.description,
+      duration: body.duration,
+      price: new Decimal(body.price),
+      inclusions: body.inclusions,
+      exclusions: body.exclusions,
+      highlights: body.highlights,
+    };
+
+    const updatedPackage = await prisma.nileCruisePackage.update({
+      where: { id: body.id },
+      data: updateData,
+      include: {
+        itinerary: true,
+        cruise: {
+          include: {
+            images: true
+          }
+        }
+      },
+    });
+
+    return NextResponse.json(updatedPackage);
+  } catch (error) {
+    console.error('Failed to update package:', error);
+    return NextResponse.json({ error: "Failed to update package" }, { status: 500 });
+  }
+}

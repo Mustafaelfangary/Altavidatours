@@ -1,157 +1,103 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Star, Calendar, MapPin, User, MessageSquare, Edit, Trash2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { toast } from '@/components/ui/use-toast';
+import { Star, ThumbsUp } from 'lucide-react';
+import Image from 'next/image';
 
-interface Review {
+type Review = {
   id: string;
-  rating: number;
+  title: string;
   comment: string;
-  title?: string;
-  photos: string[];
-  location?: string;
-  tripDate?: string;
-  approvedAt: string;
+  rating: number;
+  helpful: number;
+  verified: boolean;
   createdAt: string;
-  user: {
-    id: string;
-    name?: string;
-    image?: string;
-  };
-  package?: {
+  dahabiya: {
     id: string;
     name: string;
-    mainImageUrl?: string;
   };
-  dahabiya?: {
-    id: string;
-    name: string;
-    mainImageUrl?: string;
-  };
-}
+  photos: string[];
+  response?: string;
+};
 
-interface ReviewsListProps {
-  userId?: string;
-  packageId?: string;
-  dahabiyaId?: string;
-  showUserInfo?: boolean;
-  showActions?: boolean;
-  limit?: number;
-}
-
-const ReviewsList: React.FC<ReviewsListProps> = ({ 
-  userId, 
-  packageId,
-  dahabiyaId,
-  showUserInfo = true,
-  showActions = false,
-  limit 
-}) => {
+export function ReviewsList() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     fetchReviews();
-  }, [userId, packageId, dahabiyaId]);
+  }, []);
 
   const fetchReviews = async () => {
     try {
-      setLoading(true);
-      setError(null);
-      // Use the reviews API endpoint
-      let url = '/api/reviews?';
-      const params = new URLSearchParams();
-
-      if (userId) params.append('userId', userId);
-      if (packageId) params.append('packageId', packageId);
-      if (dahabiyaId) params.append('dahabiyaId', dahabiyaId);
-      if (limit) params.append('limit', limit.toString());
-
-      url += params.toString();
-
-      const response = await fetch(url);
+      const response = await fetch('/api/user/reviews');
       if (!response.ok) {
-        // If unauthorized, show empty state instead of error
-        if (response.status === 401) {
-          setReviews([]);
-          return;
-        }
-        throw new Error(`Failed to fetch reviews: ${response.status}`);
+        throw new Error('Failed to fetch reviews');
       }
-
       const data = await response.json();
-      setReviews(data.reviews || data || []);
-    } catch (err) {
-      console.error('Reviews fetch error:', err);
-      // Set empty array instead of error for better UX
-      setReviews([]);
-      setError(null);
+      setReviews(data.reviews || []);
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+      toast.error("Failed to load reviews. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   const deleteReview = async (reviewId: string) => {
-    if (!confirm('Are you sure you want to delete this review?')) {
-      return;
-    }
+    if (!confirm('Are you sure you want to delete this review?')) return;
 
     try {
-      const response = await fetch(`/api/reviews/${reviewId}`, {
+      const response = await fetch(`/api/user/reviews?id=${reviewId}`, {
         method: 'DELETE',
       });
+
+      if (response.status === 404) {
+        setReviews((prev) => prev.filter((review) => review.id !== reviewId));
+        toast.success("Review deleted successfully.");
+        return;
+      }
 
       if (!response.ok) {
         throw new Error('Failed to delete review');
       }
 
-      setReviews(prev => prev.filter(review => review.id !== reviewId));
-      toast.success('Review deleted successfully');
-    } catch (err) {
-      toast.error('Failed to delete review');
+      setReviews((prev) => prev.filter((review) => review.id !== reviewId));
+      
+      toast.success("Review deleted successfully.");
+    } catch (error) {
+      console.error('Error deleting review:', error);
+      toast.error("Failed to delete review. Please try again.");
     }
   };
 
   const renderStars = (rating: number) => {
-    return (
-      <div className="flex items-center gap-1">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <Star
-            key={star}
-            className={`w-4 h-4 ${
-              star <= rating 
-                ? 'fill-yellow-400 text-yellow-400' 
-                : 'text-gray-300'
-            }`}
-          />
-        ))}
-      </div>
-    );
+    return Array.from({ length: 5 }).map((_, index) => (
+      <Star
+        key={index}
+        className={`h-4 w-4 ${index < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+      />
+    ));
   };
 
   if (loading) {
     return (
       <div className="space-y-4">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="animate-pulse">
-            <CardContent className="p-6">
-              <div className="flex space-x-4">
-                <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
-                <div className="flex-1 space-y-2">
-                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                  <div className="h-20 bg-gray-200 rounded"></div>
-                </div>
-              </div>
+          <Card key={i}>
+            <CardHeader>
+              <Skeleton className="h-6 w-[200px]" />
+              <Skeleton className="h-4 w-[150px]" />
+            </CardHeader>
+            <CardContent>
+              <Skeleton className="h-20 w-full" />
             </CardContent>
           </Card>
         ))}
@@ -159,138 +105,84 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
     );
   }
 
-  // Remove error display - just show empty state for better UX
-
   if (reviews.length === 0) {
     return (
-      <div className="text-center py-12">
-        <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-ocean-blue-400 to-deep-blue-400 rounded-full flex items-center justify-center">
-          <Star className="w-8 h-8 text-white" />
-        </div>
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">No Reviews Yet</h3>
-        <p className="text-gray-600 mb-6">Share your experiences after completing a journey</p>
-        <Link href="/packages">
-          <Button className="bg-gradient-to-r from-ocean-blue-400 to-deep-blue-400 hover:from-ocean-blue-500 hover:to-deep-blue-500 text-white">
-            <Star className="w-4 h-4 mr-2" />
-            Book a Journey
-          </Button>
-        </Link>
-      </div>
+      <Card>
+        <CardContent className="text-center py-8">
+          <p className="text-muted-foreground mb-4">You haven&apos;t written any reviews yet.</p>
+          <Button onClick={() => router.push('/dahabiyat')}>Browse Dahabiyas</Button>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {reviews.map((review) => (
-        <Card key={review.id} className="overflow-hidden">
-          <CardContent className="p-6">
-            <div className="space-y-4">
-              {/* Header */}
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-4">
-                  {showUserInfo && (
-                    <Avatar className="w-12 h-12">
-                      <AvatarImage src={review.user.image || ''} />
-                      <AvatarFallback>
-                        {review.user.name?.charAt(0) || <User className="w-6 h-6" />}
-                      </AvatarFallback>
-                    </Avatar>
-                  )}
-                  <div>
-                    {showUserInfo && (
-                      <p className="font-semibold text-gray-900">
-                        {review.user.name || 'Anonymous'}
-                      </p>
-                    )}
-                    <div className="flex items-center gap-2 mb-2">
-                      {renderStars(review.rating)}
-                      <span className="text-sm text-gray-500">
-                        {format(new Date(review.createdAt), 'MMM dd, yyyy')}
-                      </span>
-                    </div>
-                    {(review.package || review.dahabiya) && (
-                      <p className="text-sm text-gray-600">
-                        {review.package?.name || review.dahabiya?.name}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                
-                {showActions && (
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm">
-                      <Edit className="w-4 h-4" />
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => deleteReview(review.id)}
-                    >
-                      <Trash2 className="w-4 h-4 text-red-500" />
-                    </Button>
-                  </div>
-                )}
+        <Card key={review.id}>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="text-lg">{review.title || 'Untitled Review'}</CardTitle>
+                <CardDescription>
+                  {review.dahabiya.name} • {format(new Date(review.createdAt), 'PP')}
+                </CardDescription>
               </div>
-
-              {/* Title */}
-              {review.title && (
-                <h4 className="font-semibold text-lg text-gray-900">
-                  {review.title}
-                </h4>
-              )}
-
-              {/* Comment */}
-              <p className="text-gray-700 leading-relaxed">
-                {review.comment}
-              </p>
-
-              {/* Trip Details */}
-              {(review.location || review.tripDate) && (
-                <div className="flex items-center gap-4 text-sm text-gray-500">
-                  {review.location && (
-                    <div className="flex items-center gap-1">
-                      <MapPin className="w-4 h-4" />
-                      <span>{review.location}</span>
-                    </div>
-                  )}
-                  {review.tripDate && (
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      <span>Trip: {format(new Date(review.tripDate), 'MMM yyyy')}</span>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Photos */}
-              {review.photos && review.photos.length > 0 && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  {review.photos.slice(0, 4).map((photo, index) => (
-                    <div key={index} className="relative aspect-square rounded-lg overflow-hidden">
-                      <Image
-                        src={photo}
-                        alt={`Review photo ${index + 1}`}
-                        fill
-                        className="object-cover hover:scale-105 transition-transform cursor-pointer"
-                      />
-                      {index === 3 && review.photos.length > 4 && (
-                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                          <span className="text-white font-semibold">
-                            +{review.photos.length - 4}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+              <div className="flex items-center space-x-1">
+                {renderStars(review.rating)}
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-gray-600 mb-4">{review.comment}</p>
+            {review.photos && review.photos.length > 0 && (
+              <div className="flex gap-2 mb-4">
+                {review.photos.map((photo, index) => (
+                  <div key={index} className="relative h-12 w-12">
+                    <Image
+                      src={photo}
+                      alt={`Review photo ${index + 1}`}
+                      fill
+                      className="object-cover rounded-full"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            {review.response && (
+              <div className="bg-gray-50 p-4 rounded-lg mt-4">
+                <p className="text-sm font-medium mb-2">Response from Cruise Team:</p>
+                <p className="text-sm text-gray-600">{review.response}</p>
+              </div>
+            )}
+            <div className="flex items-center space-x-2 mt-4">
+              <ThumbsUp className="h-4 w-4 text-gray-400" />
+              <span className="text-sm text-gray-500">{review.helpful} people found this helpful</span>
+              {review.verified && (
+                <span className="text-sm text-green-600 font-medium ml-2">
+                  Verified Purchase
+                </span>
               )}
             </div>
           </CardContent>
+          <CardFooter className="justify-end space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => router.push(`/dahabiyat/${review.dahabiya.id}`)}
+            >
+              View Dahabiya
+            </Button>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => deleteReview(review.id)}
+            >
+              Delete Review
+            </Button>
+          </CardFooter>
         </Card>
       ))}
     </div>
   );
-};
-
-export default ReviewsList;
-export { ReviewsList };
+}

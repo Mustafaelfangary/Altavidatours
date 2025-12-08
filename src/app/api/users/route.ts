@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { z } from "zod";
 import { hash } from "bcrypt";
 
@@ -9,7 +9,7 @@ const userCreateSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   password: z.string().min(6),
-  role: z.enum(["ADMIN", "MANAGER", "GUIDE", "USER"]),
+  role: z.enum(["ADMIN", "USER"]),
 });
 
 export async function POST(request: NextRequest) {
@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    return NextResponse.json({ users, total: users.length });
+    return NextResponse.json(users);
   } catch (error) {
     return NextResponse.json(
       { error: "Internal server error" },

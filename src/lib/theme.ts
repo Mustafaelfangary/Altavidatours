@@ -4,230 +4,87 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#0B2E4F', // Nile blue
-      dark: '#061A2A',
-      light: '#0B4871',
+      main: 'hsl(210, 85%, 25%)', // Deep Nile Blue
+      dark: 'hsl(210, 90%, 20%)',
+      light: 'hsl(210, 80%, 35%)',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#D4AF37', // pharaonic gold accent
-      dark: '#B8922E',
-      light: '#F3D472',
-      contrastText: '#ffffff',
+      main: 'hsl(43, 85%, 58%)', // Egyptian Gold
+      dark: 'hsl(43, 90%, 48%)',
+      light: 'hsl(43, 80%, 68%)',
+      contrastText: 'hsl(210, 15%, 15%)',
     },
     background: {
       default: '#ffffff',
-      paper: 'rgba(255,255,255,0.9)',
+      paper: '#ffffff',
     },
     text: {
-      primary: '#0a2833',
-      secondary: '#42515a',
+      primary: 'hsl(210, 15%, 15%)',
+      secondary: 'hsl(210, 10%, 45%)',
     },
-    error: {
-      main: '#c62828',
+  },
+  typography: {
+    fontFamily: [
+      'Inter',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+    ].join(','),
+    h1: {
+      fontFamily: '"Playfair Display", "Times New Roman", serif',
+      fontWeight: 700,
+      letterSpacing: '0.02em',
     },
-    success: {
-      main: '#1bae70',
+    h2: {
+      fontFamily: '"Playfair Display", "Times New Roman", serif',
+      fontWeight: 600,
+      letterSpacing: '0.01em',
     },
-    info: {
-      main: '#1baee1',
+    h3: {
+      fontFamily: '"Playfair Display", "Times New Roman", serif',
+      fontWeight: 600,
+    },
+    h4: {
+      fontWeight: 600,
+    },
+    h5: {
+      fontWeight: 600,
+    },
+    h6: {
+      fontWeight: 600,
     },
   },
   components: {
-    // Fix Material-UI TextField labels and text
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          '& .MuiInputLabel-root': {
-            color: '#000000 !important',
-            fontWeight: 600,
-          },
-          '& .MuiInputLabel-root.Mui-focused': {
-            color: '#1BAE70 !important',
-          },
-          '& .MuiOutlinedInput-root': {
-            '& input': {
-              color: '#000000 !important',
-              fontWeight: 500,
-            },
-            '& textarea': {
-              color: '#000000 !important',
-              fontWeight: 500,
-            },
-          },
-        },
-      },
-    },
-    // Fix Material-UI FormControl labels
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-          '& .MuiInputLabel-root': {
-            color: '#000000 !important',
-            fontWeight: 600,
-          },
-          '& .MuiInputLabel-root.Mui-focused': {
-            color: '#1BAE70 !important',
-          },
-        },
-      },
-    },
-    // Fix Material-UI Select components
-    MuiSelect: {
-      styleOverrides: {
-        root: {
-          color: '#000000 !important',
-          fontWeight: 500,
-        },
-      },
-    },
-    // Fix Material-UI MenuItem text
-    MuiMenuItem: {
-      styleOverrides: {
-        root: {
-          color: '#000000 !important',
-          fontWeight: 500,
-        },
-      },
-    },
-    // Fix Material-UI Typography
-    MuiTypography: {
-      styleOverrides: {
-        root: {
-          color: '#000000 !important',
-          fontWeight: 500,
-        },
-        h1: {
-          color: '#000000 !important',
-          fontWeight: 700,
-        },
-        h2: {
-          color: '#000000 !important',
-          fontWeight: 700,
-        },
-        h3: {
-          color: '#000000 !important',
-          fontWeight: 700,
-        },
-        h4: {
-          color: '#000000 !important',
-          fontWeight: 700,
-        },
-        h5: {
-          color: '#000000 !important',
-          fontWeight: 700,
-        },
-        h6: {
-          color: '#000000 !important',
-          fontWeight: 700,
-        },
-      },
-    },
-    // Fix Material-UI FormControlLabel
-    MuiFormControlLabel: {
-      styleOverrides: {
-        label: {
-          color: '#000000 !important',
-          fontWeight: 600,
-        },
-      },
-    },
-    // Fix Material-UI TableCell
-    MuiTableCell: {
-      styleOverrides: {
-        root: {
-          color: '#000000 !important',
-          fontWeight: 500,
-        },
-        head: {
-          color: '#000000 !important',
-          fontWeight: 700,
-        },
-      },
-    },
-    // Fix Material-UI Button text
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: 'none',
-          borderRadius: '1.25rem',
-          fontWeight: 700,
-          padding: '14px 32px',
-          background: 'linear-gradient(90deg, #0B2E4F 0%, #D4AF37 100%)',
-          color: '#ffffff',
-          boxShadow: '0 4px 24px 0 rgba(11,46,79,0.15)',
-          transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
+          borderRadius: '0.75rem',
+          fontWeight: 600,
+          padding: '12px 24px',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
           '&:hover': {
-            background: 'linear-gradient(90deg, #D4AF37 0%, #0B2E4F 100%)',
-            color: '#ffffff',
-            boxShadow: '0 8px 32px 0 rgba(11,46,79,0.25)',
+            transform: 'translateY(-2px)',
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
           },
         },
         contained: {
-          background: 'linear-gradient(135deg, #0B2E4F 0%, #D4AF37 100%)',
+          background: 'linear-gradient(135deg, hsl(210, 85%, 25%) 0%, hsl(210, 80%, 35%) 100%)',
           '&:hover': {
-            background: 'linear-gradient(135deg, #D4AF37 0%, #0B2E4F 100%)',
+            background: 'linear-gradient(135deg, hsl(210, 90%, 20%) 0%, hsl(210, 85%, 30%) 100%)',
           },
         },
         outlined: {
           borderWidth: '2px',
           '&:hover': {
             borderWidth: '2px',
-            backgroundColor: 'rgba(212, 175, 55, 0.08)',
-          },
-        },
-      },
-    },
-    // Fix Material-UI Chip text
-    MuiChip: {
-      styleOverrides: {
-        label: {
-          color: '#000000 !important',
-          fontWeight: 600,
-        },
-      },
-    },
-    // Fix Material-UI Dialog components
-    MuiDialog: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: '#ffffff !important',
-          backgroundImage: 'none !important',
-          opacity: '1 !important',
-          borderRadius: '1rem',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
-          '&:hover': {
-            transform: 'none',
-          },
-        },
-      },
-    },
-    MuiDialogTitle: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#1BAE70 !important',
-          color: '#ffffff !important',
-          opacity: '1 !important',
-        },
-      },
-    },
-    MuiDialogContent: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#ffffff !important',
-          opacity: '1 !important',
-        },
-      },
-    },
-    // Fix Material-UI Tab components
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          color: '#000000 !important',
-          fontWeight: 600,
-          '&.Mui-selected': {
-            color: '#1BAE70 !important',
-            fontWeight: 700,
+            backgroundColor: 'hsl(210, 85%, 25%, 0.05)',
           },
         },
       },
@@ -235,78 +92,45 @@ export const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: '2rem',
-          background: 'rgba(255,255,255,0.15)',
-          boxShadow: '0 8px 32px 0 rgba(10,35,66,0.25)',
+          borderRadius: '1rem',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          '&:hover': {
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
+            transform: 'translateY(-2px)',
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            borderRadius: '0.75rem',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            '&:hover': {
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+            },
+            '&.Mui-focused': {
+              boxShadow: '0 4px 16px rgba(210, 85%, 25%, 0.2)',
+            },
+          },
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: '2rem',
-          background: 'rgba(255,255,255,0.15)',
-          boxShadow: '0 8px 32px 0 rgba(10,35,66,0.25)',
-          border: '1.5px solid rgba(255,255,255,0.18)',
+          borderRadius: '1rem',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           overflow: 'hidden',
-        },
-      },
-    },
-    MuiBackdrop: {
-      styleOverrides: {
-        root: {
-          backgroundColor: 'rgba(0, 0, 0, 0.9) !important',
-          backdropFilter: 'blur(8px) !important',
+          '&:hover': {
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
+            transform: 'translateY(-4px)',
+          },
         },
       },
     },
   },
-  typography: {
-    fontFamily: [
-      'Montserrat',
-      'Inter',
-      'Playfair Display',
-      'serif',
-      'sans-serif',
-    ].join(','),
-    h1: {
-      fontFamily: 'Playfair Display, serif',
-      fontWeight: 800,
-      color: '#d4af37',
-      letterSpacing: '0.04em',
-    },
-    h2: {
-      fontFamily: 'Playfair Display, serif',
-      fontWeight: 700,
-      color: '#ffe082',
-      letterSpacing: '0.03em',
-    },
-    h3: {
-      fontFamily: 'Playfair Display, serif',
-      fontWeight: 600,
-      color: '#ffe082',
-    },
-    h4: {
-      fontWeight: 600,
-      color: '#ffe082',
-    },
-    h5: {
-      fontWeight: 600,
-      color: '#ffe082',
-    },
-    h6: {
-      fontWeight: 600,
-      color: '#ffe082',
-    },
-    body1: {
-      color: '#ffffff',
-    },
-    body2: {
-      color: '#ffe082',
-    },
-    button: {
-      fontWeight: 700,
-      color: '#0a2342',
-    },
-  },
-});
+}); 

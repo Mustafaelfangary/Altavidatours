@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,10 +10,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import Link from "next/link";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { Upload } from "lucide-react";
 import Image from "next/image";
-import EmailVerificationForm from "./EmailVerificationForm";
 
 const signUpSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -35,22 +34,7 @@ export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [showVerification, setShowVerification] = useState(false);
-  const [userEmail, setUserEmail] = useState('');
-  const [formData, setFormData] = useState<SignUpFormData | null>(null);
   const router = useRouter();
-
-  // Check URL parameters on component mount to handle page refresh
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const email = urlParams.get('email');
-    const verification = urlParams.get('verification');
-
-    if (email && verification === 'true') {
-      setUserEmail(email);
-      setShowVerification(true);
-    }
-  }, []);
   
   const {
     register,
@@ -138,18 +122,27 @@ export default function SignUpForm() {
       const responseData = await response.json();
       console.log('Signup successful:', responseData);
 
-      // All new accounts now require email verification
-      setUserEmail(data.email);
-      setFormData(data); // Store form data for auto sign-in after verification
-      setShowVerification(true);
+      toast.success("Account created successfully!");
 
-      // Update URL to persist verification state on page refresh
-      const newUrl = new URL(window.location.href);
-      newUrl.searchParams.set('email', data.email);
-      newUrl.searchParams.set('verification', 'true');
-      window.history.replaceState({}, '', newUrl.toString());
+      // Sign in the user automatically after successful registration
+      console.log('Attempting to sign in...');
+      const result = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
 
-      toast.success("Account created! Please check your email for verification code.");
+      if (result?.error) {
+        console.error('Auto sign-in failed:', result.error);
+        toast.error("Account created but failed to sign in automatically");
+        router.push("/auth/signin");
+        return;
+      }
+
+      console.log('Sign-in successful, redirecting to profile...');
+      // Redirect to profile page for regular users
+      router.push("/profile");
+      router.refresh();
     } catch (error) {
       console.error('Sign up error:', error);
       toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
@@ -158,70 +151,12 @@ export default function SignUpForm() {
     }
   };
 
-  const handleVerificationComplete = async () => {
-    // Clear URL parameters
-    const newUrl = new URL(window.location.href);
-    newUrl.searchParams.delete('email');
-    newUrl.searchParams.delete('verification');
-    window.history.replaceState({}, '', newUrl.toString());
-
-    try {
-      // Auto sign-in the user after email verification
-      const result = await signIn("credentials", {
-        email: userEmail,
-        password: formData?.password, // Use the password from the form
-        redirect: false, // Handle redirect manually
-      });
-
-      if (result?.error) {
-        toast.error("Verification successful, but sign-in failed. Please sign in manually.");
-        router.push("/auth/signin?verified=true");
-        return;
-      }
-
-      if (result?.ok) {
-        toast.success("Account verified and signed in! Welcome to Dahabiyat!");
-
-        // Wait a moment for the session to be established
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        // Force full page reload to ensure middleware recognizes the session
-        window.location.href = '/profile'; // New users always go to profile first
-      }
-    } catch (error) {
-      console.error('Auto sign-in error:', error);
-      toast.error("Verification successful, but sign-in failed. Please sign in manually.");
-      router.push("/auth/signin?verified=true");
-    }
-  };
-
-  // Show verification form if needed
-  if (showVerification) {
-    return (
-      <div className="w-full max-w-md mx-auto">
-        <EmailVerificationForm
-          email={userEmail}
-          onVerified={handleVerificationComplete}
-        />
-        <div className="mt-4 text-center">
-          <Button
-            variant="ghost"
-            onClick={() => setShowVerification(false)}
-            className="text-sm text-gray-600 hover:text-gray-800"
-          >
-            ← Back to signup
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="w-full max-w-md mx-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-4">
           {/* Profile Image Upload */}
-          <div className="flex-col items-center space-y-4">
+          <div className="flex flex-col items-center space-y-4">
             <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200">
               {previewUrl ? (
                 <Image
@@ -231,14 +166,14 @@ export default function SignUpForm() {
                   className="object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-white flex items-center justify-center">
-                  <Upload className="w-8 h-8 text-text-primary" />
+                <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                  <Upload className="w-8 h-8 text-gray-400" />
                 </div>
               )}
             </div>
             <div>
               <Label htmlFor="profileImage" className="cursor-pointer">
-                <span className="text-sm text-text-primary hover:text-text-primary">
+                <span className="text-sm text-gray-600 hover:text-gray-900">
                   {previewUrl ? "Change photo" : "Add photo (optional)"}
                 </span>
                 <Input
@@ -263,7 +198,7 @@ export default function SignUpForm() {
               className={errors.name ? "border-red-500" : ""}
             />
             {errors.name && (
-              <p className="text-text-primary text-sm mt-1">{errors.name.message}</p>
+              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
             )}
           </div>
 
@@ -278,7 +213,7 @@ export default function SignUpForm() {
               className={errors.email ? "border-red-500" : ""}
             />
             {errors.email && (
-              <p className="text-text-primary text-sm mt-1">{errors.email.message}</p>
+              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
             )}
           </div>
 
@@ -293,7 +228,7 @@ export default function SignUpForm() {
               className={errors.phone ? "border-red-500" : ""}
             />
             {errors.phone && (
-              <p className="text-text-primary text-sm mt-1">{errors.phone.message}</p>
+              <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
             )}
           </div>
           
@@ -308,7 +243,7 @@ export default function SignUpForm() {
               className={errors.password ? "border-red-500" : ""}
             />
             {errors.password && (
-              <p className="text-text-primary text-sm mt-1">{errors.password.message}</p>
+              <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
             )}
           </div>
 
@@ -323,7 +258,7 @@ export default function SignUpForm() {
               className={errors.confirmPassword ? "border-red-500" : ""}
             />
             {errors.confirmPassword && (
-              <p className="text-text-primary text-sm mt-1">{errors.confirmPassword.message}</p>
+              <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
             )}
           </div>
         </div>

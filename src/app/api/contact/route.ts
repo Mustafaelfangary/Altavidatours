@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { ContactStatus } from "@prisma/client";
 import { sendEmail } from '@/lib/email';
 
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     // Send email notification
     await sendEmail({
-      to: process.env.CONTACT_EMAIL || 'info@cleopatradahabiya.com',
+      to: process.env.CONTACT_EMAIL || 'info@egiptotrips.com',
       subject: `New Contact Form Submission: ${subject}`,
       template: 'contact',
       data: {

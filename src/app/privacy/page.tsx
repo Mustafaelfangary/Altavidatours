@@ -1,113 +1,131 @@
-"use client";
-
 import { Container, Typography, Box, Paper } from '@mui/material';
-import { useContent } from '@/hooks/useContent';
-import { useState, useEffect } from 'react';
-import {
-  HieroglyphicText,
-  EgyptianBorder,
-  PharaohCard,
-  FloatingEgyptianElements,
-  EgyptianPatternBackground,
-  RoyalCrown,
-  HieroglyphicDivider,
-} from '@/components/ui/pharaonic-elements';
-import LogoLoader from '@/components/ui/LogoLoader';
-import UnifiedHero from '@/components/ui/UnifiedHero';
 
 export default function PrivacyPage() {
-  const { getContent } = useContent({ page: 'privacy' });
-  const [privacyContent, setPrivacyContent] = useState<{
-    title: string;
-    content: string;
-    lastUpdated: string;
-  } | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const loadPrivacyContent = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/settings/privacy', {
-          cache: 'no-store',
-          headers: {
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to load privacy content');
-        }
-
-        const data = await response.json();
-        setPrivacyContent(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load privacy content');
-        // Fallback to default content
-        setPrivacyContent({
-          title: 'Privacy Policy',
-          content: 'Privacy policy content is being updated. Please check back soon.',
-          lastUpdated: new Date().toISOString()
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPrivacyContent();
-  }, []);
-
-  if (loading) {
-    return <LogoLoader variant="elegant" />;
-  }
   return (
-    <div className="min-h-screen bg-slate-50 relative overflow-hidden">
-      {/* Egyptian Pattern Background */}
-      <EgyptianPatternBackground className="opacity-5" />
-      <FloatingEgyptianElements />
-
-      {/* Unified Hero Section */}
-      <UnifiedHero
-        imageSrc={getContent('privacy_hero_image', '/images/privacy-hero-bg.jpg')}
-        title={privacyContent?.title || getContent('privacy_hero_title', 'Privacy Policy')}
-        subtitle={getContent('privacy_hero_subtitle', '𓊪 Royal Decree of Privacy Protection 𓊪')}
-        hieroglyphicTitle={true}
-        showEgyptianElements={true}
-        showRoyalCrown={true}
-        showHieroglyphics={true}
-        overlayOpacity="medium"
-        textColor="dark"
-        minHeight="80vh"
-      />
+    <main>
+      {/* Hero Section */}
+      <Box
+        sx={{
+          position: 'relative',
+          height: '40vh',
+          display: 'flex',
+          alignItems: 'center',
+          color: 'white',
+          bgcolor: 'primary.main',
+        }}
+      >
+        <Container maxWidth="lg">
+          <Typography variant="h1" sx={{ fontWeight: 'bold' }}>
+            Privacy Policy
+          </Typography>
+        </Container>
+      </Box>
 
       {/* Privacy Content */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-deep-blue-50/30 relative">
-        <Container maxWidth="md">
-          <PharaohCard className="overflow-hidden">
-            <div className="p-8 md:p-12">
-              {privacyContent?.lastUpdated && (
-                <div className="text-center mb-8 text-amber-600">
-                  <Typography variant="body2">
-                    Last Updated: {new Date(privacyContent.lastUpdated).toLocaleDateString()}
-                  </Typography>
-                </div>
-              )}
+      <Container maxWidth="md" sx={{ py: 8 }}>
+        <Paper sx={{ p: 4 }}>
+          <Typography variant="h4" sx={{ mb: 4 }}>
+            1. Information We Collect
+          </Typography>
+          <Typography paragraph>
+            1.1. Personal Information: We collect information that you provide directly to us, including your name, email address, phone number, and payment information.
+          </Typography>
+          <Typography paragraph>
+            1.2. Booking Information: Details about your cruise preferences, special requirements, and travel plans.
+          </Typography>
+          <Typography paragraph>
+            1.3. Website Usage: Information about how you interact with our website, including IP address, browser type, and pages visited.
+          </Typography>
 
-              <div className="prose prose-lg prose-amber max-w-none">
-                <div
-                  className="text-amber-800 leading-relaxed"
-                  dangerouslySetInnerHTML={{
-                    __html: privacyContent?.content || 'Privacy policy content is being updated. Please check back soon.'
-                  }}
-                />
-              </div>
-            </div>
-          </PharaohCard>
-        </Container>
-      </section>
-    </div>
+          <Typography variant="h4" sx={{ mb: 4, mt: 6 }}>
+            2. How We Use Your Information
+          </Typography>
+          <Typography paragraph>
+            2.1. To process your bookings and payments.
+          </Typography>
+          <Typography paragraph>
+            2.2. To communicate with you about your bookings and provide customer support.
+          </Typography>
+          <Typography paragraph>
+            2.3. To send you marketing communications (with your consent).
+          </Typography>
+          <Typography paragraph>
+            2.4. To improve our website and services.
+          </Typography>
+
+          <Typography variant="h4" sx={{ mb: 4, mt: 6 }}>
+            3. Information Sharing
+          </Typography>
+          <Typography paragraph>
+            3.1. We do not sell your personal information to third parties.
+          </Typography>
+          <Typography paragraph>
+            3.2. We may share your information with:
+          </Typography>
+          <Typography paragraph>
+            - Service providers who assist in operating our website and conducting our business
+          </Typography>
+          <Typography paragraph>
+            - Legal authorities when required by law
+          </Typography>
+
+          <Typography variant="h4" sx={{ mb: 4, mt: 6 }}>
+            4. Data Security
+          </Typography>
+          <Typography paragraph>
+            4.1. We implement appropriate security measures to protect your personal information.
+          </Typography>
+          <Typography paragraph>
+            4.2. We use secure servers and encryption for sensitive data.
+          </Typography>
+
+          <Typography variant="h4" sx={{ mb: 4, mt: 6 }}>
+            5. Your Rights
+          </Typography>
+          <Typography paragraph>
+            5.1. You have the right to access, correct, or delete your personal information.
+          </Typography>
+          <Typography paragraph>
+            5.2. You can opt-out of marketing communications at any time.
+          </Typography>
+          <Typography paragraph>
+            5.3. You can request a copy of your personal data.
+          </Typography>
+
+          <Typography variant="h4" sx={{ mb: 4, mt: 6 }}>
+            6. Cookies
+          </Typography>
+          <Typography paragraph>
+            6.1. We use cookies to improve your browsing experience and analyze website traffic.
+          </Typography>
+          <Typography paragraph>
+            6.2. You can control cookie settings through your browser preferences.
+          </Typography>
+
+          <Typography variant="h4" sx={{ mb: 4, mt: 6 }}>
+            7. Changes to This Policy
+          </Typography>
+          <Typography paragraph>
+            7.1. We may update this privacy policy from time to time.
+          </Typography>
+          <Typography paragraph>
+            7.2. We will notify you of any significant changes via email or website notice.
+          </Typography>
+
+          <Typography variant="h4" sx={{ mb: 4, mt: 6 }}>
+            8. Contact Us
+          </Typography>
+          <Typography paragraph>
+            If you have any questions about this privacy policy, please contact us at:
+          </Typography>
+          <Typography paragraph>
+            Email: privacy@egiptotrips.com
+          </Typography>
+          <Typography paragraph>
+            Phone: +20 123 456 7890
+          </Typography>
+        </Paper>
+      </Container>
+    </main>
   );
-}
+} 

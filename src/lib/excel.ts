@@ -8,13 +8,22 @@ interface Booking {
   totalPrice: number;
   status: string;
   specialRequests?: string | null;
-  travelService: {
+  dailyTour?: {
     name: string;
-  };
+    images?: { url: string }[];
+  } | null;
+  dahabiya?: {
+    name: string;
+    images?: { url: string }[];
+  } | null;
+  cabin?: {
+    name: string;
+    images?: { url: string }[];
+  } | null;
   user: {
     name: string | null;
-    email: string | null;
-    phone?: string | null;
+    email: string;
+    phoneNumber?: string | null;
   } | null;
 }
 
@@ -75,11 +84,11 @@ export const exportBookingsToExcel = async (bookings: Booking[]) => {
 
   // Header styles by column index (1-based)
   const headerStyles = [
-    { fill: '0080FF', font: { color: 'FFFFFF' } }, // Booking ID (ocean blue)
-    { fill: '0080FF', font: { color: 'FFFFFF' } }, // Dahabiya (ocean blue)
-    { fill: '0080FF', font: { color: 'FFFFFF' } }, // Customer Name (ocean blue)
-    { fill: '0080FF', font: { color: 'FFFFFF' } }, // phone Number (ocean blue)
-    { fill: '0080FF', font: { color: 'FFFFFF' } }, // Customer Email (ocean blue)
+    { fill: 'FFFF00', font: { color: '000000' } }, // Booking ID (yellow)
+    { fill: 'FFFF00', font: { color: '000000' } }, // Dahabiya (yellow)
+    { fill: 'FFFF00', font: { color: '000000' } }, // Customer Name (yellow)
+    { fill: 'FFFF00', font: { color: '000000' } }, // phone Number (yellow)
+    { fill: 'FFFF00', font: { color: '000000' } }, // Customer Email (yellow)
     { fill: '00B050', font: { color: 'FFFFFF' } }, // Start Date (green)
     { fill: 'FF0000', font: { color: 'FFFFFF' } }, // End Date (red)
     { fill: 'B7B7B7', font: { color: '000000' } }, // Number of Guests (gray)
@@ -107,11 +116,13 @@ export const exportBookingsToExcel = async (bookings: Booking[]) => {
 
   // Add data rows
   bookings.forEach(booking => {
+    // Get the tour/dahabiya name from whichever is available
+    const tourName = booking.dahabiya?.name || booking.dailyTour?.name || booking.cabin?.name || 'N/A';
     const row = worksheet.addRow({
       id: booking.id,
-      dahabiya: booking.travelService.name,
+      dahabiya: tourName,
       customerName: booking.user?.name || 'N/A',
-      phoneNumber: booking.user?.phone || 'N/A',
+      phoneNumber: booking.user?.phoneNumber || 'N/A',
       customerEmail: booking.user?.email || 'N/A',
       startDate: new Date(booking.startDate).toLocaleDateString(),
       endDate: new Date(booking.endDate).toLocaleDateString(),
@@ -134,7 +145,17 @@ export const exportBookingsToExcel = async (bookings: Booking[]) => {
     row.getCell(9).numFmt = '"$"#,##0.00';
   });
 
-  // Generate and return the buffer for server-side use
+  // Download
   const buffer = await workbook.xlsx.writeBuffer();
-  return buffer;
+  const blob = new Blob([buffer], {
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  });
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `dahabiyat-bookings-${new Date().toISOString().split('T')[0]}.xlsx`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(url);
 }; 

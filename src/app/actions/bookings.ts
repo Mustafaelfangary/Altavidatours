@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { z } from 'zod';
 
 const bookingStatusSchema = z.object({
@@ -26,7 +26,7 @@ export async function updateBookingStatus(formData: FormData) {
     revalidatePath('/dashboard');
     
     return { success: true, data: booking };
-  } catch {
+  } catch (error) {
     return { success: false, error: 'Failed to update booking status' };
   }
 }
@@ -63,7 +63,7 @@ export async function getBookingStats() {
     });
 
     return { success: true, data: stats };
-  } catch {
+  } catch (error) {
     return { success: false, error: 'Failed to fetch booking stats' };
   }
 }

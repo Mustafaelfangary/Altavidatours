@@ -35,23 +35,9 @@ export const AnimatedSection = forwardRef<HTMLDivElement, AnimatedSectionProps>(
       'scale-in': 'animate-scale-in',
     };
 
-    // Ensure both internal observer ref and any forwarded ref are set
-    const setRefs = (node: HTMLDivElement | null) => {
-      // Attach to internal ref used by IntersectionObserver
-      // @ts-ignore - ref is created as HTMLElement
-      ref.current = node as any;
-      // Attach to forwarded ref if provided
-      if (typeof forwardedRef === 'function') {
-        forwardedRef(node);
-      } else if (forwardedRef && 'current' in forwardedRef) {
-        // @ts-ignore - forwardedRef may be mutable ref
-        forwardedRef.current = node;
-      }
-    };
-
     return (
       <div
-        ref={setRefs}
+        ref={forwardedRef || (ref as any)}
         className={cn(
           'transition-all duration-300',
           isVisible ? animationClasses[animation] : 'opacity-0',
@@ -89,7 +75,7 @@ export function StaggeredAnimation({
   const { ref, isVisible } = useScrollAnimation({ threshold });
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref as any} className={className}>
       {children.map((child, index) => (
         <AnimatedSection
           key={index}
@@ -134,7 +120,7 @@ export function ParallaxElement({ children, className, speed = 0.5 }: ParallaxEl
 
   return (
     <div
-      ref={ref}
+      ref={ref as any}
       className={className}
       style={{
         transform: `translateY(${offset}px)`,

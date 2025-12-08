@@ -1,16 +1,29 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcryptjs';
-import { sendWelcomeEmail } from '@/lib/email/welcome-email';
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import prisma from "@/lib/prisma";
+import { hash } from "bcrypt";
+import { z } from "zod";
+
+// Schema for creating a new admin
+const createAdminSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  role: z.literal("ADMIN"),
+});
 
 // GET /api/admin/users - Get all users
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.role || !["ADMIN", "MANAGER"].includes(session.user.role)) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    // Check if user is authenticated and is an admin
+    if (!session?.user || session.user.role !== "ADMIN") {
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
     }
 
     const users = await prisma.user.findMany({
@@ -20,105 +33,60 @@ export async function GET() {
         email: true,
         role: true,
         createdAt: true,
-        updatedAt: true,
-        emailVerified: true,
-        phone: true,
-        loyaltyPoints: true,
-        _count: {
-          select: {
-            bookings: true,
-            reviews: true
-          }
-        }
       },
-      orderBy: [
-        { role: 'asc' },
-        { createdAt: 'desc' }
-      ]
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
-    // Transform users to match frontend expectations
-    const transformedUsers = users.map(user => ({
-      ...user,
-      isEmailVerified: !!user.emailVerified,
-      loyaltyPoints: user.loyaltyPoints || 0
-    }));
-
-    return NextResponse.json({ users: transformedUsers });
+    return NextResponse.json(users);
   } catch (error) {
-    console.error('Error fetching users:', error);
-    return NextResponse.json({ error: 'Failed to fetch users' }, { status: 500 });
+    console.error("Error fetching users:", error);
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
   }
 }
 
-// POST /api/admin/users - Create new user
-export async function POST(request: NextRequest) {
+// POST /api/admin/users - Create a new admin
+export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.role || !["ADMIN", "MANAGER"].includes(session.user.role)) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    // Check if user is authenticated and is an admin
+    if (!session?.user || session.user.role !== "ADMIN") {
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
     }
 
-    const data = await request.json();
-    const { name, email, password, role } = data;
-
-    // Validate required fields
-    if (!name || !email || !password || !role) {
-      return NextResponse.json({ 
-        error: 'Missing required fields',
-        message: 'Name, email, password, and role are required' 
-      }, { status: 400 });
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json({ 
-        error: 'Invalid email format',
-        message: 'Please provide a valid email address' 
-      }, { status: 400 });
-    }
-
-    // Validate password length
-    if (password.length < 6) {
-      return NextResponse.json({ 
-        error: 'Password too short',
-        message: 'Password must be at least 6 characters long' 
-      }, { status: 400 });
-    }
-
-    // Validate role
-    const validRoles = ['ADMIN', 'MANAGER', 'GUIDE', 'USER'];
-    if (!validRoles.includes(role)) {
-      return NextResponse.json({ 
-        error: 'Invalid role',
-        message: 'Role must be one of: ADMIN, MANAGER, GUIDE, USER' 
-      }, { status: 400 });
-    }
+    const body = await req.json();
+    const { name, email, password, role } = createAdminSchema.parse(body);
 
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({
-      where: { email }
+      where: { email },
     });
 
     if (existingUser) {
-      return NextResponse.json({ 
-        error: 'User already exists',
-        message: 'A user with this email address already exists' 
-      }, { status: 409 });
+      return NextResponse.json(
+        { message: "User with this email already exists" },
+        { status: 400 }
+      );
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 12);
+    // Hash the password
+    const hashedPassword = await hash(password, 10);
 
-    // Create user
+    // Create the admin user
     const user = await prisma.user.create({
       data: {
         name,
         email,
         password: hashedPassword,
         role,
-        emailVerified: new Date() // Auto-verify admin-created users
       },
       select: {
         id: true,
@@ -126,39 +94,21 @@ export async function POST(request: NextRequest) {
         email: true,
         role: true,
         createdAt: true,
-        emailVerified: true
-      }
+      },
     });
 
-    // Send welcome email only for admin roles (ADMIN, MANAGER, GUIDE)
-    const adminRoles = ['ADMIN', 'MANAGER', 'GUIDE'];
-    if (adminRoles.includes(role)) {
-      try {
-        await sendWelcomeEmail({
-          email,
-          name,
-          password, // Send the plain password (before hashing)
-          role
-        });
-        console.log(`Welcome email sent to ${email}`);
-      } catch (emailError) {
-        console.error('Failed to send welcome email:', emailError);
-        // Don't fail the user creation if email fails
-        // Just log the error
-      }
-    }
-
-    return NextResponse.json({ 
-      user,
-      message: adminRoles.includes(role) 
-        ? 'User created successfully! Welcome email sent with login credentials.' 
-        : 'User created successfully'
-    });
+    return NextResponse.json(user, { status: 201 });
   } catch (error) {
-    console.error('Error creating user:', error);
-    return NextResponse.json({ 
-      error: 'Failed to create user',
-      message: 'An error occurred while creating the user' 
-    }, { status: 500 });
+    console.error("Error creating admin:", error);
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { message: "Invalid input data", errors: error.errors },
+        { status: 400 }
+      );
+    }
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
   }
-}
+} 

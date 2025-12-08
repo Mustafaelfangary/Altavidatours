@@ -38,52 +38,23 @@ export default function SignInForm() {
   const onSubmit = async (data: SignInFormData) => {
     try {
       setIsLoading(true);
-
-      // First check if user exists and if email is verified (bypass for admin users)
-      const checkResponse = await fetch('/api/auth/check-user', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: data.email })
-      });
-
-      if (checkResponse.ok) {
-        const userData = await checkResponse.json();
-        if (userData.exists && !userData.isEmailVerified && userData.role !== 'ADMIN') {
-          toast.error("Please verify your email address before signing in.");
-          router.push(`/auth/verify-email?email=${encodeURIComponent(data.email)}`);
-          return;
-        }
-      }
-
-      // Get callback URL from search params or default to admin dashboard
-      const urlParams = new URLSearchParams(window.location.search);
-      let callbackUrl = urlParams.get('callbackUrl') || '/admin';
       
-      // Ensure the callback URL is a relative path
-      if (callbackUrl.startsWith('http')) {
-        try {
-          const url = new URL(callbackUrl);
-          callbackUrl = url.pathname + url.search;
-        } catch (e) {
-          console.error('Invalid callback URL:', callbackUrl);
-          callbackUrl = '/';
-        }
-      }
-
-      console.log('Signing in with callback URL:', callbackUrl);
-
-      // Sign in with credentials and let NextAuth handle redirect atomically to avoid race conditions
       const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
-        redirect: true,
-        callbackUrl: callbackUrl
+        redirect: false,
       });
 
-      // If redirect is true, NextAuth will navigate. This log is mainly for debugging in non-redirect scenarios.
-      console.log('Sign in result:', result);
+      if (result?.error) {
+        toast.error("Invalid email or password");
+        return;
+      }
+
+      toast.success("Signed in successfully");
       
-      // No manual navigation here to prevent loops; errors will be handled by NextAuth or shown above.
+      // Redirect to dashboard - let the dashboard handle role-based routing
+      router.push("/dashboard");
+      router.refresh();
     } catch (error) {
       console.error('Sign in error:', error);
       toast.error("Something went wrong. Please try again.");
@@ -107,7 +78,7 @@ export default function SignInForm() {
               className={errors.email ? "border-red-500" : ""}
             />
             {errors.email && (
-              <p className="text-text-primary text-sm mt-1">{errors.email.message}</p>
+              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
             )}
           </div>
           
@@ -122,7 +93,7 @@ export default function SignInForm() {
               className={errors.password ? "border-red-500" : ""}
             />
             {errors.password && (
-              <p className="text-text-primary text-sm mt-1">{errors.password.message}</p>
+              <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
             )}
           </div>
         </div>
@@ -147,7 +118,7 @@ export default function SignInForm() {
         </Button>
 
         <div className="text-sm text-center">
-          Don&apos;t have an account?{" "}
+          Don't have an account?{" "}
           <Link 
             href="/auth/signup"
             className="text-primary hover:text-primary-dark"

@@ -1,6 +1,4 @@
-'use client';
-
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/components/Navbar';
 
 const translations = {
   en: {
@@ -8,12 +6,12 @@ const translations = {
     packages: 'Packages',
     about: 'About',
     contact: 'Contact',
-    dashboard: 'Admin',
+    dashboard: 'Dashboard',
     signIn: 'Sign In',
     signOut: 'Sign Out',
     home: 'Home',
     featured: 'Featured Dahabiyat',
-    whyChoose: 'Why Choose Dahabiyat',
+    whyChoose: 'Why Choose Cleopatra Dahabiya',
     testimonials: 'What Our Guests Say',
     faq: 'Frequently Asked Questions',
     about_values_title: 'Our Values',
@@ -30,7 +28,7 @@ const translations = {
     packages: 'الباقات',
     about: 'من نحن',
     contact: 'اتصل بنا',
-    dashboard: 'الإدارة',
+    dashboard: 'لوحة التحكم',
     signIn: 'تسجيل الدخول',
     signOut: 'تسجيل الخروج',
     home: 'الرئيسية',
@@ -52,12 +50,12 @@ const translations = {
     packages: 'Paquetes',
     about: 'Sobre nosotros',
     contact: 'Contacto',
-    dashboard: 'Admin',
+    dashboard: 'Panel',
     signIn: 'Iniciar sesión',
     signOut: 'Cerrar sesión',
     home: 'Inicio',
     featured: 'Dahabiyat Destacados',
-    whyChoose: 'Por qué elegir Dahabiyat',
+    whyChoose: 'Por qué elegir Cleopatra Dahabiya',
     testimonials: 'Lo que dicen nuestros huéspedes',
     faq: 'Preguntas Frecuentes',
     about_values_title: 'Nuestros Valores',
@@ -74,12 +72,12 @@ const translations = {
     packages: 'Pacotes',
     about: 'Sobre nós',
     contact: 'Contato',
-    dashboard: 'Admin',
+    dashboard: 'Painel',
     signIn: 'Entrar',
     signOut: 'Sair',
     home: 'Início',
     featured: 'Dahabiyat em Destaque',
-    whyChoose: 'Por que escolher Dahabiyat',
+    whyChoose: 'Por que escolher Cleopatra Dahabiya',
     testimonials: 'O que nossos hóspedes dizem',
     faq: 'Perguntas Frequentes',
     about_values_title: 'Nossos Valores',
@@ -96,12 +94,12 @@ const translations = {
     packages: 'Forfaits',
     about: 'À propos',
     contact: 'Contact',
-    dashboard: 'Admin',
+    dashboard: 'Tableau de bord',
     signIn: 'Se connecter',
     signOut: 'Se déconnecter',
     home: 'Accueil',
     featured: 'Dahabiyat en vedette',
-    whyChoose: 'Pourquoi choisir Dahabiyat',
+    whyChoose: 'Pourquoi choisir Cleopatra Dahabiya',
     testimonials: 'Ce que disent nos invités',
     faq: 'Questions Fréquemment Posées',
     about_values_title: 'Nos Valeurs',
@@ -118,12 +116,12 @@ const translations = {
     packages: 'Пакеты',
     about: 'О нас',
     contact: 'Контакты',
-    dashboard: 'Админ',
+    dashboard: 'Панель',
     signIn: 'Войти',
     signOut: 'Выйти',
     home: 'Главная',
     featured: 'Избранные Дахабият',
-    whyChoose: 'Почему Dahabiyat',
+    whyChoose: 'Почему Cleopatra Dahabiya',
     testimonials: 'Отзывы гостей',
     faq: 'Часто задаваемые вопросы',
     about_values_title: 'Наши ценности',
@@ -138,10 +136,10 @@ const translations = {
 };
 
 export function useTranslation() {
-  const { locale } = useLanguage();
+  const { language } = useLanguage();
   type Lang = keyof typeof translations;
-  const lang: Lang = (locale in translations ? locale : 'en') as Lang;
+  const lang: Lang = (language in translations ? language : 'en') as Lang;
   return (key: keyof typeof translations['en']) => {
     return translations[lang][key] || translations['en'][key] || key;
   };
-}
+} 

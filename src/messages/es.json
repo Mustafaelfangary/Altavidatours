@@ -1,0 +1,59 @@
+{
+  "common": {
+    "bookNow": "Reservar Ahora",
+    "explore": "Explorar",
+    "learnMore": "Saber Más",
+    "contactUs": "Contáctenos",
+    "home": "Inicio",
+    "tours": "Tours",
+    "packages": "Paquetes",
+    "tailorMade": "A Medida",
+    "about": "Sobre Nosotros",
+    "blog": "Blog",
+    "signIn": "Iniciar Sesión",
+    "dashboard": "Panel",
+    "signOut": "Cerrar Sesión"
+  },
+  "home": {
+    "hero": {
+      "title": "Experimenta el Lujo en el Nilo",
+      "subtitle": "Descubre la magia del antiguo Egipto a bordo de nuestros cruceros Dahabiya premium"
+    },
+    "cruises": {
+      "title": "Nuestros Programas de Cruceros",
+      "viewAll": "Ver Todos los Cruceros"
+    }
+  },
+  "nav": {
+    "tours": "Tours",
+    "packages": "Paquetes",
+    "tailorMade": "A Medida",
+    "about": "Sobre Nosotros",
+    "contact": "Contacto",
+    "blog": "Blog"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "signOut": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes una cuenta?",
+    "haveAccount": "¿Ya tienes una cuenta?"
+  },
+  "booking": {
+    "title": "Reserva tu Crucero",
+    "selectDates": "Seleccionar Fechas",
+    "guests": "Número de Huéspedes",
+    "specialRequests": "Solicitudes Especiales",
+    "proceed": "Continuar al Pago"
+  },
+  "admin": {
+    "dashboard": "Panel de Control",
+    "cruises": "Gestionar Cruceros",
+    "bookings": "Gestionar Reservas",
+    "users": "Gestionar Usuarios",
+    "content": "Gestionar Contenido"
+  }
+}

@@ -6,12 +6,7 @@ import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { existsSync } from 'fs';
 import sharp from 'sharp';
-import { prisma } from '@/lib/prisma';
-
-// Route segment config for handling large file uploads
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
-export const maxDuration = 300; // 5 minutes timeout for video uploads
+import prisma from '@/lib/prisma';
 
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const ALLOWED_VIDEO_TYPES = ['video/mp4', 'video/webm'];
@@ -40,25 +35,9 @@ export async function POST(request: NextRequest) {
     const allowedTypes = isImage ? ALLOWED_IMAGE_TYPES : ALLOWED_VIDEO_TYPES;
     const maxSize = isImage ? MAX_IMAGE_SIZE : MAX_VIDEO_SIZE;
 
-    // Enhanced file type validation for external sources
-    const fileExtension = file.name.split('.').pop()?.toLowerCase();
-    const validImageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
-    const validVideoExtensions = ['mp4', 'webm', 'mov', 'avi'];
-
-    const isValidByExtension = isImage
-      ? validImageExtensions.includes(fileExtension || '')
-      : validVideoExtensions.includes(fileExtension || '');
-
-    if (!allowedTypes.includes(file.type) && !isValidByExtension) {
+    if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        {
-          error: `Invalid file type: ${file.type}. Allowed: ${isImage ? 'JPEG, PNG, WebP, GIF, SVG' : 'MP4, WebM, MOV, AVI'}`,
-          details: {
-            receivedType: file.type,
-            fileName: file.name,
-            fileExtension: fileExtension
-          }
-        },
+        { error: `Only ${isImage ? 'JPEG, PNG, WebP, and GIF' : 'MP4 and WebM'} files are allowed` },
         { status: 400 }
       );
     }
@@ -71,9 +50,10 @@ export async function POST(request: NextRequest) {
     }
 
     const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const buffer = Buffer.from(new Uint8Array(bytes).buffer);
 
-    // Create a unique filename (using fileExtension from line 39)
+    // Create a unique filename
+    const fileExtension = file.name.split(".").pop();
     const uniqueFilename = `${uuidv4()}.${fileExtension}`;
 
     // Determine the upload directory based on file type
@@ -88,6 +68,7 @@ export async function POST(request: NextRequest) {
       try {
         // Convert to WebP for better compression
         finalExtension = "webp";
+        // @ts-expect-error: sharp Buffer type compatibility workaround
         finalBuffer = await sharp(buffer)
           .webp({ quality: 80 }) // Adjust quality as needed
           .toBuffer();
@@ -133,34 +114,16 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    console.log('✅ File uploaded successfully:', {
-      originalName: file.name,
-      savedAs: finalFilename,
-      size: `${(file.size / 1024 / 1024).toFixed(2)}MB`,
-      type: file.type,
-      url: publicUrl,
-      optimized: isImage ? 'Yes (WebP)' : 'No'
-    });
-
     return NextResponse.json({
       url: publicUrl,
-      mediaAsset: mediaAsset,
-      success: true,
-      filename: finalFilename,
-      originalName: file.name,
-      size: file.size,
-      type: file.type,
-      optimized: isImage
+      mediaAsset: mediaAsset
     });
   } catch (error) {
-    console.error("❌ Upload error:", error);
-
-    return NextResponse.json({
-      error: "Failed to upload file",
-      details: error instanceof Error ? error.message : 'Unknown error',
-      timestamp: new Date().toISOString(),
-      success: false
-    }, { status: 500 });
+    console.error("Upload error:", error);
+    return NextResponse.json(
+      { error: "Failed to upload file" },
+      { status: 500 }
+    );
   }
 }
 

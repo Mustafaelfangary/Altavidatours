@@ -1,0 +1,16 @@
+﻿[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.dahabiyat.nilecruise",
+      "sha256_cert_fingerprints": [
+        "BE:8E:F1:87:5C:E7:5B:0B:1B:4D:3D:9B:97:7B:43:23:83:D0:1E:7B:AB:B9:DB:6B:87:69:EF:69:4F:EB:E4:2B"
+      ]
+    }
+  }
+]
+
+

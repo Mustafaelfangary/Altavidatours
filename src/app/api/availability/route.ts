@@ -1,91 +1,32 @@
-import { NextRequest, NextResponse } from "next/server";
-import { CleanAvailabilityService } from "@/lib/services/availability-service";
+import { NextRequest, NextResponse } from 'next/server';
+import { AvailabilityService } from '@/lib/services/availability-service';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const {
-      type,
-      itemId,
-      startDate,
-      endDate,
-      guests,
-      excludeBookingId,
-      includeAlternatives = false
-    } = body;
+    // Support both dailyTourId and legacy dahabiyaId
+    const { dailyTourId, dahabiyaId, startDate, endDate, guests } = body;
+    const tourId = dailyTourId || dahabiyaId;
 
-    console.log("🔍 Availability check request:", { type, itemId, startDate, endDate, guests });
-
-    if (!type || !itemId || !startDate || !endDate || !guests) {
+    if (!tourId || !startDate || !endDate || !guests) {
       return NextResponse.json(
-        { error: 'Missing required parameters: type, itemId, startDate, endDate, guests' },
+        { error: 'Missing required fields' },
         { status: 400 }
       );
     }
 
-    // Validate type
-    if (!['DAHABIYA', 'PACKAGE'].includes(type)) {
-      return NextResponse.json(
-        { error: 'Invalid type. Must be DAHABIYA or PACKAGE' },
-        { status: 400 }
-      );
-    }
-
-    // Check availability
-    const availability = await CleanAvailabilityService.checkAvailability({
-      type,
-      itemId,
+    const availability = await AvailabilityService.checkAvailability({
+      dailyTourId: tourId,
       startDate: new Date(startDate),
       endDate: new Date(endDate),
-      guests: Number(guests),
-      excludeBookingId
+      guests: parseInt(guests),
     });
 
-    const response: {
-      isAvailable: boolean;
-      message: string;
-      totalPrice: number;
-      conflictingBookings?: unknown;
-      alternatives?: unknown;
-    } = {
-      isAvailable: availability.isAvailable,
-      message: availability.message,
-      totalPrice: availability.totalPrice
-    };
-
-    // Include additional data if requested
-    if (availability.conflictingBookings) {
-      response.conflictingBookings = availability.conflictingBookings;
-    }
-
-    // Find alternatives if not available and requested
-    if (!availability.isAvailable && includeAlternatives) {
-      const duration = Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24));
-      const alternatives = await CleanAvailabilityService.findAlternatives(
-        type,
-        itemId,
-        new Date(startDate),
-        duration,
-        Number(guests)
-      );
-      response.alternatives = alternatives;
-    }
-
-    console.log("✅ Availability check result:", response.isAvailable ? "Available" : "Not available");
-    return NextResponse.json(response);
-
+    return NextResponse.json(availability);
   } catch (error) {
-    console.error('❌ Availability API error:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error('API Error details:', {
-      error: errorMessage,
-      stack: error instanceof Error ? error.stack : undefined
-    });
+    console.error('Availability check error:', error);
     return NextResponse.json(
-      {
-        error: 'Failed to check availability',
-        details: errorMessage
-      },
+      { error: 'Error checking availability' },
       { status: 500 }
     );
   }
@@ -93,42 +34,30 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const dahabiyaId = searchParams.get('dahabiyaId');
-    const startMonth = searchParams.get('startMonth');
-    const endMonth = searchParams.get('endMonth');
+    const searchParams = request.nextUrl.searchParams;
+    // Support both dailyTourId and legacy dahabiyaId
+    const dailyTourId = searchParams.get('dailyTourId') || searchParams.get('dahabiyaId');
+    const month = parseInt(searchParams.get('month') || '0');
+    const year = parseInt(searchParams.get('year') || new Date().getFullYear().toString());
 
-    if (!dahabiyaId || !startMonth || !endMonth) {
+    if (!dailyTourId) {
       return NextResponse.json(
-        { error: 'Missing required parameters: dahabiyaId, startMonth, endMonth' },
+        { error: 'Missing dailyTourId or dahabiyaId' },
         { status: 400 }
       );
     }
 
-    console.log("📅 Getting available dates for dahabiya:", dahabiyaId);
-
-    const result = await CleanAvailabilityService.getAvailableDates(
-      dahabiyaId,
-      new Date(startMonth),
-      new Date(endMonth)
+    const calendar = await AvailabilityService.getAvailabilityCalendar(
+      dailyTourId,
+      month,
+      year
     );
 
-    if (!result.success) {
-      return NextResponse.json(
-        { error: result.error },
-        { status: 500 }
-      );
-    }
-
-    console.log("✅ Available dates retrieved");
-    return NextResponse.json({
-      unavailableDates: result.unavailableDates
-    });
-
+    return NextResponse.json(calendar);
   } catch (error) {
-    console.error('❌ Error getting available dates:', error);
+    console.error('Calendar fetch error:', error);
     return NextResponse.json(
-      { error: 'Failed to get available dates' },
+      { error: 'Error fetching availability calendar' },
       { status: 500 }
     );
   }

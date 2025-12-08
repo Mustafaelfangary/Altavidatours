@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import {
   Table,
@@ -8,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-interface DataTableProps<T extends Record<string, unknown>> {
+interface DataTableProps<T extends Record<string, any>> {
   data: T[];
   columns: {
     accessorKey?: keyof T;
@@ -18,7 +20,7 @@ interface DataTableProps<T extends Record<string, unknown>> {
   }[];
 }
 
-export function DataTable<T extends Record<string, unknown>>({ data, columns }: DataTableProps<T>) {
+export function DataTable<T extends Record<string, any>>({ data, columns }: DataTableProps<T>) {
   return (
     <div className="rounded-md border">
       <Table>

@@ -8,11 +8,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Toaster } from 'sonner';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import FloatingDock from '@/components/ui/FloatingDock';
-import { LanguageProvider } from '@/contexts/LanguageContext';
-
+import { HomeButton } from '@/components/HomeButton';
+import { LanguageProvider } from '@/components/Navbar';
+import SEO from '@/components/SEO';
+import ThemeCSSVariables from '@/components/ThemeCSSVariables';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
+import { NextIntlClientProvider, useLocale, useMessages } from 'next-intl';
+import enMessages from '@/messages/en.json';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({
@@ -24,23 +27,38 @@ export function Providers({ children }: { children: React.ReactNode }) {
     },
   }));
 
+  let locale: string = 'en';
+  let messages: any = enMessages;
+  try {
+    locale = useLocale();
+    messages = useMessages();
+  } catch (err) {
+    // Fallback for SSR/prerender (e.g., not-found)
+    locale = 'en';
+    messages = enMessages;
+  }
+
   return (
     <>
+      <SEO />
+      <ThemeCSSVariables />
       <QueryClientProvider client={queryClient}>
-        <NextThemesProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <AuthProvider>
-                <LanguageProvider>
-                  {children}
-                </LanguageProvider>
-                <FloatingDock />
-              </AuthProvider>
-              <Toaster position="top-right" />
-            </LocalizationProvider>
-          </ThemeProvider>
-        </NextThemesProvider>
+        <NextIntlClientProvider locale={locale} messages={messages} timeZone="Africa/Cairo">
+          <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <AuthProvider>
+                  <LanguageProvider>
+                    {children}
+                  </LanguageProvider>
+                  <HomeButton />
+                </AuthProvider>
+                <Toaster position="top-right" />
+              </LocalizationProvider>
+            </ThemeProvider>
+          </NextThemesProvider>
+        </NextIntlClientProvider>
       </QueryClientProvider>
     </>
   );

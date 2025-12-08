@@ -20,11 +20,13 @@ export async function GET(request: Request) {
       prisma.review.findMany({
         where: { userId: session.user.id },
         include: {
-          user: {
+          dailyTour: {
             select: {
               id: true,
               name: true,
-              image: true,
+              images: {
+                take: 1,
+              },
             },
           },
         },
@@ -37,8 +39,14 @@ export async function GET(request: Request) {
       }),
     ]);
 
+    // Map for backward compatibility
+    const mappedReviews = reviews.map(review => ({
+      ...review,
+      dahabiya: review.dailyTour,
+    }));
+
     return NextResponse.json({
-      reviews,
+      reviews: mappedReviews,
       total,
       pages: Math.ceil(total / limit),
     });
@@ -56,39 +64,38 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { dahabiyaId, rating, comment } = body;
+    const { dahabiyaId, dailyTourId, rating, comment } = body;
 
-    // Verify the user has completed bookings
+    // Support both legacy dahabiyaId and new dailyTourId
+    const tourId = dailyTourId || dahabiyaId;
+
+    // Verify the user has booked this tour
     const booking = await prisma.booking.findFirst({
       where: {
         userId: session.user.id,
+        dailyTourId: tourId,
         status: 'COMPLETED',
       },
     });
 
     if (!booking) {
       return new NextResponse(
-        'You can only review after completing a booking',
+        'You can only review tours you have completed',
         { status: 400 }
       );
     }
 
-    // Check if user has already reviewed recently (limit one review per day)
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
+    // Check if user has already reviewed this tour
     const existingReview = await prisma.review.findFirst({
       where: {
         userId: session.user.id,
-        createdAt: {
-          gte: today
-        }
+        dailyTourId: tourId,
       },
     });
 
     if (existingReview) {
       return new NextResponse(
-        'You have already submitted a review today',
+        'You have already reviewed this tour',
         { status: 400 }
       );
     }
@@ -96,22 +103,30 @@ export async function POST(request: Request) {
     const review = await prisma.review.create({
       data: {
         userId: session.user.id,
+        dailyTourId: tourId,
         rating,
         comment,
-        status: 'PENDING'
       },
       include: {
-        user: {
+        dailyTour: {
           select: {
             id: true,
             name: true,
-            image: true,
+            images: {
+              take: 1,
+            },
           },
         },
       },
     });
 
-    return NextResponse.json(review);
+    // Map for backward compatibility
+    const mappedReview = {
+      ...review,
+      dahabiya: review.dailyTour,
+    };
+
+    return NextResponse.json(mappedReview);
   } catch (error) {
     console.error('Failed to create review:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
@@ -152,17 +167,25 @@ export async function PATCH(request: Request) {
         updatedAt: new Date(),
       },
       include: {
-        user: {
+        dailyTour: {
           select: {
             id: true,
             name: true,
-            image: true,
+            images: {
+              take: 1,
+            },
           },
         },
       },
     });
 
-    return NextResponse.json(updatedReview);
+    // Map for backward compatibility
+    const mappedReview = {
+      ...updatedReview,
+      dahabiya: updatedReview.dailyTour,
+    };
+
+    return NextResponse.json(mappedReview);
   } catch (error) {
     console.error('Failed to update review:', error);
     return new NextResponse('Internal Server Error', { status: 500 });

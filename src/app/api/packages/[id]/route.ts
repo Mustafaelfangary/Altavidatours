@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import prisma from "@/lib/prisma";
 
 export async function GET(
   request: NextRequest,
@@ -9,72 +9,38 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
+    const session = await getServerSession(authOptions);
+    if (!session || session.user.role !== 'ADMIN') {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
-    // Try to find by ID first
-    let pkg = await prisma.package.findUnique({ where: { id } });
-
-    // If not found by ID, try to find by slug or name
-    if (!pkg) {
-      pkg = await prisma.package.findFirst({
-        where: {
-          OR: [
-            { slug: id },
-            { name: { contains: id, mode: 'insensitive' } },
-          ],
+    const packageData = await prisma.package.findUnique({
+      where: { id },
+      include: {
+        itineraryDays: {
+          include: {
+            images: true,
+          },
+          orderBy: { dayNumber: 'asc' },
         },
-      });
+        selectedDahabiya: {
+          select: {
+            id: true,
+            name: true,
+            pricePerDay: true,
+          },
+        },
+      },
+    });
+
+    if (!packageData) {
+      return NextResponse.json({ error: 'Package not found' }, { status: 404 });
     }
 
-    if (!pkg) {
-      return NextResponse.json(
-        { error: 'Package not found' },
-        { status: 404 }
-      );
-    }
-
-    // Normalize itinerary JSON into the expected structure
-    const rawItinerary = Array.isArray(pkg.itinerary) ? pkg.itinerary as any[] : [];
-    const itineraryDays = rawItinerary.map((day: any, index: number) => ({
-      day: Number(day?.dayNumber ?? index + 1),
-      title: day?.title || `Day ${Number(day?.dayNumber ?? index + 1)}`,
-      description: day?.description || '',
-      activities: Array.isArray(day?.activities)
-        ? day.activities.map((a: any, i: number) => ({
-            id: `act-${pkg!.id}-${index}-${i}`,
-            description: typeof a === 'string' ? a : (a?.description || 'Activity'),
-            time: typeof a === 'string' ? 'TBD' : (a?.time || 'TBD'),
-            order: i,
-          }))
-        : [],
-      isActive: true,
-      id: `day-${pkg!.id}-${index + 1}`,
-    }));
-
-    // Convert values and map image URLs
-    const formattedPackage = {
-      ...pkg,
-      price: Number(pkg.price),
-      mainImageUrl: pkg.mainImage || '/images/default-package.jpg',
-      highlights: pkg.includes || [],
-      included: pkg.includes || [],
-      excluded: pkg.excludes || [],
-      maxGuests: pkg.maxGroupSize ?? 20,
-      slug: pkg.slug,
-      longDescription: pkg.description,
-      itineraryDays,
-      images: Array.isArray(pkg.images)
-        ? pkg.images.map((url, i) => ({ id: `img-${pkg!.id}-${i}`, url, alt: pkg!.name, order: i, isActive: true }))
-        : [],
-      reviews: [],
-    };
-
-    return NextResponse.json(formattedPackage);
+    return NextResponse.json(packageData);
   } catch (error) {
     console.error('Error fetching package:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch package' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -83,40 +49,85 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
-    
     if (!session || session.user.role !== 'ADMIN') {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { id } = await params;
     const body = await request.json();
+    const {
+      name,
+      description,
+      shortDescription,
+      price,
+      durationDays,
+      mainImageUrl,
+      itineraryDays,
+      packageType,
+      selectedDahabiyaId,
+      cairoNights,
+      dahabiyaNights,
+      maxGuests,
+      highlights,
+    } = body;
 
-    // Update package
+    // First, delete existing itinerary days
+    await prisma.packageItineraryDay.deleteMany({
+      where: { packageId: id },
+    });
+
+    // Update the package with new data
     const updatedPackage = await prisma.package.update({
       where: { id },
       data: {
-        name: body.name,
-        description: body.description,
-        shortDescription: body.shortDescription,
-        duration: body.durationDays ?? body.duration,
-        price: body.price,
-        mainImage: body.mainImageUrl ?? body.mainImage,
-        isFeatured: body.isFeatured ?? body.isFeaturedOnHomepage,
-        order: body.homepageOrder ?? body.order,
+        name,
+        description,
+        shortDescription,
+        price,
+        durationDays,
+        mainImageUrl,
+        packageType: packageType || 'CAIRO_DAHABIYA',
+        selectedDahabiyaId,
+        cairoNights: cairoNights || 0,
+        dahabiyaNights: dahabiyaNights || 0,
+        maxGuests: maxGuests || 12,
+        highlights: highlights || [],
+        itineraryDays: {
+          create: (itineraryDays || []).map((day: any, idx: number) => ({
+            dayNumber: idx + 1,
+            title: day.title,
+            description: day.description,
+            location: day.location || '',
+            activities: day.activities || [],
+            images: {
+              create: (day.images || []).map((img: any) => ({ 
+                url: img.url, 
+                alt: img.alt || '',
+              })),
+            },
+          })),
+        },
+      },
+      include: {
+        itineraryDays: { 
+          include: { images: true },
+          orderBy: { dayNumber: 'asc' },
+        },
+        selectedDahabiya: {
+          select: {
+            id: true,
+            name: true,
+            pricePerDay: true,
+          },
+        },
       },
     });
 
     return NextResponse.json(updatedPackage);
   } catch (error) {
     console.error('Error updating package:', error);
-    return NextResponse.json(
-      { error: 'Failed to update package' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -125,27 +136,19 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await getServerSession(authOptions);
-    
-    if (!session || session.user.role !== 'ADMIN') {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
+    const session = await getServerSession(authOptions);
+    if (!session || session.user.role !== 'ADMIN') {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
     await prisma.package.delete({
       where: { id },
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ message: 'Package deleted successfully' });
   } catch (error) {
     console.error('Error deleting package:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete package' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

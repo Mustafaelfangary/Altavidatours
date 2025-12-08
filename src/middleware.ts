@@ -1,20 +1,51 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { withAuth } from "next-auth/middleware";
+import { NextRequest } from "next/server";
+import { NextResponse } from 'next/server';
 
-// Simplified middleware for Edge Runtime compatibility
-export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  // Handle image requests - simplified for Edge Runtime
-  if (pathname.startsWith('/images/')) {
-    // Let Next.js handle image optimization
+export default withAuth(
+  function middleware(req: NextRequest, token: any) {
+    console.log("middleware", req.nextUrl.pathname);
+    
+    // Handle admin routes
+    const isAdminRoute = req.nextUrl.pathname.startsWith('/admin');
+    if (isAdminRoute) {
+      // Check if user has admin role
+      if (token?.role !== 'ADMIN') {
+        return NextResponse.redirect(new URL('/', req.url));
+      }
+    }
+    
     return NextResponse.next();
+  },
+  {
+    callbacks: {
+      authorized: ({ req, token }) => {
+        // For dashboard routes, require authentication
+        if (req.nextUrl.pathname.startsWith("/dashboard")) {
+          return !!token;
+        }
+        
+        // For admin routes, require admin role
+        if (req.nextUrl.pathname.startsWith("/admin")) {
+          return token?.role === "ADMIN";
+        }
+        
+        // For other protected routes, require authentication
+        return !!token;
+      },
+    },
+    pages: {
+      signIn: "/auth/signin",
+    },
   }
-
-  return NextResponse.next();
-}
+);
 
 export const config = {
   matcher: [
-    '/images/:path*',
+    "/dashboard/:path*",
+    "/api/admin/:path*",
+    "/profile/:path*",
+    "/bookings/:path*",
+    "/admin/:path*",
   ],
 };

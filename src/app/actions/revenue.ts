@@ -1,6 +1,6 @@
 'use server';
 
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 
 export async function getRevenueData() {
   try {
@@ -44,7 +44,7 @@ export async function getRevenueData() {
         totalRevenue: monthlyRevenue.reduce((a, b) => a + b, 0)
       }
     };
-  } catch {
+  } catch (error) {
     return { 
       success: false, 
       error: 'Failed to fetch revenue data' 

@@ -5,6 +5,7 @@ export enum CruiseType {
 }
 
 export enum CruiseCategory {
+  DELUXE = "DELUXE",
   PREMIUM = "PREMIUM",
   LUXURY = "LUXURY"
 }

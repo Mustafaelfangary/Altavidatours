@@ -1,129 +1,110 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Calendar, MapPin, Users, Clock, Star, Eye, Package } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { toast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 
-interface Booking {
+type Booking = {
   id: string;
-  status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED';
   startDate: string;
   endDate: string;
+  status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED' | 'REFUNDED';
   totalPrice: number;
-  guestCount: number;
-  specialRequests?: string;
-  createdAt: string;
-  updatedAt: string;
+  guests: number;
+  cruise?: {
+    name: string;
+    images: { url: string }[];
+  };
   package?: {
-    id: string;
     name: string;
-    mainImageUrl?: string;
-    duration: number;
   };
-  dahabiya?: {
-    id: string;
+  cabin?: {
     name: string;
-    mainImageUrl?: string;
   };
-}
+  payment?: {
+    status: 'PENDING' | 'COMPLETED' | 'FAILED' | 'REFUNDED';
+  };
+};
 
-interface BookingsListProps {
-  userId?: string;
-  showUserInfo?: boolean;
-  limit?: number;
-}
-
-const BookingsList: React.FC<BookingsListProps> = ({ 
-  userId, 
-  showUserInfo = false, 
-  limit 
-}) => {
+export function BookingsList() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     fetchBookings();
-  }, [userId]);
+  }, []);
 
   const fetchBookings = async () => {
     try {
-      setLoading(true);
-      setError(null);
-      // Use the existing bookings API endpoint
-      const url = `/api/bookings${limit ? `?limit=${limit}` : ''}`;
-
-      const response = await fetch(url);
-      if (!response.ok) {
-        // If unauthorized, show empty state instead of error
-        if (response.status === 401) {
-          setBookings([]);
-          return;
-        }
-        throw new Error(`Failed to fetch bookings: ${response.status}`);
-      }
-
+      const response = await fetch('/api/bookings');
+      if (!response.ok) throw new Error('Failed to fetch bookings');
       const data = await response.json();
-      setBookings(data.bookings || data || []);
-    } catch (err) {
-      console.error('Bookings fetch error:', err);
-      // Set empty array instead of error for better UX
-      setBookings([]);
-      setError(null);
+      setBookings(data);
+    } catch (error) {
+      toast('Failed to load bookings. Please try again.', {
+        style: { backgroundColor: 'red', color: 'white' }
+      });
     } finally {
       setLoading(false);
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'CONFIRMED':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'PENDING':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'CANCELLED':
-        return 'bg-red-100 text-red-800 border-red-200';
-      case 'COMPLETED':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+  const handleCancelBooking = async (bookingId: string) => {
+    if (!confirm('Are you sure you want to cancel this booking?')) return;
+
+    try {
+      const response = await fetch(`/api/bookings/${bookingId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'CANCELLED' }),
+      });
+
+      if (response.ok) {
+        toast('Booking cancelled successfully.');
+        setBookings(bookings.filter((booking) => booking.id !== bookingId));
+      } else {
+        toast('Failed to cancel booking. Please try again.', {
+          style: { backgroundColor: 'red', color: 'white' }
+        });
+      }
+    } catch (error) {
+      toast('Failed to cancel booking. Please try again.', {
+        style: { backgroundColor: 'red', color: 'white' }
+      });
     }
   };
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'CONFIRMED':
-        return '✓';
-      case 'PENDING':
-        return '⏳';
-      case 'CANCELLED':
-        return '✗';
-      case 'COMPLETED':
-        return '★';
-      default:
-        return '?';
-    }
+  const getStatusColor = (status: Booking['status']) => {
+    const colors = {
+      PENDING: 'bg-yellow-100 text-yellow-800',
+      CONFIRMED: 'bg-green-100 text-green-800',
+      CANCELLED: 'bg-red-100 text-red-800',
+      COMPLETED: 'bg-blue-100 text-blue-800',
+      REFUNDED: 'bg-gray-100 text-gray-800',
+    };
+    return colors[status];
   };
 
   if (loading) {
     return (
       <div className="space-y-4">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="animate-pulse glass-card">
-            <CardContent className="p-3 lg:p-6">
-              <div className="flex space-x-3">
-                <div className="w-16 h-16 lg:w-24 lg:h-24 bg-gray-100 rounded-lg"></div>
-                <div className="flex-1 space-y-2">
-                  <div className="h-3 lg:h-4 bg-gray-100 rounded w-3/4"></div>
-                  <div className="h-3 lg:h-4 bg-gray-100 rounded w-1/2"></div>
-                  <div className="h-3 lg:h-4 bg-gray-100 rounded w-1/4"></div>
-                </div>
-              </div>
+          <Card key={i}>
+            <CardHeader>
+              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[200px]" />
+            </CardHeader>
+            <CardContent>
+              <Skeleton className="h-4 w-[300px]" />
+              <Skeleton className="h-4 w-[200px] mt-2" />
             </CardContent>
           </Card>
         ))}
@@ -133,117 +114,66 @@ const BookingsList: React.FC<BookingsListProps> = ({
 
   if (bookings.length === 0) {
     return (
-      <div className="text-center py-12">
-        <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-          <Calendar className="w-8 h-8 text-[#1193b1]" />
-        </div>
-        <h3 className="text-xl font-semibold text-[#073b5a] mb-2 luxury-font">No Journeys Yet</h3>
-        <p className="text-gray-700/80 mb-6 luxury-font">Start your Egyptian adventure by booking your first Dahabiya cruise</p>
-        <Link href="/packages">
-          <Button className="bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white luxury-font text-lg px-4 py-2 rounded-md">
-            <Package className="w-4 h-4 mr-2" />
-            Browse Packages
-          </Button>
-        </Link>
-      </div>
+      <Card>
+        <CardContent className="text-center py-8">
+          <p className="text-gray-600">You haven&apos;t made any bookings yet.</p>
+          <Button onClick={() => router.push('/cruises')}>Browse Cruises</Button>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {bookings.map((booking) => (
-        <Card key={booking.id} className="overflow-hidden glass-card hover:shadow-2xl transition-shadow">
-          <CardContent className="p-3 lg:p-6">
-            <div className="flex flex-col md:flex-row gap-3 lg:gap-4">
-              {/* Image */}
-              <div className="w-full md:w-24 lg:w-32 h-24 lg:h-32 relative rounded-lg overflow-hidden bg-gray-100">
-                <Image
-                  src={booking.package?.mainImageUrl || booking.dahabiya?.mainImageUrl || '/images/placeholder-booking.jpg'}
-                  alt={booking.package?.name || booking.dahabiya?.name || 'Booking'}
-                  fill
-                  className="object-cover"
-                />
+        <Card key={booking.id}>
+          <CardHeader>
+            <CardTitle>
+              {booking.cruise?.name || booking.package?.name || 'Booking'} - {booking.cabin?.name}
+            </CardTitle>
+            <CardDescription>
+              {format(new Date(booking.startDate), 'PPP')} -{' '}
+              {format(new Date(booking.endDate), 'PPP')}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center justify-between mb-4">
+              <div className="space-y-1">
+                <p className="text-sm font-medium">Guests: {booking.guests}</p>
+                <p className="text-sm font-medium">
+                  Total Price: ${booking.totalPrice.toLocaleString()}
+                </p>
               </div>
-
-              {/* Content */}
-              <div className="flex-1">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-base lg:text-lg font-bold text-[#073b5a] mb-2 luxury-font">
-                      {booking.package?.name || booking.dahabiya?.name || 'Custom Booking'}
-                    </h3>
-                    <div className="flex items-center gap-2 mb-2">
-                      <Badge className={`bg-[#1193b1]/10 text-[#073b5a] border-[#1193b1]/30 luxury-font`}>
-                        {getStatusIcon(booking.status)} {booking.status}
-                      </Badge>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold text-[#073b5a] luxury-font">
-                      ${booking.totalPrice.toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Details */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700/85 luxury-font">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>
-                      {format(new Date(booking.startDate), 'MMM dd, yyyy')} - {format(new Date(booking.endDate), 'MMM dd, yyyy')}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    <span>{booking.guestCount} guests</span>
-                  </div>
-                  {booking.package?.duration && (
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      <span>{booking.package.duration} days</span>
-                    </div>
-                  )}
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>Booked {format(new Date(booking.createdAt), 'MMM dd, yyyy')}</span>
-                  </div>
-                </div>
-
-                {/* Special Requests */}
-                {booking.specialRequests && (
-                  <div className="mt-4 p-3 bg-gray-100 rounded-lg">
-                    <p className="text-sm text-gray-700 luxury-font">
-                      <strong>Special Requests:</strong> {booking.specialRequests}
-                    </p>
-                  </div>
+              <div className="space-x-2">
+                <Badge className={getStatusColor(booking.status)}>
+                  {booking.status}
+                </Badge>
+                {booking.payment && (
+                  <Badge variant="outline">
+                    Payment: {booking.payment.status}
+                  </Badge>
                 )}
-
-                {/* Actions */}
-                <div className="flex gap-2 mt-4">
-                  <Link href={`/bookings/${booking.id}`}>
-                    <Button variant="outline" size="sm" className="btn-gold luxury-font text-base">
-                      <Eye className="w-3 h-3 mr-1" />
-                      <span className="text-xs">View Details</span>
-                      <span className="text-xs text-[#073b5a] ml-1">𓎢𓃭𓅂𓅱𓊪𓄿𓏏𓂋𓄿</span>
-                    </Button>
-                  </Link>
-                  {booking.status === 'COMPLETED' && (
-                    <Link href={`/bookings/${booking.id}/review`}>
-                      <Button size="sm" className="btn-gold luxury-font text-base">
-                        <Star className="w-4 h-4 mr-2" />
-                        Leave Review
-                      </Button>
-                    </Link>
-                  )}
-                </div>
               </div>
             </div>
           </CardContent>
+          <CardFooter className="justify-end space-x-2">
+            <Button
+              variant="outline"
+              onClick={() => router.push(`/bookings/${booking.id}`)}
+            >
+              View Details
+            </Button>
+            {booking.status === 'PENDING' && (
+              <Button
+                variant="destructive"
+                onClick={() => handleCancelBooking(booking.id)}
+              >
+                Cancel Booking
+              </Button>
+            )}
+          </CardFooter>
         </Card>
       ))}
     </div>
   );
-};
-
-export default BookingsList;
-export { BookingsList };
+}

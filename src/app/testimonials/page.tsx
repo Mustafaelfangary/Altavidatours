@@ -1,309 +1,119 @@
-"use client";
+import { Container, Typography, Box, Grid, Card, CardContent, Avatar, Rating } from '@mui/material';
 
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import Container from '@/components/ui/container';
-import { PharaonicCard } from '@/components/ui/pharaonic-elements';
-import { ReviewCard } from '@/components/testimonials';
-import { useContent } from '@/hooks/useContent';
-import {
-  Star,
-  User,
-  MapPin,
-  Calendar,
-  MessageSquare,
-  Search,
-  Filter,
-  Quote
-} from 'lucide-react';
-
-interface Review {
-  id: string;
-  rating: number;
-  comment: string;
-  title?: string;
-  photos: string[];
-  location?: string;
-  tripDate?: string;
-  approvedAt: string;
-  user: {
-    id: string;
-    name?: string;
-    image?: string;
-  };
-  dahabiya: {
-    id: string;
-    name: string;
-    hieroglyph?: string;
-    slug: string;
-  };
-}
-
-interface Dahabiya {
-  id: string;
-  name: string;
-  hieroglyph?: string;
-}
+const testimonials = [
+  {
+    id: 1,
+    name: 'Sarah Johnson',
+    location: 'United States',
+    rating: 5,
+    date: '2024-02-15',
+    image: '/images/testimonials/sarah.jpg',
+    text: 'An unforgettable experience! The dahabiya was beautiful, the crew was exceptional, and the historical sites were breathtaking. The small group size made it feel like a private tour.',
+  },
+  {
+    id: 2,
+    name: 'Michael Chen',
+    location: 'Australia',
+    rating: 5,
+    date: '2024-01-20',
+    image: '/images/testimonials/michael.jpg',
+    text: 'The perfect blend of luxury and authenticity. The food was amazing, the cabins were comfortable, and the guides were incredibly knowledgeable. Highly recommend!',
+  },
+  {
+    id: 3,
+    name: 'Emma Thompson',
+    location: 'United Kingdom',
+    rating: 5,
+    date: '2024-01-05',
+    image: '/images/testimonials/emma.jpg',
+    text: 'A magical journey down the Nile. The sunset views were spectacular, and the small boat experience allowed us to visit places the larger ships can\'t reach.',
+  },
+  {
+    id: 4,
+    name: 'David Rodriguez',
+    location: 'Spain',
+    rating: 5,
+    date: '2023-12-10',
+    image: '/images/testimonials/david.jpg',
+    text: 'The attention to detail was impressive. From the welcome drinks to the farewell dinner, every moment was carefully planned and executed perfectly.',
+  },
+  {
+    id: 5,
+    name: 'Sophie Martin',
+    location: 'France',
+    rating: 5,
+    date: '2023-11-25',
+    image: '/images/testimonials/sophie.jpg',
+    text: 'The crew went above and beyond to make our trip special. The traditional music nights and cooking demonstrations were highlights of our journey.',
+  },
+  {
+    id: 6,
+    name: 'James Wilson',
+    location: 'Canada',
+    rating: 5,
+    date: '2023-11-10',
+    image: '/images/testimonials/james.jpg',
+    text: 'A once-in-a-lifetime experience. The combination of luxury, history, and natural beauty made this trip truly unforgettable.',
+  },
+];
 
 export default function TestimonialsPage() {
-  const { getContent } = useContent({ page: 'testimonials' });
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [dahabiyas, setDahabiyas] = useState<Dahabiya[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedDahabiya, setSelectedDahabiya] = useState('');
-  const [selectedRating, setSelectedRating] = useState('');
-
-  useEffect(() => {
-    fetchReviews();
-    fetchDahabiyas();
-  }, []);
-
-  const fetchReviews = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch('/api/reviews?status=APPROVED');
-      if (response.ok) {
-        const data = await response.json();
-        setReviews(data.reviews);
-      }
-    } catch (error) {
-      console.error('Error fetching reviews:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchDahabiyas = async () => {
-    try {
-      const response = await fetch('/api/dahabiyat');
-      if (response.ok) {
-        const data = await response.json();
-        setDahabiyas(data.dahabiyat || []);
-      }
-    } catch (error) {
-      console.error('Error fetching dahabiyas:', error);
-    }
-  };
-
-  const filteredReviews = reviews.filter(review => {
-    const matchesSearch = !searchTerm || 
-      review.comment.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      review.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      review.user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      review.dahabiya.name.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesDahabiya = !selectedDahabiya || review.dahabiya.id === selectedDahabiya;
-    const matchesRating = !selectedRating || review.rating >= parseInt(selectedRating);
-    
-    return matchesSearch && matchesDahabiya && matchesRating;
-  });
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`w-4 h-4 ${
-          i < rating ? 'text-egyptian-gold fill-current' : 'text-gray-300'
-        }`}
-      />
-    ));
-  };
-
-  const averageRating = reviews.length > 0 
-    ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length 
-    : 0;
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-ocean-blue-50 to-navy-blue-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-6xl text-egyptian-gold animate-pulse mb-4">⭐</div>
-          <div className="text-xl text-hieroglyph-brown">Loading testimonials...</div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="pharaonic-container">
+    <main>
       {/* Hero Section */}
-      <section className="py-24 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 left-10 text-6xl text-egyptian-gold animate-pulse">⭐</div>
-          <div className="absolute top-20 right-20 text-4xl text-sunset-orange animate-pulse">𓊪</div>
-          <div className="absolute bottom-20 left-20 text-5xl text-egyptian-gold animate-pulse">𓈖</div>
-          <div className="absolute bottom-10 right-10 text-6xl text-sunset-orange animate-pulse">𓂀</div>
-        </div>
-
+      <Box
+        sx={{
+          position: 'relative',
+          height: '40vh',
+          display: 'flex',
+          alignItems: 'center',
+          color: 'white',
+          bgcolor: 'primary.main',
+        }}
+      >
         <Container maxWidth="lg">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <span className="text-egyptian-gold text-5xl animate-pulse">⭐</span>
-              <h1 className="text-3xl md:text-4xl font-heading font-bold text-text-primary">
-                {getContent('testimonials_hero_title', 'Guest Testimonials')}
-              </h1>
-              <span className="text-egyptian-gold text-5xl animate-pulse">⭐</span>
-            </div>
-
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="text-egyptian-gold text-xl">𓈖</span>
-              <span className="text-egyptian-gold text-xl">𓂀</span>
-              <span className="text-egyptian-gold text-xl">𓏏</span>
-              <span className="text-egyptian-gold text-xl">𓇯</span>
-              <span className="text-egyptian-gold text-xl">𓊃</span>
-            </div>
-
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 text-justify">
-              {getContent('testimonials_hero_subtitle', 'Discover authentic experiences from our guests who have sailed the Nile aboard our luxury dahabiyas. Each testimonial tells a story of wonder, comfort, and unforgettable memories.')}
-            </p>
-
-            {/* Stats */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-6">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-hieroglyph-brown">{reviews.length}</div>
-                <div className="text-gray-600">{getContent('testimonials_total_reviews_label', 'Total Reviews')}</div>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2">
-                  <span className="text-2xl font-bold text-hieroglyph-brown">
-                    {averageRating.toFixed(1)}
-                  </span>
-                  <div className="flex">{renderStars(Math.round(averageRating))}</div>
-                </div>
-                <div className="text-gray-600">{getContent('testimonials_avg_rating_label', 'Average Rating')}</div>
-              </div>
-            </div>
-
-            <Link href="/profile">
-              <Button className="bg-egyptian-gold text-hieroglyph-brown hover:bg-egyptian-gold/90 text-lg px-8 py-3">
-                <MessageSquare className="w-5 h-5 mr-2" />
-                {getContent('testimonials_share_review_btn', 'Share Your Review')}
-              </Button>
-            </Link>
-          </div>
+          <Typography variant="h1" sx={{ fontWeight: 'bold' }}>
+            Guest Reviews
+          </Typography>
+          <Typography variant="h5" sx={{ mt: 2 }}>
+            What our guests say about their experience
+          </Typography>
         </Container>
-      </section>
+      </Box>
 
-      {/* Filters Section */}
-      <section className="py-8 bg-white/50 backdrop-blur-sm border-y border-egyptian-gold/20">
-        <Container maxWidth="lg">
-          <div className="flex flex-col md:flex-row gap-4 items-center">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <Input
-                placeholder={getContent('testimonials_search_placeholder', 'Search testimonials...')}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-
-            <Select value={selectedDahabiya || 'ALL'} onValueChange={(value) => setSelectedDahabiya(value === 'ALL' ? '' : value)}>
-              <SelectTrigger className="w-full md:w-48">
-                <SelectValue placeholder={getContent('testimonials_filter_all_dahabiyas', 'All Dahabiyas')} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ALL">{getContent('testimonials_filter_all_dahabiyas', 'All Dahabiyas')}</SelectItem>
-                {dahabiyas.map((dahabiya) => (
-                  <SelectItem key={dahabiya.id} value={dahabiya.id}>
-                    <span className="mr-2">𓇳</span>
-                    {dahabiya.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select value={selectedRating || 'ALL'} onValueChange={(value) => setSelectedRating(value === 'ALL' ? '' : value)}>
-              <SelectTrigger className="w-full md:w-48">
-                <SelectValue placeholder={getContent('testimonials_filter_all_ratings', 'All Ratings')} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ALL">{getContent('testimonials_filter_all_ratings', 'All Ratings')}</SelectItem>
-                <SelectItem value="5">{getContent('testimonials_filter_5_stars', '5 Stars Only')}</SelectItem>
-                <SelectItem value="4">{getContent('testimonials_filter_4_stars', '4+ Stars')}</SelectItem>
-                <SelectItem value="3">{getContent('testimonials_filter_3_stars', '3+ Stars')}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </Container>
-      </section>
-
-      {/* Reviews Grid */}
-      <section className="pt-8 pb-8">
-        <Container maxWidth="lg">
-          {filteredReviews.length === 0 ? (
-            <div className="text-center pt-8 pb-8">
-              <div className="text-6xl text-egyptian-gold mb-4">⭐</div>
-              <h3 className="text-2xl font-bold text-hieroglyph-brown mb-2">{getContent('testimonials_no_reviews_title', 'No Reviews Found')}</h3>
-              <p className="text-gray-600 mb-6 text-justify">
-                {searchTerm || selectedDahabiya || selectedRating
-                  ? getContent('testimonials_no_reviews_filter_text', 'Try adjusting your filters to see more reviews.')
-                  : getContent('testimonials_no_reviews_empty_text', 'Be the first to share your experience with us!')
-                }
-              </p>
-              <Link href="/profile">
-                <Button className="bg-egyptian-gold text-hieroglyph-brown hover:bg-egyptian-gold/90">
-                  <MessageSquare className="w-4 h-4 mr-2" />
-                  {getContent('testimonials_write_first_review_btn', 'Write the First Review')}
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredReviews.map((review, index) => (
-                <motion.div
-                  key={review.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <ReviewCard review={review} />
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </Container>
-      </section>
-
-      {/* Call to Action */}
-      <section className="pt-8 pb-8 bg-white/50 backdrop-blur-sm">
-        <Container maxWidth="lg">
-          <div className="text-center">
-            <div className="bg-white/80 backdrop-blur-sm border border-egyptian-gold/30 rounded-2xl p-6 max-w-2xl mx-auto">
-              <div className="text-4xl text-egyptian-gold mb-4">𓊪</div>
-              <h3 className="text-2xl font-bold text-hieroglyph-brown mb-3">
-                {getContent('testimonials_cta_title', 'Share Your Nile Experience')}
-              </h3>
-              <p className="text-gray-600 mb-6">
-                {getContent('testimonials_cta_description', 'Have you sailed with us? Your review helps future travelers discover the magic of a luxury Nile dahabiya journey.')}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/profile">
-                  <Button className="bg-egyptian-gold text-hieroglyph-brown hover:bg-egyptian-gold/90">
-                    <MessageSquare className="w-4 h-4 mr-2" />
-                    {getContent('testimonials_cta_write_review_btn', 'Write a Review')}
-                  </Button>
-                </Link>
-                <Link href="/dahabiyas">
-                  <Button variant="outline" className="border-egyptian-gold/30 text-hieroglyph-brown hover:bg-egyptian-gold/10">
-                    <span className="mr-2">𓇳</span>
-                    {getContent('testimonials_cta_explore_fleet_btn', 'Explore Our Fleet')}
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-    </div>
+      {/* Testimonials Content */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Grid container component="div" spacing={4}>
+          {testimonials.map((testimonial) => (
+            <Box key={testimonial.id} sx={{ width: '100%', maxWidth: 600, flex: '1 1 300px' }}>
+              <Card sx={{ height: '100%' }}>
+                <CardContent>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <Avatar
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      sx={{ width: 60, height: 60, mr: 2 }}
+                    />
+                    <Box>
+                      <Typography variant="h6">{testimonial.name}</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {testimonial.location}
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Rating value={testimonial.rating} readOnly sx={{ mb: 2 }} />
+                  <Typography variant="body1" paragraph>
+                    {testimonial.text}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {new Date(testimonial.date).toLocaleDateString()}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
+          ))}
+        </Grid>
+      </Container>
+    </main>
   );
-}
+} 

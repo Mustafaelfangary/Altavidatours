@@ -33,7 +33,7 @@ export function LocalFileUpload({
     async (acceptedFiles: File[]) => {
       if (acceptedFiles.length > 0) {
         try {
-          await onUpload(acceptedFiles[0]!);
+          await onUpload(acceptedFiles[0]);
         } catch (error) {
           console.error('Error uploading file:', error);
         }
@@ -42,25 +42,20 @@ export function LocalFileUpload({
     [onUpload]
   );
 
-  const dropzoneOptions: any = {
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    accept: accept ? { [accept]: [] } : undefined,
     multiple: false,
-  };
-  
-  if (accept) {
-    dropzoneOptions.accept = { [accept]: [] };
-  }
-  
-  const { getRootProps, getInputProps, isDragActive } = useDropzone(dropzoneOptions);
+  });
 
   const handleReplace = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0] && fileUrl) {
       const filename = fileUrl.split('/').pop()!;
       try {
         const newUrl = await replaceFile(filename, e.target.files[0]);
-        onReplace?.(newUrl);
+        onReplace && onReplace(newUrl);
       } catch (err) {
-        console.error('Error replacing file:', err);
+        // error handled in hook
       }
     }
   };
@@ -70,9 +65,9 @@ export function LocalFileUpload({
       const filename = fileUrl.split('/').pop()!;
       try {
         await deleteFile(filename);
-        onDelete?.();
+        onDelete && onDelete();
       } catch (err) {
-        console.error('Error deleting file:', err);
+        // error handled in hook
       }
     }
   };
@@ -95,22 +90,18 @@ export function LocalFileUpload({
           </Box>
         </Box>
       ) : (
-        <div
+        <Paper
           {...getRootProps()}
-          style={{
-            padding: '24px',
-            textAlign: 'center' as const,
+          sx={{
+            p: 3,
+            textAlign: 'center',
             cursor: 'pointer',
-            backgroundColor: isDragActive ? '#f5f5f5' : '#ffffff',
+            bgcolor: isDragActive ? 'action.hover' : 'background.paper',
             border: '2px dashed',
-            borderColor: isDragActive ? '#1976d2' : '#e0e0e0',
-            borderRadius: '4px',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#f5f5f5';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = isDragActive ? '#f5f5f5' : '#ffffff';
+            borderColor: isDragActive ? 'primary.main' : 'divider',
+            '&:hover': {
+              bgcolor: 'action.hover',
+            },
           }}
         >
           <input {...getInputProps()} />
@@ -128,7 +119,7 @@ export function LocalFileUpload({
               <CircularProgress size={24} />
             </Box>
           )}
-        </div>
+        </Paper>
       )}
       {error && (
         <Alert severity="error" sx={{ mt: 2 }}>

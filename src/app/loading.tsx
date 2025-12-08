@@ -1,5 +1,5 @@
-import LogoLoader from '@/components/ui/LogoLoader';
+import { LoadingPage } from '@/components/ui/LoadingPage';
 
 export default function Loading() {
-  return <LogoLoader variant="minimal" />;
+  return <LoadingPage isLoading={true} />;
 }

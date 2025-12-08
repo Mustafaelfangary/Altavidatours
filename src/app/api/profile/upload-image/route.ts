@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import path from "path";
 import fs from "fs/promises";
 
@@ -48,17 +48,12 @@ export async function POST(req: NextRequest) {
     await fs.writeFile(filePath, buffer);
 
     // Update user's profile image in database
-    const imageUrl = `/uploads/profiles/${fileName}`;
     await prisma.user.update({
       where: { id: userId },
-      data: { image: imageUrl },
+      data: { image: `/uploads/profiles/${fileName}` },
     });
 
-    return NextResponse.json({
-      success: true,
-      imageUrl: imageUrl,
-      message: 'Profile image updated successfully'
-    });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error uploading profile image:', error);
     return NextResponse.json(

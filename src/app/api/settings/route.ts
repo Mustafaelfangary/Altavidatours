@@ -1,18 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { z } from "zod";
 import { revalidatePath } from 'next/cache';
 
-// Unused schema - keeping for potential future use
-/*
 const contentBlockSchema = z.object({
   key: z.string().min(1),
   title: z.string().min(1),
-  content: z.string().optional().nullable(),
-  mediaUrl: z.string().optional().nullable(),
-  mediaType: z.enum(["IMAGE", "VIDEO", "DOCUMENT"]).optional().nullable(),
+  content: z.string().optional(),
+  mediaUrl: z.string().optional(),
+  mediaType: z.enum(["IMAGE", "VIDEO", "DOCUMENT"]).optional(),
   contentType: z.enum([
     "TEXT",
     "TEXTAREA",
@@ -29,80 +27,37 @@ const contentBlockSchema = z.object({
   order: z.number().default(0),
   isActive: z.boolean().default(true),
 });
-*/
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const page = searchParams.get('page');
     const section = searchParams.get('section');
-    const group = searchParams.get('group');
 
-    // If group parameter is provided, use Settings model
-    if (group) {
-      const settings = await prisma.setting.findMany({
-        where: { group }
-      });
+    let whereClause: any = { isActive: true };
+    if (page) whereClause.page = page;
+    if (section) whereClause.section = section;
 
-      const settingsObject = settings.reduce((acc, setting) => {
-        acc[setting.key] = setting.value;
-        return acc;
-      }, {} as Record<string, string>);
-
-      return NextResponse.json(settingsObject);
-    }
-
-    // Fetch content from settings table for now
-    const whereClause: Record<string, unknown> = {};
-
-    if (group) {
-      whereClause.group = group;
-    } else if (page) {
-      whereClause.group = page; // Use page as group for now
-    }
-
-    const settings = await prisma.setting.findMany({
+    const contentBlocks = await prisma.websiteContent.findMany({
       where: whereClause,
-      orderBy: {
-        key: 'asc'
-      }
+      orderBy: [
+        { page: 'asc' },
+        { section: 'asc' },
+        { order: 'asc' }
+      ]
     });
 
-    // Convert settings to content blocks format
-    const contentBlocks = settings.map(setting => ({
-      id: setting.id,
-      key: setting.key,
-      title: setting.key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-      content: setting.value,
-      mediaUrl: setting.value.startsWith('http') ? setting.value : null,
-      mediaType: setting.value.startsWith('http') ? 'IMAGE' : null,
-      contentType: setting.value.length > 100 ? 'TEXTAREA' : 'TEXT',
-      page: setting.group,
-      section: 'general',
-      order: 0,
-      isActive: true,
-      createdAt: setting.createdAt.toISOString(),
-      updatedAt: setting.updatedAt.toISOString(),
-    }));
-
-    // Create a settings object for backward compatibility
-    const contentObject = settings.reduce((acc, setting) => {
-      acc[setting.key] = setting.value;
+    // For backward compatibility, also return as key-value object
+    const contentObject = contentBlocks.reduce((acc, block) => {
+      acc[block.key] = block.content || block.mediaUrl || '';
       return acc;
     }, {} as Record<string, string>);
 
-    const response = NextResponse.json({
+    return NextResponse.json({
       blocks: contentBlocks, // For ContentManager component
       contentBlocks, // For backward compatibility
       settings: contentObject // For backward compatibility
     });
-
-    // Add cache control headers to prevent caching
-    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    response.headers.set('Pragma', 'no-cache');
-    response.headers.set('Expires', '0');
-
-    return response;
   } catch (error) {
     console.error('Failed to fetch content blocks:', error);
     return NextResponse.json({ error: "Failed to fetch content blocks" }, { status: 500 });
@@ -117,26 +72,31 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+    const validated = contentBlockSchema.parse(body);
 
-    // Save to settings table for now
-    const setting = await prisma.setting.upsert({
-      where: { key: body.key },
-      update: {
-        value: body.content || body.value || '',
-        group: body.page || body.group || 'general',
-      },
-      create: {
-        key: body.key,
-        value: body.content || body.value || '',
-        group: body.page || body.group || 'general',
+    const contentBlock = await prisma.websiteContent.create({
+      data: {
+        key: validated.key,
+        title: validated.title,
+        content: validated.content,
+        mediaUrl: validated.mediaUrl,
+        mediaType: validated.mediaType,
+        contentType: validated.contentType,
+        page: validated.page,
+        section: validated.section,
+        order: validated.order,
+        isActive: validated.isActive,
       },
     });
 
     revalidatePath('/');
-    return NextResponse.json(setting);
+    return NextResponse.json(contentBlock);
   } catch (error) {
-    console.error('Failed to create/update setting:', error);
-    return NextResponse.json({ error: "Failed to create/update setting" }, { status: 500 });
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: error.errors }, { status: 400 });
+    }
+    console.error('Failed to create content block:', error);
+    return NextResponse.json({ error: "Failed to create content block" }, { status: 500 });
   }
 }
 
@@ -148,27 +108,43 @@ export async function PUT(request: NextRequest) {
     }
 
     const body = await request.json();
-    console.log('PUT request body:', body);
+    const validated = contentBlockSchema.parse(body);
 
-    // Save to settings table for now
-    const setting = await prisma.setting.upsert({
-      where: { key: body.key },
+    const updatedContentBlock = await prisma.websiteContent.upsert({
+      where: { key: validated.key },
       update: {
-        value: body.content || body.value || '',
-        group: body.page || body.group || 'general',
+        title: validated.title,
+        content: validated.content,
+        mediaUrl: validated.mediaUrl,
+        mediaType: validated.mediaType,
+        contentType: validated.contentType,
+        page: validated.page,
+        section: validated.section,
+        order: validated.order,
+        isActive: validated.isActive,
       },
       create: {
-        key: body.key,
-        value: body.content || body.value || '',
-        group: body.page || body.group || 'general',
-      },
+        key: validated.key,
+        title: validated.title,
+        content: validated.content,
+        mediaUrl: validated.mediaUrl,
+        mediaType: validated.mediaType,
+        contentType: validated.contentType,
+        page: validated.page,
+        section: validated.section,
+        order: validated.order,
+        isActive: validated.isActive,
+      }
     });
 
     revalidatePath('/');
-    return NextResponse.json(setting);
+    return NextResponse.json(updatedContentBlock);
   } catch (error) {
-    console.error('Failed to update setting:', error);
-    return NextResponse.json({ error: "Failed to update setting" }, { status: 500 });
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: error.errors }, { status: 400 });
+    }
+    console.error('Failed to update content block:', error);
+    return NextResponse.json({ error: "Failed to update content block" }, { status: 500 });
   }
 }
 

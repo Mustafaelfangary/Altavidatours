@@ -4,91 +4,6 @@ import { authOptions } from "@/lib/auth";
 import { readdir, stat } from "fs/promises";
 import { join } from "path";
 import { existsSync } from "fs";
-import { prisma } from "@/lib/prisma";
-
-// Shapes returned to the client
-interface MediaItem {
-  id: string;
-  url: string;
-  type: string; // mimeType (best-effort)
-  name: string; // original file name
-  filename: string; // stored file name
-  size: number;
-  createdAt: string; // ISO string
-  uploadedAt: string; // ISO string
-  source?: "database" | "filesystem" | "images" | "videos";
-}
-
-// Recursively scan a directory for media files
-async function scanDirectory(dirPath: string, baseUrl: string): Promise<MediaItem[]> {
-  const items: MediaItem[] = [];
-
-  try {
-    const entries = await readdir(dirPath, { withFileTypes: true });
-
-    for (const entry of entries) {
-      const fullPath = join(dirPath, entry.name);
-      const urlPath = `${baseUrl}/${entry.name}`;
-
-      if (entry.isDirectory()) {
-        // Skip certain directories
-        if (entry.name.includes("_files") || entry.name.includes(".html")) {
-          continue;
-        }
-
-        // Recursively scan subdirectories
-        const subItems = await scanDirectory(fullPath, urlPath);
-        items.push(...subItems);
-        continue;
-      }
-
-      if (!entry.isFile()) continue;
-
-      // Images
-      if (/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff)$/i.test(entry.name)) {
-        try {
-          const stats = await stat(fullPath);
-          items.push({
-            id: `img_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`,
-            url: urlPath,
-            type: "image/jpeg", // best-effort default
-            name: entry.name,
-            filename: entry.name,
-            size: stats.size,
-            createdAt: stats.mtime.toISOString(),
-            uploadedAt: stats.mtime.toISOString(),
-          });
-        } catch (e) {
-          console.warn(`Could not stat file ${fullPath}:`, e);
-        }
-        continue;
-      }
-
-      // Videos
-      if (/\.(mp4|webm|mov|avi|mkv)$/i.test(entry.name)) {
-        try {
-          const stats = await stat(fullPath);
-          items.push({
-            id: `vid_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`,
-            url: urlPath,
-            type: "video/mp4", // best-effort default
-            name: entry.name,
-            filename: entry.name,
-            size: stats.size,
-            createdAt: stats.mtime.toISOString(),
-            uploadedAt: stats.mtime.toISOString(),
-          });
-        } catch (e) {
-          console.warn(`Could not stat file ${fullPath}:`, e);
-        }
-      }
-    }
-  } catch (error) {
-    console.warn(`Could not read directory ${dirPath}:`, error);
-  }
-
-  return items;
-}
 
 export async function GET(request: NextRequest) {
   try {
@@ -97,154 +12,50 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Get query parameters
-    const { searchParams } = new URL(request.url);
-    const sortBy = searchParams.get('sortBy') || 'date'; // date, size, name, lastUsed
-    const sortOrder = searchParams.get('sortOrder') || 'desc'; // asc, desc
-    const search = searchParams.get('search') || '';
-    const type = searchParams.get('type') || 'all'; // all, image, video
-
-    const mediaItems: MediaItem[] = [];
-
-    // 1) Database-backed assets (if table exists)
-    try {
-      const dbMediaAssets = await prisma.mediaAsset.findMany({
-        orderBy: { createdAt: "desc" },
-      });
-
-      for (const asset of dbMediaAssets) {
-        mediaItems.push({
-          id: `db_${asset.id}`,
-          url: asset.url,
-          type: asset.mimeType || "image/jpeg",
-          name: asset.originalName,
-          filename: asset.filename,
-          size: asset.size,
-          createdAt: asset.createdAt.toISOString(),
-          uploadedAt: asset.createdAt.toISOString(),
-          source: "database",
-        });
-      }
-    } catch (dbError) {
-      // Table or model might not exist; ignore
-    }
-
-    // 2) Scan public/uploads
-    const uploadsDir = join(process.cwd(), "public", "uploads");
-    if (existsSync(uploadsDir)) {
-      try {
-        const uploadItems = await scanDirectory(uploadsDir, "/uploads");
-        for (const item of uploadItems) {
-          const existsInDb = mediaItems.some((dbItem) => dbItem.url === item.url);
-          if (!existsInDb) {
-            mediaItems.push({ ...item, source: "filesystem" });
-          }
+    const mediaItems = [];
+    
+    // Scan images directory
+    const imagesDir = join(process.cwd(), "public", "images");
+    if (existsSync(imagesDir)) {
+      const imageFiles = await readdir(imagesDir);
+      for (const file of imageFiles) {
+        if (file.match(/\.(jpg|jpeg|png|webp|gif)$/i)) {
+          const filePath = join(imagesDir, file);
+          const stats = await stat(filePath);
+          mediaItems.push({
+            url: `/images/${file}`,
+            type: "image",
+            filename: file,
+            size: stats.size,
+            uploadedAt: stats.mtime.toISOString(),
+          });
         }
-      } catch (e) {
-        console.error("Error scanning uploads directory:", e);
       }
     }
 
-    // 3) Scan key images directories
-    const keyDirectories: Array<{ path: string; url: string }> = [
-      { path: join(process.cwd(), "public", "images", "about"), url: "/images/about" },
-      { path: join(process.cwd(), "public", "images", "uploads"), url: "/images/uploads" },
-      { path: join(process.cwd(), "public", "images"), url: "/images" },
-    ];
-
-    for (const dir of keyDirectories) {
-      if (!existsSync(dir.path)) continue;
-      try {
-        const items = await scanDirectory(dir.path, dir.url);
-        for (const item of items) {
-          const existsInList = mediaItems.some((existing) => existing.url === item.url);
-          if (!existsInList) {
-            mediaItems.push({ ...item, source: "images" });
-          }
-        }
-      } catch (e) {
-        console.error(`Error scanning ${dir.path}:`, e);
-      }
-    }
-
-    // 4) Scan public/videos
+    // Scan videos directory
     const videosDir = join(process.cwd(), "public", "videos");
     if (existsSync(videosDir)) {
-      try {
-        const videoItems = await scanDirectory(videosDir, "/videos");
-        for (const item of videoItems) {
-          const existsInList = mediaItems.some((existing) => existing.url === item.url);
-          if (!existsInList) {
-            mediaItems.push({ ...item, source: "videos" });
-          }
+      const videoFiles = await readdir(videosDir);
+      for (const file of videoFiles) {
+        if (file.match(/\.(mp4|webm|mov)$/i)) {
+          const filePath = join(videosDir, file);
+          const stats = await stat(filePath);
+          mediaItems.push({
+            url: `/videos/${file}`,
+            type: "video",
+            filename: file,
+            size: stats.size,
+            uploadedAt: stats.mtime.toISOString(),
+          });
         }
-      } catch (e) {
-        console.error("Error scanning videos directory:", e);
       }
     }
 
-    // 5) Filter by search query
-    let filteredItems = mediaItems;
-    if (search) {
-      const searchLower = search.toLowerCase();
-      filteredItems = mediaItems.filter(item => 
-        item.name.toLowerCase().includes(searchLower) ||
-        item.filename.toLowerCase().includes(searchLower)
-      );
-    }
+    // Sort by upload date (newest first)
+    mediaItems.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
 
-    // 6) Filter by type
-    if (type !== 'all') {
-      filteredItems = filteredItems.filter(item => {
-        if (type === 'image') return item.type.startsWith('image/');
-        if (type === 'video') return item.type.startsWith('video/');
-        return true;
-      });
-    }
-
-    // 7) Sort based on sortBy parameter
-    filteredItems.sort((a, b) => {
-      let comparison = 0;
-      
-      switch (sortBy) {
-        case 'date':
-          comparison = new Date(b.createdAt || b.uploadedAt).getTime() - 
-                      new Date(a.createdAt || a.uploadedAt).getTime();
-          break;
-        
-        case 'size':
-          comparison = b.size - a.size;
-          break;
-        
-        case 'name':
-          comparison = a.name.localeCompare(b.name);
-          break;
-        
-        case 'lastUsed':
-          // For now, use uploadedAt as proxy for lastUsed
-          // TODO: Track actual usage in database
-          comparison = new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime();
-          break;
-        
-        default:
-          comparison = new Date(b.createdAt || b.uploadedAt).getTime() - 
-                      new Date(a.createdAt || a.uploadedAt).getTime();
-      }
-      
-      // Apply sort order
-      return sortOrder === 'asc' ? -comparison : comparison;
-    });
-
-    // Prioritize database items
-    const dbItems = filteredItems.filter(item => item.source === 'database');
-    const fsItems = filteredItems.filter(item => item.source !== 'database');
-    const sortedItems = [...dbItems, ...fsItems];
-
-    return NextResponse.json({ 
-      media: sortedItems, 
-      total: sortedItems.length,
-      filters: { sortBy, sortOrder, search, type }
-    });
+    return NextResponse.json(mediaItems);
   } catch (error) {
     console.error("Failed to fetch media:", error);
     return NextResponse.json({ error: "Failed to fetch media" }, { status: 500 });
@@ -265,12 +76,14 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "URL parameter is required" }, { status: 400 });
     }
 
+    // Extract filename from URL
     const filename = url.split("/").pop();
     if (!filename) {
       return NextResponse.json({ error: "Invalid URL" }, { status: 400 });
     }
 
-    const isVideo = /\.(mp4|webm|mov)$/i.test(filename);
+    // Determine directory based on file extension
+    const isVideo = filename.match(/\.(mp4|webm|mov)$/i);
     const directory = isVideo ? "videos" : "images";
     const filePath = join(process.cwd(), "public", directory, filename);
 
@@ -278,6 +91,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "File not found" }, { status: 404 });
     }
 
+    // Delete the file
     const { unlink } = await import("fs/promises");
     await unlink(filePath);
 
@@ -286,5 +100,4 @@ export async function DELETE(request: NextRequest) {
     console.error("Failed to delete media:", error);
     return NextResponse.json({ error: "Failed to delete media" }, { status: 500 });
   }
-}
-
+} 

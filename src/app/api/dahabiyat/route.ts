@@ -1,149 +1,111 @@
-// Backward compatibility alias for /api/dahabiyat -> /api/dahabiyas
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import prisma from "@/lib/prisma";
+import { z } from "zod";
+import { DailyTourType, DailyTourCategory } from "@prisma/client";
 
-export async function GET(request: NextRequest) {
-  try {
-    // Redirect to the correct endpoint
-    const url = new URL(request.url);
-    const searchParams = url.searchParams.toString();
-    const redirectUrl = `/api/dahabiyas${searchParams ? '?' + searchParams : ''}`;
-    
-    // Forward the request to the correct endpoint
-    const baseUrl = url.origin;
-    const response = await fetch(`${baseUrl}${redirectUrl}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Internal-Redirect',
-        // Forward auth headers if present
-        ...(request.headers.get('authorization') && {
-          'authorization': request.headers.get('authorization')!
-        }),
-        ...(request.headers.get('cookie') && {
-          'cookie': request.headers.get('cookie')!
-        })
-      },
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Upstream request failed: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    return NextResponse.json(data, { status: response.status });
-  } catch (error) {
-    console.error('Error in dahabiyat compatibility endpoint:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch dahabiyas' },
-      { status: 500 }
-    );
-  }
-}
+const dailyTourSchema = z.object({
+  name: z.string().min(1),
+  description: z.string(),
+  pricePerDay: z.number().positive(),
+  capacity: z.number().positive(),
+  type: z.enum(["STANDARD", "LUXURY", "PREMIUM", "BUDGET"]),
+  category: z.enum(["DELUXE", "PREMIUM", "STANDARD", "LUXURY"]),
+  images: z.array(z.string()).optional(),
+  shipId: z.string().optional(),
+  itineraryId: z.string(),
+  advantages: z.string().optional(),
+  meaning: z.string().optional(),
+});
 
 export async function POST(request: NextRequest) {
   try {
-    const url = new URL(request.url);
-    const baseUrl = url.origin;
-    const body = await request.text();
-    
-    const response = await fetch(`${baseUrl}/api/dahabiyas`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Internal-Redirect',
-        // Forward auth headers if present
-        ...(request.headers.get('authorization') && {
-          'authorization': request.headers.get('authorization')!
-        }),
-        ...(request.headers.get('cookie') && {
-          'cookie': request.headers.get('cookie')!
-        })
-      },
-      body,
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Upstream request failed: ${response.status}`);
+    const session = await getServerSession(authOptions);
+    if (!session || session.user.role !== 'ADMIN') {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    
-    const data = await response.json();
-    return NextResponse.json(data, { status: response.status });
+
+    const data = await request.json();
+    const dailyTour = await prisma.dailyTour.create({
+      data: {
+        name: data.name,
+        description: data.description,
+        shortDescription: data.shortDescription,
+        pricePerDay: data.pricePerDay,
+        capacity: data.capacity,
+        features: data.features,
+        type: data.type,
+        category: data.category,
+        amenities: data.amenities,
+        itineraryId: data.itineraryId,
+        shipId: data.shipId,
+        advantages: data.advantages || 'Comprehensive Egypt tour experience',
+        meaning: data.meaning || 'Daily tour package in Egypt',
+      },
+      include: {
+        images: true,
+        itinerary: true,
+      },
+    });
+
+    return NextResponse.json(dailyTour);
   } catch (error) {
-    console.error('Error in dahabiyat compatibility endpoint (POST):', error);
-    return NextResponse.json(
-      { error: 'Failed to create dahabiya' },
-      { status: 500 }
-    );
+    console.error('Error creating daily tour:', error);
+    return NextResponse.json({ error: 'Failed to create daily tour' }, { status: 500 });
   }
 }
 
-export async function PUT(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const url = new URL(request.url);
-    const baseUrl = url.origin;
-    const body = await request.text();
-    
-    const response = await fetch(`${baseUrl}/api/dahabiyas`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Internal-Redirect',
-        // Forward auth headers if present
-        ...(request.headers.get('authorization') && {
-          'authorization': request.headers.get('authorization')!
-        }),
-        ...(request.headers.get('cookie') && {
-          'cookie': request.headers.get('cookie')!
-        })
-      },
-      body,
-    });
-    
-    if (!response.ok) {
-      throw new Error(`Upstream request failed: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    return NextResponse.json(data, { status: response.status });
-  } catch (error) {
-    console.error('Error in dahabiyat compatibility endpoint (PUT):', error);
-    return NextResponse.json(
-      { error: 'Failed to update dahabiya' },
-      { status: 500 }
-    );
-  }
-}
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "10");
+    const type = searchParams.get("type") as DailyTourType | null;
+    const category = searchParams.get("category") as DailyTourCategory | null;
 
-export async function DELETE(request: NextRequest) {
-  try {
-    const url = new URL(request.url);
-    const baseUrl = url.origin;
-    
-    const response = await fetch(`${baseUrl}/api/dahabiyas`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Internal-Redirect',
-        // Forward auth headers if present
-        ...(request.headers.get('authorization') && {
-          'authorization': request.headers.get('authorization')!
-        }),
-        ...(request.headers.get('cookie') && {
-          'cookie': request.headers.get('cookie')!
-        })
-      },
+    const skip = (page - 1) * limit;
+
+    const where = {
+      ...(type ? { type } : {}),
+      ...(category ? { category } : {}),
+    };
+
+    const [dailyTours, total] = await Promise.all([
+      prisma.dailyTour.findMany({
+        where,
+        include: {
+          images: true,
+          ship: true,
+          itinerary: true,
+          reviews: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+        skip,
+        take: limit,
+      }),
+      prisma.dailyTour.count({ where }),
+    ]);
+
+    const formattedDailyTours = dailyTours.map((d) => ({
+      ...d,
+      averageRating:
+        d.reviews.length > 0
+          ? d.reviews.reduce((acc, r) => acc + r.rating, 0) / d.reviews.length
+          : 0,
+    }));
+
+    return NextResponse.json({
+      dailyTours: formattedDailyTours,
+      total,
+      pages: Math.ceil(total / limit),
     });
-    
-    if (!response.ok) {
-      throw new Error(`Upstream request failed: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    return NextResponse.json(data, { status: response.status });
   } catch (error) {
-    console.error('Error in dahabiyat compatibility endpoint (DELETE):', error);
+    console.error('Error fetching daily tours:', error);
     return NextResponse.json(
-      { error: 'Failed to delete dahabiya' },
+      { error: 'Failed to fetch daily tours' },
       { status: 500 }
     );
   }

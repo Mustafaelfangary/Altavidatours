@@ -1,10 +1,9 @@
 "use client";
 
 import { Box, Container, Typography, Button } from '@mui/material';
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect } from 'react';
 import NextLink from 'next/link';
 import UniversalVideo from '@/components/UniversalVideo';
-import { useContent } from '@/hooks/useContent';
 
 interface VideoHeroProps {
   videoSrc: string;
@@ -14,7 +13,7 @@ interface VideoHeroProps {
   ctaLink: string;
 }
 
-export const VideoHero = memo(function VideoHero({
+export function VideoHero({
   videoSrc,
   title,
   subtitle,
@@ -23,126 +22,23 @@ export const VideoHero = memo(function VideoHero({
 }: VideoHeroProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { getContent } = useContent({ page: 'global_media' });
 
   useEffect(() => {
-    // Only log in development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('VideoHero mounted with videoSrc:', videoSrc);
-    }
+    console.log('VideoHero mounted with videoSrc:', videoSrc);
   }, [videoSrc]);
 
+  // Add debugging for videoSrc
+  console.log('VideoHero render - videoSrc:', videoSrc);
+
   if (error) {
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Video error:', error);
-    }
-    // Fallback to image hero if video fails
+    console.error('Video error:', error);
     return (
-      <Box
-        sx={{
-          position: 'relative',
-          height: '100vh',
-          width: { xs: '100%', md: '140vw' },
-          left: { xs: 0, md: '-20vw' },
-          overflow: 'hidden',
-          backgroundImage: 'url(/images/hero-bg.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'linear-gradient(to bottom, rgba(191,219,254,0.7), rgba(191,219,254,0.9))',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Container>
-            <Box
-              sx={{
-                opacity: 0,
-                animation: 'fadeIn 0.8s ease-out forwards',
-                '@keyframes fadeIn': {
-                  '0%': {
-                    opacity: 0,
-                    transform: 'translateY(20px)',
-                  },
-                  '100%': {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                },
-              }}
-            >
-              <Typography
-                variant="h1"
-                sx={{
-                  color: '#111827',
-                  textAlign: 'center',
-                  mb: 2,
-                  fontFamily: 'var(--font-playfair)',
-                  fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem', lg: '4rem' },
-                  textShadow: 'none',
-                  letterSpacing: '0.04em',
-                }}
-              >
-                {title}
-              </Typography>
-              <Typography
-                variant="h5"
-                sx={{
-                  color: '#1f2937',
-                  textAlign: 'center',
-                  mb: { xs: 4, md: 6 },
-                  maxWidth: '800px',
-                  mx: 'auto',
-                  textShadow: 'none',
-                  fontWeight: 400,
-                  fontSize: { xs: '1.2rem', sm: '1.4rem', md: '1.5rem' },
-                  px: { xs: 2, md: 0 },
-                }}
-              >
-                {subtitle}
-              </Typography>
-              <Box sx={{ textAlign: 'center' }}>
-                {ctaLink && (
-                  <Button
-                    variant="contained"
-                    size="large"
-                    href={ctaLink}
-                    sx={{
-                      background: 'linear-gradient(90deg, #3399ff 0%, #FFB300 100%)',
-                      color: 'black',
-                      boxShadow: '0 0 24px 6px rgba(51, 153, 255, 0.25), 0 4px 20px rgba(0,0,0,0.2)',
-                      borderRadius: '40px',
-                      px: { xs: 4, md: 7 },
-                      py: { xs: 2, md: 2.5 },
-                      fontSize: { xs: '1.1rem', md: '1.3rem' },
-                      fontWeight: 800,
-                      letterSpacing: '0.04em',
-                      textTransform: 'uppercase',
-                      minWidth: { xs: '180px', md: '220px' },
-                      '&:hover': {
-                        background: 'linear-gradient(90deg, #FFB300 0%, #3399ff 100%)',
-                        transform: 'scale(1.06)',
-                        boxShadow: '0 0 32px 10px rgba(51, 153, 255, 0.35), 0 8px 32px rgba(0,0,0,0.25)',
-                      },
-                    }}
-                  >
-                    {ctaText || 'Book Now'}
-                  </Button>
-                )}
-              </Box>
-            </Box>
-          </Container>
-        </Box>
+      <Box sx={{ position: 'relative', height: '100vh', width: '100%', overflow: 'hidden', bgcolor: 'black' }}>
+        <Container sx={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Typography variant="h6" color="white">
+            {error}
+          </Typography>
+        </Container>
       </Box>
     );
   }
@@ -152,31 +48,25 @@ export const VideoHero = memo(function VideoHero({
       sx={{
         position: 'relative',
         height: '100vh',
-        width: { xs: '100%', md: '140vw' },
-        left: { xs: 0, md: '-20vw' },
+        width: '100%',
         overflow: 'hidden',
       }}
     >
       <UniversalVideo
         src={videoSrc}
-        poster={getContent('hero_fallback_image', '/images/hero-bg.jpg')}
+        poster="/images/hero-bg.jpg"
         className="absolute inset-0 w-full h-full"
         style={{
           position: 'absolute',
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          objectPosition: 'center center',
         }}
         onLoad={() => setIsLoading(false)}
         onError={(error) => setError(error)}
-        autoPlay={true}
-        muted={true}
-        loop={true}
-        playsInline={true}
       />
       
-      {/* Gradient Overlay - Pale Blue */}
+      {/* Gradient Overlay */}
       <Box
         sx={{
           position: 'absolute',
@@ -184,7 +74,7 @@ export const VideoHero = memo(function VideoHero({
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(to bottom, rgba(191,219,254,0.6), rgba(191,219,254,0.85))',
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5))',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -210,12 +100,12 @@ export const VideoHero = memo(function VideoHero({
             <Typography
               variant="h1"
               sx={{
-                color: '#111827',
+                color: 'white',
                 textAlign: 'center',
                 mb: 2,
                 fontFamily: 'var(--font-playfair)',
-                fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem', lg: '4rem' },
-                textShadow: 'none',
+                fontSize: { xs: '2.5rem', md: '4rem' },
+                textShadow: '0 4px 24px rgba(0,0,0,0.7), 0 1px 0 #fff2',
                 letterSpacing: '0.04em',
               }}
             >
@@ -224,15 +114,13 @@ export const VideoHero = memo(function VideoHero({
             <Typography
               variant="h5"
               sx={{
-                color: '#1f2937',
+                color: 'white',
                 textAlign: 'center',
-                mb: { xs: 4, md: 6 },
+                mb: 6,
                 maxWidth: '800px',
                 mx: 'auto',
-                textShadow: 'none',
+                textShadow: '0 2px 12px rgba(0,0,0,0.6)',
                 fontWeight: 400,
-                fontSize: { xs: '1.2rem', sm: '1.4rem', md: '1.5rem' },
-                px: { xs: 2, md: 0 },
               }}
             >
               {subtitle}
@@ -247,25 +135,25 @@ export const VideoHero = memo(function VideoHero({
                       size="large"
                       aria-label={ctaText || 'Book Now'}
                       sx={{
-                        background: 'linear-gradient(90deg, #3399ff 0%, #FFB300 100%)',
+                        background: 'linear-gradient(90deg, #FFD700 0%, #FFB300 100%)',
                         color: 'black',
-                        boxShadow: '0 0 24px 6px rgba(51, 153, 255, 0.25), 0 4px 20px rgba(0,0,0,0.2)',
+                        boxShadow: '0 0 24px 6px rgba(255, 215, 0, 0.25), 0 4px 20px rgba(0,0,0,0.2)',
                         borderRadius: '40px',
-                        px: { xs: 4, md: 7 },
-                        py: { xs: 2, md: 2.5 },
-                        fontSize: { xs: '1.1rem', md: '1.3rem' },
+                        px: 7,
+                        py: 2.5,
+                        fontSize: '1.3rem',
                         fontWeight: 800,
                         letterSpacing: '0.04em',
                         textTransform: 'uppercase',
-                        minWidth: { xs: '180px', md: '220px' },
+                        minWidth: '220px',
                         position: 'relative',
                         overflow: 'hidden',
                         transition: 'transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.18s cubic-bezier(.4,0,.2,1)',
                         '&:hover': {
-                          background: 'linear-gradient(90deg, #FFB300 0%, #3399ff 100%)',
+                          background: 'linear-gradient(90deg, #FFB300 0%, #FFD700 100%)',
                           color: 'black',
                           transform: 'scale(1.06)',
-                          boxShadow: '0 0 32px 10px rgba(51, 153, 255, 0.35), 0 8px 32px rgba(0,0,0,0.25)',
+                          boxShadow: '0 0 32px 10px rgba(255, 215, 0, 0.35), 0 8px 32px rgba(0,0,0,0.25)',
                         },
                         '&:active::after': {
                           content: '""',
@@ -296,25 +184,25 @@ export const VideoHero = memo(function VideoHero({
                     rel="noopener noreferrer"
                     aria-label={ctaText || 'Book Now'}
                     sx={{
-                      background: 'linear-gradient(90deg, #3399ff 0%, #FFB300 100%)',
+                      background: 'linear-gradient(90deg, #FFD700 0%, #FFB300 100%)',
                       color: 'black',
-                      boxShadow: '0 0 24px 6px rgba(51, 153, 255, 0.25), 0 4px 20px rgba(0,0,0,0.2)',
+                      boxShadow: '0 0 24px 6px rgba(255, 215, 0, 0.25), 0 4px 20px rgba(0,0,0,0.2)',
                       borderRadius: '40px',
-                      px: { xs: 4, md: 7 },
-                      py: { xs: 2, md: 2.5 },
-                      fontSize: { xs: '1.1rem', md: '1.3rem' },
+                      px: 7,
+                      py: 2.5,
+                      fontSize: '1.3rem',
                       fontWeight: 800,
                       letterSpacing: '0.04em',
                       textTransform: 'uppercase',
-                      minWidth: { xs: '180px', md: '220px' },
+                      minWidth: '220px',
                       position: 'relative',
                       overflow: 'hidden',
                       transition: 'transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.18s cubic-bezier(.4,0,.2,1)',
                       '&:hover': {
-                        background: 'linear-gradient(90deg, #FFB300 0%, #3399ff 100%)',
+                        background: 'linear-gradient(90deg, #FFB300 0%, #FFD700 100%)',
                         color: 'black',
                         transform: 'scale(1.06)',
-                        boxShadow: '0 0 32px 10px rgba(51, 153, 255, 0.35), 0 8px 32px rgba(0,0,0,0.25)',
+                        boxShadow: '0 0 32px 10px rgba(255, 215, 0, 0.35), 0 8px 32px rgba(0,0,0,0.25)',
                       },
                       '&:active::after': {
                         content: '""',
@@ -343,4 +231,4 @@ export const VideoHero = memo(function VideoHero({
       </Box>
     </Box>
   );
-});
+} 

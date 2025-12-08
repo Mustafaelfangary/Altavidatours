@@ -1,27 +1,21 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
+import prisma from "@/lib/prisma";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
+
+export const dynamic = 'force-dynamic';
 
 // GET /api/ships
 export async function GET() {
   try {
-    // Mock ships data since Ship model doesn't exist
-    const ships = [
-      {
-        id: '1',
-        name: 'Cleopatra Dahabiya',
-        imageUrl: '/images/ships/cleopatra.jpg',
-        capacity: 12,
-        yearBuilt: 2020,
-        specifications: 'Luxury traditional dahabiya with modern amenities'
-      }
-    ];
-    console.log('Found ships:', ships);
+    const ships = await prisma.ship.findMany();
     return NextResponse.json(ships);
   } catch (error) {
     console.error('Error fetching ships:', error);
-    return NextResponse.json({ error: 'Failed to fetch ships' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to fetch ships' }, 
+      { status: 500 }
+    );
   }
 }
 
@@ -29,27 +23,38 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session || session.user.role !== 'ADMIN') {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!session?.user || (session.user as any).role !== 'ADMIN') {
+      return NextResponse.json(
+        { error: 'Unauthorized' }, 
+        { status: 401 }
+      );
     }
 
     const data = await request.json();
+    
+    if (!data.name || !data.imageUrl) {
+      return NextResponse.json(
+        { error: 'Name and imageUrl are required' },
+        { status: 400 }
+      );
+    }
 
-    // Mock ship creation since Ship model doesn't exist
-    const ship = {
-      id: Date.now().toString(),
-      name: data.name,
-      imageUrl: data.imageUrl,
-      capacity: data.capacity,
-      yearBuilt: data.yearBuilt,
-      specifications: data.specifications,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
+    const ship = await prisma.ship.create({
+      data: {
+        name: data.name,
+        imageUrl: data.imageUrl,
+        capacity: data.capacity || 0,
+        yearBuilt: data.yearBuilt || new Date().getFullYear(),
+        specifications: data.specifications || {},
+      },
+    });
 
-    return NextResponse.json(ship);
+    return NextResponse.json(ship, { status: 201 });
   } catch (error) {
     console.error('Error creating ship:', error);
-    return NextResponse.json({ error: 'Failed to create ship' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to create ship' },
+      { status: 500 }
+    );
   }
 }
