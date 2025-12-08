@@ -45,7 +45,7 @@
 
     /* Egyptian-inspired Additional Colors - Enhanced */
     --nile-blue: 210 100% 50%;
-    --pharaoh-gold: 43 100% 55%;
+    --pharaoh-gold: 8 68% 45%;
     --desert-sand: 35 40% 82%;
     --papyrus: 45 30% 90%;
     --ancient-stone: 30 12% 60%;
@@ -229,7 +229,7 @@
 
   /* Egyptian Theme Gradients */
   .gradient-pharaoh {
-    background: linear-gradient(135deg, hsl(43, 100%, 55%) 0%, hsl(43, 100%, 45%) 50%, hsl(25, 90%, 60%) 100%);
+    background: linear-gradient(135deg, hsl(8, 68%, 45%) 0%, hsl(345, 70%, 30%) 50%, hsl(8, 68%, 55%) 100%);
   }
 
   .gradient-nile {

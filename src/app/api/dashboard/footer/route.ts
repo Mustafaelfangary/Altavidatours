@@ -7,10 +7,10 @@ import { z } from "zod";
 // Footer content structure for the new enhanced footer
 const FOOTER_CONTENT_STRUCTURE = {
   company: {
-    footer_company_name: { key: 'footer_company_name', type: 'TEXT', order: 1, defaultValue: 'Egipto Trips' },
-    footer_logo: { key: 'footer_logo', type: 'IMAGE', order: 2, defaultValue: '/MainLogo.png' },
+    footer_company_name: { key: 'footer_company_name', type: 'TEXT', order: 1, defaultValue: 'AltaVida Tours' },
+    footer_logo: { key: 'footer_logo', type: 'IMAGE', order: 2, defaultValue: '/logos/altavida-logo.png' },
     footer_description: { key: 'footer_description', type: 'TEXTAREA', order: 3, defaultValue: 'Discover the wonders of Egypt with our comprehensive travel packages and daily tours. Experience ancient history, vibrant culture, and unforgettable adventures.' },
-    footer_copyright: { key: 'footer_copyright', type: 'TEXT', order: 4, defaultValue: 'All rights reserved by Egipto Trips.' },
+    footer_copyright: { key: 'footer_copyright', type: 'TEXT', order: 4, defaultValue: 'All rights reserved by AltaVida Tours.' },
   },
   navigation: {
     footer_link_dahabiyat: { key: 'footer_link_dahabiyat', type: 'TEXT', order: 5, defaultValue: 'Our Dahabiyas' },
@@ -25,7 +25,7 @@ const FOOTER_CONTENT_STRUCTURE = {
   contact: {
     contact_address: { key: 'contact_address', type: 'TEXT', order: 13, defaultValue: 'Esna, Luxor, Egypt' },
     contact_phone: { key: 'contact_phone', type: 'TEXT', order: 14, defaultValue: '+20 123 456 789' },
-    contact_email: { key: 'contact_email', type: 'EMAIL', order: 15, defaultValue: 'info@egiptotrips.com' },
+    contact_email: { key: 'contact_email', type: 'EMAIL', order: 15, defaultValue: 'info@altavidatours.com' },
   },
   social_media: {
     footer_social_facebook: { key: 'footer_social_facebook', type: 'URL', order: 16, defaultValue: '#' },

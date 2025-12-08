@@ -147,7 +147,7 @@ export default function SeoPage() {
                 <div><Label>OG Image URL</Label><Input value={editingItem.ogImage || ''} onChange={(e) => setEditingItem({...editingItem, ogImage: e.target.value})} placeholder="https://..." /></div>
               </TabsContent>
               <TabsContent value="advanced" className="space-y-4 pt-4">
-                <div><Label>Canonical URL</Label><Input value={editingItem.canonical || ''} onChange={(e) => setEditingItem({...editingItem, canonical: e.target.value})} placeholder="https://egiptotrips.com/..." /></div>
+                <div><Label>Canonical URL</Label><Input value={editingItem.canonical || ''} onChange={(e) => setEditingItem({...editingItem, canonical: e.target.value})} placeholder="https://altavidatours.com/..." /></div>
                 <div className="flex gap-6">
                   <div className="flex items-center gap-2"><Switch checked={editingItem.noIndex} onCheckedChange={(c) => setEditingItem({...editingItem, noIndex: c})} /><Label>No Index</Label></div>
                   <div className="flex items-center gap-2"><Switch checked={editingItem.noFollow} onCheckedChange={(c) => setEditingItem({...editingItem, noFollow: c})} /><Label>No Follow</Label></div>

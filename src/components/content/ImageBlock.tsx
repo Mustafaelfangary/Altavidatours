@@ -1,5 +1,6 @@
 import { ContentBlock } from '@prisma/client';
 import Image from 'next/image';
+import imageLoader from '../../utils/imageLoader';
 
 interface ImageBlockProps {
   block: ContentBlock;
@@ -17,7 +18,7 @@ export default function ImageBlock({ block }: ImageBlockProps) {
 
   return (
     <div className="my-4">
-      <Image src={src} alt={alt} width={800} height={600} className="rounded-lg" />
+      <Image src={src} alt={alt} width={800} height={600} className="rounded-lg" loader={imageLoader} />
     </div>
   );
 }

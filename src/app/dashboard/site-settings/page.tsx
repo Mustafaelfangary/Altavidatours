@@ -36,17 +36,17 @@ interface SiteSettings {
 }
 
 const defaultSettings: SiteSettings = {
-  site_name: 'Egipto Trips',
+  site_name: 'AltaVida Tours',
   site_tagline: 'Luxury Nile Cruises & Egyptian Adventures',
   site_description: 'Experience the magic of Egypt with our luxury Dahabiya cruises and curated tours.',
-  logo_url: '/MainLogo.png',
+  logo_url: '/logos/altavida-logo.png',
   favicon_url: '/favicon.ico',
-  contact_email: 'info@egiptotrips.com',
+  contact_email: 'info@altavidatours.com',
   contact_phone: '+20 123 456 7890',
   contact_whatsapp: '+20 123 456 7890',
   contact_address: 'Luxor, Egypt',
-  social_facebook: 'https://facebook.com/egiptotrips',
-  social_instagram: 'https://instagram.com/egiptotrips',
+  social_facebook: 'https://facebook.com/altavidatours',
+  social_instagram: 'https://instagram.com/altavidatours',
   social_twitter: '',
   social_youtube: '',
   social_tiktok: '',

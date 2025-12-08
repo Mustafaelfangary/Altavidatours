@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     // Send email notification
     await sendEmail({
-      to: process.env.CONTACT_EMAIL || 'info@egiptotrips.com',
+      to: process.env.CONTACT_EMAIL || 'info@altavidatours.com',
       subject: `New Contact Form Submission: ${subject}`,
       template: 'contact',
       data: {

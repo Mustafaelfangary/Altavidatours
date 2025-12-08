@@ -1,5 +1,6 @@
 import { ContentBlock } from '@prisma/client';
 import Image from 'next/image';
+import imageLoader from '../../utils/imageLoader';
 
 interface GalleryBlockProps {
   block: ContentBlock;
@@ -20,7 +21,7 @@ export default function GalleryBlock({ block }: GalleryBlockProps) {
     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-4">
       {images.map((image: { src: string; alt: string }, index: number) => (
         <div key={index} className="relative aspect-square">
-          <Image src={image.src} alt={image.alt} layout="fill" objectFit="cover" className="rounded-lg" />
+          <Image src={image.src} alt={image.alt} fill className="rounded-lg object-cover" loader={imageLoader} />
         </div>
       ))}
     </div>

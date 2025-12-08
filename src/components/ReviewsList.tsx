@@ -9,6 +9,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from '@/components/ui/use-toast';
 import { Star, ThumbsUp } from 'lucide-react';
 import Image from 'next/image';
+import imageLoader from '../utils/imageLoader';
 
 type Review = {
   id: string;
@@ -144,6 +145,7 @@ export function ReviewsList() {
                       alt={`Review photo ${index + 1}`}
                       fill
                       className="object-cover rounded-full"
+                      loader={imageLoader}
                     />
                   </div>
                 ))}

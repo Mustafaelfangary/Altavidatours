@@ -59,15 +59,15 @@ export function LoadingPage({ isLoading, onComplete }: LoadingPageProps) {
           <div className="absolute inset-0 bg-pharaoh-gold/30 rounded-full blur-2xl animate-pulse"></div>
           <div className="relative animate-scale-in">
             <Image
-              src="/MainLogo.png"
-              alt="Egipto Trips Logo"
+              src="/logos/altavida-logo.png"
+              alt="AltaVida Tours Logo"
               width={200}
               height={200}
               loader={imageLoader}
               className="object-contain animate-float"
               priority
               onError={(e) => {
-                console.error('MainLogo.png not found, using fallback');
+                console.error('altavida logo not found, using fallback');
                 (e.target as HTMLImageElement).src = '/wordmark-favicon.webp';
               }}
             />
@@ -79,7 +79,7 @@ export function LoadingPage({ isLoading, onComplete }: LoadingPageProps) {
           𓎼𓇌𓊪𓏏 𓏏𓅲𓂋𓋴
         </div>
         <div className="text-lg md:text-xl text-white/80 font-light animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          Egipto Trips
+          AltaVida Tours
         </div>
 
         {/* Pharaonic Decorations */}

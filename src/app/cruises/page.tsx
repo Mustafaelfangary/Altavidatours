@@ -7,7 +7,7 @@ import Link from "next/link";
 import imageLoader from "@/utils/imageLoader";
 
 export const metadata = {
-  title: "Nile Cruises | Egipto Trips",
+  title: "Nile Cruises | AltaVida Tours",
   description: "Explore our luxury Nile cruise offerings. Experience the magic of Egypt from the comfort of our premium cruise ships.",
 };
 

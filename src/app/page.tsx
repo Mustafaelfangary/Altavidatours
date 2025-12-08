@@ -207,7 +207,7 @@ export default function HomePage() {
                 <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50">
                   <Image
                     src={getContentBlock('homepage_dahabiya_image')?.mediaUrl || FEATURED_TOURS.pyramids}
-                    alt="Why Choose Egipto Trips"
+                    alt="Why Choose AltaVida Tours"
                     width={600}
                     height={400}
                     className="rounded-3xl transform group-hover:scale-110 transition-transform duration-700"
@@ -369,6 +369,7 @@ export default function HomePage() {
                     alt="Featured Tour 1"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    loader={imageLoader}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute top-4 right-4 z-10">
@@ -399,6 +400,7 @@ export default function HomePage() {
                     alt="Featured Tour 2"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    loader={imageLoader}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute top-4 right-4 z-10">
@@ -429,6 +431,7 @@ export default function HomePage() {
                     alt="Featured Tour 3"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    loader={imageLoader}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute top-4 right-4 z-10">
@@ -504,6 +507,7 @@ export default function HomePage() {
                       alt={`Egypt Travel Memory ${index + 1}`}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-125"
+                          loader={imageLoader}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>

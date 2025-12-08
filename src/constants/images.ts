@@ -1,9 +1,9 @@
-// Centralized Image Constants for Egipto Trips
+// Centralized Image Constants for AltaVida Tours
 // All images from the public folder organized by category
 
 export const IMAGES = {
   // Logo
-  logo: '/MainLogo.png',
+  logo: '/logos/altavida-logo.png',
   
   // Recent Photos (WhatsApp Images)
   recent: [

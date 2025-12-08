@@ -225,7 +225,7 @@ export function SettingsManagement() {
             <CardContent className="space-y-4">
               {renderSettingInput('site_name', 'Site Name', 'Dahabiyat')}
               {renderSettingInput('site_description', 'Site Description', 'Luxury dahabiya cruises on the Nile')}
-              {renderSettingInput('contact_email', 'Contact Email', 'info@egiptotrips.com')}
+              {renderSettingInput('contact_email', 'Contact Email', 'info@altavidatours.com')}
               {renderSettingInput('site_logo', 'Site Logo')}
             </CardContent>
           </Card>
@@ -253,7 +253,7 @@ export function SettingsManagement() {
             <CardContent className="space-y-4">
               {renderSettingInput('contact_phone', 'Phone Number', '+20 123 456 7890')}
               {renderSettingInput('contact_address', 'Address', '123 Nile Street, Cairo, Egypt')}
-              {renderSettingInput('contact_email', 'Contact Email', 'info@egiptotrips.com')}
+              {renderSettingInput('contact_email', 'Contact Email', 'info@altavidatours.com')}
               {renderSettingInput('contact_image', 'Contact Page Image')}
             </CardContent>
           </Card>

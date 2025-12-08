@@ -48,12 +48,12 @@ export default function Footer({ settings = {} }: FooterProps) {
         console.error('Failed to load footer content:', error);
         // Set default content on error
         setContent({
-          footer_company_name: 'Egipto Trips',
+          footer_company_name: 'AltaVida Tours',
           footer_description: 'Discover the wonders of Egypt with our comprehensive travel packages and daily tours.',
           contact_phone: '+20 123 456 789',
-          contact_email: 'info@egiptotrips.com',
+          contact_email: 'info@altavidatours.com',
           contact_address: 'Cairo, Egypt',
-          footer_copyright: 'All rights reserved by Egipto Trips.'
+          footer_copyright: 'All rights reserved by AltaVida Tours.'
         });
       } finally {
         setLoading(false);
@@ -146,23 +146,23 @@ export default function Footer({ settings = {} }: FooterProps) {
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold bg-gradient-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold bg-clip-text text-transparent">
-                      Egipto Trips
+                      AltaVida Tours
                     </h2>
                     <p className="text-pharaoh-gold text-sm font-semibold">Egypt Tours & Travel</p>
                   </div>
                 </div>
                 
-                {/* Logo - MainLogo.png should be placed in public folder */}
+                {/* Logo - place the AltaVida logo in `public/logos/altavida-logo.png` */}
                 <div className="mb-6">
                   <Image
-                    src="/MainLogo.png"
-                    alt="Egipto Trips Logo"
+                    src="/logos/altavida-logo.png"
+                    alt="AltaVida Tours Logo"
                     width={200}
                     height={200}
                     className="object-contain group-hover:scale-105 transition-transform duration-300 bg-white/5 rounded-lg p-2"
                     style={{ maxWidth: '180px', height: 'auto', minHeight: '60px' }}
                     onError={(e) => {
-                      console.error('MainLogo.png not found in public folder. Please add the logo file as MainLogo.png');
+                      console.error('altavida logo not found in public folder. Please add the logo file as /logos/altavida-logo.png');
                       // Try fallback
                       const img = e.target as HTMLImageElement;
                       if (!img.src.includes('wordmark')) {
@@ -342,7 +342,7 @@ export default function Footer({ settings = {} }: FooterProps) {
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <div className="text-center md:text-left">
                 <p className="text-gray-700 text-sm font-semibold">
-                  © 2025 Egipto Trips. All rights reserved.
+                  © 2025 AltaVida Tours. All rights reserved.
                 </p>
                 <p className="text-gray-600 text-xs mt-1 flex items-center justify-center md:justify-start space-x-1">
                   <span>Crafted with</span>

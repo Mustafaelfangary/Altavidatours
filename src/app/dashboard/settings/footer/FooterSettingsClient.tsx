@@ -476,7 +476,7 @@ export default function FooterSettingsClient() {
                     type="email"
                     value={settings.contact_email || ''}
                     onChange={(e) => handleInputChange('contact_email', e.target.value)}
-                    placeholder="info@egiptotrips.com"
+                    placeholder="info@altavidatours.com"
                   />
                 </div>
               </div>

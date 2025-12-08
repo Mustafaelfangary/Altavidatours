@@ -10,7 +10,7 @@ interface PharaonicDecorationProps {
 
 // Pharaonic hieroglyphs for decoration
 const pharaonicSymbols = [
-  '𓎼', '𓇌', '𓊪', '𓏏', '𓅲', '𓂋', '𓋴', // Egipto Trips
+  '𓎼', '𓇌', '𓊪', '𓏏', '𓅲', '𓂋', '𓋴', // AltaVida Tours
   '𓆑', '𓏏', '𓅱', '𓏏', '𓂋', // Common symbols
   '𓊃', '𓏏', '𓅱', '𓏏', // Additional decorative
   '𓎟', '𓏏', '𓅱', '𓏏', // More symbols
@@ -101,7 +101,7 @@ export function PharaonicDecoration({
   );
 }
 
-// Pharaonic text component for "Egipto Trips"
+// Pharaonic text component for "AltaVida Tours"
 export function PharaonicText({ 
   className = '',
   showTranslation = true 
@@ -110,7 +110,7 @@ export function PharaonicText({
   showTranslation?: boolean;
 }) {
   const pharaonicText = '𓎼𓇌𓊪𓏏 𓏏𓅲𓂋𓋴';
-  const translation = 'Egipto Trips';
+  const translation = 'AltaVida Tours';
 
   return (
     <div className={`flex flex-col items-center gap-2 ${className}`}>

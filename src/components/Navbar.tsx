@@ -64,7 +64,7 @@ export default function Navbar() {
   const user = session?.user;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [settings, setSettings] = useState({ siteName: 'Egipto Trips', logoUrl: '/MainLogo.png' });
+  const [settings, setSettings] = useState({ siteName: 'AltaVida Tours', logoUrl: '/logos/altavida-logo.png' });
   const [megaOpen, setMegaOpen] = useState<string | false>(false);
   const { language, setLanguage } = useLanguage();
   const t = useTranslations('nav');
@@ -110,15 +110,15 @@ export default function Navbar() {
     fetch('/api/settings?group=general')
       .then(res => res.json())
       .then(data => {
-        let siteName = 'Egipto Trips';
-        let logoUrl = '/MainLogo.png';
+        let siteName = 'AltaVida Tours';
+        let logoUrl = '/logos/altavida-logo.png';
         if (Array.isArray(data)) {
           siteName = data.find(s => s.settingKey === 'site_name')?.settingValue || siteName;
           const settingLogo = data.find(s => s.settingKey === 'site_logo')?.settingValue;
-          logoUrl = settingLogo && settingLogo !== '/logo.png' ? settingLogo : '/MainLogo.png';
+          logoUrl = settingLogo && settingLogo !== '/logo.png' ? settingLogo : '/logos/altavida-logo.png';
         } else if (data && typeof data === 'object') {
           siteName = data.site_name || siteName;
-          logoUrl = (data.site_logo && data.site_logo !== '/logo.png') ? data.site_logo : '/MainLogo.png';
+          logoUrl = (data.site_logo && data.site_logo !== '/logo.png') ? data.site_logo : '/logos/altavida-logo.png';
         }
         setSettings({ siteName, logoUrl });
       });
@@ -330,20 +330,20 @@ export default function Navbar() {
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <Image 
-                src="/MainLogo.png"
-                alt="Egipto Trips Logo" 
-                width={40}
-                height={40}
+              <Image
+                src="/logos/altavida-logo.png"
+                alt="AltaVida Tours Logo"
+                width={120}
+                height={50}
                 loader={imageLoader}
-                style={{ 
-                  objectFit: 'contain', 
+                className="object-contain"
+                style={{
                   transition: 'all 0.3s ease-in-out',
                   filter: isHomepage && !scrolled ? 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))' : 'none',
                   WebkitFilter: isHomepage && !scrolled ? 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))' : 'none'
                 }}
                 onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                  console.error('MainLogo.png not found, using fallback');
+                  console.error('altavida logo not found, using fallback');
                   const target = e.target as HTMLImageElement;
                   target.onerror = null;
                   target.src = '/wordmark-favicon.webp';

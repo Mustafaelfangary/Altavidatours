@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps) {
   const cruise = await getCruise(id);
   if (!cruise) return { title: "Cruise Not Found" };
   return {
-    title: `${cruise.name} | Egipto Trips`,
+    title: `${cruise.name} | AltaVida Tours`,
     description: cruise.description,
   };
 }

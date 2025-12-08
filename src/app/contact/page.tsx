@@ -131,7 +131,7 @@ export default function ContactPage() {
                   {getContent('contact_email_title', 'Email')}
                 </Typography>
                 <Typography sx={{ whiteSpace: 'pre-line' }}>
-                  {getContent('contact_email_content', 'info@egiptotrips.com\nbookings@egiptotrips.com')}
+                  {getContent('contact_email_content', 'info@altavidatours.com\nbookings@altavidatours.com')}
                 </Typography>
               </Box>
 

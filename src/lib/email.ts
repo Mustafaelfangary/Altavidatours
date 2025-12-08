@@ -31,7 +31,7 @@ const templates = {
         <li>Guests: ${data.booking.guests}</li>
         <li>Total Price: $${data.booking.totalPrice}</li>
       </ul>
-      <p>Thank you for choosing Egipto Trips!</p>
+      <p>Thank you for choosing AltaVida Tours!</p>
     `,
   }),
   'booking-modification': (data: any) => ({
@@ -47,7 +47,7 @@ const templates = {
         <li>Guests: ${data.booking.guests}</li>
         <li>Total Price: $${data.booking.totalPrice}</li>
       </ul>
-      <p>Thank you for choosing Egipto Trips!</p>
+      <p>Thank you for choosing AltaVida Tours!</p>
     `,
   }),
   'booking-cancellation': (data: any) => ({

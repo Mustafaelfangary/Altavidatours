@@ -119,7 +119,7 @@ export default function PrivacyPage() {
             If you have any questions about this privacy policy, please contact us at:
           </Typography>
           <Typography paragraph>
-            Email: privacy@egiptotrips.com
+            Email: privacy@altavidatours.com
           </Typography>
           <Typography paragraph>
             Phone: +20 123 456 7890
