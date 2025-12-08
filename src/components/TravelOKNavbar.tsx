@@ -437,15 +437,15 @@ function TravelOKNavbarLegacy() {
                     aria-controls={`mega-${item.id}`}
                     onClick={() => toggleDropdownClick(item.id)}
                     onKeyDown={(e) => onKeyDownTopItem(e, item.id)}
-                    className={`px-2.5 py-2 text-[11px] font-semibold transition-all duration-200 border-r border-white/20 flex items-center space-x-1.5 hover:-translate-y-0.5 ${
+                    className={`px-2 py-1.5 text-[10px] font-semibold transition-all duration-200 border-r border-white/20 flex items-center space-x-1.5 hover:-translate-y-0.5 ${
                       activeDropdown === item.id || isActive(item.mainHref)
                         ? 'text-travelok-gold' 
                         : 'text-white hover:text-travelok-gold'
                     }`}
                   >
-                    <item.icon size={14} />
+                    <item.icon size={12} />
                     <span>{item.label}</span>
-                    <ChevronDown size={12} className={`transition-transform duration-200 ${activeDropdown === item.id ? 'rotate-180' : ''}`} />
+                    <ChevronDown size={10} className={`transition-transform duration-200 ${activeDropdown === item.id ? 'rotate-180' : ''}`} />
                   </button>
 
                   {/* Enhanced Mega Dropdown Menu via Portal */}
@@ -1276,7 +1276,7 @@ export default function TravelOKNavbar() {
 
       {/* Main Navigation - glass over white then solid on scroll */}
       <nav className={`modern-nav sticky top-0 z-[200] transition-all duration-500 ${navReady ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'} ${scrolled ? 'backdrop-blur bg-[#0b2e4f]/95 shadow-sm' : 'backdrop-blur bg-[#0b2e4f]/90'} border-b border-white/10`} ref={containerRef as any} style={{ overflow: 'visible' }}>
-        <div className="max-w-6xl mx-auto px-2 lg:px-3" style={{ overflow: 'visible' }}>
+        <div className="max-w-5xl mx-auto px-2 lg:px-3" style={{ overflow: 'visible' }}>
           <div className="flex items-center justify-start gap-1" style={{ overflow: 'visible' }}>
             {/* Mobile Menu Button */}
             <button
@@ -1434,7 +1434,7 @@ export default function TravelOKNavbar() {
                   onChange={(e) => setQuery(e.target.value)}
                   type="search"
                   placeholder="Search destinations, tours..."
-                  className="bg-transparent outline-none text-[13px] placeholder:text-white/50 text-white w-44"
+                  className="bg-transparent outline-none text-[12px] placeholder:text-white/50 text-white w-40"
                 />
               </form>
 

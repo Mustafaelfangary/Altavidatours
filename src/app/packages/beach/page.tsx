@@ -115,17 +115,17 @@ export default function BeachExtensionsPage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Beach Destinations</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {destinations.map((destination, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-48 bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+              <div key={index} className="egypt-card">
+                <div className="relative h-44 bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
                   <Waves size={48} className="text-white" />
                 </div>
-                <div className="p-5">
+                <div className="egypt-card-body">
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{destination.name}</h3>
                   <p className="text-gray-600 mb-3">{destination.description}</p>
                   
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-sm text-gray-500">{destination.duration}</span>
-                    <span className="text-lg font-bold text-cyan-600">{destination.price}</span>
+                    <span className="text-lg font-bold egypt-price">{destination.price}</span>
                   </div>
 
                   <div className="mb-4">
@@ -140,9 +140,9 @@ export default function BeachExtensionsPage() {
                     </ul>
                   </div>
 
-                  <button className="w-full bg-cyan-600 text-white py-2 px-3 rounded-lg hover:bg-cyan-700 transition-colors font-semibold">
+                  <Link href="/contact" className="egypt-cta w-full text-center">
                     Book This Destination
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -154,12 +154,14 @@ export default function BeachExtensionsPage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Beach Experience Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {beachFeatures.map((feature, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-5 text-center">
-                <div className="bg-cyan-100 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-3">
+              <div key={index} className="egypt-card text-center">
+                <div className="egypt-card-body">
+                  <div className="bg-cyan-100 rounded-full w-14 h-14 flex items-center justify-center mx-auto mb-3">
                   <feature.icon size={28} className="text-cyan-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 text-sm">{feature.description}</p>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm">{feature.description}</p>
               </div>
             ))}
           </div>

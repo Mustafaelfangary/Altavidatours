@@ -207,7 +207,7 @@ export default function TravelOKHomepage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {packages.slice(0, 6).map((pkg, index) => {
               // Choose image based on package type to reflect categories
               const getImageForPackage = () => {
@@ -241,8 +241,8 @@ export default function TravelOKHomepage() {
                 return cultural[index % cultural.length];
               };
               return (
-              <div key={pkg.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative h-48">
+              <div key={pkg.id} className="egypt-card">
+                <div className="relative h-44">
                   <Image
                     src={getImageForPackage() || pkg.image}
                     alt={pkg.title}
@@ -252,24 +252,24 @@ export default function TravelOKHomepage() {
                       e.currentTarget.src = pkg.image;
                     }}
                   />
-                  <div className="absolute top-4 right-4 bg-travelok-orange text-white px-3 py-1 rounded-full text-sm font-bold">
+                  <div className="egypt-badge">
                     {pkg.duration}
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-travelok-blue mb-2">{pkg.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{pkg.description}</p>
+                <div className="egypt-card-body">
+                  <h3 className="text-lg font-bold text-travelok-blue mb-2">{pkg.title}</h3>
+                  <p className="text-gray-600 text-sm mb-3 line-clamp-3">{pkg.description}</p>
                   
                   <div className="mb-4">
-                    <div className="text-sm text-gray-500 mb-2">Highlights:</div>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="text-xs text-gray-500 mb-2">Highlights:</div>
+                    <div className="flex flex-wrap gap-1.5">
                       {pkg.highlights.slice(0, 3).map((highlight, index) => (
-                        <span key={index} className="bg-blue-100 text-travelok-blue px-2 py-1 rounded text-xs">
+                        <span key={index} className="egypt-pill">
                           {highlight}
                         </span>
                       ))}
                       {pkg.highlights.length > 3 && (
-                        <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">
+                        <span className="egypt-pill">
                           +{pkg.highlights.length - 3} more
                         </span>
                       )}
@@ -277,13 +277,11 @@ export default function TravelOKHomepage() {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="text-2xl font-bold text-travelok-orange">
-                      From ${pkg.price.from}
+                    <div>
+                      <div className="text-xs text-gray-500">From</div>
+                      <div className="text-xl egypt-price">${pkg.price.from}</div>
                     </div>
-                    <Link 
-                      href={`/packages/${pkg.id}`}
-                      className="bg-travelok-blue hover:bg-travelok-orange text-white px-4 py-2 rounded transition-colors text-sm font-semibold"
-                    >
+                    <Link href={`/packages/${pkg.id}`} className="egypt-cta">
                       View Details
                     </Link>
                   </div>
@@ -573,4 +571,3 @@ export default function TravelOKHomepage() {
     </div>
   );
 }
-

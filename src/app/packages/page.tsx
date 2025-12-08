@@ -231,21 +231,21 @@ export default function PackagesPage() {
           {filteredPackages.map((pkg) => (
             <Box key={pkg.id} sx={{ width: { xs: '100%', md: '50%', lg: '33.3333%' }, pr: { md: 2 }, pb: 2 }}>
               <Card
+                className="egypt-card"
                 sx={{
                   height: '100%',
                   borderRadius: 3,
                   overflow: 'hidden',
-                  transition: 'all 0.3s ease',
+                  transition: 'all 0.2s ease',
                   '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 20px 60px rgba(0,0,0,0.12)'
+                    transform: 'translateY(-2px)'
                   }
                 }}
               >
                 <Box sx={{ position: 'relative' }}>
                   <CardMedia
                     component="img"
-                    height="280"
+                    height="220"
                     image={pkg.mainImage || pkg.mainImageUrl || '/cultural-historical/DSCF1165.JPG'}
                     alt={pkg.name}
                     sx={{ objectFit: 'cover' }}
@@ -279,7 +279,7 @@ export default function PackagesPage() {
                     </Box>
                   </Box>
                 </Box>
-                <CardContent sx={{ p: 4 }}>
+                <CardContent sx={{ p: 3 }}>
                   <Typography variant="h5" component="h3" fontWeight="bold" gutterBottom>
                     {pkg.name}
                   </Typography>
@@ -304,10 +304,10 @@ export default function PackagesPage() {
 
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Box>
-                      <Typography variant="body2" color="text.secondary">
-                        Starting from
+                      <Typography variant="caption" color="text.secondary">
+                        From
                       </Typography>
-                      <Typography variant="h5" color="#1BAE70" fontWeight="bold">
+                      <Typography variant="h6" sx={{ color: '#D97706', fontWeight: 800 }}>
                         ${pkg.price?.toLocaleString() || '2,450'}
                       </Typography>
                     </Box>
@@ -317,13 +317,13 @@ export default function PackagesPage() {
                       variant="contained"
                       sx={{
                         textTransform: 'none',
-                        borderRadius: 2.5,
-                        px: 3,
-                        py: 1.5,
-                        fontWeight: 'bold',
-                        bgcolor: '#0B70E1',
+                        borderRadius: 2,
+                        px: 2.5,
+                        py: 1,
+                        fontWeight: 700,
+                        bgcolor: '#0B2E4F',
                         '&:hover': {
-                          bgcolor: '#0A5FBF'
+                          bgcolor: '#08243E'
                         }
                       }}
                     >

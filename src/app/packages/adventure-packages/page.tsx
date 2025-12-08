@@ -174,7 +174,7 @@ export default function AdventurePackagesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {adventurePackages.map((pkg, index) => (
               <AnimatedSection key={pkg.id} delay={index * 100}>
-                <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-orange-200">
+                <Card className="egypt-card border-orange-200">
                   <div className="relative h-72">
                     <Image src={pkg.image} alt={pkg.name} fill className="object-cover" />
                     <div className={`absolute top-4 left-4 text-white px-3 py-1 rounded-full text-sm font-bold ${getDifficultyColor(pkg.difficulty)}`}>
@@ -201,14 +201,14 @@ export default function AdventurePackagesPage() {
                     </div>
                   </div>
                   
-                  <CardContent className="p-6">
+                  <CardContent className="egypt-card-body">
                     <p className="text-gray-600 mb-6 leading-relaxed">{pkg.description}</p>
                     
                     <div className="mb-6">
                       <h4 className="font-semibold text-gray-900 mb-3">Adventure Activities:</h4>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5">
                         {pkg.highlights.slice(0, 4).map((highlight, idx) => (
-                          <span key={idx} className="bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full">
+                          <span key={idx} className="egypt-pill">
                             {highlight}
                           </span>
                         ))}
@@ -216,7 +216,7 @@ export default function AdventurePackagesPage() {
                     </div>
                     
                     <div className="flex gap-3">
-                      <Button className="flex-1 bg-orange-600 hover:bg-orange-700 text-white">
+                      <Button className="flex-1 egypt-cta">
                         <Mountain className="w-4 h-4 mr-2" />
                         Book Package
                       </Button>

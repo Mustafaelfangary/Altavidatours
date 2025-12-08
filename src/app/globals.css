@@ -730,6 +730,71 @@
   }
 }
 
+@layer components {
+  .egypt-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .egypt-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+  }
+  .egypt-card-body {
+    padding: 0.75rem 1rem 1rem;
+  }
+  .egypt-badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background-color: #0B2E4F;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    letter-spacing: 0.03em;
+  }
+  .egypt-pill {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(11, 46, 79, 0.08);
+    color: #0B2E4F;
+    border: 1px solid rgba(11, 46, 79, 0.18);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    line-height: 1;
+  }
+  .egypt-price {
+    color: #D97706;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .egypt-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0B2E4F;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+  }
+  .egypt-cta:hover {
+    background-color: #08243E;
+    color: #ffffff;
+  }
+}
+
 /* --- DESKTOP NAVBAR SUPPORT (Modern Component) --- */
 @media (min-width: 1024px) {
   .mobile-menu-button, .mobile-navbar, .mobile-menu, .MobileOptimizedLayout {
@@ -863,9 +928,9 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
-  min-height: 80px;
-  max-height: 90px;
+  padding: 0.35rem 0.8rem;
+  min-height: 72px;
+  max-height: 80px;
   overflow: visible !important;
 }
 
