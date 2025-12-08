@@ -2,97 +2,210 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Core theme variables – Altavida palette */
-:root {
-  /* Base brand colors */
-  --color-primary: #ff0000;      /* Red */
-  --color-primary-dark: #b00000; /* Darker red for hover */
-  --color-black: #000000;        /* Black */
-  --color-white: #ffffff;        /* White */
-  --color-gold-soft: #e6be8a;    /* Pale gold */
-  --color-blue-soft: #add8e6;    /* Pale blue */
+/* TravelOK / TreasureEgypt global imports */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import "../styles/theme-modern.css";
+@import "../styles/admin.css";
+@import "../styles/admin-contrast-fix.css";
 
-  /* Light theme surfaces */
-  --color-bg-light: linear-gradient(130deg, #ffffff 0%, #add8e6 40%, #e6be8a 100%);
-  --color-bg-dark: #0f172a;
-  --color-text: #111827;
+/* --- TravelOK global theme from TreasureEgyptTours --- */
+@layer base {
+  :root {
+    /* TravelOK Color Theme - Blue Primary, Orange Accent */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
 
-  /* Header / navbar */
-  --color-header-bg: linear-gradient(90deg, #000000 0%, #ff0000 35%, #e6be8a 70%, #add8e6 100%);
+    /* Primary Colors - TravelOK Blue */
+    --primary: 214 86% 49%; /* #1e64c7 - TravelOK Blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 214 86% 39%; /* Darker blue */
+    --primary-light: 214 86% 59%; /* Lighter blue */
+    --primary-muted: 214 86% 95%;
 
-  /* Cards & borders */
-  --color-card-bg: rgba(255, 255, 255, 0.96);
-  --color-card-border: rgba(230, 190, 138, 0.9);
+    /* TravelOK Color Palette */
+    --travelok-blue: #1e64c7;
+    --travelok-blue-dark: #1854a0;
+    --travelok-blue-light: #2970d4;
+    --travelok-blue-lighter: #4d88dd;
+    --travelok-blue-lightest: #70a0e6;
+    --travelok-orange: #ff6600;
+    --travelok-orange-light: #ff8833;
+    --travelok-orange-dark: #e55a00;
+    --travelok-green: #228b22;
+    --travelok-white: #ffffff;
+    --travelok-gray: #6b7280;
+    --travelok-dark: #1f2937;
 
-  /* Buttons & interactive */
-  --color-button-bg: linear-gradient(90deg, #ff0000 0%, #e6be8a 60%, #000000 100%);
-  --color-button-text: #ffffff;
+    /* Card styling */
+    --card-radius: 0.75rem;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
 
-  /* Forms */
-  --color-form-bg: #ffffff;
-  --color-form-border: #d1d5db;
-  --color-form-focus: #ff0000;
+    /* TravelOK Blue variations */
+    --travelok-blue-50: #eff6ff;
+    --travelok-blue-100: #dbeafe;
+    --travelok-blue-200: #bfdbfe;
+    --travelok-blue-300: #93c5fd;
+    --travelok-blue-400: #60a5fa;
+    --travelok-blue-500: #3b82f6;
+    --travelok-blue-600: #1e64c7;
+    --travelok-blue-700: #1d4ed8;
+    --travelok-blue-800: #1e40af;
+    --travelok-blue-900: #1e3a8a;
 
-  --color-error: #ff0000;
-}
+    /* TravelOK Orange variations */
+    --travelok-orange-50: #fff7ed;
+    --travelok-orange-100: #ffedd5;
+    --travelok-orange-200: #fed7aa;
+    --travelok-orange-300: #fdba74;
+    --travelok-orange-400: #fb923c;
+    --travelok-orange-500: #ff6600;
+    --travelok-orange-600: #ea580c;
+    --travelok-orange-700: #c2410c;
+    --travelok-orange-800: #9a3412;
+    --travelok-orange-900: #7c2d12;
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --color-bg-light: linear-gradient(120deg, #121416 0%, #0a0c0d 100%);
-  --color-text: #f0f4f8;
-  --color-header-bg: linear-gradient(90deg, #1a202c 0%, #2d3748 100%);
-  --color-card-bg: rgba(30, 32, 35, 0.96);
-  --color-card-border: rgba(55, 65, 81, 0.8);
-  --color-button-bg: linear-gradient(90deg, #3c366b 0%, #1a202c 100%);
-  --color-button-text: #e2e8f0;
-  --color-form-bg: #2d3748;
-  --color-form-border: #4a5568;
-  --color-form-focus: #5a67d8;
+    /* Secondary Colors - TravelOK Orange */
+    --secondary: 24 100% 50%; /* #ff6600 */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-dark: 24 100% 40%; 
+    --secondary-light: 24 100% 60%;
+    --secondary-muted: 24 100% 95%;
+
+    /* Accent Colors - TravelOK Green */
+    --accent: 120 60% 34%; /* #228b22 */
+    --accent-foreground: 0 0% 100%;
+
+    /* Tertiary Colors - TDS Green */
+    --tertiary: 158 85% 42%; /* #1BAE70 */
+    --tertiary-foreground: 0 0% 100%;
+    --tertiary-dark: 158 85% 35%;
+    --tertiary-light: 158 85% 55%;
+
+    /* Neutral Colors - Clean TDS styling */
+    --muted: 210 20% 94%;
+    --muted-foreground: 210 20% 45%;
+    --border: 210 25% 88%;
+    --input: 210 30% 94%;
+    --ring: 158 85% 42%; /* TDS Green ring */
+
+    /* TDS Travel Brand Colors */
+    --brand-green: 158 85% 42%; /* #1BAE70 */
+    --brand-blue: 213 89% 46%; /* #0B70E1 */
+    --brand-blue-dark: 224 90% 35%; /* #0A2FA6 */
+    --brand-orange: 39 100% 50%; /* #FFA500 */
+    --brand-white: 0 0% 100%; /* #FFFFFF */
+    --brand-black: 0 0% 0%; /* #000000 */
+    --brand-gray: 210 20% 45%; /* Neutral gray */
+
+    /* TDS Travel Text Colors */
+    --text-primary: 0 0% 0%;
+    --text-secondary: 210 20% 45%;
+    --text-accent: 158 85% 42%; /* TDS Green */
+    --text-gradient: linear-gradient(
+      135deg,
+      hsl(158, 85%, 42%) 0%,
+      hsl(213, 89%, 46%) 100%
+    );
+
+    /* Status Colors - Egyptian Theme */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 120 40% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 100% 60%;
+    --warning-foreground: 30 25% 15%;
+    --info: 200 85% 45%;
+    --info-foreground: 0 0% 100%;
+
+    /* Border Radius */
+    --radius: 0.75rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+      0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+
+  .dark {
+    /* Ocean Blue theme even in dark mode */
+    --background: 220 20% 5%;
+    --foreground: 0 0% 100%;
+    --card: 220 20% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 200 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 100% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 20% 65%;
+    --accent: 200 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 25% 20%;
+    --input: 220 30% 15%;
+    --ring: 200 100% 50%;
+  }
 }
 
 @layer base {
   * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
-    background: var(--color-bg-light);
-    color: var(--color-text);
-    font-family: var(--font-montserrat), var(--font-inter), sans-serif;
-    font-size: 1rem; /* slightly smaller, closer to 16px base */
+    background: #ffffff;
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: "Montserrat", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
     line-height: 1.6;
     min-height: 100vh;
-    transition: background 0.3s ease, color 0.3s ease;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 }
 
-@layer components {
-  header, .navbar, .homepage-header {
-    background: #0b2e4f;
-  color: var(--color-white);
-  font-family: var(--font-montserrat), var(--font-playfair), serif;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  box-shadow: 0 2px 12px rgba(15,23,42,0.16);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  min-height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-    z-index: 100;
-  }
+@layer utilities {
+  /* TravelOK Text Utilities */
+  .text-travelok-blue { color: var(--travelok-blue) !important; }
+  .text-travelok-blue-dark { color: var(--travelok-blue-dark) !important; }
+  .text-travelok-orange { color: var(--travelok-orange) !important; }
+  .text-travelok-green { color: var(--travelok-green) !important; }
+  .text-travelok-gray { color: var(--travelok-gray) !important; }
+  .text-travelok-dark { color: var(--travelok-dark) !important; }
 
-  .navbar a, .homepage-menu a, .nav-link {
-    color: #fff;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 1.2rem;
-  transition: background 0.2s, color 0.2s;
-    position: relative;
-  }
+  /* TravelOK Background Utilities */
+  .bg-travelok-blue { background-color: var(--travelok-blue) !important; }
+  .bg-travelok-orange { background-color: var(--travelok-orange) !important; }
+  .bg-travelok-green { background-color: var(--travelok-green) !important; }
+  .bg-travelok-blue, .bg-travelok-blue * { color: #ffffff !important; }
+  .bg-travelok-orange, .bg-travelok-orange * { color: #ffffff !important; }
+  .bg-travelok-green, .bg-travelok-green * { color: #ffffff !important; }
   
   .navbar a:hover, .homepage-menu a:hover, .nav-link:hover {
     background: #d4af37;
@@ -124,6 +237,246 @@
     background: repeating-linear-gradient(135deg, #e3eef7 0px, #e3eef7 40px, #f9f6ee 40px, #f9f6ee 80px);
   }
 
+  /* --- HOMEPAGE HERO & TOP SECTIONS (Treasure Egypt style sizing) --- */
+  .hero-modern {
+    min-height: 520px;
+    padding: 3.5rem 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-content {
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 3.4vw, 3rem);
+    line-height: 1.15;
+    max-width: 640px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    max-width: 560px;
+    color: #4b5563;
+  }
+
+  .search-modern {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 640px;
+  }
+
+  .search-modern input[type="search"] {
+    flex: 1;
+    height: 3rem;
+    border-radius: 9999px;
+    padding: 0 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .search-modern button {
+    height: 3rem;
+    padding: 0 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .quick-links {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+  }
+
+  .quick-link {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+  }
+
+  /* Section headers like Top Destinations / Explore The Region */
+  .section-header {
+    margin-bottom: 2.25rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 2.3vw, 2.15rem);
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+    max-width: 620px;
+    margin: 0 auto;
+    color: #4b5563;
+  }
+
+  /* Top Destinations / Explore Region card grid */
+  .grid-luxury {
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .grid-luxury-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .card-luxury {
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  .card-luxury-image {
+    position: relative;
+  }
+
+  .card-luxury-content {
+    padding: 1rem 1.25rem 1.2rem;
+  }
+
+  .card-luxury-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  /* Shared homepage card image resolution (used across sections) */
+  .standard-card-image,
+  .card-luxury-image,
+  .things-card-image,
+  .service-card-image,
+  .discover-card-image,
+  .featured-article-image {
+    height: 60px;
+  }
+
+  /* Things To Do small cards – align visual style with card-luxury */
+  .things-grid {
+    row-gap: 1.25rem;
+  }
+
+  .things-card {
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.07);
+  }
+
+  .things-card-image {
+    height: 60px;
+  }
+
+  @media (min-width: 640px) {
+    .things-card-image {
+      height: 60px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .things-card-image {
+      height: 60px;
+    }
+  }
+
+  /* Our Top Picks – harmonize card look */
+  .top-picks-grid {
+    row-gap: 1.5rem;
+  }
+
+  .top-picks-card {
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+  }
+
+  /* Featured Experiences package grid */
+  .featured-packages-grid {
+    row-gap: 1.5rem;
+  }
+
+  /* Popular Services section */
+  .services-grid {
+    row-gap: 1.25rem;
+  }
+
+  .service-card {
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+  }
+
+  .service-card-image {
+  }
+
+  @media (min-width: 768px) {
+    .service-card-image {
+    }
+  }
+
+  /* Discover Ancient Egypt grid */
+  .discover-card {
+    border-radius: 1.25rem;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+  }
+
+  .discover-card-image {
+  }
+
+  @media (min-width: 1024px) {
+    .discover-card-image {
+    }
+  }
+
+  @media (min-width: 60px) {
+    .hero-modern {
+      padding-top: 3.75rem;
+      padding-bottom: 3.25rem;
+    }
+
+    .grid-luxury-4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-modern {
+      min-height: 520px;
+      padding-top: 4.25rem;
+      padding-bottom: 3.5rem;
+    }
+
+    .hero-content {
+      flex-direction: column;
+    }
+
+    .grid-luxury-4 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .standard-card-image,
+    .card-luxury-image,
+    .things-card-image,
+    .service-card-image,
+    .discover-card-image,
+    .featured-article-image {
+      height: 60px;
+    }
+  }
+
   .homepage-grid, .destination-grid, .gallery-grid {
     display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -146,7 +499,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 280px;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease, background-color 0.25s ease;
     color: #0f172a;
   }
@@ -675,7 +1027,6 @@
 }
 
 /* --- END DESKTOP NAVBAR & DROPDOWN OVERRIDES (ENHANCED) --- */
->
 
 /* --- MODERN REACT NAVBAR STYLING --- */
 .modern-nav {
@@ -937,6 +1288,442 @@ img {
   pointer-events: auto !important;
 }
 
+/* --- TravelOK global theme overrides imported from TreasureEgyptTours --- */
+@layer base {
+  :root {
+    /* TravelOK Color Theme - Blue Primary, Orange Accent */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Primary Colors - TravelOK Blue */
+    --primary: 214 86% 49%; /* #1e64c7 - TravelOK Blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 214 86% 39%; /* Darker blue */
+    --primary-light: 214 86% 59%; /* Lighter blue */
+    --primary-muted: 214 86% 95%;
+
+    /* TravelOK Color Palette */
+    --travelok-blue: #1e64c7;
+    --travelok-blue-dark: #1854a0;
+    --travelok-blue-light: #2970d4;
+    --travelok-blue-lighter: #4d88dd;
+    --travelok-blue-lightest: #70a0e6;
+    --travelok-orange: #ff6600;
+    --travelok-orange-light: #ff8833;
+    --travelok-orange-dark: #e55a00;
+    --travelok-green: #228b22;
+    --travelok-white: #ffffff;
+    --travelok-gray: #6b7280;
+    --travelok-dark: #1f2937;
+
+    /* Card styling */
+    --card-radius: 0.75rem;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+
+    /* TravelOK Blue variations */
+    --travelok-blue-50: #eff6ff;
+    --travelok-blue-100: #dbeafe;
+    --travelok-blue-200: #bfdbfe;
+    --travelok-blue-300: #93c5fd;
+    --travelok-blue-400: #60a5fa;
+    --travelok-blue-500: #3b82f6;
+    --travelok-blue-600: #1e64c7;
+    --travelok-blue-700: #1d4ed8;
+    --travelok-blue-800: #1e40af;
+    --travelok-blue-900: #1e3a8a;
+
+    /* TravelOK Orange variations */
+    --travelok-orange-50: #fff7ed;
+    --travelok-orange-100: #ffedd5;
+    --travelok-orange-200: #fed7aa;
+    --travelok-orange-300: #fdba74;
+    --travelok-orange-400: #fb923c;
+    --travelok-orange-500: #ff6600;
+    --travelok-orange-600: #ea580c;
+    --travelok-orange-700: #c2410c;
+    --travelok-orange-800: #9a3412;
+    --travelok-orange-900: #7c2d12;
+
+    /* Secondary Colors - TravelOK Orange */
+    --secondary: 24 100% 50%; /* #ff6600 */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-dark: 24 100% 40%; 
+    --secondary-light: 24 100% 60%;
+    --secondary-muted: 24 100% 95%;
+
+    /* Accent Colors - TravelOK Green */
+    --accent: 120 60% 34%; /* #228b22 */
+    --accent-foreground: 0 0% 100%;
+
+    /* Tertiary Colors - TDS Green */
+    --tertiary: 158 85% 42%; /* #1BAE70 */
+    --tertiary-foreground: 0 0% 100%;
+    --tertiary-dark: 158 85% 35%;
+    --tertiary-light: 158 85% 55%;
+
+    /* Neutral Colors - Clean TDS styling */
+    --muted: 210 20% 94%;
+    --muted-foreground: 210 20% 45%;
+    --border: 210 25% 88%;
+    --input: 210 30% 94%;
+    --ring: 158 85% 42%; /* TDS Green ring */
+
+    /* TDS Travel Brand Colors */
+    --brand-green: 158 85% 42%; /* #1BAE70 */
+    --brand-blue: 213 89% 46%; /* #0B70E1 */
+    --brand-blue-dark: 224 90% 35%; /* #0A2FA6 */
+    --brand-orange: 39 100% 50%; /* #FFA500 */
+    --brand-white: 0 0% 100%; /* #FFFFFF */
+    --brand-black: 0 0% 0%; /* #000000 */
+    --brand-gray: 210 20% 45%; /* Neutral gray */
+
+    /* TDS Travel Text Colors */
+    --text-primary: 0 0% 0%;
+    --text-secondary: 210 20% 45%;
+    --text-accent: 158 85% 42%; /* TDS Green */
+    --text-gradient: linear-gradient(
+      135deg,
+      hsl(158, 85%, 42%) 0%,
+      hsl(213, 89%, 46%) 100%
+    );
+
+    /* Ocean Blue Profile Enhancements */
+    --pharaonic-gold-glow: 0 0 20px rgba(0, 128, 255, 0.4),
+      0 0 40px rgba(0, 128, 255, 0.2);
+    --pharaonic-avatar-shadow: 0 8px 25px rgba(0, 128, 255, 0.4),
+      0 0 20px rgba(0, 128, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    /* Status Colors - Egyptian Theme */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 120 40% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 100% 60%;
+    --warning-foreground: 30 25% 15%;
+    --info: 200 85% 45%;
+    --info-foreground: 0 0% 100%;
+
+    /* Border Radius */
+    --radius: 0.75rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+      0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+
+  .dark {
+    /* Ocean Blue theme even in dark mode */
+    --background: 220 20% 5%;
+    --foreground: 0 0% 100%;
+    --card: 220 20% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 200 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 100% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 20% 65%;
+    --accent: 200 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 25% 20%;
+    --input: 220 30% 15%;
+    --ring: 200 100% 50%;
+  }
+
+  /* Unified Hero Utilities */
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+    padding-top: 5rem; /* py-20 */
+    padding-bottom: 5rem;
+    min-height: 60vh;
+  }
+  @media (min-width: 768px) {
+    .hero-section { min-height: 70vh; }
+  }
+  @media (min-width: 1024px) {
+    .hero-section { min-height: 80vh; }
+  }
+
+  .hero-overlay-pale {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, rgb(219 234 254 / 0.7), rgb(219 234 254 / 0.5), rgb(191 219 254 / 0.8));
+  }
+
+  .hero-overlay-light {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, rgb(219 234 254 / 0.4), rgb(219 234 254 / 0.3), rgb(191 219 254 / 0.5));
+  }
+
+  .hero-overlay-heavy {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, rgb(219 234 254 / 0.9), rgb(219 234 254 / 0.8), rgb(191 219 254 / 0.95));
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/hieroglyphic-pattern.png');
+    opacity: 0.1;
+  }
+
+  .hero-container {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Ensure hero main title is white regardless of pale background overrides */
+  .hero-section .hero-title,
+  .hero-section .hero-title * {
+    color: #ffffff !important;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%; /* Prevent iOS font auto-scaling */
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: #ffffff;
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: "Montserrat", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+  }
+
+  /* Global Responsive Image Fixes */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Prevent image overflow in containers */
+  .container img,
+  .card img,
+  [class*="grid"] img,
+  [class*="flex"] img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Ensure proper aspect ratio for hero images */
+  .hero-section img,
+  [class*="hero"] img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+@layer utilities {
+  /* TravelOK Text Utilities */
+  .text-travelok-blue { color: var(--travelok-blue) !important; }
+  .text-travelok-blue-dark { color: var(--travelok-blue-dark) !important; }
+  .text-travelok-orange { color: var(--travelok-orange) !important; }
+  .text-travelok-green { color: var(--travelok-green) !important; }
+  .text-travelok-gray { color: var(--travelok-gray) !important; }
+  .text-travelok-dark { color: var(--travelok-dark) !important; }
+
+  /* TravelOK Background Utilities */
+  .bg-travelok-blue { background-color: var(--travelok-blue) !important; }
+  .bg-travelok-orange { background-color: var(--travelok-orange) !important; }
+  .bg-travelok-green { background-color: var(--travelok-green) !important; }
+  .bg-travelok-blue, .bg-travelok-blue * { color: #ffffff !important; }
+  .bg-travelok-orange, .bg-travelok-orange * { color: #ffffff !important; }
+  .bg-travelok-green, .bg-travelok-green * { color: #ffffff !important; }
+
+  /* TravelOK Button Styles */
+  .btn-travelok-primary {
+    background: linear-gradient(135deg, var(--travelok-blue) 0%, var(--travelok-blue-light) 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+  }
+  .btn-travelok-primary:hover {
+    background: linear-gradient(135deg, var(--travelok-blue-dark) 0%, var(--travelok-blue) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 100, 199, 0.3);
+  }
+
+  .btn-travelok-secondary {
+    background: linear-gradient(135deg, var(--travelok-orange) 0%, var(--travelok-orange-light) 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+  }
+  .btn-travelok-secondary:hover {
+    background: linear-gradient(135deg, var(--travelok-orange-dark) 0%, var(--travelok-orange) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 102, 0, 0.3);
+  }
+
+  /* TravelOK Card Styles */
+  .card-travelok {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .card-travelok:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* --- TravelOK global theme overrides imported from TreasureEgyptTours --- */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import "../styles/theme-modern.css";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 214 86% 49%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 24 100% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 210 20% 45%;
+    --border: 210 25% 88%;
+    --input: 210 30% 94%;
+    --ring: 158 85% 42%;
+
+    --radius: 0.75rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+
+    /* TravelOK palette */
+    --travelok-blue: #1e64c7;
+    --travelok-blue-dark: #1854a0;
+    --travelok-blue-light: #2970d4;
+    --travelok-orange: #ff6600;
+    --travelok-gray: #6b7280;
+    --travelok-dark: #1f2937;
+  }
+
+  body {
+    background: #ffffff;
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: "Montserrat", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--travelok-blue-dark);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--travelok-gray);
+    line-height: 1.7;
+  }
+
+  a {
+    color: var(--travelok-blue);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--travelok-orange);
+  }
+}
+
+@layer utilities {
+  .card-travelok {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .card-travelok:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-travelok-primary {
+    background: linear-gradient(135deg, var(--travelok-blue) 0%, var(--travelok-blue-light) 100%);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  .btn-travelok-primary:hover {
+    background: linear-gradient(135deg, var(--travelok-blue-dark) 0%, var(--travelok-blue) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 100, 199, 0.3);
+  }
+}
+
 /* Avoid forcing display/visibility on every image inside generic containers.
    Component-level styles (e.g. Tailwind classes, Next/Image wrappers) should
    control layout instead. */
@@ -1051,7 +1838,6 @@ img + .loader, img + .spinner, .image-loader, .image-spinner {
 }
 
 /* --- END UNIVERSAL IMAGE LOADING FIXES --- */
->
 
 /* --- UNIVERSAL IMAGE 404 FALLBACK --- */
 img[src=""], img:not([src]), img.broken, img[onerror], img[src*="404"], img[src*="notfound"], img[src*="missing"], img[src*="undefined"], img[src*="null"] {

@@ -134,7 +134,7 @@ async function main() {
     {
       key: 'homepage_destination_siwa-oasis_image',
       title: 'Homepage Siwa Oasis Image',
-      mediaUrl: '/images/cultural&historical/DSCF1165.JPG',
+      mediaUrl: '/images/cultural-historical/DSCF1165.JPG',
       contentType: 'IMAGE',
       page: 'homepage',
       section: 'destinations',
