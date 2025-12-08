@@ -281,7 +281,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
   };
 
   return (
-    <Card className="p-8 max-w-5xl mx-auto bg-gradient-to-br from-emerald-50 via-amber-50 to-blue-50 shadow-2xl border-2 border-pharaoh-gold/30">
+    <Card className="p-8 max-w-5xl mx-auto bg-gradient-to-br from-emerald-50 via-red-50 to-blue-50 shadow-2xl border-2 border-pharaoh-gold/30">
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-bold text-nile-blue mb-2 font-serif">Create Premium Package</h2>
         <p className="text-ancient-stone">Combine Cairo/Giza exploration with luxury dahabiya cruising</p>
@@ -299,7 +299,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
               type="button"
               onClick={generatePackageContent}
               disabled={generatingContent || !form.name || !form.selectedDahabiyaId}
-              className="bg-gradient-to-r from-pharaoh-gold to-amber-600 hover:from-amber-600 hover:to-pharaoh-gold text-white font-bold"
+              className="bg-gradient-to-r from-pharaoh-gold to-red-600 hover:from-red-600 hover:to-pharaoh-gold text-white font-bold"
             >
               {generatingContent ? (
                 <>
@@ -577,7 +577,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
               <Button
                 type="button"
                 onClick={addItineraryDay}
-                className="bg-pharaoh-gold hover:bg-amber-600 text-white"
+                className="bg-pharaoh-gold hover:bg-red-600 text-white"
               >
                 Add Day
               </Button>

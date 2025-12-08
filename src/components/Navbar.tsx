@@ -331,7 +331,7 @@ export default function Navbar() {
               justifyContent: 'center'
             }}>
               <Image
-                src="/logos/altavida-logo.png"
+                src="/icons/altavida-logo-1.svg"
                 alt="AltaVida Tours Logo"
                 width={120}
                 height={50}
@@ -346,7 +346,7 @@ export default function Navbar() {
                   console.error('altavida logo not found, using fallback');
                   const target = e.target as HTMLImageElement;
                   target.onerror = null;
-                  target.src = '/wordmark-favicon.webp';
+                  target.src = '/icons/altavida-logo-1.png';
                 }}
               />
             </div>

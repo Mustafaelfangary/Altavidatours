@@ -65,7 +65,7 @@ export default function ExcursionsPage() {
 
   const getTypeColor = (type: string) => {
     const colors: Record<string, string> = {
-      HISTORICAL: "bg-amber-100 text-amber-800",
+      HISTORICAL: "bg-red-100 text-red-800",
       DESERT: "bg-orange-100 text-orange-800",
       CULTURAL: "bg-purple-100 text-purple-800",
       BEACH: "bg-blue-100 text-blue-800",

@@ -200,7 +200,7 @@ export default function FooterSettingsClient() {
           onClick={handleSync} 
           disabled={syncing}
           variant="outline"
-          className="border-amber-300 text-amber-700 hover:bg-amber-50"
+          className="border-red-300 text-red-700 hover:bg-red-50"
         >
           <RefreshCw className={`w-4 h-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
           {syncing ? 'Syncing...' : 'Sync Structure'}
@@ -326,9 +326,9 @@ export default function FooterSettingsClient() {
         {/* Navigation Links */}
         <TabsContent value="navigation">
           <Card>
-            <CardHeader>
+              <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <Star className="w-5 h-5 text-amber-600" />
+                <Star className="w-5 h-5 text-red-600" />
                 <span>Navigation Links</span>
               </CardTitle>
               <CardDescription>
@@ -339,7 +339,7 @@ export default function FooterSettingsClient() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <h4 className="font-medium text-gray-900 flex items-center space-x-2">
-                    <Anchor className="w-4 h-4 text-amber-500" />
+                    <Anchor className="w-4 h-4 text-red-500" />
                     <span>Quick Links</span>
                   </h4>
                   

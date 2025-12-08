@@ -175,7 +175,7 @@ export default function HomePage() {
         )}
 
         {/* Why Choose Us Section */}
-        <section className="py-24 bg-gradient-to-br from-amber-50 via-orange-50 to-pharaoh-gold/10 section-enhanced">
+        <section className="py-24 bg-gradient-to-br from-red-50 via-red-50 to-pharaoh-gold/10 section-enhanced">
           <Container maxWidth="lg">
             <div className="text-center mb-12">
               <PharaonicDecoration variant="section" size="sm" />
@@ -276,10 +276,10 @@ export default function HomePage() {
         </section>
 
         {/* Features Section */}
-        <section className="py-24 bg-gradient-to-br from-blue-50 via-amber-50 to-emerald-50 relative overflow-hidden section-enhanced">
+        <section className="py-24 bg-gradient-to-br from-blue-50 via-red-50 to-emerald-50 relative overflow-hidden section-enhanced">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pharaoh-gold to-amber-400 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pharaoh-gold to-red-400 rounded-full blur-3xl animate-pulse"></div>
             <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-br from-nile-blue to-blue-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
             <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-gradient-to-br from-emerald-400 to-teal-400 rounded-full blur-2xl animate-pulse delay-500"></div>
           </div>
@@ -294,7 +294,7 @@ export default function HomePage() {
                   </h2>
                   {/* Decorative underline */}
                   <div className="mt-6 flex justify-center">
-                    <div className="w-32 h-1.5 bg-gradient-to-r from-pharaoh-gold via-amber-400 to-pharaoh-gold rounded-full animate-shimmer shadow-lg"></div>
+                    <div className="w-32 h-1.5 bg-gradient-to-r from-pharaoh-gold via-red-400 to-pharaoh-gold rounded-full animate-shimmer shadow-lg"></div>
                   </div>
                 </div>
 
@@ -320,7 +320,7 @@ export default function HomePage() {
                         <FloatingElement intensity={0.4}>
                           <div className="relative w-20 h-20 mx-auto mb-6">
                             {/* Icon background with gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-pharaoh-gold/20 via-amber-300/20 to-pharaoh-gold/20 rounded-2xl group-hover:from-pharaoh-gold group-hover:via-amber-400 group-hover:to-pharaoh-gold transition-all duration-500 shadow-lg group-hover:shadow-xl"></div>
+                            <div className="absolute inset-0 bg-gradient-to-br from-pharaoh-gold/20 via-red-300/20 to-pharaoh-gold/20 rounded-2xl group-hover:from-pharaoh-gold group-hover:via-red-400 group-hover:to-pharaoh-gold transition-all duration-500 shadow-lg group-hover:shadow-xl"></div>
                             <div className="relative w-full h-full flex items-center justify-center rounded-2xl">
                               <Icon className="w-10 h-10 text-pharaoh-gold group-hover:text-white transition-all duration-500 transform group-hover:scale-110" />
                             </div>
@@ -338,7 +338,7 @@ export default function HomePage() {
                         </p>
 
                         {/* Decorative element */}
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-pharaoh-gold to-amber-400 group-hover:w-16 transition-all duration-500 rounded-full"></div>
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-pharaoh-gold to-red-400 group-hover:w-16 transition-all duration-500 rounded-full"></div>
                       </div>
                     </div>
                   </AnimatedSection>
@@ -424,7 +424,7 @@ export default function HomePage() {
               </div>
 
               {/* Featured Tour 3 */}
-              <div className="group relative overflow-hidden bg-gradient-to-br from-white to-amber-50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 border-transparent hover:border-pharaoh-gold/30">
+              <div className="group relative overflow-hidden bg-gradient-to-br from-white to-red-50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 border-transparent hover:border-pharaoh-gold/30">
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={getContentBlock('homepage_featured_3_image')?.mediaUrl || FEATURED_TOURS.alexandria}
@@ -435,7 +435,7 @@ export default function HomePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute top-4 right-4 z-10">
-                    <Badge className="bg-amber-500 text-white px-3 py-1 font-bold">Featured</Badge>
+                    <Badge className="bg-red-500 text-white px-3 py-1 font-bold">Featured</Badge>
                   </div>
                 </div>
                 <div className="p-6 relative z-10">

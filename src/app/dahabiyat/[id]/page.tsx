@@ -116,11 +116,11 @@ export default async function DahabiyaPage({ params }: DahabiyaPageProps) {
             </div>
 
             {/* Why Choose This Dahabiya */}
-            <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl p-8">
-              <h2 className="text-3xl font-bold mb-6 text-amber-900 font-serif">
+            <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-8">
+              <h2 className="text-3xl font-bold mb-6 text-red-900 font-serif">
                 Why Choose This Dahabiya?
               </h2>
-              <div className="prose max-w-none text-amber-900">
+              <div className="prose max-w-none text-red-900">
                 <p className="text-lg leading-relaxed">{serializedDahabiya.advantages}</p>
               </div>
             </div>

@@ -18,7 +18,7 @@ export default function ItineraryGallery({ images, dayTitle }: ItineraryGalleryP
         {images.map((img, idx) => (
           <div
             key={img.url}
-            className="relative w-56 h-40 flex-shrink-0 rounded-xl overflow-hidden group shadow-lg border-2 border-emerald-200 hover:border-amber-400 transition-all cursor-pointer"
+            className="relative w-56 h-40 flex-shrink-0 rounded-xl overflow-hidden group shadow-lg border-2 border-emerald-200 hover:border-red-400 transition-all cursor-pointer"
             onClick={() => setLightboxIdx(idx)}
           >
             <Image
@@ -48,13 +48,13 @@ export default function ItineraryGallery({ images, dayTitle }: ItineraryGalleryP
             {images.length > 1 && (
               <>
                 <button
-                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-amber-400 text-white rounded-full p-2"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-red-400 text-white rounded-full p-2"
                   onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + images.length) % images.length); }}
                 >
                   &#8592;
                 </button>
                 <button
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-amber-400 text-white rounded-full p-2"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-red-400 text-white rounded-full p-2"
                   onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % images.length); }}
                 >
                   &#8594;

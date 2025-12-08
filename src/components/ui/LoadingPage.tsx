@@ -68,7 +68,7 @@ export function LoadingPage({ isLoading, onComplete }: LoadingPageProps) {
               priority
               onError={(e) => {
                 console.error('altavida logo not found in /icons, using fallback');
-                (e.target as HTMLImageElement).src = '/wordmark-favicon.webp';
+                (e.target as HTMLImageElement).src = '/icons/altavida-logo-1.png';
               }}
             />
           </div>

@@ -40,7 +40,7 @@ const defaultSettings: SiteSettings = {
   site_tagline: 'Luxury Nile Cruises & Egyptian Adventures',
   site_description: 'Experience the magic of Egypt with our luxury Dahabiya cruises and curated tours.',
   logo_url: '/icons/altavida-logo-1.svg',
-  favicon_url: '/favicon.ico',
+  favicon_url: '/icons/altavida-logo-1.ico',
   contact_email: 'info@altavidatours.com',
   contact_phone: '+20 123 456 7890',
   contact_whatsapp: '+20 123 456 7890',

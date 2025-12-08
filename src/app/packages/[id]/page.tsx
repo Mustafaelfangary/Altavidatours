@@ -31,7 +31,7 @@ export default async function PackageDetailPage({ params }: { params: Promise<{ 
           <h1 className="text-4xl font-bold mb-2 font-serif drop-shadow-lg">{pkg.name}</h1>
           <p className="text-lg opacity-90 mb-2">{pkg.shortDescription}</p>
           <div className="flex gap-6 items-center">
-            <span className="bg-amber-500 text-white font-bold px-4 py-1 rounded-full text-lg shadow">${pkg.price.toLocaleString()}</span>
+            <span className="bg-red-500 text-white font-bold px-4 py-1 rounded-full text-lg shadow">${pkg.price.toLocaleString()}</span>
             <span className="bg-emerald-600 text-white font-bold px-4 py-1 rounded-full text-lg shadow">{pkg.durationDays} days</span>
           </div>
         </div>
@@ -46,8 +46,8 @@ export default async function PackageDetailPage({ params }: { params: Promise<{ 
         <div className="mb-12">
           <h2 className="text-3xl font-bold mb-8 text-emerald-800 font-serif text-center">Itinerary</h2>
           <div className="space-y-10">
-            {pkg.itineraryDays.map((day) => (
-              <div key={day.id} className="bg-gradient-to-br from-emerald-50 to-amber-50 rounded-2xl shadow-lg p-8 animate-fade-in">
+              {pkg.itineraryDays.map((day) => (
+              <div key={day.id} className="bg-gradient-to-br from-emerald-50 to-red-50 rounded-2xl shadow-lg p-8 animate-fade-in">
                 <div className="flex items-center mb-4">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-2xl font-bold mr-4 shadow-lg">
                     {day.dayNumber}
@@ -70,7 +70,7 @@ export default async function PackageDetailPage({ params }: { params: Promise<{ 
       )}
       {/* Booking/Inquiry Button */}
       <div className="flex justify-center mt-12">
-        <button className="bg-amber-500 hover:bg-amber-600 text-white font-bold px-8 py-4 rounded-full text-xl shadow-lg transition-all">Book or Inquire Now</button>
+      <button className="bg-red-500 hover:bg-red-600 text-white font-bold px-8 py-4 rounded-full text-xl shadow-lg transition-all">Book or Inquire Now</button>
       </div>
     </div>
   );

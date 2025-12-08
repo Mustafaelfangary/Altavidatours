@@ -11,6 +11,13 @@ export const metadata: Metadata = {
   description: 'Your Egypt travel experience',
 };
 
+// Add default icons (favicons / apple touch)
+metadata.icons = {
+  icon: '/icons/altavida-logo-1.ico',
+  shortcut: '/icons/altavida-logo-1.png',
+  apple: '/icons/altavida-logo-1.png',
+};
+
 export default function RootLayout({
   children,
 }: {

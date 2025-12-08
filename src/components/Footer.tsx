@@ -76,11 +76,11 @@ export default function Footer({ settings = {} }: FooterProps) {
     setEmail('');
   };
 
-  if (loading) {
+      if (loading) {
     return (
       <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 min-h-[200px] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-amber-400 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-red-400 mx-auto mb-4"></div>
           <p className="text-white font-semibold">Loading footer...</p>
         </div>
       </footer>
@@ -113,7 +113,7 @@ export default function Footer({ settings = {} }: FooterProps) {
   return (
     <footer className="relative overflow-hidden">
       {/* Pale gradient background with Egyptian-inspired colors */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-blue-50 to-purple-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-blue-50 to-purple-50"></div>
       
       {/* Decorative elements with animation */}
       <div className="absolute inset-0 opacity-20">
@@ -166,7 +166,7 @@ export default function Footer({ settings = {} }: FooterProps) {
                       // Try fallback
                       const img = e.target as HTMLImageElement;
                       if (!img.src.includes('wordmark')) {
-                        img.src = '/wordmark-favicon.webp';
+                        img.src = '/icons/altavida-logo-1.png';
                       }
                     }}
                   />
