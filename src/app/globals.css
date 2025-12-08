@@ -199,6 +199,17 @@
   .text-travelok-gray { color: var(--travelok-gray) !important; }
   .text-travelok-dark { color: var(--travelok-dark) !important; }
 
+  /* Justified paragraph utilities for classic reading feel */
+  .text-justify { 
+    text-align: justify !important; 
+    text-justify: inter-word !important; 
+    hyphens: auto !important; 
+    overflow-wrap: break-word !important; 
+  }
+  .text-justify-last { 
+    text-align-last: justify !important; 
+  }
+
   /* TravelOK Background Utilities */
   .bg-travelok-blue { background-color: var(--travelok-blue) !important; }
   .bg-travelok-orange { background-color: var(--travelok-orange) !important; }

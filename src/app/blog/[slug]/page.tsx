@@ -189,7 +189,7 @@ export default function IndividualBlogPostPage() {
                 {/* Article Content */}
                 <div className="prose prose-lg prose-amber max-w-none">
                   <div 
-                    className="text-amber-800 leading-relaxed"
+                    className="text-amber-800 leading-relaxed text-justify"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   />
                 </div>

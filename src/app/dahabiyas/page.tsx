@@ -176,7 +176,8 @@ export default function DahabiyasPage() {
               opacity: 0.95,
               maxWidth: '800px',
               mx: 'auto',
-              lineHeight: 1.4
+              lineHeight: 1.4,
+              textAlign: 'justify'
             }}
           >
             {getContent('dahabiyas_hero_subtitle', 'Premium Traditional Sailing Vessels on the Nile')}
@@ -188,7 +189,8 @@ export default function DahabiyasPage() {
               opacity: 0.85,
               maxWidth: '600px',
               mx: 'auto',
-              fontSize: { xs: '1rem', md: '1.25rem' }
+              fontSize: { xs: '1rem', md: '1.25rem' },
+              textAlign: 'justify'
             }}
           >
             {getContent('dahabiyas_hero_description', 'Handcrafted dahabiyas combining authentic Egyptian heritage with modern luxury amenities')}
@@ -435,7 +437,7 @@ export default function DahabiyasPage() {
           <Typography variant="h2" component="h2" fontWeight="bold" gutterBottom sx={{ color: '#0A2FA6', fontSize: { xs: '2rem', md: '2.5rem' } }}>
             {getContent('dahabiyas_cta_title', 'Ready to Board Your Dahabiya?')}
           </Typography>
-          <Typography variant="h5" color="text.secondary" sx={{ mb: 6, maxWidth: '700px', mx: 'auto', lineHeight: 1.6 }}>
+          <Typography variant="h5" color="text.secondary" sx={{ mb: 6, maxWidth: '700px', mx: 'auto', lineHeight: 1.6, textAlign: 'justify' }}>
             {getContent('dahabiyas_cta_description', 'Experience the timeless elegance of traditional Nile sailing with modern luxury accommodations')}
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 3, justifyContent: 'center' }}>

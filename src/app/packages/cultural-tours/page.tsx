@@ -143,7 +143,7 @@ export default function CulturalToursPage() {
           <div className="flex justify-center mb-6">
             <BookOpen className="w-12 h-12 text-orange-600" />
           </div>
-          <p className="text-lg sm:text-xl mb-8 leading-relaxed px-4 sm:px-0">
+          <p className="text-lg sm:text-xl mb-8 leading-relaxed px-4 sm:px-0 text-justify">
             Journey through thousands of years of Egyptian civilization with our comprehensive cultural 
             tour packages that bring ancient history to life through authentic experiences and expert guidance.
           </p>
@@ -179,12 +179,14 @@ export default function CulturalToursPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
             {culturalFeatures.map((feature, index) => (
               <AnimatedSection key={index} delay={index * 100}>
-                <div className="text-center p-6 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors duration-300">
-                  <div className="flex justify-center mb-4">
-                    {feature.icon}
+                <div className="egypt-card text-center">
+                  <div className="egypt-card-body">
+                    <div className="flex justify-center mb-4">
+                      {feature.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
+                    <p className="text-gray-600 text-sm">{feature.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -235,7 +237,7 @@ export default function CulturalToursPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {filteredPackages.map((pkg, index) => (
               <AnimatedSection key={pkg.id} delay={index * 100}>
-                <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-orange-200">
+                <Card className="egypt-card border-orange-200">
                   <div className="relative h-72">
                     <Image src={pkg.image} alt={pkg.name} fill className="object-cover" />
                     <div className={`absolute top-4 left-4 text-white px-3 py-1 rounded-full text-sm font-bold ${getDifficultyColor(pkg.difficulty)}`}>
@@ -262,14 +264,14 @@ export default function CulturalToursPage() {
                     </div>
                   </div>
                   
-                  <CardContent className="p-6">
-                    <p className="text-gray-600 mb-6 leading-relaxed">{pkg.description}</p>
+                  <CardContent className="egypt-card-body">
+                    <p className="text-gray-600 mb-6 leading-relaxed text-justify">{pkg.description}</p>
                     
                     <div className="mb-6">
                       <h4 className="font-semibold text-gray-900 mb-3">Cultural Highlights:</h4>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5">
                         {pkg.highlights.slice(0, 4).map((highlight, idx) => (
-                          <span key={idx} className="bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full">
+                          <span key={idx} className="egypt-pill">
                             {highlight}
                           </span>
                         ))}
@@ -277,7 +279,7 @@ export default function CulturalToursPage() {
                     </div>
                     
                     <div className="flex gap-3">
-                      <Button className="flex-1 bg-orange-600 hover:bg-orange-700 text-white">
+                      <Button className="flex-1 egypt-cta">
                         <BookOpen className="w-4 h-4 mr-2" />
                         Book Package
                       </Button>

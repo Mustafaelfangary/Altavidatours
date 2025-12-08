@@ -165,7 +165,7 @@ export default function ItinerariesPage() {
         mediaFit="contain"
       >
         <div className="text-center max-w-4xl mx-auto text-gray-900">
-          <p className="text-lg mb-8 leading-relaxed max-w-3xl mx-auto text-gray-700">
+          <p className="text-lg mb-8 leading-relaxed max-w-3xl mx-auto text-gray-700 text-justify">
             {getSettingValue('itineraries_hero_description', 'Explore our collection of meticulously planned itineraries, each designed to immerse you in the wonders of pharaonic Egypt while ensuring comfort and authenticity.')}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -223,7 +223,7 @@ export default function ItinerariesPage() {
                     <h3 className="text-2xl font-bold text-ocean-blue mb-4">
                       {getSettingValue('itineraries_no_itineraries_title', 'There are no itineraries yet')}
                     </h3>
-                    <p className="text-ocean-blue-dark">
+                    <p className="text-ocean-blue-dark text-justify">
                       {getSettingValue('itineraries_no_itineraries_description', 'Our pharaonic scholars are crafting extraordinary journeys. Please check back soon for amazing adventures along the Nile.')}
                     </p>
                   </>
@@ -232,7 +232,7 @@ export default function ItinerariesPage() {
                     <h3 className="text-2xl font-bold text-ocean-blue mb-4">
                       {getSettingValue('itineraries_empty_title', 'No Journeys Found')}
                     </h3>
-                    <p className="text-ocean-blue-dark">
+                    <p className="text-ocean-blue-dark text-justify">
                       {getSettingValue('itineraries_empty_description', 'No active journeys match your current filter. Try selecting a different category or check back later.')}
                     </p>
                   </>

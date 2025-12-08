@@ -114,7 +114,7 @@ export default function AdventurePackagesPage() {
           <div className="flex justify-center mb-6">
             <Mountain className="w-12 h-12 text-orange-600" />
           </div>
-          <p className="text-lg sm:text-xl mb-8 leading-relaxed px-4 sm:px-0">
+          <p className="text-lg sm:text-xl mb-8 leading-relaxed px-4 sm:px-0 text-justify">
             Combine multiple extreme activities into comprehensive adventure packages that showcase 
             Egypt's diverse landscapes and provide non-stop excitement for adrenaline junkies.
           </p>
@@ -202,7 +202,7 @@ export default function AdventurePackagesPage() {
                   </div>
                   
                   <CardContent className="egypt-card-body">
-                    <p className="text-gray-600 mb-6 leading-relaxed">{pkg.description}</p>
+                    <p className="text-gray-600 mb-6 leading-relaxed text-justify">{pkg.description}</p>
                     
                     <div className="mb-6">
                       <h4 className="font-semibold text-gray-900 mb-3">Adventure Activities:</h4>

@@ -162,7 +162,7 @@ export default function TestimonialsPage() {
               <span className="text-egyptian-gold text-xl">𓊃</span>
             </div>
 
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 text-justify">
               {getContent('testimonials_hero_subtitle', 'Discover authentic experiences from our guests who have sailed the Nile aboard our luxury dahabiyas. Each testimonial tells a story of wonder, comfort, and unforgettable memories.')}
             </p>
 
@@ -244,7 +244,7 @@ export default function TestimonialsPage() {
             <div className="text-center pt-8 pb-8">
               <div className="text-6xl text-egyptian-gold mb-4">⭐</div>
               <h3 className="text-2xl font-bold text-hieroglyph-brown mb-2">{getContent('testimonials_no_reviews_title', 'No Reviews Found')}</h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-6 text-justify">
                 {searchTerm || selectedDahabiya || selectedRating
                   ? getContent('testimonials_no_reviews_filter_text', 'Try adjusting your filters to see more reviews.')
                   : getContent('testimonials_no_reviews_empty_text', 'Be the first to share your experience with us!')

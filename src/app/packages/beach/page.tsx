@@ -86,7 +86,7 @@ export default function BeachExtensionsPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 h-full flex items-center">
           <div className="text-white">
             <h2 className="text-4xl font-bold mb-4">Red Sea Paradise</h2>
-            <p className="text-xl mb-6 max-w-2xl">
+            <p className="text-xl mb-6 max-w-2xl text-justify">
               Extend your Nile cruise adventure with a relaxing beach extension. 
               Experience the best of both worlds - ancient history and modern beach luxury.
             </p>
@@ -121,7 +121,7 @@ export default function BeachExtensionsPage() {
                 </div>
                 <div className="egypt-card-body">
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{destination.name}</h3>
-                  <p className="text-gray-600 mb-3">{destination.description}</p>
+                  <p className="text-gray-600 mb-3 text-justify">{destination.description}</p>
                   
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-sm text-gray-500">{destination.duration}</span>

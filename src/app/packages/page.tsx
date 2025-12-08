@@ -298,7 +298,7 @@ export default function PackagesPage() {
                     </Typography>
                   </Box>
 
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 4, lineHeight: 1.7, height: { xs: 'auto', md: '4.5em' }, overflow: 'hidden' }}>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 4, lineHeight: 1.7, height: { xs: 'auto', md: '4.5em' }, overflow: 'hidden', textAlign: 'justify' }}>
                     {pkg.shortDescription || pkg.description?.substring(0, 140) || 'Luxury travel experience combining comfort, culture, and adventure in Egypt.'}...
                   </Typography>
 

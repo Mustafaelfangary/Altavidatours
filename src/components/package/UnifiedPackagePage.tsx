@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Box, Card, CardContent, Button, Chip, Grid } from '@mui/material';
+import { Container, Typography, Box, Card, CardContent, Button, Chip } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import { AnimatedSection, StaggeredAnimation } from '@/components/ui/animated-section';
 import { Star, Users, Calendar, MapPin, Clock, Package as PackageIcon, Crown, Sparkles, Shield } from 'lucide-react';
 import Link from 'next/link';
@@ -198,7 +199,7 @@ export default function UnifiedPackagePage({
 
                 <div className="max-w-4xl mx-auto mb-12">
                   <div className="bg-white/70 backdrop-blur-sm border border-blue-200 rounded-2xl p-8 shadow">
-                    <p className="text-xl md:text-2xl leading-relaxed text-gray-800 font-light">
+                    <p className="text-xl md:text-2xl leading-relaxed text-gray-800 font-light text-justify">
                       {packageData.description}
                     </p>
                   </div>
