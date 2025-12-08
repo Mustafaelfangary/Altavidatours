@@ -2,7 +2,27 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Calendar, Ship, Package, Users, Settings, Mail, Bell, Home } from 'lucide-react';
+import { 
+  LayoutDashboard, 
+  Calendar, 
+  Ship, 
+  Package, 
+  Users, 
+  Settings, 
+  Mail, 
+  Bell, 
+  Home, 
+  FileText, 
+  Globe, 
+  MapPin, 
+  Building2, 
+  Landmark, 
+  Compass, 
+  Waves, 
+  Briefcase, 
+  Sparkles, 
+  Layers 
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export function AdminSidebar() {
@@ -10,10 +30,32 @@ export function AdminSidebar() {
 
   const navItems = [
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { name: 'Tours', href: '/admin/tours', icon: Package },
+    { name: 'Content Manager', href: '/admin/content', icon: FileText },
+    { name: 'Homepage', href: '/admin/content/homepage', icon: Home },
+    { name: 'About Us', href: '/admin/content/about', icon: Globe },
+    { name: 'Contact', href: '/admin/content/contact', icon: Mail },
+    { name: 'Footer', href: '/admin/content/footer', icon: Bell },
+    { name: 'Attractions', href: '/admin/content/attractions', icon: Landmark },
+    { name: 'Destinations', href: '/admin/content/destinations', icon: MapPin },
+    { name: 'Accommodations', href: '/admin/content/accommodations', icon: Building2 },
+    { name: 'Packages', href: '/admin/content/packages', icon: Package },
+    { name: 'Tours', href: '/admin/content/tours', icon: Compass },
+    { name: 'Experiences', href: '/admin/content/experiences', icon: Waves },
+    { name: 'Services', href: '/admin/content/services', icon: Briefcase },
+    { name: 'Custom Tours', href: '/admin/content/custom-tours', icon: Sparkles },
+    { name: 'Cards', href: '/admin/content/cards', icon: Layers },
+    { name: 'Global Settings', href: '/admin/content/global', icon: Settings },
+    { 
+      name: 'Business Tools',
+      divider: true
+    },
     { name: 'Bookings', href: '/admin/bookings', icon: Calendar },
     { name: 'Users', href: '/admin/users', icon: Users },
     { name: 'Settings', href: '/admin/settings', icon: Settings },
+    { 
+      name: 'Navigation',
+      divider: true
+    },
     { name: 'Back to Site', href: '/', icon: Home },
   ];
 
@@ -26,7 +68,17 @@ export function AdminSidebar() {
           </div>
           <nav className="flex-1 px-2 space-y-1 bg-white">
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              if ((item as any).divider) {
+                return (
+                  <div key={item.name} className="px-4 py-3 mt-4 mb-2">
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{item.name}</h3>
+                  </div>
+                );
+              }
+
+              const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+              const Icon = item.icon as React.ComponentType<{ className?: string; 'aria-hidden'?: boolean }>;
+
               return (
                 <Link
                   key={item.name}
@@ -38,12 +90,12 @@ export function AdminSidebar() {
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                   )}
                 >
-                  <item.icon
+                  <Icon
                     className={cn(
                       'mr-3 flex-shrink-0 h-5 w-5',
                       isActive ? 'text-egyptian-blue' : 'text-gray-400 group-hover:text-gray-500',
                     )}
-                    aria-hidden="true"
+                    aria-hidden={true}
                   />
                   {item.name}
                 </Link>
@@ -55,3 +107,4 @@ export function AdminSidebar() {
     </div>
   );
 }
+

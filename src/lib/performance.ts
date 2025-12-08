@@ -186,7 +186,7 @@ export function createLazyComponent<T extends React.ComponentType<Record<string,
           ? React.createElement(fallback)
           : React.createElement('div', null, 'Loading...')
       },
-      React.createElement(LazyComponent, props)
+      React.createElement(LazyComponent, props as any)
     );
   };
 }

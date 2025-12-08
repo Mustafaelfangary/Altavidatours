@@ -160,7 +160,7 @@ export default function Navbar() {
   const { data: session } = useSession();
   const { getContent } = useContent({ page: 'branding_settings' });
   const currentPathname = usePathname();
-  const { t: translate, changeLanguage } = useLanguage();
+  const { locale, setLocale, t: translate } = useLanguage();
   const [logoUrl, setLogoUrl] = useState('/AppIcons/android/mipmap-xxxhdpi/altavida.png');
   const [logoTimestamp, setLogoTimestamp] = useState<number | null>(null);
   const [isClient, setIsClient] = useState(false);
@@ -291,7 +291,6 @@ export default function Navbar() {
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [settings, setSettings] = useState({ siteName: 'Altavida Tours.com' });
-  const { locale, setLocale } = useLanguage();
   const t = useTranslation();
   const { getContent: getHomepageContent } = useContent({ page: 'homepage' });
 
@@ -533,7 +532,7 @@ export default function Navbar() {
 
   return (
     <>
-    <nav className="navbar-animate hidden lg:block" style={{
+    <nav className="navbar navbar-animate" style={{
       position: 'fixed',
       top: `calc(${getBannerHeight()} + 2px)`, // Dynamic position below HieroglyphicTopBanner with 2px buffer
       left: 0,
@@ -945,7 +944,7 @@ export default function Navbar() {
       
       {/* Mobile menu */}
       <AnimatePresence>
-        {isOpen && (
+        {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
@@ -991,31 +990,31 @@ export default function Navbar() {
               
               {!session ? (
                 <div className="mt-4 flex flex-col gap-2 border-t border-gray-100 pt-3">
-                  <Link 
-                    href="/auth/signin" 
+                  <Link
+                    href="/auth/signin"
                     className="w-full rounded-lg bg-gray-50 px-4 py-2.5 text-center text-sm font-medium text-gray-700 hover:bg-gray-100"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Sign in
                   </Link>
-                  {!session ? (
-                    <Link
-                      href="/auth/signup"
-                      className="w-full rounded-lg bg-gradient-to-r from-primary to-primary/80 px-4 py-2.5 text-center text-sm font-medium text-white shadow-sm hover:from-primary/90 hover:to-primary/70"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Sign Up
-                    </Link>
-                  ) : (
-                    <Link
-                      href="/profile"
-                      className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <User className="h-4 w-4 text-primary" />
-                      My Profile
-                    </Link>
-                  )}
+                  <Link
+                    href="/auth/signup"
+                    className="w-full rounded-lg bg-gradient-to-r from-primary to-primary/80 px-4 py-2.5 text-center text-sm font-medium text-white shadow-sm hover:from-primary/90 hover:to-primary/70"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              ) : (
+                <div className="mt-4 flex flex-col gap-2 border-t border-gray-100 pt-3">
+                  <Link
+                    href="/profile"
+                    className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <User className="h-4 w-4 text-primary" />
+                    My Profile
+                  </Link>
                   <button
                     onClick={() => {
                       signOut();
@@ -1038,11 +1037,11 @@ export default function Navbar() {
                     <button
                       key={lang.code}
                       onClick={() => {
-                        // Handle language change
+                        setLocale(lang.code);
                         setIsMobileMenuOpen(false);
                       }}
                       className={`flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium ${
-                        currentLanguage === lang.code
+                        locale === lang.code
                           ? 'bg-primary/10 text-primary'
                           : 'text-gray-700 hover:bg-gray-50'
                       }`}

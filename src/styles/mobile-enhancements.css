@@ -292,12 +292,11 @@
     gap: 1rem;
     padding: 1rem;
   }
-}
-
-/* Grid layout for larger mobile screens */
-@media (min-width: 480px) and (max-width: 640px) {
-  .packages-grid, .itineraries-grid {
-    grid-template-columns: 1fr 1fr;
+  
+  @media (min-width: 480px) {
+    .packages-grid, .itineraries-grid {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }
 
@@ -788,14 +787,12 @@
 }
 
 /* Success states for mobile */
-@media (max-height: 500px) and (orientation: landscape) {
-  .success-mobile {
-    background: #f0fdf4;
-    border: 1px solid #86efac;
-    color: #16a34a;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    text-align: center;
-  }
+.success-mobile {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  color: #16a34a;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  text-align: center;
 }

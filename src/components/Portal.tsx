@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 interface PortalProps {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 
@@ -26,6 +26,6 @@ export default function Portal({ children, className }: PortalProps) {
     };
   }, [className]);
 
-  if (!mounted) return null;
+  if (!mounted || !children) return null;
   return createPortal(children, elRef.current!);
 }

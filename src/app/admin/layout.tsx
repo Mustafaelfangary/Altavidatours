@@ -12,8 +12,6 @@ import AdminTextFixer from '@/components/admin/AdminTextFixer';
 import { Loader2 } from 'lucide-react';
 import '../globals.css';
 import '../../styles/admin.css';
-import '../../styles/admin-contrast-fix.css';
-import '../../styles/mui-admin-override.css';
 
 // Wrapper component to handle session and loading state
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
@@ -73,7 +71,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen admin-container flex flex-col admin-layout">
       <AdminTextFixer />
       <AdminHeader />
       

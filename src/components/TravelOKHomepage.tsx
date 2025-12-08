@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { packages } from '@/data/packages';
 import { destinations } from '@/data/destinations';
 import { useContent } from '@/hooks/useContent';
@@ -11,8 +10,6 @@ import { useContent } from '@/hooks/useContent';
 export default function TravelOKHomepage() {
   const [heroReady, setHeroReady] = useState(false);
   const { getContent } = useContent({ page: 'homepage' });
-  const router = useRouter();
-  const [query, setQuery] = useState("");
   // Services state
   interface ServiceData { id: string; slug?: string; title: string; serviceType?: string; summary?: string; price?: number }
   const [services, setServices] = useState<ServiceData[]>([]);
@@ -40,176 +37,78 @@ export default function TravelOKHomepage() {
       })
       .catch(() => setServices([]));
   }, []);
- 
-  // Animated package card with slideshow and 3D hover
-  function AnimatedPackageCard({ pkg, images, index }: { pkg: any; images: string[]; index: number }) {
-    const [idx, setIdx] = useState(0);
-
-    useEffect(() => {
-      if (!images || images.length <= 1) return;
-      const timer = setInterval(() => setIdx((i) => (i + 1) % images.length), 3500);
-      return () => clearInterval(timer);
-    }, [images]);
-
-    const current = images && images[idx] ? images[idx] : (images?.[0] || pkg.image);
-
-    return (
-      <div className={`group relative bg-white rounded-2xl border border-gray-100 shadow-[0_12px_40px_rgba(11,46,79,0.08)] hover:shadow-[0_26px_70px_rgba(11,46,79,0.16)] transition-all duration-500 [transform-style:preserve-3d] hover:[transform:translateY(-10px)_rotateX(2deg)] ${index % 2 === 1 ? 'md:mt-10 lg:mt-16' : ''}`}>
-        <div className="absolute inset-0 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{boxShadow:'inset 0 1px 0 rgba(255,255,255,.6), 0 30px 80px rgba(11,46,79,.15)', filter:'saturate(110%)'}}></div>
-        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
-          <Image
-            key={current}
-            src={current || pkg.image}
-            alt={pkg.title}
-            fill
-            className="object-cover scale-[1.02] transition-all duration-700 group-hover:scale-[1.06]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/35"></div>
-          <div className="absolute top-4 right-4 bg-white/95 text-[#0b2e4f] px-3 py-1 rounded-full text-sm font-bold shadow">
-            {pkg.duration}
-          </div>
-        </div>
-        <div className="p-6 md:p-7">
-          <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#0b2e4f] mb-2 animate-[slideUp_0.6s_ease-out]">{pkg.title}</h3>
-          <p className="text-gray-600 text-sm md:text-base mb-4 line-clamp-3 animate-[fadeIn_0.8s_ease-out]">{pkg.description}</p>
-
-          <div className="mb-5">
-            <div className="text-sm text-gray-700 mb-2 font-semibold">Highlights:</div>
-            <div className="flex flex-wrap gap-2">
-              {pkg.highlights.slice(0, 3).map((highlight: string, i: number) => (
-                <span key={i} className="pale-chip px-2.5 py-1 rounded text-xs">{highlight}</span>
-              ))}
-              {pkg.highlights.length > 3 && (
-                <span className="pale-chip px-2 py-1 rounded text-xs">+{pkg.highlights.length - 3} more</span>
-              )}
-            </div>
-          </div>
-
-          <div className="flex items-center justify-end">
-            <Link
-              href={`/packages/${pkg.id}`}
-              className="px-4 md:px-5 py-2 md:py-2.5 rounded-full bg-[#0b2e4f] text-white font-semibold hover:bg-[#09304e] transition-colors"
-            >
-              View Details
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section with Modern Design */}
-      <section className="hero-modern">
-        <div className="hero-content">
-          <h1 className="hero-title animate-fade-in-up">
-            {getContent('homepage_hero_title', 'Discover Egypt This Season')}
-          </h1>
-          <p className="hero-subtitle animate-fade-in">
-            {getContent('homepage_hero_subtitle', 'From ancient wonders to Nile cruises, plan unforgettable experiences with Altavida.')}
-          </p>
-          <form
-            onSubmit={(e) => { e.preventDefault(); const q = query.trim(); if (q) router.push(`/search?q=${encodeURIComponent(q)}`); }}
-            className="search-modern animate-slide-up"
-          >
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              type="search"
-              placeholder={getContent('homepage_search_placeholder', 'Search experiences, destinations, cruises...')}
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <div className="relative h-screen sm:h-screen lg:h-screen bg-gradient-to-b from-blue-900 to-blue-700" style={{ minHeight: 'calc(100vh - 4rem)' }}>
+        {/* Background Image/Video */}
+        <div className="absolute inset-0">
+          {getContent('hero_video_url') ? (
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={getContent('hero_video_poster', '/images/cultural&historical/DSC_8401.JPG')}
+              className="w-full h-full object-cover opacity-60"
+            >
+              <source src={getContent('hero_video_url')} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <Image
+              src={getContent('hero_video_poster', '/images/cultural&historical/DSC_8401.JPG')}
+              alt={getContent('hero_video_title', 'Discover Egypt')}
+              fill
+              className="object-cover opacity-60"
+              priority
             />
-            <button type="submit">
-              {getContent('homepage_search_cta', 'Search')}
-            </button>
-          </form>
-          <div className="quick-links animate-fade-in">
-            <Link href="/packages" className="quick-link">Things To Do</Link>
-            <Link href="/destinations" className="quick-link">Cities & Regions</Link>
-            <Link href="/dahabiyas" className="quick-link">Places To Stay</Link>
-            <Link href="/blog" className="quick-link">Festivals & Events</Link>
-            <Link href="/destinations" className="quick-link">State Parks</Link>
-            <Link href="/blog" className="quick-link">Dining</Link>
-          </div>
+          )}
         </div>
-      </section>
 
-      {/* Top Destinations Section */}
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="section-header">
-            <h2 className="section-title animate-fade-in-up">Top Destinations</h2>
-            <p className="section-subtitle animate-fade-in">Explore Egypt's most iconic regions handpicked for this season.</p>
+        {/* Hero Content */}
+        <div className={`relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 transition-all duration-700 ${heroReady ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+            {getContent('hero_video_title', 'DISCOVER EGYPT')}
+          </h1>
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl mb-6 sm:mb-8 font-light leading-relaxed">
+            {getContent('hero_video_subtitle', 'Land of Pharaohs & Ancient Wonders')}
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-12 max-w-3xl leading-relaxed px-4 sm:px-0">
+            {getContent('homepage_hero_description')}
+          </p>
+          
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 px-4 sm:px-0">
+            <Link 
+              href={getContent('hero_video_cta_link', '/tours')}
+              className="bg-travelok-orange hover:bg-orange-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-colors text-center min-h-[48px] flex items-center justify-center"
+            >
+              {getContent('hero_video_cta_text', 'EXPLORE TOURS')}
+            </Link>
+            <Link 
+              href={getContent('hero_video_secondary_cta_link', '/destinations')}
+              className="border-2 border-white text-white hover:bg-white hover:text-travelok-blue px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold transition-colors text-center min-h-[48px] flex items-center justify-center"
+            >
+              {getContent('hero_video_secondary_cta_text', 'VIEW DESTINATIONS')}
+            </Link>
           </div>
-          <div className="grid-luxury grid-luxury-4 stagger-animation">
-            {destinations.slice(0,4).map((d, i) => {
-              const fallbackImages = [
-                '/images/cultural-historical/saqqara-pyramid.jpg',
-                '/Alexandria/IMG_6334.JPG',
-                '/desert&safary/DSC_9166.JPG',
-                '/Royal Cleopatra/DSC_8628.jpg'
-              ];
-              const img = d.image || fallbackImages[i % fallbackImages.length];
-              const title = d.name || `Destination ${i+1}`;
-              const region = d.region || 'Egypt';
-              const slug = (d as any).slug ? `/destinations/${(d as any).slug}` : '/destinations';
-              return (
-                <Link key={d.id || i} href={slug} className="card-luxury block">
-                  <div className="card-luxury-image">
-                    <Image src={img} alt={title} fill className="object-cover" />
-                    <div className="image-overlay">
-                      <div>
-                        <h3 className="text-xl font-bold mb-1">{title}</h3>
-                        <p className="text-sm opacity-90">{region}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-luxury-content">
-                    <h3 className="card-luxury-title">{title}</h3>
-                    <p className="text-sm text-gray-500">{region}</p>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+
+          {/* Scroll Indicator */}
+          {getContent('hero_scroll_text') && (
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+              <p className="text-sm text-white/80 mb-2">{getContent('hero_scroll_text')}</p>
+              <div className="w-8 h-12 border-2 border-white/50 rounded-full flex justify-center p-1">
+                <div className="w-1 h-3 bg-white rounded-full animate-bounce"></div>
+              </div>
+            </div>
+          )}
         </div>
-      </section>
+      </div>
 
-      {/* International/Nearby Destinations Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="section-header">
-            <h2 className="section-title animate-fade-in-up">Explore The Region</h2>
-            <p className="section-subtitle animate-fade-in">Add a regional touch to your itinerary with these remarkable nearby destinations.</p>
-          </div>
-          <div className="grid-luxury grid-luxury-4 stagger-animation">
-            {[
-              { name: 'Jordan', image: 'https://images.pexels.com/photos/11195793/pexels-photo-11195793.jpeg', href: '/destinations/jordan', photographer: 'Yasir Gürbüz on Pexels' },
-              { name: 'Dubai', image: 'https://images.pexels.com/photos/3611545/pexels-photo-3611545.jpeg', href: '/destinations/dubai', photographer: 'Abbas Mohammed on Pexels' },
-              { name: 'Turkey', image: 'https://images.pexels.com/photos/28966539/pexels-photo-28966539.jpeg', href: '/destinations/turkey', photographer: 'Julien Goettelmann on Pexels' },
-              { name: 'Morocco', image: 'https://images.pexels.com/photos/22711558/pexels-photo-22711558.jpeg', href: '/destinations/morocco', photographer: 'Uiliam Nörnberg on Pexels' },
-            ].map((d, i) => (
-              <Link key={d.name} href={d.href} className="card-luxury block">
-                <div className="card-luxury-image">
-                  <Image src={d.image} alt={`${d.name} - Photo by ${d.photographer}`} fill className="object-cover" unoptimized />
-                  <div className="image-overlay">
-                    <div>
-                      <h3 className="text-xl font-bold mb-1">{d.name}</h3>
-                      <p className="text-sm opacity-90">Regional Destination</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="card-luxury-content">
-                  <h3 className="card-luxury-title">{d.name}</h3>
-                  <p className="text-sm text-gray-500">Regional Destination</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="bg-gray-50 text-[#0b2e4f] py-8">
+      {/* Things To Do Section */}
+      <div className="bg-travelok-blue text-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center py-4">
             <h2 className="text-2xl font-bold tracking-wider">{getContent('homepage_things_to_do_title', 'THINGS TO DO')}</h2>
@@ -217,191 +116,179 @@ export default function TravelOKHomepage() {
         </div>
       </div>
 
-      <div className="bg-white text-[#0b2e4f] py-8">
+      {/* Category Navigation */}
+      <div className="bg-travelok-blue-dark">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 py-6">
-            {/* Pyramids & Sphinx */}
-            <Link href={getContent('category_1_link', '/attractions/pyramids')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_1_image','/images/cultural-historical/saqqara-pyramid.jpg')} alt="Pyramids & Sphinx" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-              </div>
-              <div className="p-3 text-center">
-                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">PYRAMIDS & SPHINX</div>
-              </div>
+            <Link
+              href={getContent('category_1_link', '/attractions/pyramids')}
+              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-4 sm:p-6 text-center rounded-lg min-h-[100px] flex flex-col items-center justify-center"
+            >
+              <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">{getContent('category_1_icon', '🔺')}</div>
+              <div className="font-bold text-xs sm:text-sm">{getContent('category_1_title', 'PYRAMIDS')}</div>
+              <div className="font-bold text-xs sm:text-sm">{getContent('category_1_subtitle', '& SPHINX')}</div>
             </Link>
 
-            {/* Ancient Temples */}
-            <Link href={getContent('category_2_link', '/attractions/temples')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_2_image','/cultural&historical/DSCF1165.JPG')} alt="Ancient Temples" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-              </div>
-              <div className="p-3 text-center">
-                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">ANCIENT TEMPLES</div>
-              </div>
+            <Link
+              href={getContent('category_2_link', '/attractions/temples')}
+              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+            >
+              <div className="text-3xl mb-2">{getContent('category_2_icon', '🏛️')}</div>
+              <div className="font-bold text-sm">{getContent('category_2_title', 'ANCIENT')}</div>
+              <div className="font-bold text-sm">{getContent('category_2_subtitle', 'TEMPLES')}</div>
             </Link>
 
-            {/* Museums & Artifacts */}
-            <Link href={getContent('category_3_link', '/attractions/museums')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_3_image','/cultural&historical/DSC_8401.JPG')} alt="Museums & Artifacts" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-              </div>
-              <div className="p-3 text-center">
-                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">MUSEUMS & ARTIFACTS</div>
-              </div>
+            <Link
+              href={getContent('category_3_link', '/attractions/museums')}
+              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+            >
+              <div className="text-3xl mb-2">{getContent('category_3_icon', '🏺')}</div>
+              <div className="font-bold text-sm">{getContent('category_3_title', 'MUSEUMS')}</div>
+              <div className="font-bold text-sm">{getContent('category_3_subtitle', '& ARTIFACTS')}</div>
             </Link>
 
-            {/* Desert Safari */}
-            <Link href={getContent('category_4_link', '/services/adventure-tours')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_4_image','/desert&safary/DSC_9895.JPG')} alt="Desert Safari" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-              </div>
-              <div className="p-3 text-center">
-                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">DESERT SAFARI</div>
-              </div>
+            <Link
+              href={getContent('category_4_link', '/services/adventure-tours')}
+              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+            >
+              <div className="text-3xl mb-2">{getContent('category_4_icon', '🐪')}</div>
+              <div className="font-bold text-sm">{getContent('category_4_title', 'DESERT')}</div>
+              <div className="font-bold text-sm">{getContent('category_4_subtitle', 'SAFARI')}</div>
             </Link>
 
-            {/* Red Sea Diving */}
-            <Link href={getContent('category_5_link', '/experiences/diving')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_5_image','/RedSea/DSCF1998.JPG')} alt="Red Sea Diving" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-              </div>
-              <div className="p-3 text-center">
-                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">RED SEA DIVING</div>
-              </div>
+            <Link
+              href={getContent('category_5_link', '/experiences/diving')}
+              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+            >
+              <div className="text-3xl mb-2">{getContent('category_5_icon', '🤿')}</div>
+              <div className="font-bold text-sm">{getContent('category_5_title', 'RED SEA')}</div>
+              <div className="font-bold text-sm">{getContent('category_5_subtitle', 'DIVING')}</div>
             </Link>
 
-            {/* Nile Cruises */}
-            <Link href={getContent('category_6_link', '/hotels/nile-cruises')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_6_image','/Royal Cleopatra/DSC_8628.jpg')} alt="Nile Cruises" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-              </div>
-              <div className="p-3 text-center">
-                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">NILE CRUISES</div>
-              </div>
+            <Link
+              href={getContent('category_6_link', '/hotels/nile-cruises')}
+              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+            >
+              <div className="text-3xl mb-2">{getContent('category_6_icon', '⛵')}</div>
+              <div className="font-bold text-sm">{getContent('category_6_title', 'NILE')}</div>
+              <div className="font-bold text-sm">{getContent('category_6_subtitle', 'CRUISES')}</div>
             </Link>
 
-            {/* Cultural Tours */}
-            <Link href={getContent('category_7_link', '/experiences/cultural')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_7_image','/cultural&historical/IMG_3143.JPG')} alt="Cultural Tours" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-              </div>
-              <div className="p-3 text-center">
-                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">CULTURAL TOURS</div>
-              </div>
+            <Link
+              href={getContent('category_7_link', '/experiences/cultural')}
+              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+            >
+              <div className="text-3xl mb-2">{getContent('category_7_icon', '🎭')}</div>
+              <div className="font-bold text-sm">{getContent('category_7_title', 'CULTURAL')}</div>
+              <div className="font-bold text-sm">{getContent('category_7_subtitle', 'TOURS')}</div>
             </Link>
 
-            {/* Egyptian Cuisine */}
-            <Link href={getContent('category_8_link', '/experiences/food')} className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <div className="relative h-32 sm:h-36">
-                <Image src={getContent('category_8_image','/Alexandria/IMG_6504.JPG')} alt="Egyptian Cuisine" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-              </div>
-              <div className="p-3 text-center">
-                <div className="text-[11px] font-extrabold tracking-wider text-[#0b2e4f] uppercase">EGYPTIAN CUISINE</div>
-              </div>
+            <Link
+              href={getContent('category_8_link', '/experiences/food')}
+              className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-6 text-center rounded-lg"
+            >
+              <div className="text-3xl mb-2">{getContent('category_8_icon', '🍽️')}</div>
+              <div className="font-bold text-sm">{getContent('category_8_title', 'EGYPTIAN')}</div>
+              <div className="font-bold text-sm">{getContent('category_8_subtitle', 'CUISINE')}</div>
             </Link>
-          </div>
-
-          {/* Our Top Picks Section */}
-          <div className="mt-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2e4f] mb-4">Our Top Picks</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto mb-8">Handpicked experiences for an unforgettable journey through Egypt</p>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
-              {[
-                { 
-                  name: 'Alexandria', 
-                  image: '/Alexandria/IMG_6198.JPG', 
-                  href: '/destinations/alexandria',
-                  description: 'Mediterranean Pearl of Egypt'
-                },
-                { 
-                  name: 'Luxor', 
-                  image: '/Alexandria/IMG_6201.JPG', 
-                  href: '/destinations/luxor',
-                  description: 'World\'s Greatest Open-Air Museum'
-                },
-                { 
-                  name: 'Aswan', 
-                  image: '/Alexandria/IMG_6274.JPG', 
-                  href: '/destinations/aswan',
-                  description: 'Nile Valley Beauty'
-                },
-                { 
-                  name: 'Cairo', 
-                  image: '/Alexandria/IMG_6282.JPG', 
-                  href: '/destinations/cairo',
-                  description: 'City of a Thousand Minarets'
-                },
-              ].map((item, index) => (
-                <Link 
-                  key={index} 
-                  href={item.href}
-                  className="group relative overflow-hidden rounded-xl aspect-square md:aspect-[3/4]"
-                >
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center">
-                      <h3 className="font-bold text-lg md:text-xl mb-1">{item.name}</h3>
-                      <p className="text-sm opacity-90">{item.description}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </div>
 
-      <div className="bg-white py-12">
+      {/* Featured Packages Section */}
+      <div className="bg-gray-100 py-12">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#0b2e4f] mb-4">
-              {getContent('homepage_featured_packages_title', 'Featured Experiences')}
+            <h2 className="text-3xl font-bold text-travelok-blue mb-4">
+              {getContent('homepage_featured_packages_title', 'FEATURED ')}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               {getContent('homepage_featured_packages_subtitle', 'Discover our most popular Egypt tour packages, carefully crafted to give you the best experience of this magnificent country.')}
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {packages.slice(0, 6).map((pkg, index) => {
-              const royal = [
-                '/images/Royal Cleopatra/DSC_8627.jpg',
-                '/images/Royal Cleopatra/DSC_8733.jpg',
-                '/images/Royal Cleopatra/DSC_8848.jpg',
-                '/images/Royal Cleopatra/DSC_8653.jpg',
-                '/images/Royal Cleopatra/DSC_8666.jpg',
-                '/images/Royal Cleopatra/DSC_8675.jpg'
-              ];
-              const desert = [
-                '/images/desert&safary/DSC_9908.JPG',
-                '/images/desert&safary/DSC_9912.JPG',
-                '/images/desert&safary/DSC_9895.JPG',
-                '/images/desert&safary/DSC_9826.JPG'
-              ];
-              const cultural = [
-                '/images/cultural-historical/saqqara-pyramid.jpg',
-                '/images/cultural&historical/DSC_8401.JPG',
-                '/images/cultural&historical/DSCF1165.JPG',
-                '/images/cultural&historical/IMG_3143.JPG'
-              ];
-              const images = (pkg.type === 'luxury' || pkg.type === 'cruise') ? royal : (pkg.type === 'adventure') ? desert : cultural;
+              // Choose image based on package type to reflect categories
+              const getImageForPackage = () => {
+                if (pkg.type === 'luxury' || pkg.type === 'cruise') {
+                  const royal = [
+                    '/images/Royal Cleopatra/DSC_8627.jpg',
+                    '/images/Royal Cleopatra/DSC_8733.jpg',
+                    '/images/Royal Cleopatra/DSC_8848.jpg',
+                    '/images/Royal Cleopatra/DSC_8653.jpg',
+                    '/images/Royal Cleopatra/DSC_8666.jpg',
+                    '/images/Royal Cleopatra/DSC_8675.jpg'
+                  ];
+                  return royal[index % royal.length];
+                }
+                if (pkg.type === 'adventure') {
+                  const desert = [
+                    '/images/desert&safary/DSC_9908.JPG',
+                    '/images/desert&safary/DSC_9912.JPG',
+                    '/images/desert&safary/DSC_9895.JPG',
+                    '/images/desert&safary/DSC_9826.JPG'
+                  ];
+                  return desert[index % desert.length];
+                }
+                // classic, cultural, or others
+                const cultural = [
+                  '/images/cultural&historical/Saqqara pyramid.jpg',
+                  '/images/cultural&historical/DSC_8401.JPG',
+                  '/images/cultural&historical/DSCF1165.JPG',
+                  '/images/cultural&historical/IMG_3143.JPG'
+                ];
+                return cultural[index % cultural.length];
+              };
               return (
-                <AnimatedPackageCard key={pkg.id} pkg={pkg} images={images} index={index} />
+              <div key={pkg.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="relative h-48">
+                  <Image
+                    src={getImageForPackage() || pkg.image}
+                    alt={pkg.title}
+                    fill
+                    className="object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = pkg.image;
+                    }}
+                  />
+                  <div className="absolute top-4 right-4 bg-travelok-orange text-white px-3 py-1 rounded-full text-sm font-bold">
+                    {pkg.duration}
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-travelok-blue mb-2">{pkg.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{pkg.description}</p>
+                  
+                  <div className="mb-4">
+                    <div className="text-sm text-gray-500 mb-2">Highlights:</div>
+                    <div className="flex flex-wrap gap-1">
+                      {pkg.highlights.slice(0, 3).map((highlight, index) => (
+                        <span key={index} className="bg-blue-100 text-travelok-blue px-2 py-1 rounded text-xs">
+                          {highlight}
+                        </span>
+                      ))}
+                      {pkg.highlights.length > 3 && (
+                        <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">
+                          +{pkg.highlights.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="text-2xl font-bold text-travelok-orange">
+                      From ${pkg.price.from}
+                    </div>
+                    <Link 
+                      href={`/packages/${pkg.id}`}
+                      className="bg-travelok-blue hover:bg-travelok-orange text-white px-4 py-2 rounded transition-colors text-sm font-semibold"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              </div>
               );
             })}
           </div>
@@ -409,7 +296,7 @@ export default function TravelOKHomepage() {
           <div className="text-center mt-12">
             <Link 
               href="/packages"
-              className="bg-[#0b2e4f] text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors inline-block hover:bg-[#09304e]"
+              className="bg-travelok-orange hover:bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors inline-block"
             >
               {getContent('homepage_view_all_packages_text', 'View All Packages')}
             </Link>
@@ -418,7 +305,7 @@ export default function TravelOKHomepage() {
       </div>
 
       {/* Featured Article Section */}
-      <div className="bg-gray-50 text-[#073b5a] py-8">
+      <div className="bg-travelok-orange text-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center py-4">
             <h2 className="text-2xl font-bold tracking-wider">{getContent('homepage_featured_experience_title', 'FEATURED EXPERIENCE')}</h2>
@@ -430,7 +317,7 @@ export default function TravelOKHomepage() {
       <div className="bg-white py-12">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-deep-blue mb-2">
+            <h2 className="text-3xl font-bold text-travelok-blue mb-2">
               {getContent('services_section_title', 'Popular Services')}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -454,16 +341,19 @@ export default function TravelOKHomepage() {
                   </div>
                   <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-bold text-deep-blue">{title}</h3>
+                    <h3 className="text-xl font-bold text-travelok-blue">{title}</h3>
                     {type && (
-                      <span className="text-xs bg-[#1193b1]/10 text-[#073b5a] px-2 py-1 rounded-full font-semibold">{type}</span>
+                      <span className="text-xs bg-blue-100 text-travelok-blue px-2 py-1 rounded-full font-semibold">{type}</span>
                     )}
                   </div>
                   {summary && (
                     <p className="text-gray-600 text-sm mb-4 line-clamp-3">{summary}</p>
                   )}
-                  <div className="flex items-center justify-end">
-                    <Link href={`/services/${svc.slug || svc.id}`} className="bg-white border border-gray-200 hover:bg-[#f1fcfe] text-[#073b5a] hover:text-[#073b5a] px-4 py-2 rounded text-sm font-semibold">
+                  <div className="flex items-center justify-between">
+                    <div className="text-travelok-orange font-bold">
+                      {price ? <>From ${price}</> : <span className="text-gray-400">Contact for price</span>}
+                    </div>
+                    <Link href={`/services/${svc.slug || svc.id}`} className="bg-travelok-blue hover:bg-travelok-orange text-white px-4 py-2 rounded text-sm font-semibold">
                       View Details
                     </Link>
                   </div>
@@ -493,7 +383,7 @@ export default function TravelOKHomepage() {
               />
             </div>
             <div className="md:w-1/2 p-8">
-              <h3 className="text-2xl font-bold text-deep-blue mb-4">
+              <h3 className="text-2xl font-bold text-travelok-blue mb-4">
                 {getContent('featured_article_title', 'Egypt: The Ultimate Travel Destination')}
               </h3>
               <p className="text-gray-700 leading-relaxed mb-6">
@@ -501,7 +391,7 @@ export default function TravelOKHomepage() {
               </p>
               <Link
                 href={getContent('featured_article_cta_link', '/tours/classic')}
-                className="inline-block bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white px-6 py-3 rounded hover:opacity-95 transition-colors font-semibold"
+                className="inline-block bg-travelok-blue text-white px-6 py-3 rounded hover:bg-travelok-orange transition-colors font-semibold"
               >
                 {getContent('featured_article_cta_text', 'Explore Tours')}
               </Link>
@@ -514,7 +404,7 @@ export default function TravelOKHomepage() {
       <div className="bg-white py-12">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-deep-blue mb-4">
+            <h2 className="text-4xl font-bold text-travelok-blue mb-4">
               {getContent('homepage_discover_egypt_title', 'DISCOVER ANCIENT EGYPT')}
             </h2>
           </div>
@@ -523,7 +413,7 @@ export default function TravelOKHomepage() {
             {destinations.slice(0, 8).map((destination, index) => {
               // Use available destination images
               const destinationImages = [
-                '/images/cultural-historical/saqqara-pyramid.jpg',
+                '/images/cultural&historical/Saqqara pyramid.jpg',
                 '/images/Alexandria/IMG_6334.JPG',
                 '/images/desert&safary/DSC_9166.JPG',
                 '/images/desert&safary/DSC_9826.JPG',
@@ -553,7 +443,7 @@ export default function TravelOKHomepage() {
                       e.currentTarget.src = destination.image || '/images/Royal Cleopatra/DSC_8507.jpg';
                     }}
                   />
-                  <div className="absolute top-4 left-4 bg-[#1193b1]/10 text-[#073b5a] px-3 py-1 rounded-full text-sm font-semibold">
+                  <div className="absolute top-4 left-4 bg-travelok-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
                     {destRegion}
                   </div>
                   <div className="absolute bottom-4 left-4 bg-black/80 text-white px-3 py-2 rounded">
@@ -571,7 +461,7 @@ export default function TravelOKHomepage() {
           <div className="text-center mt-12">
             <Link 
               href="/articles" 
-              className="inline-block bg-gradient-to-r from-[#1193b1] to-[#0b79a0] text-white px-8 py-4 text-lg font-semibold rounded hover:opacity-95 transition-colors"
+              className="inline-block bg-travelok-blue text-white px-8 py-4 text-lg font-semibold rounded hover:bg-travelok-orange transition-colors"
             >
               {getContent('homepage_view_all_articles_text', 'View All Articles')}
             </Link>
@@ -580,7 +470,7 @@ export default function TravelOKHomepage() {
       </div>
 
       {/* State Parks Section */}
-      <div className="bg-gray-50 text-[#073b5a] py-8">
+      <div className="bg-travelok-orange text-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center py-3">
             <h2 className="text-xl font-bold tracking-wider">{getContent('destinations_section_title', 'DESTINATIONS')}</h2>
@@ -588,40 +478,40 @@ export default function TravelOKHomepage() {
         </div>
       </div>
 
-      <div className="bg-deep-blue py-8">
+      <div className="bg-travelok-blue-dark py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
-            <Link href={getContent('dest_link_1_url', '/find-destination')} className="bg-white border border-gray-200 hover:bg-[#f1fcfe] transition-colors text-[#073b5a] hover:text-[#073b5a] p-3 sm:p-4 text-center rounded min-h-[80px] flex flex-col items-center justify-center">
+            <Link href={getContent('dest_link_1_url', '/find-destination')} className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-3 sm:p-4 text-center rounded min-h-[80px] flex flex-col items-center justify-center">
               <div className="text-xl sm:text-2xl mb-1 sm:mb-2">{getContent('dest_link_1_icon', '📍')}</div>
               <div className="text-xs font-bold leading-tight">{getContent('dest_link_1_title', 'FIND A')}</div>
               <div className="text-xs font-bold leading-tight">{getContent('dest_link_1_subtitle', 'DESTINATION')}</div>
             </Link>
 
-            <Link href={getContent('dest_link_2_url', '/book-hotel')} className="bg-white border border-gray-200 hover:bg-[#f1fcfe] transition-colors text-[#073b5a] hover:text-[#073b5a] p-4 text-center rounded">
+            <Link href={getContent('dest_link_2_url', '/book-hotel')} className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-4 text-center rounded">
               <div className="text-2xl mb-2">{getContent('dest_link_2_icon', '🏨')}</div>
               <div className="text-xs font-bold">{getContent('dest_link_2_title', 'BOOK A HOTEL')}</div>
               <div className="text-xs font-bold">{getContent('dest_link_2_subtitle', 'OR LODGE')}</div>
             </Link>
 
-            <Link href={getContent('dest_link_3_url', '/book-event')} className="bg-white border border-gray-200 hover:bg-[#f1fcfe] transition-colors text-[#073b5a] hover:text-[#073b5a] p-4 text-center rounded">
+            <Link href={getContent('dest_link_3_url', '/book-event')} className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-4 text-center rounded">
               <div className="text-2xl mb-2">{getContent('dest_link_3_icon', '🎪')}</div>
               <div className="text-xs font-bold">{getContent('dest_link_3_title', 'BOOK AN')}</div>
               <div className="text-xs font-bold">{getContent('dest_link_3_subtitle', 'EVENT')}</div>
             </Link>
 
-            <Link href={getContent('dest_link_4_url', '/book-cruise')} className="bg-white border border-gray-200 hover:bg-[#f1fcfe] transition-colors text-[#073b5a] hover:text-[#073b5a] p-4 text-center rounded">
+            <Link href={getContent('dest_link_4_url', '/book-cruise')} className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-4 text-center rounded">
               <div className="text-2xl mb-2">{getContent('dest_link_4_icon', '🚢')}</div>
               <div className="text-xs font-bold">{getContent('dest_link_4_title', 'BOOK A')}</div>
               <div className="text-xs font-bold">{getContent('dest_link_4_subtitle', 'CRUISE')}</div>
             </Link>
 
-            <Link href={getContent('dest_link_5_url', '/events')} className="bg-white border border-gray-200 hover:bg-[#f1fcfe] transition-colors text-[#073b5a] hover:text-[#073b5a] p-4 text-center rounded">
+            <Link href={getContent('dest_link_5_url', '/events')} className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-4 text-center rounded">
               <div className="text-2xl mb-2">{getContent('dest_link_5_icon', '📅')}</div>
               <div className="text-xs font-bold">{getContent('dest_link_5_title', 'DESTINATION')}</div>
               <div className="text-xs font-bold">{getContent('dest_link_5_subtitle', 'EVENTS')}</div>
             </Link>
 
-            <Link href={getContent('dest_link_6_url', '/app')} className="bg-white border border-gray-200 hover:bg-[#f1fcfe] transition-colors text-[#073b5a] hover:text-[#073b5a] p-4 text-center rounded">
+            <Link href={getContent('dest_link_6_url', '/app')} className="bg-travelok-blue hover:bg-travelok-orange transition-colors text-white p-4 text-center rounded">
               <div className="text-2xl mb-2">{getContent('dest_link_6_icon', '📱')}</div>
               <div className="text-xs font-bold">{getContent('dest_link_6_title', 'ALTAVIDA APP')}</div>
             </Link>
@@ -633,7 +523,7 @@ export default function TravelOKHomepage() {
         <div className="container mx-auto px-4 py-8 sm:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           <div>
-            <h3 className="text-2xl font-bold text-deep-blue mb-6">
+            <h3 className="text-2xl font-bold text-travelok-blue mb-6">
               {getContent('heritage_sites_title', 'Ancient Egyptian Heritage Sites')}
             </h3>
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -657,7 +547,7 @@ export default function TravelOKHomepage() {
           </div>
 
           <div>
-            <h3 className="text-2xl font-bold text-deep-blue mb-6">
+            <h3 className="text-2xl font-bold text-travelok-blue mb-6">
               {getContent('nile_experiences_title', 'Nile River Experiences')}
             </h3>
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -680,28 +570,7 @@ export default function TravelOKHomepage() {
           </div>
         </div>
       </div>
-
-      {/* Add a luxury testimonials section */}
-      <div className="bg-white/10 py-16 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="section-heading text-center mb-10">What Our Guests Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="testimonial-card">
-              <p>“A once-in-a-lifetime experience! The dahabiya cruise was pure luxury, and every detail was perfect.”</p>
-              <div className="mt-4 font-bold text-[#073b5a]">— Sarah M., UK</div>
-            </div>
-            <div className="testimonial-card">
-              <p>“Altavida Tours made Egypt magical. The guides, the food, the boat—unforgettable!”</p>
-              <div className="mt-4 font-bold text-[#073b5a]">— Ahmed F., UAE</div>
-            </div>
-            <div className="testimonial-card">
-              <p>“We felt like royalty. The gold touches and service were beyond five stars.”</p>
-              <div className="mt-4 font-bold text-[#073b5a]">— Julia R., Germany</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   );
 }
+

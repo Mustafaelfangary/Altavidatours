@@ -64,11 +64,11 @@ export default function MobileOptimizedLayout({ children }: MobileOptimizedLayou
   }, [isMobile, isLandscape, isSmallScreen]);
 
   // Mobile-specific styles with Ocean Blue theme
-  const mobileStyles = isMobile ? {
+  const mobileStyles: React.CSSProperties = isMobile ? {
     fontSize: '14px',
     lineHeight: '1.4',
     overflow: 'hidden auto',
-    WebkitOverflowScrolling: 'touch',
+    WebkitOverflowScrolling: 'touch' as const,
     WebkitTapHighlightColor: 'transparent',
     backgroundColor: pathname === '/'
       ? 'linear-gradient(to bottom, #ffffff, #f0f8ff, #e6f3ff)'
