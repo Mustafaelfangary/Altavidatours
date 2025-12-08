@@ -152,17 +152,17 @@ export default function Footer({ settings = {} }: FooterProps) {
                   </div>
                 </div>
                 
-                {/* Logo - place the AltaVida logo in `public/logos/altavida-logo.png` */}
+                {/* Logo - place the AltaVida logo in `public/icons/altavida-logo-1.svg` */}
                 <div className="mb-6">
                   <Image
-                    src="/logos/altavida-logo.png"
+                    src="/icons/altavida-logo-1.svg"
                     alt="AltaVida Tours Logo"
                     width={200}
                     height={200}
                     className="object-contain group-hover:scale-105 transition-transform duration-300 bg-white/5 rounded-lg p-2"
                     style={{ maxWidth: '180px', height: 'auto', minHeight: '60px' }}
                     onError={(e) => {
-                      console.error('altavida logo not found in public folder. Please add the logo file as /logos/altavida-logo.png');
+                      console.error('altavida logo not found in /icons. Please add the logo file as /icons/altavida-logo-1.svg');
                       // Try fallback
                       const img = e.target as HTMLImageElement;
                       if (!img.src.includes('wordmark')) {

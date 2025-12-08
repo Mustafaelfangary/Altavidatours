@@ -8,7 +8,7 @@ import { z } from "zod";
 const FOOTER_CONTENT_STRUCTURE = {
   company: {
     footer_company_name: { key: 'footer_company_name', type: 'TEXT', order: 1, defaultValue: 'AltaVida Tours' },
-    footer_logo: { key: 'footer_logo', type: 'IMAGE', order: 2, defaultValue: '/logos/altavida-logo.png' },
+    footer_logo: { key: 'footer_logo', type: 'IMAGE', order: 2, defaultValue: '/icons/altavida-logo-1.svg' },
     footer_description: { key: 'footer_description', type: 'TEXTAREA', order: 3, defaultValue: 'Discover the wonders of Egypt with our comprehensive travel packages and daily tours. Experience ancient history, vibrant culture, and unforgettable adventures.' },
     footer_copyright: { key: 'footer_copyright', type: 'TEXT', order: 4, defaultValue: 'All rights reserved by AltaVida Tours.' },
   },

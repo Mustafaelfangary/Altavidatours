@@ -59,7 +59,7 @@ export function LoadingPage({ isLoading, onComplete }: LoadingPageProps) {
           <div className="absolute inset-0 bg-pharaoh-gold/30 rounded-full blur-2xl animate-pulse"></div>
           <div className="relative animate-scale-in">
             <Image
-              src="/logos/altavida-logo.png"
+              src="/icons/altavida-logo-1.svg"
               alt="AltaVida Tours Logo"
               width={200}
               height={200}
@@ -67,7 +67,7 @@ export function LoadingPage({ isLoading, onComplete }: LoadingPageProps) {
               className="object-contain animate-float"
               priority
               onError={(e) => {
-                console.error('altavida logo not found, using fallback');
+                console.error('altavida logo not found in /icons, using fallback');
                 (e.target as HTMLImageElement).src = '/wordmark-favicon.webp';
               }}
             />

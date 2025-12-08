@@ -64,7 +64,7 @@ export default function Navbar() {
   const user = session?.user;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [settings, setSettings] = useState({ siteName: 'AltaVida Tours', logoUrl: '/logos/altavida-logo.png' });
+  const [settings, setSettings] = useState({ siteName: 'AltaVida Tours', logoUrl: '/icons/altavida-logo-1.svg' });
   const [megaOpen, setMegaOpen] = useState<string | false>(false);
   const { language, setLanguage } = useLanguage();
   const t = useTranslations('nav');
@@ -111,14 +111,14 @@ export default function Navbar() {
       .then(res => res.json())
       .then(data => {
         let siteName = 'AltaVida Tours';
-        let logoUrl = '/logos/altavida-logo.png';
+        let logoUrl = '/icons/altavida-logo-1.svg';
         if (Array.isArray(data)) {
           siteName = data.find(s => s.settingKey === 'site_name')?.settingValue || siteName;
           const settingLogo = data.find(s => s.settingKey === 'site_logo')?.settingValue;
-          logoUrl = settingLogo && settingLogo !== '/logo.png' ? settingLogo : '/logos/altavida-logo.png';
+          logoUrl = settingLogo && settingLogo !== '/logo.png' ? settingLogo : '/icons/altavida-logo-1.svg';
         } else if (data && typeof data === 'object') {
           siteName = data.site_name || siteName;
-          logoUrl = (data.site_logo && data.site_logo !== '/logo.png') ? data.site_logo : '/logos/altavida-logo.png';
+          logoUrl = (data.site_logo && data.site_logo !== '/logo.png') ? data.site_logo : '/icons/altavida-logo-1.svg';
         }
         setSettings({ siteName, logoUrl });
       });

@@ -3,7 +3,7 @@
 
 export const IMAGES = {
   // Logo
-  logo: '/logos/altavida-logo.png',
+  logo: '/icons/altavida-logo-1.svg',
   
   // Recent Photos (WhatsApp Images)
   recent: [
