@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ImageSlideshow } from '@/components/ui/ImageSlideshow';
 import { PharaonicDecoration, PharaonicText } from '@/components/ui/PharaonicDecoration';
+import imageLoader from '@/utils/imageLoader';
 import { 
   Landmark, 
   Mountain, 
@@ -152,6 +153,7 @@ export default function ToursPage() {
                     alt={category.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    loader={imageLoader}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
                   {category.featured && (

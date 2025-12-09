@@ -1,5 +1,8 @@
+"use client";
+
 import Image from 'next/image';
 import { Container, Typography, Box, Card, CardContent, Button, Grid } from '@mui/material';
+import imageLoader from '@/utils/imageLoader';
 import { AnimatedSection, StaggeredAnimation, FloatingElement } from '@/components/ui/animated-section';
 import { Star, Users, Calendar, MapPin, Anchor, Crown, Sparkles, Wifi, Car, Utensils, Bed, Bath, Sun, Camera, Music, Shield, Leaf, TreePine } from 'lucide-react';
 import Link from 'next/link';
@@ -80,6 +83,7 @@ export default function AzharDahabiyaPage() {
               alt={dahabiya.name}
               fill
               className="object-cover opacity-30"
+              loader={imageLoader}
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-br from-nile-blue/80 via-pharaoh-gold/40 to-ancient-stone/80"></div>
@@ -229,6 +233,7 @@ export default function AzharDahabiyaPage() {
                           alt={image.alt}
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          loader={imageLoader}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-nile-blue/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -310,6 +315,7 @@ export default function AzharDahabiyaPage() {
                                     width={96}
                                     height={96}
                                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                                    loader={imageLoader}
                                   />
                                 </div>
                               ))}

@@ -11,6 +11,7 @@ import { ImageSlideshow } from '@/components/ui/ImageSlideshow';
 import { PharaonicDecoration, PharaonicText } from '@/components/ui/PharaonicDecoration';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useContent } from '@/hooks/useContent';
+import imageLoader from '@/utils/imageLoader';
 import { 
   Landmark, 
   Building2, 
@@ -481,6 +482,7 @@ export default function ExcursionsPage() {
                     alt={excursion.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    loader={imageLoader}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
                   <div className="absolute top-4 right-4">
@@ -601,6 +603,7 @@ export default function ExcursionsPage() {
                         alt={excursion.name}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        loader={imageLoader}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                       <div className="absolute top-4 left-4">
@@ -696,6 +699,7 @@ export default function ExcursionsPage() {
                 alt={`Gallery image ${index + 1}`}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
+                loader={imageLoader}
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                 <Camera className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

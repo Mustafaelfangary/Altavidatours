@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ImageSlideshow } from '@/components/ui/ImageSlideshow';
 import { PharaonicDecoration, PharaonicText } from '@/components/ui/PharaonicDecoration';
+import imageLoader from '@/utils/imageLoader';
 import { 
   UtensilsCrossed, 
   ShoppingBag, 
@@ -153,6 +154,7 @@ export default function OtherExcursionsPage() {
                       alt={excursion.name}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      loader={imageLoader}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     {excursion.featured && (
@@ -243,6 +245,7 @@ export default function OtherExcursionsPage() {
                   alt={`Cultural experience ${index + 1}`}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  loader={imageLoader}
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                   <Camera className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

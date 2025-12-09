@@ -151,9 +151,64 @@ export default function HomePage() {
                 </div>
               </AnimatedSection>
               <AnimatedSection animation="slide-up" delay={400}>
-                <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto opacity-95 leading-relaxed">
-                  {getContent('homepage_hero_description', 'Experience the magic of ancient Egypt with our expertly crafted tours. From the Pyramids of Giza to the Grand Egyptian Museum, discover the treasures of this magnificent land.')}
-                </p>
+                <section className="mb-10 max-w-4xl mx-auto">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-4 tracking-wide text-pharaoh-gold">
+                    Top Destinations, Curated for You
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                      {
+                        href: '/destinations/egypt',
+                        title: 'Egypt',
+                        caption: 'Timeless Nile journeys, pyramids & boutique desert stays.',
+                        image: '/Destinations/Egypt.webp',
+                      },
+                      {
+                        href: '/destinations/dubai',
+                        title: 'Dubai',
+                        caption: 'Skyline glamour, private yachts and desert lodges.',
+                        image: '/Destinations/Dubai.webp',
+                      },
+                      {
+                        href: '/destinations/jordan',
+                        title: 'Jordan',
+                        caption: 'Petra by candlelight, Wadi Rum and Dead Sea retreats.',
+                        image: '/Destinations/Jordon.jpg',
+                      },
+                      {
+                        href: '/destinations/turkey',
+                        title: 'Turkey',
+                        caption: 'Istanbul, Cappadocia balloons and Aegean hideaways.',
+                        image: '/Destinations/Turkey.jpg',
+                      },
+                    ].map((dest) => (
+                      <Link
+                        key={dest.href}
+                        href={dest.href}
+                        className="group relative overflow-hidden rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
+                      >
+                        <div className="relative h-32">
+                          <Image
+                            src={dest.image}
+                            alt={dest.title}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-700"
+                            loader={imageLoader}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+                        </div>
+                        <div className="p-3 text-left">
+                          <p className="text-base font-semibold text-white mb-1">
+                            {dest.title}
+                          </p>
+                          <p className="text-xs text-white/80 leading-snug">
+                            {dest.caption}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
               </AnimatedSection>
               <AnimatedSection animation="scale-in" delay={600}>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

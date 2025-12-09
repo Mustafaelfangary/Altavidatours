@@ -37,13 +37,15 @@ export default function Footer({ settings = {} }: FooterProps) {
   // Permanent default content for AltaVida Tours / Treasure details
   const defaults: FooterContent = {
     footer_company_name: 'AltaVida Tours',
-    footer_description: 'Explore Egypt with AltaVida Tours. Tailored Nile journeys, dahabiya cruises, cultural adventures, and luxury experiences crafted by local experts.',
+    footer_description:
+      'Explore Egypt with AltaVida Tours. Tailored Nile journeys, dahabiya cruises, cultural adventures, and luxury experiences crafted by local experts.',
     contact_phone: '+20 100 258 8564',
     contact_email: 'info@altavidatours.com',
-    contact_address: 'Pyramids View Tower 2, No. 312, Mashaal Station, Giza, Haram, Giza, Egypt',
+    contact_address:
+      'Pyramids View Tower 2, No. 312, Mashaal Station, Giza, Haram, Giza, Egypt',
     footer_site_url: 'https://www.altavidatours.com',
     footer_whatsapp: '+20 100 258 8564',
-    footer_copyright: 'All rights reserved by AltaVida Tours.'
+    footer_copyright: 'All rights reserved by AltaVida Tours.',
   };
 
   // Helper to get content with fallback (settings can optionally override defaults)

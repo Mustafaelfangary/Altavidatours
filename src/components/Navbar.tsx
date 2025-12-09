@@ -270,15 +270,15 @@ function NavbarInner() {
       {
         title: t('destinations'),
         items: [
-          { href: '/destinations/egypt', label: t('egypt'), desc: t('egyptDesc'), image: '/images/destinations/egypt.jpg' },
-          { href: '/destinations/jordan', label: t('jordan'), desc: t('jordanDesc'), image: '/images/destinations/jordan.jpg' },
+          { href: '/destinations/egypt', label: t('egypt'), desc: t('egyptDesc'), image: '/Destinations/Egypt.webp' },
+          { href: '/destinations/jordan', label: t('jordan'), desc: t('jordanDesc'), image: '/Destinations/Jordon.jpg' },
         ],
       },
       {
         title: t('destinations'),
         items: [
-          { href: '/destinations/dubai', label: t('dubai'), desc: t('dubaiDesc'), image: '/images/destinations/dubai.jpg' },
-          { href: '/destinations/turkey', label: t('turkey'), desc: t('turkeyDesc'), image: '/images/destinations/turkey.jpg' },
+          { href: '/destinations/dubai', label: t('dubai'), desc: t('dubaiDesc'), image: '/Destinations/Dubai.webp' },
+          { href: '/destinations/turkey', label: t('turkey'), desc: t('turkeyDesc'), image: '/Destinations/Turkey.jpg' },
         ],
       },
     ],
