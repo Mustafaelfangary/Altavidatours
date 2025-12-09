@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -31,43 +31,24 @@ interface FooterProps {
 }
 
 export default function Footer({ settings = {} }: FooterProps) {
-  const [content, setContent] = useState<FooterContent>({});
-  const [loading, setLoading] = useState(true);
+  const [content] = useState<FooterContent>({});
   const [email, setEmail] = useState('');
 
-  // Load footer content from API
-  useEffect(() => {
-    const loadContent = async () => {
-      try {
-        const response = await fetch('/api/dashboard/footer');
-        if (response.ok) {
-          const data = await response.json();
-          setContent(data.settings || {});
-        }
-      } catch (error) {
-        console.error('Failed to load footer content:', error);
-        // Set default content on error
-        setContent({
-          footer_company_name: 'AltaVida Tours',
-          footer_description: 'Explore Egypt with AltaVida Tours. Tailored Nile journeys, dahabiya cruises, cultural adventures, and luxury experiences crafted by local experts.',
-          contact_phone: '+20 100 258 8564',
-          contact_email: 'info@altavidatours.com',
-          contact_address: 'Pyramids View Tower 2, No. 312, Mashaal Station, Giza, Haram, Giza, Egypt',
-          footer_site_url: 'https://www.altavidatours.com',
-          footer_whatsapp: '+20 100 258 8564',
-          footer_copyright: 'All rights reserved by AltaVida Tours.'
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Permanent default content for AltaVida Tours / Treasure details
+  const defaults: FooterContent = {
+    footer_company_name: 'AltaVida Tours',
+    footer_description: 'Explore Egypt with AltaVida Tours. Tailored Nile journeys, dahabiya cruises, cultural adventures, and luxury experiences crafted by local experts.',
+    contact_phone: '+20 100 258 8564',
+    contact_email: 'info@altavidatours.com',
+    contact_address: 'Pyramids View Tower 2, No. 312, Mashaal Station, Giza, Haram, Giza, Egypt',
+    footer_site_url: 'https://www.altavidatours.com',
+    footer_whatsapp: '+20 100 258 8564',
+    footer_copyright: 'All rights reserved by AltaVida Tours.'
+  };
 
-    loadContent();
-  }, []);
-
-  // Helper to get content with fallback
+  // Helper to get content with fallback (settings can optionally override defaults)
   const get = (key: string, fallback = '') => {
-    return content[key] || settings[key] || fallback;
+    return content[key] || settings[key] || defaults[key] || fallback;
   };
 
   // Newsletter subscription handler
@@ -77,17 +58,6 @@ export default function Footer({ settings = {} }: FooterProps) {
     console.log('Newsletter subscription:', email);
     setEmail('');
   };
-
-      if (loading) {
-    return (
-      <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 min-h-[200px] flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-red-400 mx-auto mb-4"></div>
-          <p className="text-white font-semibold">Loading footer...</p>
-        </div>
-      </footer>
-    );
-  }
 
   // Navigation links
   const quickLinks = [
