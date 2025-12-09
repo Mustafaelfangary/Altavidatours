@@ -303,29 +303,26 @@ function NavbarInner() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-110">
-              <Image
-                src={settings.logoUrl}
-                alt={settings.siteName}
-                width={72}
-                height={72}
-                className="object-contain"
-                priority
-                loader={({ src, width, quality = 75 }) => {
-                  return `${src}?w=${width}&q=${quality}`
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = '/icons/altavida-logo-1.png';
-                }}
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent font-serif tracking-wider">
-                {settings.siteName}
-              </span>
-              <span className="text-xs font-medium text-amber-300 font-serif">
+            <div className="flex items-center space-x-2">
+              <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-110">
+                <Image
+                  src={settings.logoUrl}
+                  alt=""
+                  width={72}
+                  height={72}
+                  className="object-contain"
+                  priority
+                  loader={({ src, width, quality = 75 }) => {
+                    return `${src}?w=${width}&q=${quality}`
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = '/icons/altavida-logo-1.png';
+                  }}
+                />
+              </div>
+              <span className="text-2xl font-medium text-amber-300 font-serif">
                 𓎼𓇌𓊪𓏏 𓏏𓅲𓂋𓋴
               </span>
             </div>
