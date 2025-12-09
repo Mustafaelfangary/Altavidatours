@@ -1,0 +1,19 @@
+{
+  "signIn": "Connexion",
+  "signUp": "S'inscrire",
+  "dashboard": "Tableau de bord",
+  "profile": "Profil",
+  "signOut": "Déconnexion",
+  "tours": "Circuits",
+  "packages": "Forfaits",
+  "tailorMade": "Sur mesure",
+  "about": "À propos",
+  "contact": "Contact",
+  "blog": "Blog",
+  "allPackages": "Tous les forfaits",
+  "dahabiyaCruises": "Croisières Dahabiya",
+  "familyPackages": "Forfaits famille",
+  "popularTours": "Circuits populaires",
+  "experiences": "Expériences",
+  "egyptClassics": "Classiques d'Égypte"
+}

@@ -1,15 +1,14 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import { useState, useEffect } from 'react';
-import type { ChangeEvent } from 'react';
+import { useState, useEffect, createContext, useContext, ReactNode, ChangeEvent } from 'react';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from 'next/image';
 import { LogOut, User, LayoutDashboard, UserCircle, Menu, X, Globe } from 'lucide-react';
-import { useTranslation } from '@/lib/i18n';
+import { useTranslations } from '@/hooks/useTranslations';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useLanguage } from '@/context/language-context';
+import { PharaonicDecoration } from '@/components/ui/PharaonicDecoration';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,8 +17,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import imageLoader from '@/utils/imageLoader';
 
 export const dynamic = "force-dynamic";
+
+interface LanguageContextType {
+  language: string;
+  setLanguage: (lang: string) => void;
+}
+
+export const LanguageContext = createContext<LanguageContextType>({ language: 'en', setLanguage: () => {} });
+
+export const useLanguage = () => useContext(LanguageContext);
 
 const LANGUAGES = [
   { code: 'en', label: 'English' },
@@ -28,8 +37,27 @@ const LANGUAGES = [
   { code: 'pt', label: 'Português' },
   { code: 'fr', label: 'Français' },
   { code: 'ru', label: 'Русский' },
-  { code: 'it', label: 'Italiano' },
 ];
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState('en');
+  
+  useEffect(() => {
+    const storedLang = typeof window !== 'undefined' ? localStorage.getItem('lang') : null;
+    if (storedLang) setLanguage(storedLang);
+  }, []);
+  
+  const handleSetLanguage = (lang: string) => {
+    setLanguage(lang);
+    if (typeof window !== 'undefined') localStorage.setItem('lang', lang);
+  };
+  
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+}
 
 interface NavLinkProps {
   href: string;
@@ -96,27 +124,51 @@ export default function Navbar() {
   });
   const [megaOpen, setMegaOpen] = useState<string | false>(false);
   const { language, setLanguage } = useLanguage();
-  const t = useTranslation();
+  const t = useTranslations('nav');
+  const tCommon = useTranslations('common');
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const getNavbarStyle = () => {
-    if (scrolled || !isHomepage) {
-      return {
-        background: 'rgba(185, 28, 28, 0.9)',
-        backdropFilter: 'blur(8px)',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-      };
-    }
-    return {
-      background: 'transparent',
-      boxShadow: 'none'
-    };
-  };
-
   // Check if we're on the homepage
-  const isHomepage = pathname === '/' || pathname === `/${language}`;
+  const isHomepage = pathname === '/';
+
+  // Show loading state while session is being fetched
+  if (status === 'loading') {
+    return (
+      <header className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled || !isHomepage ? 'bg-red-900/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      }`}>
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex justify-between items-center">
+            <Link href="/" className="flex items-center space-x-2 group">
+              <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <Image
+                  src={settings.logoUrl}
+                  alt={settings.siteName}
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent font-serif tracking-wider">
+                {settings.siteName}
+              </span>
+            </Link>
+            <div className="hidden md:flex space-x-8 items-center">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="h-4 w-16 bg-gray-200 animate-pulse rounded"></div>
+              ))}
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="h-10 w-24 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-10 w-10 bg-gray-200 animate-pulse rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -154,57 +206,10 @@ export default function Navbar() {
     fetchSettings();
   }, []);
 
-  // Show loading state while session is being fetched
-  if (status === 'loading') {
-    return (
-      <header 
-        className="fixed w-full z-50 transition-all duration-300"
-        style={getNavbarStyle()}
-      >
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center space-x-2 group">
-              <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
-                <Image
-                  src={settings.logoUrl}
-                  alt={settings.siteName}
-                  width={48}
-                  height={48}
-                  className="object-contain"
-                  priority
-                  loader={({ src, width, quality = 75 }) => {
-                    return `${src}?w=${width}&q=${quality}`
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = '/icons/altavida-logo-1.png';
-                  }}
-                />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent font-serif tracking-wider">
-                {settings.siteName}
-              </span>
-            </Link>
-            <div className="hidden md:flex space-x-8 items-center">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="h-4 w-16 bg-gray-200 animate-pulse rounded"></div>
-              ))}
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="h-10 w-24 bg-gray-200 animate-pulse rounded"></div>
-              <div className="h-10 w-10 bg-gray-200 animate-pulse rounded-full"></div>
-            </div>
-          </div>
-        </div>
-      </header>
-    );
-  }
-
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newLang = e.target.value;
     // Update the URL with the new locale
-    const newPath = pathname.replace(/^\/(en|es|ar|pt|fr|ru|it)/, `/${newLang}`) || `/${newLang}`;
+    const newPath = pathname.replace(/^\/(en|es|ar|pt|fr|ru)/, `/${newLang}`) || `/${newLang}`;
     const queryString = searchParams.toString() ? `?${searchParams.toString()}` : '';
     
     // Update the language in context and localStorage
@@ -224,29 +229,57 @@ export default function Navbar() {
   };
 
   // Navigation links with translation keys
-  const navItems: NavItem[] = [
-    { href: '/tours', label: t('tours'), key: 'tours' },
+  const navLinks: NavItem[] = [
     { 
-      href: '/packages', 
+      href: "/tours", 
+      label: t('tours'), 
+      key: 'tours',
+      submenu: [
+        [
+          { href: '/daily-tours', label: t('allDailyTours'), desc: t('shortGuidedTrips') },
+          { href: '/excursions/historical', label: t('culturalHistorical'), desc: t('cairoLuxorAswan') },
+          { href: '/excursions/desert', label: t('desertRedSea'), desc: t('safariSnorkeling') }
+        ],
+        [
+          { href: '/excursions/other', label: t('uniqueExperiences'), desc: t('hotAirBalloon') },
+          { href: '/gallery', label: t('gallery'), desc: t('photoInspiration') },
+          { href: '/contact', label: t('askAnExpert'), desc: t('personalHelp') }
+        ]
+      ]
+    },
+    { 
+      href: "/packages", 
       label: t('packages'), 
       key: 'packages',
       submenu: [
         [
-          { href: '/packages/all', label: t('allPackages') },
-          { href: '/packages/dahabiya', label: t('dahabiyaCruises') },
-          { href: '/packages/family', label: t('familyPackages') }
-        ],
-        [
-          { href: '/packages/popular', label: t('popularTours') },
-          { href: '/packages/experiences', label: t('experiences') },
-          { href: '/packages/classics', label: t('egyptClassics') }
+          { href: '/packages', label: t('allPackages'), desc: t('multiDayItineraries') },
+          { href: '/dahabiyat', label: t('dahabiyaCruises'), desc: t('nileUnderSail') },
+          { href: '/packages?type=family', label: t('familyPackages'), desc: t('kidFriendly') }
         ]
       ]
     },
-    { href: '/tailor-made', label: t('tailorMade'), key: 'tailorMade' },
-    { href: '/about', label: t('about'), key: 'about' },
-    { href: '/contact', label: t('contact'), key: 'contact' },
-    { href: '/blog', label: t('blog'), key: 'blog' }
+    { 
+      href: "/tailor-made", 
+      label: t('tailorMade'), 
+      special: true, 
+      key: 'tailor' 
+    },
+    { 
+      href: "/about", 
+      label: t('about'), 
+      key: 'about' 
+    },
+    { 
+      href: "/contact", 
+      label: t('contact'), 
+      key: 'contact' 
+    },
+    { 
+      href: "/blog", 
+      label: t('blog'), 
+      key: 'blog' 
+    },
   ];
 
   const servicesLinks = [
@@ -291,8 +324,9 @@ export default function Navbar() {
 
   return (
     <header 
-      className="fixed w-full z-50 transition-all duration-300"
-      style={getNavbarStyle()}
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled || !isHomepage ? 'bg-red-900/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      }`}
     >
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
@@ -302,13 +336,9 @@ export default function Navbar() {
               <Image
                 src={settings.logoUrl}
                 alt={settings.siteName}
-                width={48}
-                height={48}
+                fill
                 className="object-contain"
                 priority
-                loader={({ src, width, quality = 75 }) => {
-                  return `${src}?w=${width}&q=${quality}`
-                }}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.onerror = null;
@@ -328,7 +358,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-2">
-            {navItems.map((link) => (
+            {navLinks.map((link) => (
               <div key={link.key} className="relative group">
                 {link.special ? (
                   <Link
@@ -427,19 +457,19 @@ export default function Navbar() {
                   <DropdownMenuItem asChild>
                     <Link href="/dashboard" className="w-full">
                       <LayoutDashboard className="mr-2 h-4 w-4" />
-                      {t('dashboard')}
+                      Dashboard
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link href="/profile" className="w-full">
                       <User className="mr-2 h-4 w-4" />
-                      {t('profile')}
+                      Profile
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleSignOut} className="text-red-500">
                     <LogOut className="mr-2 h-4 w-4" />
-                    {t('signOut')}
+                    Sign out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -447,12 +477,12 @@ export default function Navbar() {
               <div className="hidden md:flex items-center space-x-2">
                 <Link href="/auth/signin">
                   <Button variant="outline" className="text-amber-300 border-amber-300 hover:bg-amber-900/30">
-                    {t('signIn')}
+                    {tCommon('signIn')}
                   </Button>
                 </Link>
                 <Link href="/auth/signup">
                   <Button className="bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 hover:from-amber-300 hover:to-yellow-200">
-                    {t('signUp')}
+                    {tCommon('signUp')}
                   </Button>
                 </Link>
               </div>
@@ -478,7 +508,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div className={`md:hidden transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-screen' : 'max-h-0 overflow-hidden'}`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-red-900/95">
-          {navItems.map((link) => (
+          {navLinks.map((link) => (
             <div key={link.key} className="relative">
               <Link
                 href={link.href}
@@ -501,14 +531,14 @@ export default function Navbar() {
                 className="block w-full text-center px-4 py-2 text-base font-medium text-amber-300 hover:bg-red-800 rounded-md"
                 onClick={() => setMobileOpen(false)}
               >
-                {t('signIn')}
+                {tCommon('signIn')}
               </Link>
               <Link
                 href="/auth/signup"
                 className="mt-2 block w-full text-center px-4 py-2 rounded-md bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200"
                 onClick={() => setMobileOpen(false)}
               >
-                {t('signUp')}
+                {tCommon('signUp')}
               </Link>
             </div>
           )}

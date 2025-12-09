@@ -161,6 +161,7 @@ export default function Footer({ settings = {} }: FooterProps) {
                     height={200}
                     className="object-contain group-hover:scale-105 transition-transform duration-300 bg-white/5 rounded-lg p-2"
                     style={{ maxWidth: '180px', height: 'auto', minHeight: '60px' }}
+                    loader={({ src, width, quality = 75 }) => `${src}?w=${width}&q=${quality}`}
                     onError={(e) => {
                       console.error('altavida logo not found in /icons. Please add the logo file as /icons/altavida-logo-1.svg');
                       // Try fallback

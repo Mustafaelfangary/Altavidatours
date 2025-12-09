@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "tours": "Tours",
+    "packages": "Packages",
+    "tailorMade": "Tailor Made",
+    "about": "About",
+    "contact": "Contact",
+    "blog": "Blog",
+    "allDailyTours": "All Daily Tours",
+    "culturalHistorical": "Cultural & Historical",
+    "desertRedSea": "Desert & Red Sea",
+    "uniqueExperiences": "Unique Experiences",
+    "gallery": "Gallery",
+    "askAnExpert": "Ask an Expert",
+    "allPackages": "All Packages",
+    "dahabiyaCruises": "Dahabiya Cruises",
+    "familyPackages": "Family Packages",
+    "popularTours": "Popular Tours",
+    "experiences": "Experiences",
+    "egyptClassics": "Egypt Classics"
+  },
+  "common": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "signOut": "Sign Out"
+  }
+}

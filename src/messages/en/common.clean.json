@@ -1,0 +1,19 @@
+{
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "dashboard": "Dashboard",
+  "profile": "Profile",
+  "signOut": "Sign Out",
+  "tours": "Tours",
+  "packages": "Packages",
+  "tailorMade": "Tailor Made",
+  "about": "About",
+  "contact": "Contact",
+  "blog": "Blog",
+  "allPackages": "All Packages",
+  "dahabiyaCruises": "Dahabiya Cruises",
+  "familyPackages": "Family Packages",
+  "popularTours": "Popular Tours",
+  "experiences": "Experiences",
+  "egyptClassics": "Egypt Classics"
+}

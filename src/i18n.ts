@@ -1,20 +1,37 @@
-import { getRequestConfig } from 'next-intl/server';
-import { ReactNode } from 'react';
-import React from 'react';
+// src/lib/i18n.ts
+import { useLanguage } from '@/context/language-context';
 
-// Supported locales
-export const locales = ['en', 'ar'] as const;
-export type Locale = (typeof locales)[number];
+// Import translation files
+import enCommon from '@/messages/en/common.json';
 
-// Main i18n configuration
-export default getRequestConfig(async ({ locale = 'en' }) => {
-  return {
-    locale,
-    messages: (await import(`./messages/${locale}.json`)).default,
-    timeZone: 'Africa/Cairo',
-    defaultTranslationValues: {
-      strong: (chunks: ReactNode) => React.createElement('strong', null, chunks),
-      em: (chunks: ReactNode) => React.createElement('em', null, chunks)
+const translations = {
+  en: { common: enCommon },
+  // Other languages will be added here
+  ar: { common: {} },
+  es: { common: {} },
+  fr: { common: {} },
+  ru: { common: {} },
+  pt: { common: {} }
+};
+
+export function useTranslation(namespace = 'common') {
+  const { language } = useLanguage();
+  
+  const t = (key: string, options?: Record<string, any>) => {
+    // Get the translation
+    let translation = translations[language]?.[namespace]?.[key] || 
+                     translations['en']?.[namespace]?.[key] || 
+                     key;
+
+    // Handle variable substitution
+    if (options) {
+      Object.entries(options).forEach(([k, v]) => {
+        translation = translation.replace(new RegExp(`{{${k}}}`, 'g'), String(v));
+      });
     }
+
+    return translation;
   };
-});
+
+  return { t, i18n: { language } };
+}

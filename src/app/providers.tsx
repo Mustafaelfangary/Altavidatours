@@ -9,7 +9,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Toaster } from 'sonner';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { HomeButton } from '@/components/HomeButton';
-import { LanguageProvider } from '@/components/Navbar';
+import { LanguageProvider } from '@/context/language-context';
 import SEO from '@/components/SEO';
 import ThemeCSSVariables from '@/components/ThemeCSSVariables';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
