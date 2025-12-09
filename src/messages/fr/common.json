@@ -15,5 +15,14 @@
   "familyPackages": "Forfaits famille",
   "popularTours": "Circuits populaires",
   "experiences": "Expériences",
-  "egyptClassics": "Classiques d'Égypte"
+  "egyptClassics": "Classiques d'Égypte",
+  "destinations": "Destinations",
+  "egypt": "Égypte",
+  "jordan": "Jordanie",
+  "dubai": "Dubaï",
+  "turkey": "Turquie",
+  "egyptDesc": "Croisières sur le Nil, Le Caire et les Pyramides",
+  "jordanDesc": "Petra, désert de Wadi Rum et mer Morte",
+  "dubaiDesc": "Skyline moderne, désert et luxe",
+  "turkeyDesc": "Istanbul, Cappadoce et côte Égéenne"
 }

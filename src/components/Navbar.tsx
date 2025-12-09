@@ -82,7 +82,7 @@ interface NavItem {
   label: string;
   key: string;
   special?: boolean;
-  submenu?: { href: string; label: string; desc?: string }[][];
+  submenu?: { href: string; label: string; desc?: string; image?: string }[][];
 }
 
 export default function Navbar() {
@@ -225,7 +225,14 @@ export default function Navbar() {
 
   // Navigation links with translation keys
   const navItems: NavItem[] = [
-    { href: '/tours', label: t('tours'), key: 'tours' },
+    { href: '/destinations', label: t('destinations'), key: 'destinations', special: false, submenu: [
+      [
+        { href: '/destinations/egypt', label: t('egypt') },
+        { href: '/destinations/jordan', label: t('jordan') },
+        { href: '/destinations/dubai', label: t('dubai') },
+        { href: '/destinations/turkey', label: t('turkey') }
+      ]
+    ] },
     { 
       href: '/packages', 
       label: t('packages'), 
@@ -258,24 +265,22 @@ export default function Navbar() {
     { href: "/packages", label: t('tourPackages') },
   ];
 
-  const megaMenuMap: Record<string, { title: string; items: { href: string; label: string; desc?: string }[] }[]> = {
-    tours: [
-      { 
-        title: t('popularTours'), 
+  const megaMenuMap: Record<string, { title: string; items: { href: string; label: string; desc?: string; image?: string }[] }[]> = {
+    destinations: [
+      {
+        title: t('destinations'),
         items: [
-          { href: '/daily-tours', label: t('allDailyTours'), desc: t('shortGuidedTrips') },
-          { href: '/excursions/historical', label: t('culturalHistorical'), desc: t('cairoLuxorAswan') },
-          { href: '/excursions/desert', label: t('desertRedSea'), desc: t('safariSnorkeling') },
-        ]
+          { href: '/destinations/egypt', label: t('egypt'), desc: t('egyptDesc'), image: '/images/destinations/egypt.jpg' },
+          { href: '/destinations/jordan', label: t('jordan'), desc: t('jordanDesc'), image: '/images/destinations/jordan.jpg' },
+        ],
       },
-      { 
-        title: t('experiences'), 
+      {
+        title: t('destinations'),
         items: [
-          { href: '/excursions/other', label: t('uniqueExperiences'), desc: t('hotAirBalloon') },
-          { href: '/gallery', label: t('gallery'), desc: t('photoInspiration') },
-          { href: '/contact', label: t('askAnExpert'), desc: t('personalHelp') },
-        ]
-      }
+          { href: '/destinations/dubai', label: t('dubai'), desc: t('dubaiDesc'), image: '/images/destinations/dubai.jpg' },
+          { href: '/destinations/turkey', label: t('turkey'), desc: t('turkeyDesc'), image: '/images/destinations/turkey.jpg' },
+        ],
+      },
     ],
     packages: [
       { 
@@ -297,13 +302,13 @@ export default function Navbar() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-110">
               <Image
                 src={settings.logoUrl}
                 alt={settings.siteName}
-                width={48}
-                height={48}
+                width={72}
+                height={72}
                 className="object-contain"
                 priority
                 loader={({ src, width, quality = 75 }) => {
@@ -367,10 +372,25 @@ export default function Navbar() {
                                   href={item.href}
                                   className="block p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                                 >
-                                  <p className="font-medium text-gray-900 dark:text-white">{item.label}</p>
-                                  {item.desc && (
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>
-                                  )}
+                                  <div className="flex items-start space-x-3">
+                                    {item.image && (
+                                      <div className="relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-md">
+                                        <Image
+                                          src={item.image}
+                                          alt={item.label}
+                                          width={48}
+                                          height={48}
+                                          className="object-cover w-full h-full"
+                                        />
+                                      </div>
+                                    )}
+                                    <div>
+                                      <p className="font-medium text-gray-900 dark:text-white">{item.label}</p>
+                                      {item.desc && (
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>
+                                      )}
+                                    </div>
+                                  </div>
                                 </Link>
                               ))}
                             </div>

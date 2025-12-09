@@ -113,7 +113,7 @@ export default function ContactPage() {
                   {getContent('contact_address_title', 'Address')}
                 </Typography>
                 <Typography sx={{ whiteSpace: 'pre-line' }}>
-                  {getContent('contact_address_content', '123 Nile Street\nLuxor, Egypt')}
+                  {getContent('contact_address_content', 'Pyramids View Tower 2, No. 312, Mashaal Station\nGiza, Haram, Giza, Egypt')}
                 </Typography>
               </Box>
 
@@ -122,7 +122,7 @@ export default function ContactPage() {
                   {getContent('contact_phone_title', 'Phone')}
                 </Typography>
                 <Typography sx={{ whiteSpace: 'pre-line' }}>
-                  {getContent('contact_phone_content', '+20 123 456 7890\n+20 123 456 7891')}
+                  {getContent('contact_phone_content', '+20 100 258 8564 (Phone / WhatsApp)')}
                 </Typography>
               </Box>
 
@@ -131,7 +131,7 @@ export default function ContactPage() {
                   {getContent('contact_email_title', 'Email')}
                 </Typography>
                 <Typography sx={{ whiteSpace: 'pre-line' }}>
-                  {getContent('contact_email_content', 'info@altavidatours.com\nbookings@altavidatours.com')}
+                  {getContent('contact_email_content', 'info@altavidatours.com')}
                 </Typography>
               </Box>
 

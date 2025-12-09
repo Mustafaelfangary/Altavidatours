@@ -116,7 +116,7 @@ export default function HomePage() {
             ctaLink={getContent('homepage_hero_cta_link', '/daily-tours')}
           />
         ) : (
-          <section className="relative h-screen flex items-center justify-center overflow-hidden">
+          <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
             {/* Enhanced Hero Slideshow */}
             <div className="absolute inset-0 z-0">
               <ImageSlideshow
@@ -124,7 +124,7 @@ export default function HomePage() {
                 alt="Egypt Travel Hero"
                 autoPlay={true}
                 interval={5000}
-                height="h-screen"
+                height="h-[50vh]"
                 className="rounded-none"
               />
             </div>

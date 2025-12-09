@@ -15,5 +15,14 @@
   "familyPackages": "Pacchetti famiglia",
   "popularTours": "Tour popolari",
   "experiences": "Esperienze",
-  "egyptClassics": "Classici d'Egitto"
+  "egyptClassics": "Classici d'Egitto",
+  "destinations": "Destinazioni",
+  "egypt": "Egitto",
+  "jordan": "Giordania",
+  "dubai": "Dubai",
+  "turkey": "Turchia",
+  "egyptDesc": "Crocere sul Nilo, Il Cairo e Piramidi",
+  "jordanDesc": "Petra, deserto del Wadi Rum e mar Morto",
+  "dubaiDesc": "Skyline moderno, deserto e lusso",
+  "turkeyDesc": "Istanbul, Cappadocia e costa Egea"
 }

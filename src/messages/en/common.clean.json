@@ -15,5 +15,14 @@
   "familyPackages": "Family Packages",
   "popularTours": "Popular Tours",
   "experiences": "Experiences",
-  "egyptClassics": "Egypt Classics"
+  "egyptClassics": "Egypt Classics",
+  "destinations": "Destinations",
+  "egypt": "Egypt",
+  "jordan": "Jordan",
+  "dubai": "Dubai",
+  "turkey": "Turkey",
+  "egyptDesc": "Iconic Nile cruises, Cairo & the Pyramids",
+  "jordanDesc": "Petra, Wadi Rum desert, and the Dead Sea",
+  "dubaiDesc": "Modern skyline, desert adventures, and luxury",
+  "turkeyDesc": "Istanbul, Cappadocia, and Aegean coast journeys"
 }
