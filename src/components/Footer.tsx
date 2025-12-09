@@ -48,14 +48,14 @@ export default function Footer({ settings = {} }: FooterProps) {
         console.error('Failed to load footer content:', error);
         // Set default content on error
         setContent({
-          footer_company_name: 'Treasure Egypt Tours',
-          footer_description: 'Explore Egypt with Treasure Egypt Tours. Tailored Nile journeys, dahabiya cruises, cultural adventures, and luxury experiences crafted by local experts.',
+          footer_company_name: 'AltaVida Tours',
+          footer_description: 'Explore Egypt with AltaVida Tours. Tailored Nile journeys, dahabiya cruises, cultural adventures, and luxury experiences crafted by local experts.',
           contact_phone: '+20 100 258 8564',
           contact_email: 'info@altavidatours.com',
           contact_address: 'Pyramids View Tower 2, No. 312, Mashaal Station, Giza, Haram, Giza, Egypt',
           footer_site_url: 'https://www.altavidatours.com',
           footer_whatsapp: '+20 100 258 8564',
-          footer_copyright: 'All rights reserved by Treasure Egypt Tours.'
+          footer_copyright: 'All rights reserved by AltaVida Tours.'
         });
       } finally {
         setLoading(false);
