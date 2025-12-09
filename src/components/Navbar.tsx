@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import type { ChangeEvent } from 'react';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -85,7 +85,7 @@ interface NavItem {
   submenu?: { href: string; label: string; desc?: string; image?: string }[][];
 }
 
-export default function Navbar() {
+function NavbarInner() {
   const { data: session, status } = useSession();
   const user = session?.user;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -535,5 +535,13 @@ export default function Navbar() {
         </div>
       </div>
     </header>
+  );
+}
+
+export default function Navbar() {
+  return (
+    <Suspense fallback={null}>
+      <NavbarInner />
+    </Suspense>
   );
 }
