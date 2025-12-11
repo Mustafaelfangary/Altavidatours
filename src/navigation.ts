@@ -5,3 +5,4 @@ export const { Link, redirect, usePathname, useRouter } = createNavigation({
   locales,
   localePrefix: 'as-needed' // or 'always' or 'never'
 });
+

@@ -130,3 +130,5 @@ export function ParallaxElement({ children, className, speed = 0.5 }: ParallaxEl
     </div>
   );
 }
+
+

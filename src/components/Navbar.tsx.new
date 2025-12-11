@@ -80,7 +80,7 @@ const NavLink = ({
       isActive
         ? 'text-amber-300 font-medium bg-red-800/50 shadow-inner'
         : 'text-gray-100 hover:text-amber-200 hover:bg-red-800/30'
-    } ${special ? 'bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 hover:from-amber-300 hover:to-yellow-200' : ''}`}
+    } ${special ? 'bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 hover:from-amber-300 hover:to-yellow-200' : ''}`}
   >
     <span className="relative group-hover:scale-105 transition-transform">
       {label}
@@ -151,7 +151,7 @@ export default function Navbar() {
                   priority
                 />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent font-serif tracking-wider">
+              <span className="text-2xl font-bold bg-linear-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent font-serif tracking-wider">
                 {settings.siteName}
               </span>
             </Link>
@@ -347,7 +347,7 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent font-serif tracking-wider">
+              <span className="text-2xl font-bold bg-linear-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent font-serif tracking-wider">
                 {settings.siteName}
               </span>
               <span className="text-xs font-medium text-amber-300 font-serif">
@@ -363,7 +363,7 @@ export default function Navbar() {
                 {link.special ? (
                   <Link
                     href={link.href}
-                    className="flex items-center space-x-2 py-2 px-4 rounded-md bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                    className="flex items-center space-x-2 py-2 px-4 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                     onMouseEnter={(e) => {
                       const target = e.currentTarget;
                       target.style.boxShadow = '0 0 0 6px rgba(255, 215, 0, 0.22), 0 18px 40px rgba(231, 169, 26, 0.6)';
@@ -481,7 +481,7 @@ export default function Navbar() {
                   </Button>
                 </Link>
                 <Link href="/auth/signup">
-                  <Button className="bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 hover:from-amber-300 hover:to-yellow-200">
+                  <Button className="bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 hover:from-amber-300 hover:to-yellow-200">
                     {tCommon('signUp')}
                   </Button>
                 </Link>
@@ -516,7 +516,7 @@ export default function Navbar() {
                   pathname === link.href
                     ? 'bg-red-800 text-amber-300'
                     : 'text-gray-200 hover:bg-red-800 hover:text-amber-200'
-                } ${link.special ? 'bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900' : ''}`}
+                } ${link.special ? 'bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900' : ''}`}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -535,7 +535,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/auth/signup"
-                className="mt-2 block w-full text-center px-4 py-2 rounded-md bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200"
+                className="mt-2 block w-full text-center px-4 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200"
                 onClick={() => setMobileOpen(false)}
               >
                 {tCommon('signUp')}

@@ -156,3 +156,5 @@ export const FEATURED_TOURS = {
 };
 
 export default IMAGES;
+
+

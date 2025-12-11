@@ -60,3 +60,4 @@ export function RecentBookings({ bookings }: RecentBookingsProps) {
     </Card>
   );
 }
+

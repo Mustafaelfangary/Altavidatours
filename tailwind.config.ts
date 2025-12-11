@@ -94,18 +94,6 @@ const config: Config = {
           '800': '#9c4221',
           '900': '#7b341e',
         },
-        'desert-sand': {
-          '50': '#f8f5f0',
-          '100': '#f0e6d9',
-          '200': '#e0cdb3',
-          '300': '#d0b38a',
-          '400': '#c09866',
-          '500': '#b07d42',
-          '600': '#8f5e2e',
-          '700': '#6d4523',
-          '800': '#4f321a',
-          '900': '#362111',
-        },
         'nile-green': {
           '50': '#f0fdf4',
           '100': '#dcfce7',
@@ -117,18 +105,6 @@ const config: Config = {
           '700': '#15803d',
           '800': '#166534',
           '900': '#14532d',
-        },
-        'papyrus': {
-          '50': '#f8f6f0',
-          '100': '#f1ecde',
-          '200': '#e3d8bd',
-          '300': '#d4c39a',
-          '400': '#c5ae77',
-          '500': '#b69954',
-          '600': '#8f7a43',
-          '700': '#6d5c33',
-          '800': '#4f4224',
-          '900': '#362d19',
         },
         
         // Modern accent colors
@@ -150,6 +126,16 @@ const config: Config = {
         'text-primary': 'hsl(var(--text-primary))',
         'text-secondary': 'hsl(var(--text-secondary))',
         'text-accent': 'hsl(var(--text-accent))',
+        
+        // Egyptian-themed custom colors (CSS variables for utility classes)
+        'nile-blue': 'hsl(var(--nile-blue))',
+        'pharaoh-gold': 'hsl(var(--pharaoh-gold))',
+        'ancient-stone': 'hsl(var(--ancient-stone))',
+        'sunset-orange': 'hsl(var(--sunset-orange))',
+        'lotus-pink': 'hsl(var(--lotus-pink))',
+        'turquoise-nile': 'hsl(var(--turquoise-nile))',
+        'royal-purple': 'hsl(var(--royal-purple))',
+        'emerald-oasis': 'hsl(var(--emerald-oasis))',
       },
       borderRadius: {
         lg: 'var(--radius)',

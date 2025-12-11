@@ -1547,6 +1547,51 @@ nav.navbar-animate {
   animation: navbarSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dropdown Styles */
+.dropdown {
+  @apply relative;
+}
+
+.dropdown-toggle {
+  @apply px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition-colors;
+}
+
+.dropdown-menu {
+  @apply absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-48;
+  display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+  @apply block;
+}
+
+.dropdown-menu li {
+  @apply block px-4 py-2 hover:bg-gray-100 transition-colors;
+}
+
+.dropdown-menu li a {
+  @apply text-gray-700 hover:text-blue-600;
+}
+
+/* Badge Styles */
+.badge {
+  @apply inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium;
+}
+
+/* Button Styles */
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-colors;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-500;
+}
+
+/* Card Styles */
+.card {
+  @apply bg-white rounded-lg shadow-md border border-gray-200;
+}
+
 .nav-link-animate {
   animation: navLinkFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   opacity: 0;

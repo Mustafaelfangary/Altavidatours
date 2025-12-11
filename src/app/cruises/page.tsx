@@ -64,9 +64,9 @@ export default async function CruisesPage() {
   const cruises = await getCruises();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-deep-nile-blue/5 to-white">
+    <div className="min-h-screen bg-linear-to-b from-deep-nile-blue/5 to-white">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-deep-nile-blue to-deep-nile-blue/80">
+      <section className="relative py-20 bg-linear-to-r from-deep-nile-blue to-deep-nile-blue/80">
         <div className="absolute inset-0 bg-[url('/images/nile-pattern.png')] opacity-10"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center text-white">
@@ -109,7 +109,7 @@ export default async function CruisesPage() {
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-deep-nile-blue/20 to-pharaoh-gold/20 flex items-center justify-center">
+                      <div className="w-full h-full bg-linear-to-br from-deep-nile-blue/20 to-pharaoh-gold/20 flex items-center justify-center">
                         <Ship className="w-16 h-16 text-deep-nile-blue/40" />
                       </div>
                     )}
@@ -152,7 +152,7 @@ export default async function CruisesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-pharaoh-gold/10 to-deep-nile-blue/10">
+      <section className="py-16 bg-linear-to-r from-pharaoh-gold/10 to-deep-nile-blue/10">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Can&apos;t Find What You&apos;re Looking For?</h2>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
@@ -168,4 +168,6 @@ export default async function CruisesPage() {
     </div>
   );
 }
+
+
 

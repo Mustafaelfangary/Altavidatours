@@ -2,10 +2,11 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "./prisma";
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
   debug: true,
+  adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
@@ -85,3 +86,5 @@ export const authOptions: NextAuthOptions = {
     },
   },
 };
+
+

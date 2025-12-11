@@ -256,3 +256,4 @@ export function BookingManagement() {
     </div>
   );
 }
+

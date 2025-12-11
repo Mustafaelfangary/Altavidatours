@@ -109,3 +109,4 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ promot
     </>
   );
 };
+

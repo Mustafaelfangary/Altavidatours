@@ -70,3 +70,4 @@ export const useSettings = (): UseSettingsReturn => {
     isLoading: loading,
   };
 };
+

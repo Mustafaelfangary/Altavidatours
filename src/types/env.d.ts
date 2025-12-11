@@ -7,3 +7,5 @@ declare namespace NodeJS {
     UPLOADTHING_APP_ID: string;
   }
 }
+
+

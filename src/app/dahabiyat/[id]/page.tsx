@@ -97,7 +97,7 @@ export default async function DahabiyaPage({ params }: DahabiyaPageProps) {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
             <h1 className="text-4xl font-bold mb-2">{serializedDahabiya.name}</h1>
             <p className="text-lg opacity-90">{serializedDahabiya.shortDescription}</p>
@@ -116,7 +116,7 @@ export default async function DahabiyaPage({ params }: DahabiyaPageProps) {
             </div>
 
             {/* Why Choose This Dahabiya */}
-            <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-8">
+            <div className="bg-linear-to-br from-red-50 to-red-100 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-6 text-red-900 font-serif">
                 Why Choose This Dahabiya?
               </h2>
@@ -126,7 +126,7 @@ export default async function DahabiyaPage({ params }: DahabiyaPageProps) {
             </div>
 
             {/* The Meaning of Dahabiya */}
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
+            <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-6 text-blue-900 font-serif">
                 The Meaning of Dahabiya
               </h2>
@@ -147,9 +147,9 @@ export default async function DahabiyaPage({ params }: DahabiyaPageProps) {
                 <h2 className="text-3xl font-bold mb-8 text-emerald-800 font-serif text-center">Itinerary</h2>
                 <div className="space-y-10">
                   {serializedDahabiya.itinerary.days.map((day, idx) => (
-                    <div key={day.id} className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl shadow-lg p-8 animate-fade-in">
+                    <div key={day.id} className="bg-linear-to-br from-emerald-50 to-emerald-100 rounded-2xl shadow-lg p-8 animate-fade-in">
                       <div className="flex items-center mb-4">
-                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-2xl font-bold mr-4 shadow-lg">
+                        <div className="shrink-0 w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center text-2xl font-bold mr-4 shadow-lg">
                           {day.dayNumber}
                         </div>
                         <div>

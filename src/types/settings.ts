@@ -60,3 +60,4 @@ export interface UseSettingsReturn {
   updateSettings: (newSettings: Partial<Settings>) => void;
   isLoading: boolean;
 }
+

@@ -136,7 +136,7 @@ export default function ReviewList({ reviews, dahabiyaId }: ReviewListProps) {
         {reviews.map((review) => (
           <div key={review.id} className="border-b pb-8">
             <div className="flex items-center mb-4">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 {review.user.image ? (
                   <div className="relative h-12 w-12">
                     <Image
@@ -177,3 +177,5 @@ export default function ReviewList({ reviews, dahabiyaId }: ReviewListProps) {
     </div>
   );
 }
+
+

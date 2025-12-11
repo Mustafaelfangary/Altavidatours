@@ -35,3 +35,4 @@ export function useTranslation(namespace = 'common') {
 
   return { t, i18n: { language } };
 }
+

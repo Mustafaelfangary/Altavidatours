@@ -62,9 +62,9 @@ export default function PrincessCleopatraPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/5">
+    <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/5">
       {/* Hero Section with Video/Image */}
-      <section className="relative py-32 bg-gradient-to-br from-nile-blue via-pharaoh-gold/20 to-ancient-stone overflow-hidden">
+      <section className="relative py-32 bg-linear-to-br from-nile-blue via-pharaoh-gold/20 to-ancient-stone overflow-hidden">
         {/* Background Video/Image */}
         <div className="absolute inset-0">
           {dahabiya.videoUrl ? (
@@ -86,7 +86,7 @@ export default function PrincessCleopatraPage() {
               loader={imageLoader}
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-br from-nile-blue/80 via-pharaoh-gold/40 to-ancient-stone/80"></div>
+          <div className="absolute inset-0 bg-linear-to-br from-nile-blue/80 via-pharaoh-gold/40 to-ancient-stone/80"></div>
         </div>
 
         {/* Floating Background Elements */}
@@ -108,7 +108,7 @@ export default function PrincessCleopatraPage() {
               <div className="inline-block p-4 rounded-full bg-pharaoh-gold/30 backdrop-blur-sm border-2 border-pharaoh-gold/50 mb-6">
                 <Crown className="w-16 h-16 text-pharaoh-gold" />
               </div>
-              <h1 className="text-6xl md:text-8xl font-heading font-bold mb-6 bg-gradient-to-r from-pharaoh-gold via-white to-pharaoh-gold bg-clip-text text-transparent drop-shadow-2xl animate-pulse">
+              <h1 className="text-6xl md:text-8xl font-heading font-bold mb-6 bg-linear-to-r from-pharaoh-gold via-white to-pharaoh-gold bg-clip-text text-transparent drop-shadow-2xl animate-pulse">
                 <span className="inline-block animate-bounce hover:animate-spin transition-all duration-500 hover:scale-110">{dahabiya.name.split(' ')[0]}</span>{' '}
                 <span className="inline-block animate-pulse delay-300 hover:animate-bounce hover:text-pharaoh-gold transition-all duration-500">{dahabiya.name.split(' ')[1]}</span>{' '}
                 <span className="inline-block animate-bounce delay-500 hover:animate-pulse hover:scale-125 transition-all duration-500">{dahabiya.name.split(' ')[2]}</span>
@@ -124,8 +124,8 @@ export default function PrincessCleopatraPage() {
                 </span>
               </div>
 
-              <p className="text-2xl md:text-3xl font-light mb-8 bg-gradient-to-r from-pharaoh-gold via-white to-pharaoh-gold bg-clip-text text-transparent max-w-4xl mx-auto animate-fade-in hover:animate-pulse hover:scale-105 transition-all duration-700">
-                <span className="hover:bg-gradient-to-r hover:from-nile-blue hover:via-pharaoh-gold hover:to-white hover:bg-clip-text hover:text-transparent transition-all duration-500">
+              <p className="text-2xl md:text-3xl font-light mb-8 bg-linear-to-r from-pharaoh-gold via-white to-pharaoh-gold bg-clip-text text-transparent max-w-4xl mx-auto animate-fade-in hover:animate-pulse hover:scale-105 transition-all duration-700">
+                <span className="hover:bg-linear-to-r hover:from-nile-blue hover:via-pharaoh-gold hover:to-white hover:bg-clip-text hover:text-transparent transition-all duration-500">
                   {dahabiya.shortDescription}
                 </span>
               </p>
@@ -163,13 +163,13 @@ export default function PrincessCleopatraPage() {
         <Container maxWidth="lg">
           <AnimatedSection animation="fade-in">
             <div className="text-center mb-16">
-              <h2 className="text-5xl font-heading font-bold bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-6 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
-                <span className="hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
+              <h2 className="text-5xl font-heading font-bold bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-6 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
+                <span className="hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
                   ✨ About Princess Cleopatra ✨
                 </span>
               </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto rounded-full mb-8 animate-shimmer hover:w-32 hover:h-2 transition-all duration-500"></div>
-              <p className="text-xl bg-gradient-to-r from-ancient-stone via-nile-blue/80 to-ancient-stone bg-clip-text text-transparent leading-relaxed max-w-4xl mx-auto hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-nile-blue hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent transition-all duration-700">
+              <div className="w-24 h-1 bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto rounded-full mb-8 animate-shimmer hover:w-32 hover:h-2 transition-all duration-500"></div>
+              <p className="text-xl bg-linear-to-r from-ancient-stone via-nile-blue/80 to-ancient-stone bg-clip-text text-transparent leading-relaxed max-w-4xl mx-auto hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-nile-blue hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent transition-all duration-700">
                 <span className="hover:animate-pulse">{dahabiya.description}</span>
               </p>
             </div>
@@ -178,19 +178,19 @@ export default function PrincessCleopatraPage() {
           {/* Features Grid */}
           <AnimatedSection animation="slide-up" delay={200}>
             <div className="mb-20">
-              <h3 className="text-4xl font-heading font-bold bg-gradient-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold bg-clip-text text-transparent text-center mb-12 animate-bounce hover:animate-pulse hover:scale-110 transition-all duration-500">
-                <span className="hover:bg-gradient-to-r hover:from-white hover:via-pharaoh-gold hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
+              <h3 className="text-4xl font-heading font-bold bg-linear-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold bg-clip-text text-transparent text-center mb-12 animate-bounce hover:animate-pulse hover:scale-110 transition-all duration-500">
+                <span className="hover:bg-linear-to-r hover:from-white hover:via-pharaoh-gold hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
                   ✨ Luxury Dahabiya Features ✨
                 </span>
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {dahabiya.features.map((feature, index) => (
                   <AnimatedSection key={index} animation="scale-in" delay={index * 100}>
-                    <div className="bg-gradient-to-br from-pharaoh-gold/10 via-white to-nile-blue/10 rounded-2xl p-6 text-center border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group hover:scale-105">
+                    <div className="bg-linear-to-br from-pharaoh-gold/10 via-white to-nile-blue/10 rounded-2xl p-6 text-center border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group hover:scale-105">
                       <div className="w-12 h-12 bg-pharaoh-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-pharaoh-gold group-hover:scale-110 transition-all duration-500">
                         <Sparkles className="w-6 h-6 text-pharaoh-gold group-hover:text-white transition-colors duration-300" />
                       </div>
-                      <h4 className="font-bold bg-gradient-to-r from-nile-blue to-pharaoh-gold bg-clip-text text-transparent text-sm animate-pulse hover:animate-bounce hover:scale-105 hover:bg-gradient-to-r hover:from-pharaoh-gold hover:to-white hover:bg-clip-text hover:text-transparent transition-all duration-500">{feature}</h4>
+                      <h4 className="font-bold bg-linear-to-r from-nile-blue to-pharaoh-gold bg-clip-text text-transparent text-sm animate-pulse hover:animate-bounce hover:scale-105 hover:bg-linear-to-r hover:from-pharaoh-gold hover:to-white hover:bg-clip-text hover:text-transparent transition-all duration-500">{feature}</h4>
                     </div>
                   </AnimatedSection>
                 ))}
@@ -201,19 +201,19 @@ export default function PrincessCleopatraPage() {
           {/* Amenities Grid */}
           <AnimatedSection animation="slide-up" delay={400}>
             <div className="mb-20">
-              <h3 className="text-4xl font-heading font-bold bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent text-center mb-12 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
-                <span className="hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
+              <h3 className="text-4xl font-heading font-bold bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent text-center mb-12 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
+                <span className="hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
                   🌟 Premium Luxury Amenities 🌟
                 </span>
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {dahabiya.amenities.map((amenity, index) => (
                   <AnimatedSection key={index} animation="scale-in" delay={index * 100}>
-                    <div className="bg-gradient-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-2xl p-6 text-center border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group hover:scale-105 shadow-lg hover:shadow-xl">
+                    <div className="bg-linear-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-2xl p-6 text-center border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group hover:scale-105 shadow-lg hover:shadow-xl">
                       <div className="w-16 h-16 bg-pharaoh-gold/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-pharaoh-gold group-hover:scale-110 transition-all duration-500">
                         <Crown className="w-8 h-8 text-pharaoh-gold group-hover:text-white transition-colors duration-300" />
                       </div>
-                      <h4 className="text-lg font-heading font-bold bg-gradient-to-r from-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-2 animate-pulse hover:animate-bounce hover:scale-110 hover:bg-gradient-to-r hover:from-white hover:via-pharaoh-gold hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-500">{amenity}</h4>
+                      <h4 className="text-lg font-heading font-bold bg-linear-to-r from-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-2 animate-pulse hover:animate-bounce hover:scale-110 hover:bg-linear-to-r hover:from-white hover:via-pharaoh-gold hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-500">{amenity}</h4>
                     </div>
                   </AnimatedSection>
                 ))}
@@ -239,7 +239,7 @@ export default function PrincessCleopatraPage() {
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                           loader={imageLoader}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-nile-blue/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="absolute inset-0 bg-linear-to-t from-nile-blue/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                           <h4 className="font-bold text-sm mb-1">{image.alt}</h4>
                           <p className="text-xs text-pharaoh-gold">{image.category.replace('_', ' ')}</p>
@@ -254,17 +254,17 @@ export default function PrincessCleopatraPage() {
 
           {/* Why Choose This Dahabiya Section */}
           <AnimatedSection animation="slide-up" delay={800}>
-            <div className="mb-20 bg-gradient-to-br from-pharaoh-gold/10 via-white to-nile-blue/10 rounded-3xl p-12 border-2 border-pharaoh-gold/20">
+            <div className="mb-20 bg-linear-to-br from-pharaoh-gold/10 via-white to-nile-blue/10 rounded-3xl p-12 border-2 border-pharaoh-gold/20">
               <div className="text-center mb-8">
                 <Crown className="w-16 h-16 text-pharaoh-gold mx-auto mb-6" />
-                <h3 className="text-4xl font-heading font-bold bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-6 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
-                  <span className="hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
+                <h3 className="text-4xl font-heading font-bold bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-6 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
+                  <span className="hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
                     👑 Why Choose Princess Cleopatra? 👑
                   </span>
                 </h3>
                 <div className="w-20 h-0.5 bg-pharaoh-gold mx-auto rounded-full mb-8"></div>
               </div>
-              <p className="text-lg bg-gradient-to-r from-ancient-stone via-nile-blue/80 to-ancient-stone bg-clip-text text-transparent leading-relaxed text-center max-w-4xl mx-auto hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-nile-blue hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent hover:animate-pulse transition-all duration-700">
+              <p className="text-lg bg-linear-to-r from-ancient-stone via-nile-blue/80 to-ancient-stone bg-clip-text text-transparent leading-relaxed text-center max-w-4xl mx-auto hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-nile-blue hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent hover:animate-pulse transition-all duration-700">
                 <span className="hover:scale-105 transition-all duration-500">{dahabiya.advantages}</span>
               </p>
             </div>
@@ -272,7 +272,7 @@ export default function PrincessCleopatraPage() {
 
           {/* Meaning of Dahabiya Section */}
           <AnimatedSection animation="fade-in" delay={1000}>
-            <div className="mb-20 bg-gradient-to-br from-nile-blue/10 via-white to-pharaoh-gold/10 rounded-3xl p-12 border-2 border-nile-blue/20">
+            <div className="mb-20 bg-linear-to-br from-nile-blue/10 via-white to-pharaoh-gold/10 rounded-3xl p-12 border-2 border-nile-blue/20">
               <div className="text-center mb-8">
                 <Anchor className="w-16 h-16 text-nile-blue mx-auto mb-6" />
                 <h3 className="text-4xl font-heading font-bold text-nile-blue mb-6">
@@ -290,32 +290,32 @@ export default function PrincessCleopatraPage() {
           <AnimatedSection animation="slide-up" delay={1200}>
             <div className="mb-20">
               <div className="text-center mb-16">
-                <h3 className="text-4xl font-heading font-bold bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-6 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
-                  <span className="hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
+                <h3 className="text-4xl font-heading font-bold bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-6 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
+                  <span className="hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
                     🗓️ 4-Day Magical Journey Itinerary 🗓️
                   </span>
                 </h3>
-                <div className="w-24 h-1 bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto rounded-full animate-shimmer hover:w-32 hover:h-2 transition-all duration-500"></div>
+                <div className="w-24 h-1 bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto rounded-full animate-shimmer hover:w-32 hover:h-2 transition-all duration-500"></div>
               </div>
 
               <div className="space-y-12">
                 {dahabiya.itineraryDays.map((day, index) => (
                   <AnimatedSection key={index} animation="slide-in-left" delay={index * 200}>
-                    <div className="bg-gradient-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-3xl p-8 border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group">
+                    <div className="bg-linear-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-3xl p-8 border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group">
                       <div className="flex flex-col lg:flex-row gap-8 items-center">
-                        <div className="flex-shrink-0">
+                        <div className="shrink-0">
                           <div className="w-20 h-20 bg-pharaoh-gold rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                             <span className="text-2xl font-bold text-white">Day {day.dayNumber}</span>
                           </div>
                         </div>
 
-                        <div className="flex-grow text-center lg:text-left">
-                          <h4 className="text-2xl font-heading font-bold bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-4 animate-pulse hover:animate-bounce hover:scale-105 transition-all duration-500">
-                            <span className="hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
+                        <div className="grow text-center lg:text-left">
+                          <h4 className="text-2xl font-heading font-bold bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-4 animate-pulse hover:animate-bounce hover:scale-105 transition-all duration-500">
+                            <span className="hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-white hover:to-nile-blue hover:bg-clip-text hover:text-transparent transition-all duration-700">
                               {day.title}
                             </span>
                           </h4>
-                          <p className="bg-gradient-to-r from-ancient-stone via-nile-blue/60 to-ancient-stone bg-clip-text text-transparent leading-relaxed mb-6 hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-nile-blue hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent hover:animate-pulse transition-all duration-700">
+                          <p className="bg-linear-to-r from-ancient-stone via-nile-blue/60 to-ancient-stone bg-clip-text text-transparent leading-relaxed mb-6 hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-nile-blue hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent hover:animate-pulse transition-all duration-700">
                             <span className="hover:scale-105 transition-all duration-500">{day.description}</span>
                           </p>
 
@@ -346,13 +346,13 @@ export default function PrincessCleopatraPage() {
 
           {/* CTA Section */}
           <AnimatedSection animation="fade-in">
-            <div className="text-center bg-gradient-to-br from-nile-blue via-pharaoh-gold/20 to-nile-blue rounded-3xl p-12 text-white">
-              <h2 className="text-4xl font-heading font-bold mb-6 bg-gradient-to-r from-white via-pharaoh-gold to-white bg-clip-text text-transparent animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
-                <span className="hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-white hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent transition-all duration-700">
+            <div className="text-center bg-linear-to-br from-nile-blue via-pharaoh-gold/20 to-nile-blue rounded-3xl p-12 text-white">
+              <h2 className="text-4xl font-heading font-bold mb-6 bg-linear-to-r from-white via-pharaoh-gold to-white bg-clip-text text-transparent animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
+                <span className="hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-white hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent transition-all duration-700">
                   ✨ Ready to Experience Princess Cleopatra? ✨
                 </span>
               </h2>
-              <p className="text-xl mb-8 bg-gradient-to-r from-white/90 via-pharaoh-gold/80 to-white/90 bg-clip-text text-transparent hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-white hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent hover:animate-pulse transition-all duration-700">
+              <p className="text-xl mb-8 bg-linear-to-r from-white/90 via-pharaoh-gold/80 to-white/90 bg-clip-text text-transparent hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-white hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent hover:animate-pulse transition-all duration-700">
                 <span className="hover:scale-105 transition-all duration-500">
                   🚢 Book your luxury Nile cruise aboard this magnificent dahabiya 🚢
                 </span>
@@ -398,3 +398,5 @@ export default function PrincessCleopatraPage() {
     </div>
   );
 }
+
+

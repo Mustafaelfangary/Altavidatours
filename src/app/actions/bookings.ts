@@ -67,3 +67,4 @@ export async function getBookingStats() {
     return { success: false, error: 'Failed to fetch booking stats' };
   }
 }
+

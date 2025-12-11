@@ -190,7 +190,7 @@ export default function FooterSettingsClient() {
         <Button 
           onClick={handleSave} 
           disabled={saving}
-          className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+          className="bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
         >
           <Save className="w-4 h-4 mr-2" />
           {saving ? 'Saving...' : 'Save Changes'}
@@ -580,7 +580,7 @@ export default function FooterSettingsClient() {
                     />
                   </div>
 
-                  <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+                  <div className="mt-6 p-4 bg-linear-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
                     <h4 className="font-medium text-gray-900 mb-2">Social Media Tips</h4>
                     <ul className="text-sm text-gray-600 space-y-1">
                       <li>• Use full URLs including https://</li>
@@ -598,3 +598,5 @@ export default function FooterSettingsClient() {
     </div>
   );
 }
+
+

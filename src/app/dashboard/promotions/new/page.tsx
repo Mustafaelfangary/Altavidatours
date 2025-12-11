@@ -11,3 +11,4 @@ const NewPromotionPage = () => {
 };
 
 export default NewPromotionPage;
+

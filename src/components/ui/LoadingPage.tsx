@@ -46,7 +46,7 @@ export function LoadingPage({ isLoading, onComplete }: LoadingPageProps) {
   if (!showContent) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-gradient-to-br from-nile-blue via-pharaoh-gold/20 to-nile-blue flex items-center justify-center">
+    <div className="fixed inset-0 z-[9999] bg-linear-to-br from-nile-blue via-pharaoh-gold/20 to-nile-blue flex items-center justify-center">
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div className="absolute top-0 left-0 w-96 h-96 bg-pharaoh-gold/20 rounded-full blur-3xl animate-float"></div>
@@ -90,7 +90,7 @@ export function LoadingPage({ isLoading, onComplete }: LoadingPageProps) {
         {/* Progress Bar */}
         <div className="w-64 md:w-80 h-1 bg-white/20 rounded-full overflow-hidden mt-8">
           <div
-            className="h-full bg-gradient-to-r from-pharaoh-gold to-nile-blue transition-all duration-300 ease-out rounded-full"
+            className="h-full bg-linear-to-r from-pharaoh-gold to-nile-blue transition-all duration-300 ease-out rounded-full"
             style={{ width: `${progress}%` }}
           ></div>
         </div>
@@ -103,4 +103,6 @@ export function LoadingPage({ isLoading, onComplete }: LoadingPageProps) {
     </div>
   );
 }
+
+
 

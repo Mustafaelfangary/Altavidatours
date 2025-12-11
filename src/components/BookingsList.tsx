@@ -177,3 +177,4 @@ export function BookingsList() {
     </div>
   );
 }
+

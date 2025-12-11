@@ -129,3 +129,4 @@ export const FaqForm: React.FC<FaqFormProps> = ({ initialData }) => {
     </>
   );
 };
+

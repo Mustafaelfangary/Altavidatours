@@ -129,3 +129,4 @@ require('child_process').execSync('npm install i18next i18next-fs-backend', { st
 
 // Run translation
 translateAll().catch(console.error);
+

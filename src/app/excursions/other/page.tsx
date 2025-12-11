@@ -83,7 +83,7 @@ const otherExcursions = [
 
 export default function OtherExcursionsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-purple-50">
+    <div className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-purple-50">
       <Navbar />
       
       {/* Hero Section */}
@@ -101,7 +101,7 @@ export default function OtherExcursionsPage() {
           height="h-full"
           className="rounded-none"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 z-10"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-black/30 z-10"></div>
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="text-center text-white px-4 max-w-5xl mx-auto">
             <Link href="/excursions" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors">
@@ -130,7 +130,7 @@ export default function OtherExcursionsPage() {
       {/* Excursions Grid */}
       <div className="container mx-auto px-4 py-20">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 font-serif bg-gradient-to-r from-emerald-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 font-serif bg-linear-to-r from-emerald-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">
             Unique Cultural Experiences
           </h2>
           <PharaonicDecoration variant="section" size="md" />
@@ -156,7 +156,7 @@ export default function OtherExcursionsPage() {
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       loader={imageLoader}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
                     {excursion.featured && (
                       <div className="absolute top-4 left-4">
                         <Badge className="bg-emerald-500/90 text-white backdrop-blur-sm">
@@ -213,13 +213,13 @@ export default function OtherExcursionsPage() {
       </div>
 
       {/* Gallery Section */}
-      <div className="bg-gradient-to-br from-emerald-50 via-white to-purple-50 py-20">
+      <div className="bg-linear-to-br from-emerald-50 via-white to-purple-50 py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-emerald-500/20 text-emerald-600 border-emerald-500/30">
               Gallery
             </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 font-serif bg-gradient-to-r from-emerald-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 font-serif bg-linear-to-r from-emerald-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">
               Cultural Moments
             </h2>
             <PharaonicDecoration variant="section" size="md" />
@@ -257,7 +257,7 @@ export default function OtherExcursionsPage() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-r from-emerald-600 via-purple-600 to-emerald-600 py-20">
+      <div className="bg-linear-to-r from-emerald-600 via-purple-600 to-emerald-600 py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
             Ready for a Unique Experience?
@@ -290,3 +290,4 @@ export default function OtherExcursionsPage() {
     </div>
   );
 }
+

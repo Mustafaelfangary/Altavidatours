@@ -5,3 +5,5 @@ export default function imageLoader({ src, width, quality }) {
   const encodedSrc = encodeURI(src);
   return `${encodedSrc}?w=${width}&q=${quality || 75}`;
 }
+
+

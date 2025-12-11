@@ -87,7 +87,7 @@ export default function Footer({ settings = {} }: FooterProps) {
   return (
     <footer className="relative overflow-hidden">
       {/* Pale gradient background with Egyptian-inspired colors */}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-blue-50 to-purple-50"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-red-50 via-blue-50 to-purple-50"></div>
       
       {/* Decorative elements with animation */}
       <div className="absolute inset-0 opacity-20">
@@ -98,7 +98,7 @@ export default function Footer({ settings = {} }: FooterProps) {
       </div>
 
       {/* Animated wave pattern */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-pharaoh-gold/10 to-transparent">
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-pharaoh-gold/10 to-transparent">
         <svg className="absolute bottom-0 w-full h-16 text-blue-400/30" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor"></path>
           <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="currentColor"></path>
@@ -115,11 +115,11 @@ export default function Footer({ settings = {} }: FooterProps) {
             <div className="lg:col-span-1 space-y-6">
               <div className="group">
                 <div className="flex items-center space-x-3 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-pharaoh-gold to-orange-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                  <div className="w-12 h-12 bg-linear-to-br from-pharaoh-gold to-orange-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
                     <Anchor className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold bg-gradient-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold bg-clip-text text-transparent">
+                    <h2 className="text-2xl font-bold bg-linear-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold bg-clip-text text-transparent">
                       AltaVida Tours
                     </h2>
                     <p className="text-pharaoh-gold text-sm font-semibold">Egypt Tours & Travel</p>
@@ -186,9 +186,9 @@ export default function Footer({ settings = {} }: FooterProps) {
 
             {/* Quick Links */}
             <div className="space-y-6">
-              <h3 className="text-xl font-bold bg-gradient-to-r from-pharaoh-gold to-nile-blue bg-clip-text text-transparent relative">
+              <h3 className="text-xl font-bold bg-linear-to-r from-pharaoh-gold to-nile-blue bg-clip-text text-transparent relative">
                 Quick Links
-                <div className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-pharaoh-gold to-orange-500 rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-2 left-0 w-12 h-1 bg-linear-to-r from-pharaoh-gold to-orange-500 rounded-full animate-pulse"></div>
               </h3>
               <ul className="space-y-3">
                 {quickLinks.map((link, index) => {
@@ -211,9 +211,9 @@ export default function Footer({ settings = {} }: FooterProps) {
 
             {/* Services */}
             <div className="space-y-6">
-              <h3 className="text-xl font-bold bg-gradient-to-r from-nile-blue to-purple-600 bg-clip-text text-transparent relative">
+              <h3 className="text-xl font-bold bg-linear-to-r from-nile-blue to-purple-600 bg-clip-text text-transparent relative">
                 Our Services
-                <div className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-nile-blue to-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                <div className="absolute -bottom-2 left-0 w-12 h-1 bg-linear-to-r from-nile-blue to-purple-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
               </h3>
               <ul className="space-y-3">
                 {servicesLinks.map((link, index) => {
@@ -236,9 +236,9 @@ export default function Footer({ settings = {} }: FooterProps) {
 
             {/* Contact & Newsletter */}
             <div className="space-y-6">
-              <h3 className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent relative">
+              <h3 className="text-xl font-bold bg-linear-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent relative">
                 Get In Touch
-                <div className="absolute -bottom-2 left-0 w-12 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute -bottom-2 left-0 w-12 h-1 bg-linear-to-r from-emerald-500 to-teal-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
               </h3>
               
               {/* Contact Info */}
@@ -280,7 +280,7 @@ export default function Footer({ settings = {} }: FooterProps) {
               </div>
 
               {/* Newsletter */}
-              <div className="bg-gradient-to-br from-pharaoh-gold/10 to-nile-blue/10 rounded-lg p-4 backdrop-blur-sm border-2 border-pharaoh-gold/20 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="bg-linear-to-br from-pharaoh-gold/10 to-nile-blue/10 rounded-lg p-4 backdrop-blur-sm border-2 border-pharaoh-gold/20 shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <h4 className="text-gray-800 font-bold mb-3 flex items-center gap-2">
                   <Send className="w-4 h-4 text-pharaoh-gold" />
                   Stay Updated
@@ -298,7 +298,7 @@ export default function Footer({ settings = {} }: FooterProps) {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-pharaoh-gold to-orange-500 text-white py-2 px-4 rounded-lg font-semibold hover:from-pharaoh-gold/90 hover:to-orange-600 hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 group"
+                    className="w-full bg-linear-to-r from-pharaoh-gold to-orange-500 text-white py-2 px-4 rounded-lg font-semibold hover:from-pharaoh-gold/90 hover:to-orange-600 hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 group"
                   >
                     <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:rotate-12 transition-all duration-300" />
                     <span>Subscribe</span>
@@ -344,3 +344,5 @@ export default function Footer({ settings = {} }: FooterProps) {
     </footer>
   );
 }
+
+

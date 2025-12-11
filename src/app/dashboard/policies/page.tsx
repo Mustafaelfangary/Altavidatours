@@ -18,3 +18,4 @@ const PoliciesPage = async () => {
 };
 
 export default PoliciesPage;
+

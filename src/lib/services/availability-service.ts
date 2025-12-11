@@ -140,3 +140,4 @@ export class AvailabilityService {
     return calendar;
   }
 }
+

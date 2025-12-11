@@ -108,3 +108,4 @@ export async function deleteSetting(key: string) {
     return { success: false, error: 'Failed to delete setting' };
   }
 }
+

@@ -52,7 +52,7 @@ export default async function BookingDetailsPage({ params }: BookingDetailsPageP
             <div className="mb-8">
               <h2 className="text-xl font-semibold mb-4">Cruise Information</h2>
               <div className="flex gap-4">
-                <div className="flex-shrink-0 h-32 w-48 relative rounded-lg overflow-hidden">
+                <div className="shrink-0 h-32 w-48 relative rounded-lg overflow-hidden">
                   {booking.dahabiya?.images[0] && (
                     <Image
                       src={booking.dahabiya.images[0].url}

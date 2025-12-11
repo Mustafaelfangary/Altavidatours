@@ -58,3 +58,4 @@ export default function ImageBlockForm({ block, onSave }: ImageBlockFormProps) {
     </div>
   );
 }
+

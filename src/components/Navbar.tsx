@@ -6,7 +6,8 @@ import type { ChangeEvent } from 'react';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from 'next/image';
-import { LogOut, User, LayoutDashboard, UserCircle, Menu, X, Globe } from 'lucide-react';
+import DynamicNavMenu from '@/components/navbar/DynamicNavMenu';
+import { LogOut, User, LayoutDashboard, UserCircle, Menu, X, Globe, ChevronDown, ChevronUp } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useLanguage } from '@/context/language-context';
@@ -52,7 +53,7 @@ const NavLink = ({
       isActive
         ? 'text-amber-300 font-medium bg-red-800/50 shadow-inner'
         : 'text-gray-100 hover:text-amber-200 hover:bg-red-800/30'
-    } ${special ? 'bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 hover:from-amber-300 hover:to-yellow-200' : ''}`}
+    } ${special ? 'bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 hover:from-amber-300 hover:to-yellow-200' : ''}`}
   >
     <span className="relative group-hover:scale-105 transition-transform">
       {label}
@@ -95,6 +96,7 @@ function NavbarInner() {
     logoUrl: '/icons/altavida-logo-1.svg' 
   });
   const [megaOpen, setMegaOpen] = useState<string | false>(false);
+  const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
   const { language, setLanguage } = useLanguage();
   const t = useTranslation();
   const pathname = usePathname();
@@ -155,26 +157,24 @@ function NavbarInner() {
   }, []);
 
   // Show loading state while session is being fetched
-  if (status === 'loading') {
+    if (status === 'loading') {
     return (
       <header 
         className="fixed w-full z-50 transition-all duration-300"
         style={getNavbarStyle()}
       >
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex justify-between items-center">
-            <Link href="/" className="flex items-center space-x-2 group">
-              <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+        <div className="container mx-auto px-4 py-0">
+          <div className="flex items-center h-24">
+            <Link href="/" className="flex items-center shrink-0 group mr-3 h-full">
+              <div className="relative w-24 transition-transform duration-300 group-hover:scale-110">
                 <Image
                   src={settings.logoUrl}
                   alt={settings.siteName}
-                  width={48}
-                  height={48}
+                  width={96}
+                  height={96}
                   className="object-contain"
                   priority
-                  loader={({ src, width, quality = 75 }) => {
-                    return `${src}?w=${width}&q=${quality}`
-                  }}
+                  loader={({ src, width, quality = 75 }) => `${src}?w=${width}&q=${quality}`}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
@@ -182,18 +182,17 @@ function NavbarInner() {
                   }}
                 />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent font-serif tracking-wider">
-                {settings.siteName}
-              </span>
             </Link>
-            <div className="hidden md:flex space-x-8 items-center">
+
+            <div className="hidden md:flex space-x-8 items-center flex-1">
               {[...Array(5)].map((_, i) => (
-                <div key={i} className="h-4 w-16 bg-gray-200 animate-pulse rounded"></div>
+                <div key={i} className="h-2 w-10 bg-gray-200 animate-pulse rounded"></div>
               ))}
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="h-10 w-24 bg-gray-200 animate-pulse rounded"></div>
-              <div className="h-10 w-10 bg-gray-200 animate-pulse rounded-full"></div>
+
+            <div className="flex items-center space-x-2">
+              <div className="h-6 w-16 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-6 w-6 bg-gray-200 animate-pulse rounded-full"></div>
             </div>
           </div>
         </div>
@@ -230,7 +229,10 @@ function NavbarInner() {
         { href: '/destinations/egypt', label: t('egypt') },
         { href: '/destinations/jordan', label: t('jordan') },
         { href: '/destinations/dubai', label: t('dubai') },
-        { href: '/destinations/turkey', label: t('turkey') }
+        { href: '/destinations/turkey', label: t('turkey') },
+        { href: '/destinations/saudi-arabia', label: 'Saudi Arabia' },
+        { href: '/destinations/morocco', label: 'Morocco' },
+        { href: '/destinations/greece', label: 'Greek Islands' }
       ]
     ] },
     { 
@@ -247,6 +249,11 @@ function NavbarInner() {
           { href: '/packages/popular', label: t('popularTours') },
           { href: '/packages/experiences', label: t('experiences') },
           { href: '/packages/classics', label: t('egyptClassics') }
+        ],
+        [
+          { href: '/packages/luxury', label: 'Luxury & Exclusive' },
+          { href: '/packages/groups', label: 'Group Packages' },
+          { href: '/packages/honeymoon', label: 'Honeymoon' }
         ]
       ]
     },
@@ -299,93 +306,92 @@ function NavbarInner() {
       className="fixed w-full z-50 transition-all duration-300"
       style={getNavbarStyle()}
     >
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex justify-between items-center">
+      <div className="container mx-auto px-4 py-0">
+        <div className="flex items-center h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="flex items-center space-x-2">
-              <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-110">
-                <Image
-                  src={settings.logoUrl}
-                  alt=""
-                  width={72}
-                  height={72}
-                  className="object-contain"
-                  priority
-                  loader={({ src, width, quality = 75 }) => {
-                    return `${src}?w=${width}&q=${quality}`
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = '/icons/altavida-logo-1.png';
-                  }}
-                />
-              </div>
-              <span className="text-2xl font-medium text-amber-300 font-serif">
-                𓎼𓇌𓊪𓏏 𓏏𓅲𓂋𓋴
-              </span>
+          <Link href="/" className="flex items-center shrink-0 group mr-3 h-full">
+            <div className="relative w-24 transition-transform duration-300 group-hover:scale-105">
+              <Image
+                src={settings.logoUrl}
+                alt=""
+                width={96}
+                height={96}
+                className="object-contain"
+                priority
+                loader={({ src, width, quality = 75 }) => `${src}?w=${width}&q=${quality}`}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = '/icons/altavida-logo-1.png';
+                }}
+              />
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-2">
+          {/* Desktop Navigation with mega menus */}
+          <nav className="hidden md:flex items-center space-x-6 flex-1">
             {navItems.map((link) => (
-              <div key={link.key} className="relative group">
-                {link.special ? (
-                  <Link
-                    href={link.href}
-                    className="flex items-center space-x-2 py-2 px-4 rounded-md bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-                    onMouseEnter={(e) => {
-                      const target = e.currentTarget;
-                      target.style.boxShadow = '0 0 0 6px rgba(255, 215, 0, 0.22), 0 18px 40px rgba(231, 169, 26, 0.6)';
-                      target.style.transform = 'translateY(-3px) scale(1.05)';
-                    }}
-                    onMouseLeave={(e) => {
-                      const target = e.currentTarget;
-                      target.style.boxShadow = '0 0 0 4px rgba(255, 215, 0, 0.15), 0 12px 30px rgba(231, 169, 26, 0.45)';
-                      target.style.transform = 'translateY(0) scale(1)';
-                    }}
+              <div
+                key={link.key}
+                className="relative group"
+                onMouseEnter={() => setMegaOpen(link.submenu ? link.key : false)}
+                onMouseLeave={() => setMegaOpen(false)}
+              >
+                <NavLink href={link.href} label={link.label} special={link.special} hasSubmenu={!!link.submenu} isActive={pathname === link.href} />
+
+                {link.submenu && (
+                  <div
+                    className={`absolute left-0 top-full mt-2 w-[680px] bg-white/95 dark:bg-gray-900/95 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 transform scale-95 opacity-0 transition-all duration-150 ${megaOpen === link.key ? 'scale-100 opacity-100' : 'pointer-events-none'}`}
+                    onFocus={() => setMegaOpen(link.key)}
+                    onBlur={() => setMegaOpen(false)}
+                    aria-hidden={megaOpen !== link.key}
                   >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <>
-                    <NavLink 
-                      href={link.href} 
-                      label={link.label} 
-                      special={link.special}
-                      hasSubmenu={!!link.submenu}
-                      isActive={pathname === link.href}
-                    />
-                    {link.submenu && (
-                      <div className="absolute left-0 mt-2 w-96 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 p-4 hidden group-hover:block">
-                        <div className="grid grid-cols-2 gap-4">
-                          {link.submenu.map((group, i) => (
-                            <div key={i} className="space-y-2">
+                    <div className="p-4 grid grid-cols-2 gap-4">
+                      {/* Destinations CTA grid */}
+                      {link.key === 'destinations' && (
+                        <div className="col-span-2 grid grid-cols-4 gap-3">
+                          <Link href="/destinations/egypt" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 text-sm">{t('egypt')}</Link>
+                          <Link href="/destinations/jordan" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 text-sm">{t('jordan')}</Link>
+                          <Link href="/destinations/dubai" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 text-sm">{t('dubai')}</Link>
+                          <Link href="/destinations/turkey" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 text-sm">{t('turkey')}</Link>
+                          <Link href="/destinations/saudi-arabia" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 text-sm">Saudi Arabia</Link>
+                          <Link href="/destinations/morocco" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 text-sm">Morocco</Link>
+                          <Link href="/destinations/greece" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200 text-sm">Greek Islands</Link>
+                        </div>
+                      )}
+
+                      {/* Packages CTA + dynamic list */}
+                      {link.key === 'packages' && (
+                        <div className="col-span-2">
+                          <div className="grid grid-cols-2 gap-2 mb-3">
+                            <Link href="/packages/cultural" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200">{t('culturalHistorical') || 'Cultural & Historical'}</Link>
+                            <Link href="/packages/adventures" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200">{t('safariSnorkeling') || 'Adventures'}</Link>
+                            <Link href="/packages/romantic" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200">{t('romanticPackages') || 'Romantic Packages'}</Link>
+                            <Link href="/packages/beaches" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200">{t('beachesAndSeas') || 'Beaches & Seas'}</Link>
+                            <Link href="/packages/family" className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200">{t('familyPackages') || 'Family Packages'}</Link>
+                          </div>
+                          <div>
+                            <DynamicNavMenu type="packages" label={link.label} />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Default grouped submenu */}
+                      {link.key !== 'packages' && link.key !== 'destinations' && (
+                        <div className="col-span-2 grid grid-cols-2 gap-4">
+                          {link.submenu?.map((group, gi) => (
+                            <div key={gi} className="space-y-2">
                               {group.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  className="block p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                                >
+                                <Link key={item.href} href={item.href} className="block p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                   <div className="flex items-start space-x-3">
                                     {item.image && (
-                                      <div className="relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-md">
-                                        <Image
-                                          src={item.image}
-                                          alt={item.label}
-                                          width={48}
-                                          height={48}
-                                          className="object-cover w-full h-full"
-                                        />
+                                      <div className="relative w-12 h-12 shrink-0 overflow-hidden rounded-md">
+                                        <Image src={item.image} alt={item.label} width={48} height={48} className="object-cover w-full h-full" />
                                       </div>
                                     )}
                                     <div>
                                       <p className="font-medium text-gray-900 dark:text-white">{item.label}</p>
-                                      {item.desc && (
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>
-                                      )}
+                                      {item.desc && <p className="text-sm text-gray-500 dark:text-gray-400">{item.desc}</p>}
                                     </div>
                                   </div>
                                 </Link>
@@ -393,9 +399,9 @@ function NavbarInner() {
                             </div>
                           ))}
                         </div>
-                      </div>
-                    )}
-                  </>
+                      )}
+                    </div>
+                  </div>
                 )}
               </div>
             ))}
@@ -407,7 +413,7 @@ function NavbarInner() {
               <select
                 value={language}
                 onChange={handleLanguageChange}
-                className="bg-transparent border border-amber-300/30 text-amber-200 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent appearance-none"
+                className="bg-transparent border border-amber-300/30 text-amber-200 rounded-md px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent appearance-none"
               >
                 {LANGUAGES.map((lang) => (
                   <option 
@@ -461,14 +467,14 @@ function NavbarInner() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <div className="hidden md:flex items-center space-x-2">
+              <div className="hidden md:flex items-center space-x-1">
                 <Link href="/auth/signin">
-                  <Button variant="outline" className="text-amber-300 border-amber-300 hover:bg-amber-900/30">
+                  <Button variant="outline" className="text-amber-300 border-amber-300 hover:bg-amber-900/30 text-sm py-1 h-8">
                     {t('signIn')}
                   </Button>
                 </Link>
                 <Link href="/auth/signup">
-                  <Button className="bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 hover:from-amber-300 hover:to-yellow-200">
+                  <Button className="bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 hover:from-amber-300 hover:to-yellow-200 text-sm py-1 h-8">
                     {t('signUp')}
                   </Button>
                 </Link>
@@ -478,14 +484,14 @@ function NavbarInner() {
             {/* Mobile menu button */}
             <button
               type="button"
-              className="md:hidden p-2 rounded-md text-amber-300 hover:bg-red-800/50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500"
+              className="md:hidden p-1 rounded-md text-amber-300 hover:bg-red-800/50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
               <span className="sr-only">Open main menu</span>
               {mobileOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
+                <X className="h-5 w-5" aria-hidden="true" />
               ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
+                <Menu className="h-5 w-5" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -497,17 +503,52 @@ function NavbarInner() {
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-red-900/95">
           {navItems.map((link) => (
             <div key={link.key} className="relative">
-              <Link
-                href={link.href}
-                className={`block px-3 py-2 rounded-md text-base font-medium ${
-                  pathname === link.href
-                    ? 'bg-red-800 text-amber-300'
-                    : 'text-gray-200 hover:bg-red-800 hover:text-amber-200'
-                } ${link.special ? 'bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900' : ''}`}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </Link>
+              <div className="flex items-center justify-between">
+                <Link
+                  href={link.href}
+                  className={`block px-3 py-2 rounded-md text-base font-medium ${
+                    pathname === link.href
+                      ? 'bg-red-800 text-amber-300'
+                      : 'text-gray-200 hover:bg-red-800 hover:text-amber-200'
+                  } ${link.special ? 'bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900' : ''}`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </Link>
+                {link.submenu && (
+                  <button
+                    type="button"
+                    aria-expanded={mobileSubOpen === link.key}
+                    onClick={() => setMobileSubOpen(mobileSubOpen === link.key ? null : link.key)}
+                    className="p-2 text-amber-300 hover:bg-red-800/40 rounded-md"
+                  >
+                    {mobileSubOpen === link.key ? (
+                      <ChevronUp className="h-5 w-5" />
+                    ) : (
+                      <ChevronDown className="h-5 w-5" />
+                    )}
+                  </button>
+                )}
+              </div>
+
+              {link.submenu && mobileSubOpen === link.key && (
+                <div className="pl-4 pb-2 mt-1 space-y-1">
+                  {link.submenu.map((group, gi) => (
+                    <div key={gi} className="space-y-1">
+                      {group.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block px-3 py-2 rounded-md text-sm text-gray-200 hover:bg-red-800 hover:text-amber-200"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
           
@@ -520,9 +561,9 @@ function NavbarInner() {
               >
                 {t('signIn')}
               </Link>
-              <Link
+                <Link
                 href="/auth/signup"
-                className="mt-2 block w-full text-center px-4 py-2 rounded-md bg-gradient-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200"
+                className="mt-2 block w-full text-center px-4 py-2 rounded-md bg-linear-to-r from-amber-400 to-yellow-300 text-gray-900 font-medium hover:from-amber-300 hover:to-yellow-200"
                 onClick={() => setMobileOpen(false)}
               >
                 {t('signUp')}
@@ -542,3 +583,5 @@ export default function Navbar() {
     </Suspense>
   );
 }
+
+

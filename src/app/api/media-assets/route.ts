@@ -129,3 +129,5 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "Failed to delete media asset" }, { status: 500 });
   }
 }
+
+

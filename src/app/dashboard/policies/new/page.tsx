@@ -11,3 +11,4 @@ const NewPolicyPage = () => {
 };
 
 export default NewPolicyPage;
+

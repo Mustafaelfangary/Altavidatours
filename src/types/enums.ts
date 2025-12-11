@@ -9,3 +9,5 @@ export enum CruiseCategory {
   PREMIUM = "PREMIUM",
   LUXURY = "LUXURY"
 }
+
+

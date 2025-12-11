@@ -11,3 +11,4 @@ const NewFaqPage = () => {
 };
 
 export default NewFaqPage;
+

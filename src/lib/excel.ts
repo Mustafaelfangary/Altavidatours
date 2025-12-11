@@ -159,3 +159,4 @@ export const exportBookingsToExcel = async (bookings: Booking[]) => {
   document.body.removeChild(link);
   window.URL.revokeObjectURL(url);
 }; 
+

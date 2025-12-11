@@ -84,3 +84,4 @@ export default function ItineraryDayForm({ day, onSave }: ItineraryDayFormProps)
     </Form>
   );
 }
+

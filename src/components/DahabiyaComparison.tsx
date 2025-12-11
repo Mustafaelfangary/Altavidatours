@@ -8,7 +8,7 @@ interface Props {
 
 export default function DahabiyaComparison({ settings }: Props) {
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-red-50">
+    <section className="py-20 bg-linear-to-b from-white to-red-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ export default function DahabiyaComparison({ settings }: Props) {
                   transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                   className="flex items-start space-x-3"
                 >
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white">
+                  <span className="shrink-0 w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-white">
                     ✓
                   </span>
                   <span className="text-gray-700">{point}</span>
@@ -82,3 +82,4 @@ export default function DahabiyaComparison({ settings }: Props) {
     </section>
   );
 } 
+

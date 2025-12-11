@@ -18,7 +18,7 @@ export default function ItineraryGallery({ images, dayTitle }: ItineraryGalleryP
         {images.map((img, idx) => (
           <div
             key={img.url}
-            className="relative w-56 h-40 flex-shrink-0 rounded-xl overflow-hidden group shadow-lg border-2 border-emerald-200 hover:border-red-400 transition-all cursor-pointer"
+            className="relative w-56 h-40 shrink-0 rounded-xl overflow-hidden group shadow-lg border-2 border-emerald-200 hover:border-red-400 transition-all cursor-pointer"
             onClick={() => setLightboxIdx(idx)}
           >
             <Image
@@ -27,7 +27,7 @@ export default function ItineraryGallery({ images, dayTitle }: ItineraryGalleryP
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
         ))}
       </div>
@@ -78,3 +78,4 @@ export default function ItineraryGallery({ images, dayTitle }: ItineraryGalleryP
     </div>
   );
 } 
+

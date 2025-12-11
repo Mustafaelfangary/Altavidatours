@@ -119,3 +119,4 @@ export const FaqManagement: React.FC<FaqManagementProps> = ({ faqs }) => {
     </>
   );
 };
+

@@ -83,3 +83,4 @@ export async function sendEmail({ to, subject, template, data }: EmailOptions) {
     html,
   });
 } 
+

@@ -127,9 +127,9 @@ export default async function DahabiyatPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/5">
+    <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/5">
       {/* Hero Section */}
-      <section className="relative py-32 bg-gradient-to-br from-nile-blue via-pharaoh-gold/20 to-ancient-stone overflow-hidden">
+      <section className="relative py-32 bg-linear-to-br from-nile-blue via-pharaoh-gold/20 to-ancient-stone overflow-hidden">
         {/* Enhanced Background Elements */}
         <div className="absolute inset-0 opacity-15">
           <div className="absolute top-20 left-10 w-20 h-20 text-pharaoh-gold animate-float">
@@ -150,7 +150,7 @@ export default async function DahabiyatPage() {
         </div>
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-nile-blue/80 via-transparent to-pharaoh-gold/30"></div>
+        <div className="absolute inset-0 bg-linear-to-r from-nile-blue/80 via-transparent to-pharaoh-gold/30"></div>
 
         <Container maxWidth="lg" className="relative z-10">
           <AnimatedSection animation="fade-in">
@@ -160,7 +160,7 @@ export default async function DahabiyatPage() {
                   <Anchor className="w-12 h-12 text-pharaoh-gold" />
                 </div>
               </div>
-              <h1 className="text-7xl md:text-8xl font-heading font-bold mb-8 bg-gradient-to-r from-pharaoh-gold via-white to-pharaoh-gold bg-clip-text text-transparent drop-shadow-2xl">
+              <h1 className="text-7xl md:text-8xl font-heading font-bold mb-8 bg-linear-to-r from-pharaoh-gold via-white to-pharaoh-gold bg-clip-text text-transparent drop-shadow-2xl">
                 {getContentValue('dahabiyat_hero_title', 'Our Dahabiyas')}
               </h1>
               <p className="text-3xl md:text-4xl font-light mb-10 text-pharaoh-gold/90 drop-shadow-lg">
@@ -177,7 +177,7 @@ export default async function DahabiyatPage() {
       </section>
 
       {/* Featured Dahabiyas Section */}
-      <section className="py-24 bg-gradient-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 relative overflow-hidden">
+      <section className="py-24 bg-linear-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 relative overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-20 w-32 h-32 border-2 border-pharaoh-gold rounded-full animate-pulse"></div>
@@ -192,10 +192,10 @@ export default async function DahabiyatPage() {
               <div className="inline-block p-3 rounded-full bg-pharaoh-gold/10 border border-pharaoh-gold/30 mb-6">
                 <Crown className="w-10 h-10 text-pharaoh-gold" />
               </div>
-              <h2 className="text-6xl md:text-7xl font-heading font-bold bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-8 drop-shadow-sm">
+              <h2 className="text-6xl md:text-7xl font-heading font-bold bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-8 drop-shadow-sm">
                 {getContentValue('dahabiyat_fleet_title', 'Our Fleet')}
               </h2>
-              <div className="w-32 h-1 bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto mb-8 rounded-full"></div>
+              <div className="w-32 h-1 bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto mb-8 rounded-full"></div>
               <p className="text-2xl text-ancient-stone leading-relaxed max-w-4xl mx-auto font-light">
                 {getContentValue('dahabiyat_fleet_description', 'Choose from our collection of authentic dahabiyas, each offering a unique blend of traditional Egyptian sailing and modern luxury amenities.')}
               </p>
@@ -206,7 +206,7 @@ export default async function DahabiyatPage() {
             {featuredDahabiyas.map((dahabiya, index) => (
               <AnimatedSection key={dahabiya.id} animation="scale-in" delay={index * 200}>
                 <Card
-                  className="group overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:-translate-y-4 hover:rotate-1 bg-gradient-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 border-2 border-pharaoh-gold/30 hover:border-pharaoh-gold/60 relative"
+                  className="group overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700 transform hover:-translate-y-4 hover:rotate-1 bg-linear-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 border-2 border-pharaoh-gold/30 hover:border-pharaoh-gold/60 relative"
                   sx={{
                     background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,215,0,0.05) 50%, rgba(30,58,138,0.05) 100%)',
                     backdropFilter: 'blur(15px)',
@@ -228,7 +228,7 @@ export default async function DahabiyatPage() {
                     </FloatingElement>
 
                     {/* Enhanced price badge */}
-                    <div className="absolute top-6 right-6 bg-gradient-to-r from-pharaoh-gold to-pharaoh-gold/80 text-nile-blue px-5 py-3 rounded-full font-bold text-base shadow-lg border border-pharaoh-gold/50 backdrop-blur-sm">
+                    <div className="absolute top-6 right-6 bg-linear-to-r from-pharaoh-gold to-pharaoh-gold/80 text-nile-blue px-5 py-3 rounded-full font-bold text-base shadow-lg border border-pharaoh-gold/50 backdrop-blur-sm">
                       <span className="text-sm">From</span> ${dahabiya.priceFrom}
                     </div>
 
@@ -247,10 +247,10 @@ export default async function DahabiyatPage() {
                   <CardContent className="p-10 relative">
                     {/* Title with enhanced styling */}
                     <div className="text-center mb-6">
-                      <h3 className="text-3xl font-heading font-bold bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-2 group-hover:scale-105 transition-transform duration-300">
+                      <h3 className="text-3xl font-heading font-bold bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue bg-clip-text text-transparent mb-2 group-hover:scale-105 transition-transform duration-300">
                         {dahabiya.name}
                       </h3>
-                      <div className="w-16 h-0.5 bg-gradient-to-r from-pharaoh-gold to-nile-blue mx-auto rounded-full"></div>
+                      <div className="w-16 h-0.5 bg-linear-to-r from-pharaoh-gold to-nile-blue mx-auto rounded-full"></div>
                     </div>
 
                     <p className="text-ancient-stone leading-relaxed mb-8 text-lg text-center font-light">
@@ -259,12 +259,12 @@ export default async function DahabiyatPage() {
 
                     {/* Enhanced info section */}
                     <div className="grid grid-cols-2 gap-6 mb-8">
-                      <div className="text-center p-4 bg-gradient-to-br from-pharaoh-gold/10 to-pharaoh-gold/5 rounded-2xl border border-pharaoh-gold/20">
+                      <div className="text-center p-4 bg-linear-to-br from-pharaoh-gold/10 to-pharaoh-gold/5 rounded-2xl border border-pharaoh-gold/20">
                         <Users className="w-8 h-8 text-pharaoh-gold mx-auto mb-2" />
                         <div className="text-2xl font-bold text-nile-blue">{dahabiya.cabins}</div>
                         <div className="text-sm text-ancient-stone font-medium">Luxury Cabins</div>
                       </div>
-                      <div className="text-center p-4 bg-gradient-to-br from-nile-blue/10 to-nile-blue/5 rounded-2xl border border-nile-blue/20">
+                      <div className="text-center p-4 bg-linear-to-br from-nile-blue/10 to-nile-blue/5 rounded-2xl border border-nile-blue/20">
                         <MapPin className="w-8 h-8 text-nile-blue mx-auto mb-2" />
                         <div className="text-2xl font-bold text-pharaoh-gold">{dahabiya.capacity}</div>
                         <div className="text-sm text-ancient-stone font-medium">Max Guests</div>
@@ -276,7 +276,7 @@ export default async function DahabiyatPage() {
                       {dahabiya.features.map((feature, idx) => (
                         <span
                           key={idx}
-                          className="px-4 py-2 bg-gradient-to-r from-pharaoh-gold/15 to-nile-blue/15 text-nile-blue rounded-full text-sm font-semibold border border-pharaoh-gold/30 hover:border-pharaoh-gold/50 transition-colors duration-300 shadow-sm"
+                          className="px-4 py-2 bg-linear-to-r from-pharaoh-gold/15 to-nile-blue/15 text-nile-blue rounded-full text-sm font-semibold border border-pharaoh-gold/30 hover:border-pharaoh-gold/50 transition-colors duration-300 shadow-sm"
                         >
                           {feature}
                         </span>
@@ -300,7 +300,7 @@ export default async function DahabiyatPage() {
                         <span className="group-hover:scale-105 transition-transform duration-300 font-bold text-lg">
                           Explore This Dahabiya
                         </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                        <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                       </Button>
                     </Link>
                   </CardContent>
@@ -312,7 +312,7 @@ export default async function DahabiyatPage() {
       </section>
 
       {/* Why Dahabiya Section */}
-      <section className="py-20 bg-gradient-to-r from-papyrus to-white">
+      <section className="py-20 bg-linear-to-r from-papyrus to-white">
         <Container maxWidth="lg">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection animation="slide-in-left">
@@ -389,7 +389,7 @@ export default async function DahabiyatPage() {
               }
             ].map((feature, index) => (
               <AnimatedSection key={index} animation="scale-in" delay={index * 150}>
-                <Card className="text-center p-8 h-full bg-gradient-to-br from-white to-papyrus/30 border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-300 hover:shadow-xl">
+                <Card className="text-center p-8 h-full bg-linear-to-br from-white to-papyrus/30 border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-300 hover:shadow-xl">
                   <div className="w-20 h-20 bg-pharaoh-gold/10 rounded-full flex items-center justify-center mx-auto mb-6 text-pharaoh-gold">
                     {feature.icon}
                   </div>
@@ -427,3 +427,5 @@ export default async function DahabiyatPage() {
     </div>
   );
 }
+
+

@@ -26,3 +26,4 @@ const PromotionsPage = async () => {
 };
 
 export default PromotionsPage;
+

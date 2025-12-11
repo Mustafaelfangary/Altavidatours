@@ -80,7 +80,7 @@ export function ImageSlideshow({
               sizes="100vw"
               loader={imageLoader}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent"></div>
           </div>
         ))}
       </div>
@@ -147,4 +147,6 @@ export function ImageSlideshow({
     </div>
   );
 }
+
+
 

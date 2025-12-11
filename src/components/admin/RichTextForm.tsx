@@ -35,3 +35,4 @@ export default function RichTextForm({ block, onSave }: RichTextFormProps) {
     </div>
   );
 }
+

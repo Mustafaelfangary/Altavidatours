@@ -27,3 +27,4 @@ export function useTranslation() {
     return dict[key] ?? translations.en[key] ?? key;
   };
 }
+

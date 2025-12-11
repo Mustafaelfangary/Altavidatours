@@ -43,3 +43,4 @@ export default function GallerySlideshow({ images }: GallerySlideshowProps) {
     </Box>
   );
 } 
+

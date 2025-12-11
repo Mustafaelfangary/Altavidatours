@@ -27,3 +27,4 @@ export async function GET(request: Request) {
     return new Response('Failed to fetch bookings', { status: 500 });
   }
 }
+

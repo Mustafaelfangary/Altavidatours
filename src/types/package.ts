@@ -47,3 +47,4 @@ export interface NileCruisePackageFormData {
 export interface NileCruisePackageCreateInput extends Omit<NileCruisePackageFormData, 'price'> {
   price: Decimal;
 }
+

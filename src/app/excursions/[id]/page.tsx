@@ -399,7 +399,7 @@ export default function ExcursionDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/10">
+      <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/10">
         <Navbar />
         <div className="flex items-center justify-center min-h-[80vh]">
           <div className="text-center">
@@ -413,7 +413,7 @@ export default function ExcursionDetailPage() {
 
   if (!excursion) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/10">
+      <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/10">
         <Navbar />
         <div className="container mx-auto px-4 py-20 text-center">
           <h1 className="text-4xl font-bold text-nile-blue mb-4">Excursion Not Found</h1>
@@ -430,7 +430,7 @@ export default function ExcursionDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/10">
+    <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/10">
       <Navbar />
       
       {/* Enhanced Hero Section with Slideshow */}
@@ -453,7 +453,7 @@ export default function ExcursionDetailPage() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
           </>
         )}
         <div className="absolute bottom-0 left-0 right-0 p-8 container mx-auto z-20">
@@ -496,7 +496,7 @@ export default function ExcursionDetailPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {excursion.highlights.map((highlight, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-pharaoh-gold mt-0.5 flex-shrink-0" />
+                    <Check className="w-5 h-5 text-pharaoh-gold mt-0.5 shrink-0" />
                     <span className="text-ancient-stone">{highlight}</span>
                   </div>
                 ))}
@@ -505,7 +505,7 @@ export default function ExcursionDetailPage() {
 
             {/* Gallery */}
             {excursion.images && excursion.images.length > 0 && (
-              <Card className="p-8 bg-gradient-to-br from-white to-pharaoh-gold/5">
+              <Card className="p-8 bg-linear-to-br from-white to-pharaoh-gold/5">
                 <h2 className="text-3xl font-bold text-nile-blue mb-6 font-serif">Photo Gallery</h2>
                 <ImageGallery
                   images={excursion.images.map(img => ({ url: img, alt: excursion.name }))}

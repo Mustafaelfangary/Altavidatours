@@ -157,3 +157,4 @@ export default function ItineraryDayManager({ itineraryId }: { itineraryId: stri
     </div>
   );
 }
+

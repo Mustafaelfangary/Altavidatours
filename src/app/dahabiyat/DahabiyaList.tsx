@@ -122,3 +122,4 @@ export function DahabiyaList({ dahabiyat }: { dahabiyat: Dahabiya[] }) {
     </div>
   );
 } 
+

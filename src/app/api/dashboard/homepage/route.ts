@@ -271,3 +271,5 @@ function getContentOrder(key: string): number {
   const structure = HOMEPAGE_CONTENT_STRUCTURE.find(item => item.key === key);
   return structure?.order || 1;
 }
+
+

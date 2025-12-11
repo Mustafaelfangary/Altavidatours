@@ -20,3 +20,4 @@ export default function CallToActionBlock({ block }: CallToActionBlockProps) {
     </div>
   );
 }
+

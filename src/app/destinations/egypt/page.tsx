@@ -9,7 +9,7 @@ import imageLoader from '@/utils/imageLoader';
 
 export default function EgyptDestinationPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-nile-blue/5">
+    <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-nile-blue/5">
       <Navbar />
       <main className="pt-20">
         <section className="relative max-w-6xl mx-auto px-4 pb-16">
@@ -21,7 +21,7 @@ export default function EgyptDestinationPage() {
               className="object-cover"
               loader={imageLoader}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60" />
+            <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/40 to-black/60" />
             <div className="absolute inset-0 flex flex-col justify-center items-start px-8 md:px-12 text-white space-y-4">
               <PharaonicText className="text-white/80" showTranslation={false} />
               <h1 className="text-4xl md:text-5xl font-serif font-bold drop-shadow-2xl">
@@ -77,3 +77,5 @@ export default function EgyptDestinationPage() {
     </div>
   );
 }
+
+

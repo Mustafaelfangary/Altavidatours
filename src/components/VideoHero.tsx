@@ -20,7 +20,7 @@ export function VideoHero() {
       >
         <source src="/videos/dahabyia nile Egypt.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/70" />
       <div className="relative flex h-full items-center justify-center text-center">
         <div className="max-w-3xl px-4">
           <h1 className="font-heading text-6xl font-bold text-white mb-6 tracking-wide">
@@ -31,7 +31,7 @@ export function VideoHero() {
             where ancient wonders meet modern elegance
           </p>
           <Link href="/cruises">
-            <Button size="lg" className="text-lg bg-gradient-to-r from-primary to-gold hover:from-gold hover:to-primary transition-all duration-300 border-2 border-sand/20 shadow-lg">
+            <Button size="lg" className="text-lg bg-linear-to-r from-primary to-gold hover:from-gold hover:to-primary transition-all duration-300 border-2 border-sand/20 shadow-lg">
               Discover Your Journey
             </Button>
           </Link>
@@ -40,3 +40,5 @@ export function VideoHero() {
     </div>
   );
 }
+
+

@@ -57,7 +57,7 @@ export default async function EditPackagePage({
   }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/10">
+    <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/10">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-nile-blue mb-2 font-serif">Edit Package</h1>

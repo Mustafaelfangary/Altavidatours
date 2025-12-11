@@ -198,3 +198,5 @@ export default function BookingForm({ dahabiyaId, price, minDays = 1, duration }
     </form>
   );
 }
+
+

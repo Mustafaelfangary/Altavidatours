@@ -213,7 +213,7 @@ export default function DailyToursPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/10">
+      <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/10">
         <Navbar />
         <div className="flex items-center justify-center min-h-[80vh]">
           <div className="text-center">
@@ -226,7 +226,7 @@ export default function DailyToursPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/10">
+    <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/10">
       <Navbar />
       
       {/* Enhanced Hero Section with Slideshow */}
@@ -250,7 +250,7 @@ export default function DailyToursPage() {
           height="h-full"
           className="rounded-none"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 z-10"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/20 z-10"></div>
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="text-center text-white px-4 max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 font-serif drop-shadow-2xl headline-animated">
@@ -291,7 +291,7 @@ export default function DailyToursPage() {
         {filteredTours.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredTours.map((tour) => (
-              <Card key={tour.id} className="group overflow-hidden bg-gradient-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 border-2 border-pharaoh-gold/30 hover:border-pharaoh-gold/60 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">
+              <Card key={tour.id} className="group overflow-hidden bg-linear-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 border-2 border-pharaoh-gold/30 hover:border-pharaoh-gold/60 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]">
                 <Link href={`/daily-tours/${tour.id}`} className="block">
                   {/* Enhanced Tour Image with Slideshow */}
                   <div className="relative h-72 w-full overflow-hidden">
@@ -315,7 +315,7 @@ export default function DailyToursPage() {
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-700"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                       </>
                     )}
 
@@ -335,7 +335,7 @@ export default function DailyToursPage() {
                     </div>
 
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-pharaoh-gold/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-pharaoh-gold/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
 
                   {/* Tour Content */}
@@ -399,4 +399,6 @@ export default function DailyToursPage() {
     </div>
   );
 }
+
+
 

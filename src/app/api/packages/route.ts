@@ -6,14 +6,6 @@ export const dynamic = 'force-dynamic';
 export async function GET() {
   try {
     const packages = await prisma.package.findMany({
-      include: {
-        itineraryDays: {
-          include: {
-            images: true,
-          },
-          orderBy: { dayNumber: 'asc' },
-        },
-      },
       orderBy: {
         createdAt: 'desc',
       },
@@ -34,50 +26,35 @@ export async function POST(request: Request) {
       description,
       shortDescription,
       price,
-      durationDays,
-      mainImageUrl,
-      itineraryDays,
-      packageType,
-      selectedDahabiyaId,
-      cairoNights,
-      dahabiyaNights,
-      maxGuests,
-      highlights,
+      duration,
+      mainImage,
+      category,
+      destination,
+      includes,
+      excludes,
+      itinerary,
+      maxGroupSize,
+      difficulty,
     } = body;
 
     const createdPackage = await prisma.package.create({
       data: {
         name,
+        slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
         description,
         shortDescription,
         price,
-        durationDays,
-        mainImageUrl,
-        packageType: packageType || 'CAIRO_DAHABIYA',
-        selectedDahabiyaId,
-        cairoNights: cairoNights || 0,
-        dahabiyaNights: dahabiyaNights || 0,
-        maxGuests: maxGuests || 12,
-        highlights: highlights || [],
-        itineraryDays: {
-          create: (itineraryDays || []).map((day: any, idx: number) => ({
-            dayNumber: idx + 1,
-            title: day.title,
-            description: day.description,
-            location: day.location || '',
-            activities: day.activities || [],
-            images: {
-              create: (day.images || []).map((img: any) => ({
-                url: img.url,
-                alt: img.alt || '',
-                category: 'INDOOR', // Default category for package images
-              })),
-            },
-          })),
-        },
-      },
-      include: {
-        itineraryDays: { include: { images: true } },
+        duration,
+        mainImage,
+        category: category || 'CAIRO_DAHABIYA',
+        destination,
+        includes,
+        excludes,
+        itinerary,
+        maxGroupSize,
+        difficulty,
+        isActive: true,
+        isFeatured: false,
       },
     });
     return NextResponse.json(createdPackage);
@@ -91,18 +68,24 @@ export async function PATCH(request: Request) {
   try {
     const body = await request.json();
     if (!body.id) return new NextResponse('Missing package id', { status: 400 });
-    const updated = await prisma.dahabiya.update({
+    const updated = await prisma.package.update({
       where: { id: body.id },
       data: {
         name: body.name,
         description: body.description,
-        pricePerDay: body.price,
-        capacity: body.capacity,
-        features: body.features,
-        type: body.type,
+        shortDescription: body.shortDescription,
+        price: body.price,
+        duration: body.duration,
+        mainImage: body.mainImage,
         category: body.category,
-        amenities: body.amenities,
-        images: body.images ? { deleteMany: {}, create: body.images } : undefined,
+        destination: body.destination,
+        includes: body.includes,
+        excludes: body.excludes,
+        itinerary: body.itinerary,
+        maxGroupSize: body.maxGroupSize,
+        difficulty: body.difficulty,
+        isActive: body.isActive,
+        isFeatured: body.isFeatured,
       },
     });
     return NextResponse.json(updated);
@@ -111,3 +94,4 @@ export async function PATCH(request: Request) {
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
+

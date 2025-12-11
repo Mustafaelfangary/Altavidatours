@@ -62,9 +62,9 @@ export default function AzharDahabiyaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/5">
+    <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/5">
       {/* Hero Section with Video/Image */}
-      <section className="relative py-32 bg-gradient-to-br from-nile-blue via-pharaoh-gold/20 to-ancient-stone overflow-hidden">
+      <section className="relative py-32 bg-linear-to-br from-nile-blue via-pharaoh-gold/20 to-ancient-stone overflow-hidden">
         {/* Background Video/Image */}
         <div className="absolute inset-0">
           {dahabiya.videoUrl ? (
@@ -86,7 +86,7 @@ export default function AzharDahabiyaPage() {
               loader={imageLoader}
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-br from-nile-blue/80 via-pharaoh-gold/40 to-ancient-stone/80"></div>
+          <div className="absolute inset-0 bg-linear-to-br from-nile-blue/80 via-pharaoh-gold/40 to-ancient-stone/80"></div>
         </div>
 
         {/* Floating Background Elements */}
@@ -108,7 +108,7 @@ export default function AzharDahabiyaPage() {
               <div className="inline-block p-4 rounded-full bg-pharaoh-gold/30 backdrop-blur-sm border-2 border-pharaoh-gold/50 mb-6">
                 <Leaf className="w-16 h-16 text-pharaoh-gold" />
               </div>
-              <h1 className="text-6xl md:text-7xl font-heading font-bold mb-6 bg-gradient-to-r from-pharaoh-gold via-white to-pharaoh-gold bg-clip-text text-transparent drop-shadow-2xl animate-pulse">
+              <h1 className="text-6xl md:text-7xl font-heading font-bold mb-6 bg-linear-to-r from-pharaoh-gold via-white to-pharaoh-gold bg-clip-text text-transparent drop-shadow-2xl animate-pulse">
                 <span className="inline-block animate-bounce hover:animate-spin transition-all duration-500 hover:scale-110">{dahabiya.name.split(' ')[0]}</span>{' '}
                 <span className="inline-block animate-pulse delay-300 hover:animate-bounce hover:text-green-400 transition-all duration-500">{dahabiya.name.split(' ')[1]}</span>
               </h1>
@@ -123,8 +123,8 @@ export default function AzharDahabiyaPage() {
                 </span>
               </div>
 
-              <p className="text-xl md:text-2xl font-light mb-8 bg-gradient-to-r from-pharaoh-gold via-white to-green-400 bg-clip-text text-transparent max-w-4xl mx-auto animate-fade-in hover:animate-pulse hover:scale-105 transition-all duration-700">
-                <span className="hover:bg-gradient-to-r hover:from-green-400 hover:via-white hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent transition-all duration-500">
+              <p className="text-xl md:text-2xl font-light mb-8 bg-linear-to-r from-pharaoh-gold via-white to-green-400 bg-clip-text text-transparent max-w-4xl mx-auto animate-fade-in hover:animate-pulse hover:scale-105 transition-all duration-700">
+                <span className="hover:bg-linear-to-r hover:from-green-400 hover:via-white hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent transition-all duration-500">
                   {dahabiya.shortDescription}
                 </span>
               </p>
@@ -162,13 +162,13 @@ export default function AzharDahabiyaPage() {
         <Container maxWidth="lg">
           <AnimatedSection animation="fade-in">
             <div className="text-center mb-16">
-              <h2 className="text-5xl font-heading font-bold bg-gradient-to-r from-green-400 via-pharaoh-gold to-green-400 bg-clip-text text-transparent mb-6 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
-                <span className="hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-white hover:to-green-400 hover:bg-clip-text hover:text-transparent transition-all duration-700">
+              <h2 className="text-5xl font-heading font-bold bg-linear-to-r from-green-400 via-pharaoh-gold to-green-400 bg-clip-text text-transparent mb-6 animate-pulse hover:animate-bounce hover:scale-110 transition-all duration-500">
+                <span className="hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-white hover:to-green-400 hover:bg-clip-text hover:text-transparent transition-all duration-700">
                   🌿 About Azhar Dahabiya 🌿
                 </span>
               </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-green-400 via-pharaoh-gold to-green-400 mx-auto rounded-full mb-8 animate-shimmer hover:w-32 hover:h-2 transition-all duration-500"></div>
-              <p className="text-xl bg-gradient-to-r from-ancient-stone via-green-400/60 to-ancient-stone bg-clip-text text-transparent leading-relaxed max-w-4xl mx-auto hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-green-400 hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent hover:animate-pulse transition-all duration-700">
+              <div className="w-24 h-1 bg-linear-to-r from-green-400 via-pharaoh-gold to-green-400 mx-auto rounded-full mb-8 animate-shimmer hover:w-32 hover:h-2 transition-all duration-500"></div>
+              <p className="text-xl bg-linear-to-r from-ancient-stone via-green-400/60 to-ancient-stone bg-clip-text text-transparent leading-relaxed max-w-4xl mx-auto hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-green-400 hover:to-pharaoh-gold hover:bg-clip-text hover:text-transparent hover:animate-pulse transition-all duration-700">
                 <span className="hover:scale-105 transition-all duration-500">{dahabiya.description}</span>
               </p>
             </div>
@@ -177,15 +177,15 @@ export default function AzharDahabiyaPage() {
           {/* Features Grid */}
           <AnimatedSection animation="slide-up" delay={200}>
             <div className="mb-20">
-              <h3 className="text-4xl font-heading font-bold bg-gradient-to-r from-green-400 via-pharaoh-gold to-green-400 bg-clip-text text-transparent text-center mb-12 animate-bounce hover:animate-pulse hover:scale-110 transition-all duration-500">
-                <span className="hover:bg-gradient-to-r hover:from-pharaoh-gold hover:via-white hover:to-green-400 hover:bg-clip-text hover:text-transparent transition-all duration-700">
+              <h3 className="text-4xl font-heading font-bold bg-linear-to-r from-green-400 via-pharaoh-gold to-green-400 bg-clip-text text-transparent text-center mb-12 animate-bounce hover:animate-pulse hover:scale-110 transition-all duration-500">
+                <span className="hover:bg-linear-to-r hover:from-pharaoh-gold hover:via-white hover:to-green-400 hover:bg-clip-text hover:text-transparent transition-all duration-700">
                   🌿 Authentic Natural Features 🌿
                 </span>
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {dahabiya.features.map((feature, index) => (
                   <AnimatedSection key={index} animation="scale-in" delay={index * 100}>
-                    <div className="bg-gradient-to-br from-pharaoh-gold/10 via-white to-nile-blue/10 rounded-2xl p-6 text-center border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group hover:scale-105">
+                    <div className="bg-linear-to-br from-pharaoh-gold/10 via-white to-nile-blue/10 rounded-2xl p-6 text-center border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group hover:scale-105">
                       <div className="w-12 h-12 bg-pharaoh-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-pharaoh-gold group-hover:scale-110 transition-all duration-500">
                         <Leaf className="w-6 h-6 text-pharaoh-gold group-hover:text-white transition-colors duration-300" />
                       </div>
@@ -206,7 +206,7 @@ export default function AzharDahabiyaPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {dahabiya.amenities.map((amenity, index) => (
                   <AnimatedSection key={index} animation="scale-in" delay={index * 100}>
-                    <div className="bg-gradient-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-2xl p-6 text-center border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group hover:scale-105 shadow-lg hover:shadow-xl">
+                    <div className="bg-linear-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-2xl p-6 text-center border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group hover:scale-105 shadow-lg hover:shadow-xl">
                       <div className="w-16 h-16 bg-pharaoh-gold/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-pharaoh-gold group-hover:scale-110 transition-all duration-500">
                         <TreePine className="w-8 h-8 text-pharaoh-gold group-hover:text-white transition-colors duration-300" />
                       </div>
@@ -235,7 +235,7 @@ export default function AzharDahabiyaPage() {
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                           loader={imageLoader}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-nile-blue/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="absolute inset-0 bg-linear-to-t from-nile-blue/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                           <h4 className="font-bold text-sm mb-1">{image.alt}</h4>
                           <p className="text-xs text-pharaoh-gold">{image.category.replace('_', ' ')}</p>
@@ -250,7 +250,7 @@ export default function AzharDahabiyaPage() {
 
           {/* Why Choose This Dahabiya Section */}
           <AnimatedSection animation="slide-up" delay={800}>
-            <div className="mb-20 bg-gradient-to-br from-pharaoh-gold/10 via-white to-nile-blue/10 rounded-3xl p-12 border-2 border-pharaoh-gold/20">
+            <div className="mb-20 bg-linear-to-br from-pharaoh-gold/10 via-white to-nile-blue/10 rounded-3xl p-12 border-2 border-pharaoh-gold/20">
               <div className="text-center mb-8">
                 <Leaf className="w-16 h-16 text-pharaoh-gold mx-auto mb-6" />
                 <h3 className="text-4xl font-heading font-bold text-nile-blue mb-6">
@@ -266,7 +266,7 @@ export default function AzharDahabiyaPage() {
 
           {/* Meaning of Dahabiya Section */}
           <AnimatedSection animation="fade-in" delay={1000}>
-            <div className="mb-20 bg-gradient-to-br from-nile-blue/10 via-white to-pharaoh-gold/10 rounded-3xl p-12 border-2 border-nile-blue/20">
+            <div className="mb-20 bg-linear-to-br from-nile-blue/10 via-white to-pharaoh-gold/10 rounded-3xl p-12 border-2 border-nile-blue/20">
               <div className="text-center mb-8">
                 <Anchor className="w-16 h-16 text-nile-blue mx-auto mb-6" />
                 <h3 className="text-4xl font-heading font-bold text-nile-blue mb-6">
@@ -287,21 +287,21 @@ export default function AzharDahabiyaPage() {
                 <h3 className="text-4xl font-heading font-bold text-nile-blue mb-6">
                   4-Day Authentic Journey Itinerary
                 </h3>
-                <div className="w-24 h-1 bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto rounded-full"></div>
+                <div className="w-24 h-1 bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto rounded-full"></div>
               </div>
 
               <div className="space-y-12">
                 {dahabiya.itineraryDays.map((day, index) => (
                   <AnimatedSection key={index} animation="slide-in-left" delay={index * 200}>
-                    <div className="bg-gradient-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-3xl p-8 border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group">
+                    <div className="bg-linear-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-3xl p-8 border-2 border-pharaoh-gold/20 hover:border-pharaoh-gold/40 transition-all duration-500 group">
                       <div className="flex flex-col lg:flex-row gap-8 items-center">
-                        <div className="flex-shrink-0">
+                        <div className="shrink-0">
                           <div className="w-20 h-20 bg-pharaoh-gold rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                             <span className="text-xl font-bold text-white">Day {day.dayNumber}</span>
                           </div>
                         </div>
 
-                        <div className="flex-grow text-center lg:text-left">
+                        <div className="grow text-center lg:text-left">
                           <h4 className="text-2xl font-heading font-bold text-nile-blue mb-4">{day.title}</h4>
                           <p className="text-ancient-stone leading-relaxed mb-6">{day.description}</p>
 
@@ -332,7 +332,7 @@ export default function AzharDahabiyaPage() {
 
           {/* CTA Section */}
           <AnimatedSection animation="fade-in">
-            <div className="text-center bg-gradient-to-br from-nile-blue via-pharaoh-gold/20 to-nile-blue rounded-3xl p-12 text-white">
+            <div className="text-center bg-linear-to-br from-nile-blue via-pharaoh-gold/20 to-nile-blue rounded-3xl p-12 text-white">
               <Leaf className="w-14 h-14 text-pharaoh-gold mx-auto mb-6" />
               <h2 className="text-4xl font-heading font-bold mb-6">
                 Experience Authentic Charm
@@ -382,3 +382,5 @@ export default function AzharDahabiyaPage() {
     </div>
   );
 }
+
+

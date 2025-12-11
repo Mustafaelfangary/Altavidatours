@@ -26,3 +26,5 @@ export function useTranslations(namespace?: string): TranslationFunction {
     }
   };
 }
+
+

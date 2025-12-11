@@ -135,3 +135,4 @@ export default function CategorizedGallery({ images }: CategorizedGalleryProps) 
     </div>
   );
 }
+

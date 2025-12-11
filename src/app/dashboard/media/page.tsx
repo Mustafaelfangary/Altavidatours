@@ -462,7 +462,7 @@ export default function MediaManagerPage() {
                     className="h-4 w-4"
                   />
                   
-                  <div className="relative w-16 h-16 flex-shrink-0">
+                  <div className="relative w-16 h-16 shrink-0">
                     {item.type === 'image' ? (
                       <Image
                         src={item.url}
@@ -599,3 +599,5 @@ export default function MediaManagerPage() {
     </div>
   );
 } 
+
+

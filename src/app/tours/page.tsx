@@ -65,7 +65,7 @@ const tourCategories = [
 
 export default function ToursPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-nile-blue/5">
+    <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-nile-blue/5">
       <Navbar />
       
       {/* Hero Section */}
@@ -83,7 +83,7 @@ export default function ToursPage() {
           height="h-full"
           className="rounded-none"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 z-10"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-black/30 z-10"></div>
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="text-center text-white px-4 max-w-5xl mx-auto">
             <Badge className="mb-6 bg-pharaoh-gold/90 text-black px-6 py-2 text-lg font-semibold">
@@ -130,7 +130,7 @@ export default function ToursPage() {
           <Badge className="mb-4 bg-pharaoh-gold/20 text-pharaoh-gold border-pharaoh-gold/30">
             Choose Your Adventure
           </Badge>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 font-serif bg-gradient-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 font-serif bg-linear-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold bg-clip-text text-transparent">
             Tour Categories
           </h2>
           <PharaonicDecoration variant="section" size="md" />
@@ -145,7 +145,7 @@ export default function ToursPage() {
             return (
               <Card 
                 key={category.id} 
-                className="group overflow-hidden bg-gradient-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 border-2 border-pharaoh-gold/30 hover:border-pharaoh-gold/60 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                className="group overflow-hidden bg-linear-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 border-2 border-pharaoh-gold/30 hover:border-pharaoh-gold/60 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
               >
                 <div className="relative h-64 overflow-hidden">
                   <Image
@@ -155,7 +155,7 @@ export default function ToursPage() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     loader={imageLoader}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"></div>
                   {category.featured && (
                     <div className="absolute top-4 right-4">
                       <Badge className="bg-pharaoh-gold/90 text-black backdrop-blur-sm">
@@ -187,7 +187,7 @@ export default function ToursPage() {
                   </div>
                   <Link href={category.href}>
                     <Button
-                      className="w-full bg-gradient-to-r from-pharaoh-gold to-pharaoh-gold/80 hover:from-pharaoh-gold/90 hover:to-pharaoh-gold/70 text-black font-semibold"
+                      className="w-full bg-linear-to-r from-pharaoh-gold to-pharaoh-gold/80 hover:from-pharaoh-gold/90 hover:to-pharaoh-gold/70 text-black font-semibold"
                     >
                       Explore {category.name}
                       <ChevronRight className="ml-2 h-4 w-4" />
@@ -201,7 +201,7 @@ export default function ToursPage() {
       </div>
 
       {/* Quick Links Section */}
-      <div className="bg-gradient-to-br from-pharaoh-gold/5 via-white to-nile-blue/5 py-20">
+      <div className="bg-linear-to-br from-pharaoh-gold/5 via-white to-nile-blue/5 py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 font-serif">Quick Links</h2>
@@ -229,7 +229,7 @@ export default function ToursPage() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold py-20">
+      <div className="bg-linear-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
             Ready to Explore Egypt?
@@ -262,4 +262,6 @@ export default function ToursPage() {
     </div>
   );
 }
+
+
 

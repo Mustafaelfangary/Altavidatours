@@ -11,3 +11,4 @@ export default function RichTextBlock({ block }: RichTextBlockProps) {
   // Using dangerouslySetInnerHTML because the content is trusted HTML from the CMS
   return <div dangerouslySetInnerHTML={{ __html: block.content }} />;
 }
+

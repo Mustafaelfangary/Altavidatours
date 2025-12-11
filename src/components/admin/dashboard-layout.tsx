@@ -145,3 +145,4 @@ export function DashboardLayout({ children, title }: DashboardLayoutProps) {
     </Box>
   );
 } 
+

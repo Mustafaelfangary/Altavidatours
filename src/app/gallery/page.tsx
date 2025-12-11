@@ -113,7 +113,7 @@ export default function GalleryPage() {
     .map(img => img.url);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-papyrus via-white to-pharaoh-gold/10">
+    <div className="min-h-screen bg-linear-to-br from-papyrus via-white to-pharaoh-gold/10">
       <Navbar />
       
       {/* Enhanced Hero Section */}
@@ -126,7 +126,7 @@ export default function GalleryPage() {
           height="h-full"
           className="rounded-none"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 z-10"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/20 z-10"></div>
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="text-center text-white px-4 max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 font-serif drop-shadow-2xl headline-animated">
@@ -182,7 +182,7 @@ export default function GalleryPage() {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-16 p-12 bg-gradient-to-br from-pharaoh-gold/10 via-nile-blue/5 to-pharaoh-gold/10 rounded-3xl border-2 border-pharaoh-gold/20">
+        <div className="text-center mt-16 p-12 bg-linear-to-br from-pharaoh-gold/10 via-nile-blue/5 to-pharaoh-gold/10 rounded-3xl border-2 border-pharaoh-gold/20">
           <h2 className="text-3xl md:text-4xl font-bold text-nile-blue mb-4">
             {getContent('gallery_cta_title', 'Ready to Create Your Own Memories?')}
           </h2>
@@ -202,3 +202,5 @@ export default function GalleryPage() {
     </div>
   );
 }
+
+

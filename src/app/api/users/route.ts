@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { z } from "zod";
-import { hash } from "bcrypt";
+import { hash } from "bcryptjs";
 
 const userCreateSchema = z.object({
   name: z.string().min(2),
@@ -100,3 +100,5 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
+

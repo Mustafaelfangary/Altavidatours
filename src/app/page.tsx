@@ -129,7 +129,7 @@ export default function HomePage() {
               />
             </div>
             
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70 z-10"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-black/70 z-10"></div>
 
             <div className="relative z-20 text-center text-white px-4 max-w-5xl mx-auto">
               <AnimatedSection animation="fade-in">
@@ -195,7 +195,7 @@ export default function HomePage() {
                             className="object-cover group-hover:scale-110 transition-transform duration-700"
                             loader={imageLoader}
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+                          <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/40 to-transparent" />
                         </div>
                         <div className="p-3 text-left">
                           <p className="text-base font-semibold text-white mb-1">
@@ -230,7 +230,7 @@ export default function HomePage() {
         )}
 
         {/* Why Choose Us Section */}
-        <section className="py-24 bg-gradient-to-br from-red-50 via-red-50 to-pharaoh-gold/10 section-enhanced">
+        <section className="py-24 bg-linear-to-br from-red-50 via-red-50 to-pharaoh-gold/10 section-enhanced">
           <Container maxWidth="lg">
             <div className="text-center mb-12">
               <PharaonicDecoration variant="section" size="sm" />
@@ -276,7 +276,7 @@ export default function HomePage() {
         </section>
 
         {/* What Makes Us Different Section */}
-        <section className="py-20 bg-gradient-to-br from-nile-blue/5 via-white to-pharaoh-gold/5 relative overflow-hidden">
+        <section className="py-20 bg-linear-to-br from-nile-blue/5 via-white to-pharaoh-gold/5 relative overflow-hidden">
           {/* Background Decorative Elements */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-10 right-20 w-40 h-40 border border-pharaoh-gold rounded-full animate-pulse"></div>
@@ -291,16 +291,16 @@ export default function HomePage() {
                 <h2 className="section-title text-nile-blue font-heading mb-4">
                   {getContent('homepage_why_different_title', 'What Makes Our Tours Special?')}
                 </h2>
-                <div className="w-32 h-1 bg-gradient-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto mb-8 rounded-full animate-shimmer"></div>
+                <div className="w-32 h-1 bg-linear-to-r from-nile-blue via-pharaoh-gold to-nile-blue mx-auto mb-8 rounded-full animate-shimmer"></div>
               </div>
             </AnimatedSection>
 
             <AnimatedSection animation="fade-in" delay={200}>
               <div className="max-w-4xl mx-auto">
                 {/* Colorful Animated Text Box */}
-                <div className="relative bg-gradient-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-3xl p-8 shadow-2xl border border-pharaoh-gold/20 backdrop-blur-sm">
+                <div className="relative bg-linear-to-br from-white via-pharaoh-gold/5 to-nile-blue/5 rounded-3xl p-8 shadow-2xl border border-pharaoh-gold/20 backdrop-blur-sm">
                   {/* Animated Border Effect */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold opacity-20 animate-gradient-x"></div>
+                  <div className="absolute inset-0 rounded-3xl bg-linear-to-r from-pharaoh-gold via-nile-blue to-pharaoh-gold opacity-20 animate-gradient-x"></div>
                   <div className="absolute inset-1 rounded-3xl bg-white/90 backdrop-blur-sm"></div>
 
                   {/* Content */}
@@ -322,7 +322,7 @@ export default function HomePage() {
                     </div>
 
                     {/* Bottom decorative line */}
-                    <div className="mt-8 w-full h-1 bg-gradient-to-r from-transparent via-pharaoh-gold to-transparent rounded-full animate-shimmer"></div>
+                    <div className="mt-8 w-full h-1 bg-linear-to-r from-transparent via-pharaoh-gold to-transparent rounded-full animate-shimmer"></div>
                   </div>
                 </div>
               </div>
@@ -331,12 +331,12 @@ export default function HomePage() {
         </section>
 
         {/* Features Section */}
-        <section className="py-24 bg-gradient-to-br from-blue-50 via-red-50 to-emerald-50 relative overflow-hidden section-enhanced">
+        <section className="py-24 bg-linear-to-br from-blue-50 via-red-50 to-emerald-50 relative overflow-hidden section-enhanced">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pharaoh-gold to-red-400 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-br from-nile-blue to-blue-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-gradient-to-br from-emerald-400 to-teal-400 rounded-full blur-2xl animate-pulse delay-500"></div>
+            <div className="absolute top-10 left-10 w-32 h-32 bg-linear-to-br from-pharaoh-gold to-red-400 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-20 w-40 h-40 bg-linear-to-br from-nile-blue to-blue-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-linear-to-br from-emerald-400 to-teal-400 rounded-full blur-2xl animate-pulse delay-500"></div>
           </div>
 
           <Container maxWidth="lg" className="relative z-10">
@@ -344,12 +344,12 @@ export default function HomePage() {
               <div className="text-center mb-20">
                 {/* Enhanced Title with Gradient and Animation */}
                 <div className="mb-6">
-                  <h2 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-nile-blue via-pharaoh-gold to-emerald-600 bg-clip-text text-transparent font-cinzel tracking-tight leading-tight hover:scale-105 transition-transform duration-500 cursor-default drop-shadow-lg">
+                  <h2 className="text-5xl md:text-7xl font-black bg-linear-to-r from-nile-blue via-pharaoh-gold to-emerald-600 bg-clip-text text-transparent font-cinzel tracking-tight leading-tight hover:scale-105 transition-transform duration-500 cursor-default drop-shadow-lg">
                     {getContent('homepage_features_title', 'Why Choose Our Tours')}
                   </h2>
                   {/* Decorative underline */}
                   <div className="mt-6 flex justify-center">
-                    <div className="w-32 h-1.5 bg-gradient-to-r from-pharaoh-gold via-red-400 to-pharaoh-gold rounded-full animate-shimmer shadow-lg"></div>
+                    <div className="w-32 h-1.5 bg-linear-to-r from-pharaoh-gold via-red-400 to-pharaoh-gold rounded-full animate-shimmer shadow-lg"></div>
                   </div>
                 </div>
 
@@ -369,13 +369,13 @@ export default function HomePage() {
                       {/* Card with enhanced styling */}
                       <div className="relative bg-white/95 backdrop-blur-lg rounded-3xl p-8 text-center border-2 border-transparent hover:border-pharaoh-gold/40 shadow-pharaoh hover:shadow-nile transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 card-enhanced-hover">
                         {/* Gradient background on hover */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-pharaoh-gold/5 via-transparent to-nile-blue/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="absolute inset-0 bg-linear-to-br from-pharaoh-gold/5 via-transparent to-nile-blue/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                         {/* Enhanced Icon */}
                         <FloatingElement intensity={0.4}>
                           <div className="relative w-20 h-20 mx-auto mb-6">
                             {/* Icon background with gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-pharaoh-gold/20 via-red-300/20 to-pharaoh-gold/20 rounded-2xl group-hover:from-pharaoh-gold group-hover:via-red-400 group-hover:to-pharaoh-gold transition-all duration-500 shadow-lg group-hover:shadow-xl"></div>
+                            <div className="absolute inset-0 bg-linear-to-br from-pharaoh-gold/20 via-red-300/20 to-pharaoh-gold/20 rounded-2xl group-hover:from-pharaoh-gold group-hover:via-red-400 group-hover:to-pharaoh-gold transition-all duration-500 shadow-lg group-hover:shadow-xl"></div>
                             <div className="relative w-full h-full flex items-center justify-center rounded-2xl">
                               <Icon className="w-10 h-10 text-pharaoh-gold group-hover:text-white transition-all duration-500 transform group-hover:scale-110" />
                             </div>
@@ -393,7 +393,7 @@ export default function HomePage() {
                         </p>
 
                         {/* Decorative element */}
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-pharaoh-gold to-red-400 group-hover:w-16 transition-all duration-500 rounded-full"></div>
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-linear-to-r from-pharaoh-gold to-red-400 group-hover:w-16 transition-all duration-500 rounded-full"></div>
                       </div>
                     </div>
                   </AnimatedSection>
@@ -417,7 +417,7 @@ export default function HomePage() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Featured Tour 1 */}
-              <div className="group relative overflow-hidden bg-gradient-to-br from-white to-pharaoh-gold/5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 border-transparent hover:border-pharaoh-gold/30">
+              <div className="group relative overflow-hidden bg-linear-to-br from-white to-pharaoh-gold/5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 border-transparent hover:border-pharaoh-gold/30">
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={getContentBlock('homepage_featured_1_image')?.mediaUrl || FEATURED_TOURS.pyramids}
@@ -426,7 +426,7 @@ export default function HomePage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                     loader={imageLoader}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute top-4 right-4 z-10">
                     <Badge className="bg-pharaoh-gold text-white px-3 py-1 font-bold">Popular</Badge>
                   </div>
@@ -448,7 +448,7 @@ export default function HomePage() {
               </div>
 
               {/* Featured Tour 2 */}
-              <div className="group relative overflow-hidden bg-gradient-to-br from-white to-nile-blue/5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 border-transparent hover:border-nile-blue/30">
+              <div className="group relative overflow-hidden bg-linear-to-br from-white to-nile-blue/5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 border-transparent hover:border-nile-blue/30">
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={getContentBlock('homepage_featured_2_image')?.mediaUrl || FEATURED_TOURS.museum}
@@ -457,7 +457,7 @@ export default function HomePage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                     loader={imageLoader}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute top-4 right-4 z-10">
                     <Badge className="bg-nile-blue text-white px-3 py-1 font-bold">Premium</Badge>
                   </div>
@@ -479,7 +479,7 @@ export default function HomePage() {
               </div>
 
               {/* Featured Tour 3 */}
-              <div className="group relative overflow-hidden bg-gradient-to-br from-white to-red-50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 border-transparent hover:border-pharaoh-gold/30">
+              <div className="group relative overflow-hidden bg-linear-to-br from-white to-red-50 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-2 border-transparent hover:border-pharaoh-gold/30">
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={getContentBlock('homepage_featured_3_image')?.mediaUrl || FEATURED_TOURS.alexandria}
@@ -488,7 +488,7 @@ export default function HomePage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                     loader={imageLoader}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute top-4 right-4 z-10">
                     <Badge className="bg-red-500 text-white px-3 py-1 font-bold">Featured</Badge>
                   </div>
@@ -513,7 +513,7 @@ export default function HomePage() {
             {/* Explore More CTA */}
             <div className="text-center mt-12">
               <Link href="/excursions">
-                <Button size="lg" className="bg-gradient-to-r from-pharaoh-gold to-nile-blue hover:from-pharaoh-gold/90 hover:to-nile-blue/90 text-white font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Button size="lg" className="bg-linear-to-r from-pharaoh-gold to-nile-blue hover:from-pharaoh-gold/90 hover:to-nile-blue/90 text-white font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300">
                   Explore All Excursions
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -564,7 +564,7 @@ export default function HomePage() {
                       className="object-cover transition-transform duration-700 group-hover:scale-125"
                           loader={imageLoader}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                 ))}
               </div>
@@ -607,7 +607,7 @@ export default function HomePage() {
         </section>
 
         {/* Enhanced Gallery Section */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <section className="py-20 bg-linear-to-br from-gray-50 to-white">
           <Container maxWidth="lg">
             <div className="text-center mb-16">
               <h2 className="section-title">
@@ -666,3 +666,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+

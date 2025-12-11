@@ -88,3 +88,5 @@ export function useMouseParallax(intensity: number = 0.1) {
 
   return { ref, position };
 }
+
+

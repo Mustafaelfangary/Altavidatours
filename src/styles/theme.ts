@@ -23,3 +23,5 @@ export const theme = {
     secondary: "linear-gradient(to right, #1B4B6D, #2C3E50)",
   },
 }
+
+

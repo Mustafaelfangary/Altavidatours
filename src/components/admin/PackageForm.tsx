@@ -281,7 +281,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
   };
 
   return (
-    <Card className="p-8 max-w-5xl mx-auto bg-gradient-to-br from-emerald-50 via-red-50 to-blue-50 shadow-2xl border-2 border-pharaoh-gold/30">
+    <Card className="p-8 max-w-5xl mx-auto bg-linear-to-br from-emerald-50 via-red-50 to-blue-50 shadow-2xl border-2 border-pharaoh-gold/30">
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-bold text-nile-blue mb-2 font-serif">Create Premium Package</h2>
         <p className="text-ancient-stone">Combine Cairo/Giza exploration with luxury dahabiya cruising</p>
@@ -289,7 +289,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Package Type & AI Generation */}
-        <Card className="p-6 bg-gradient-to-r from-pharaoh-gold/10 to-nile-blue/10 border-pharaoh-gold/30">
+        <Card className="p-6 bg-linear-to-r from-pharaoh-gold/10 to-nile-blue/10 border-pharaoh-gold/30">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold text-nile-blue flex items-center gap-2">
               <Sparkles className="w-5 h-5" />
@@ -299,7 +299,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
               type="button"
               onClick={generatePackageContent}
               disabled={generatingContent || !form.name || !form.selectedDahabiyaId}
-              className="bg-gradient-to-r from-pharaoh-gold to-red-600 hover:from-red-600 hover:to-pharaoh-gold text-white font-bold"
+              className="bg-linear-to-r from-pharaoh-gold to-red-600 hover:from-red-600 hover:to-pharaoh-gold text-white font-bold"
             >
               {generatingContent ? (
                 <>
@@ -491,7 +491,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
         </Card>
 
         {/* Package Highlights */}
-        <Card className="p-6 bg-gradient-to-r from-pharaoh-gold/5 to-nile-blue/5 border-pharaoh-gold/30">
+        <Card className="p-6 bg-linear-to-r from-pharaoh-gold/5 to-nile-blue/5 border-pharaoh-gold/30">
           <h3 className="text-xl font-bold text-nile-blue mb-4 flex items-center gap-2">
             <Star className="w-5 h-5" />
             Package Highlights
@@ -553,7 +553,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
           </h3>
 
           {/* Add New Day Form */}
-          <Card className="p-4 mb-6 bg-gradient-to-r from-pharaoh-gold/5 to-nile-blue/5 border-pharaoh-gold/20">
+          <Card className="p-4 mb-6 bg-linear-to-r from-pharaoh-gold/5 to-nile-blue/5 border-pharaoh-gold/20">
             <h4 className="font-semibold text-nile-blue mb-3">Add New Day</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
               <Input
@@ -594,7 +594,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
           {/* Existing Days */}
           <div className="space-y-6">
             {itineraryDays.map((day) => (
-              <Card key={day.id} className="p-6 bg-gradient-to-r from-white to-pharaoh-gold/5 border-pharaoh-gold/30">
+              <Card key={day.id} className="p-6 bg-linear-to-r from-white to-pharaoh-gold/5 border-pharaoh-gold/30">
                 <div className="flex justify-between items-center mb-4">
                   <div className="flex items-center gap-3">
                     <Badge className="bg-nile-blue text-white px-3 py-1">Day {day.dayNumber}</Badge>
@@ -709,7 +709,7 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
         <div className="flex justify-center pt-6">
           <Button
             type="submit"
-            className="w-full max-w-md bg-gradient-to-r from-nile-blue to-pharaoh-gold hover:from-pharaoh-gold hover:to-nile-blue text-white font-bold py-4 px-8 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
+            className="w-full max-w-md bg-linear-to-r from-nile-blue to-pharaoh-gold hover:from-pharaoh-gold hover:to-nile-blue text-white font-bold py-4 px-8 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
             disabled={loading}
           >
             {loading ? (
@@ -741,3 +741,5 @@ export default function PackageForm({ onSuccess, initialData, dahabiyas: propDah
     </Card>
   );
 }
+
+

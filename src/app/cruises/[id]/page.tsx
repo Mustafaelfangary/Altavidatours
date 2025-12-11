@@ -40,17 +40,17 @@ export default async function CruiseDetailPage({ params }: PageProps) {
   const itineraryDays = cruise.itinerary?.split("\n").filter(Boolean) || [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-deep-nile-blue/5 to-white">
+    <div className="min-h-screen bg-linear-to-b from-deep-nile-blue/5 to-white">
       {/* Hero Section */}
       <section className="relative h-[50vh] min-h-[400px]">
         {cruise.images?.[0]?.url ? (
           <Image src={cruise.images[0].url} alt={cruise.name} fill className="object-cover" priority loader={imageLoader} />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-deep-nile-blue to-pharaoh-gold flex items-center justify-center">
+          <div className="w-full h-full bg-linear-to-br from-deep-nile-blue to-pharaoh-gold flex items-center justify-center">
             <Ship className="w-32 h-32 text-white/30" />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8">
           <div className="container mx-auto">
             <Link href="/cruises" className="inline-flex items-center text-white/80 hover:text-white mb-4 transition-colors">
@@ -93,7 +93,7 @@ export default async function CruiseDetailPage({ params }: PageProps) {
                     <div className="space-y-4">
                       {itineraryDays.map((day, index) => (
                         <div key={index} className="flex gap-4 p-4 bg-muted/50 rounded-lg">
-                          <div className="flex-shrink-0 w-12 h-12 bg-pharaoh-gold/20 rounded-full flex items-center justify-center">
+                          <div className="shrink-0 w-12 h-12 bg-pharaoh-gold/20 rounded-full flex items-center justify-center">
                             <span className="font-bold text-pharaoh-gold">{index + 1}</span>
                           </div>
                           <div className="flex-1">

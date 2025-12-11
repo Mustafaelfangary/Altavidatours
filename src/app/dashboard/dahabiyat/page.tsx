@@ -26,3 +26,4 @@ export default async function AdminDahabiyatPage() {
 
   return <DahabiyatDashboardClient dahabiyat={mappedDahabiyat} />;
 }
+

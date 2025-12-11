@@ -176,7 +176,7 @@ export default function DashboardNav() {
                       <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-pharaoh-gold rounded-full animate-pulse"></div>
                     )}
                     {hoveredItem === item.href && !isActive && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-pharaoh-gold/10 rounded-xl animate-pulse"></div>
+                      <div className="absolute inset-0 bg-linear-to-r from-white/5 to-pharaoh-gold/10 rounded-xl animate-pulse"></div>
                     )}
                   </Link>
                 );
@@ -212,7 +212,7 @@ export default function DashboardNav() {
                           <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-pharaoh-gold rounded-full animate-pulse"></div>
                         )}
                         {hoveredItem === item.label && !isActive && (
-                          <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-pharaoh-gold/10 rounded-xl animate-pulse"></div>
+                          <div className="absolute inset-0 bg-linear-to-r from-white/5 to-pharaoh-gold/10 rounded-xl animate-pulse"></div>
                         )}
                       </button>
                     </DropdownMenuTrigger>
@@ -289,7 +289,7 @@ export default function DashboardNav() {
                 <LogOut className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300" />
                 <span className="hidden sm:inline font-semibold tracking-wide">Sign Out</span>
                 {hoveredItem === 'signout' && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-400/20 rounded-xl animate-pulse"></div>
+                  <div className="absolute inset-0 bg-linear-to-r from-red-500/10 to-red-400/20 rounded-xl animate-pulse"></div>
                 )}
               </Button>
             </div>
@@ -297,7 +297,7 @@ export default function DashboardNav() {
         </div>
 
         {/* Enhanced Mobile Navigation */}
-        <div className="lg:hidden border-t border-white/20 py-4 bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-sm">
+        <div className="lg:hidden border-t border-white/20 py-4 bg-linear-to-r from-white/5 to-white/10 backdrop-blur-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-white/10 backdrop-blur-sm">
               <div className="relative">
@@ -371,3 +371,5 @@ export default function DashboardNav() {
     </nav>
   );
 }
+
+

@@ -89,7 +89,7 @@ export default function AboutPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-ancient-stone/10 to-papyrus/5">
+    <main className="min-h-screen bg-linear-to-b from-ancient-stone/10 to-papyrus/5">
       {/* Hero Section */}
       <Box 
         sx={{ 
@@ -517,3 +517,5 @@ export default function AboutPage() {
     </main>
   );
 }
+
+
