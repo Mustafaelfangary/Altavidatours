@@ -1,1 +1,111 @@
- 
+/* ...existing code... */
+
+/* Enlarge Top Destinations / Curated for You cards (homepage below hero) */
+.homepage .top-destinations .card,
+.homepage .curated-for-you .card,
+.top-destinations .card,
+.curated-for-you .card,
+.section-top-destinations .card,
+.section-curated .card {
+    width: 560px;           /* increased from 380 -> larger cards */
+    max-width: 100%;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 34px rgba(0,0,0,0.10);
+    transition: transform .18s ease, box-shadow .18s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--card-bg, white);
+}
+.homepage .top-destinations .card:hover,
+.homepage .curated-for-you .card:hover,
+.top-destinations .card:hover,
+.curated-for-you .card:hover,
+.section-top-destinations .card:hover,
+.section-curated .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.14);
+}
+
+/* Taller/wider images for larger cards */
+.homepage .top-destinations .card img,
+.homepage .curated-for-you .card img,
+.top-destinations .card img,
+.curated-for-you .card img,
+.section-top-destinations .card img,
+.section-curated .card img {
+    width: 100%;
+    height: 340px;          /* increased image height */
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* grid adjustments so cards grow and fill screen nicely */
+.homepage .top-destinations .grid,
+.homepage .curated-for-you .grid,
+.top-destinations .grid,
+.curated-for-you .grid,
+.section-top-destinations .grid,
+.section-curated .grid {
+    display: grid;
+    /* allow each card to be at least 560px but grow to fill available space;
+       on wide screens you'll get multiple columns that comfortably use the width */
+    grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+    gap: 28px;
+    align-items: start;
+}
+
+/* responsive fallbacks */
+@media (max-width: 1400px) {
+    .homepage .top-destinations .card,
+    .homepage .curated-for-you .card,
+    .top-destinations .card,
+    .curated-for-you .card,
+    .section-top-destinations .card,
+    .section-curated .card {
+        width: 100%;
+        padding: 20px;
+    }
+    .homepage .top-destinations .card img,
+    .homepage .curated-for-you .card img,
+    .top-destinations .card img,
+    .curated-for-you .card img,
+    .section-top-destinations .card img,
+    .section-curated .card img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .homepage .top-destinations .grid,
+    .homepage .curated-for-you .grid,
+    .top-destinations .grid,
+    .curated-for-you .grid,
+    .section-top-destinations .grid,
+    .section-curated .grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 22px;
+    }
+    .homepage .top-destinations .card img,
+    .homepage .curated-for-you .card img,
+    .top-destinations .card img,
+    .curated-for-you .card img,
+    .section-top-destinations .card img,
+    .section-curated .card img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 640px) {
+    .homepage .top-destinations .card img,
+    .homepage .curated-for-you .card img,
+    .top-destinations .card img,
+    .curated-for-you .card img,
+    .section-top-destinations .card img,
+    .section-curated .card img {
+        height: 160px;
+    }
+}
+
+/* ...existing code... */
